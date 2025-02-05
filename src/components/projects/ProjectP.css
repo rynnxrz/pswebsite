@@ -1,0 +1,192 @@
+/* ProjectP.css */
+.project-detail {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.project-header {
+  text-align: center;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  padding-top: 120px;
+  background-image: url('/images/project-p/overview.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: -4rem;
+}
+
+.project-title {
+  font-size: 5.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
+  max-width: 90%;
+}
+
+.project-subtitle {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+  max-width: 90%;
+}
+
+
+
+.project-overview-images {
+  display: none;
+}
+
+.project-overview-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.project-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.info-item h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.project-description {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.project-description h2 {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.research-section {
+  margin-bottom: 4rem;
+}
+
+.research-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.research-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.research-item p {
+  text-align: center;
+}
+
+.insights-section {
+  margin-bottom: 4rem;
+}
+
+.insight-item {
+  margin-bottom: 3rem;
+}
+
+.insight-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.insight-solution {
+  background-color: #f5f5f5;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.stress-scenarios,
+.solution-preview {
+  margin: 2rem 0;
+}
+
+.stress-scenarios img,
+.solution-preview img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.design-process,
+.final-design {
+  margin-bottom: 4rem;
+}
+
+.process-images,
+.final-screens {
+  margin-top: 2rem;
+}
+
+.process-images img,
+.final-screens img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.summary-section {
+  background-color: #f5f5f5;
+  padding: 3rem;
+  border-radius: 8px;
+}
+
+.summary-points {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.summary-point h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .project-info,
+  .research-grid,
+  .summary-points {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-title {
+    font-size: 2rem;
+  }
+  
+  .project-subtitle {
+    font-size: 1.2rem;
+  }
+}

@@ -36,45 +36,11 @@ export const Home = () => (
     </section>
 
     <section id="contact" className="section-container">
-      <div className="contact-form">
+      <div className="contact-section">
         <h2 className="home-title">Contact</h2>
-        <form className="form-group">
-          <div className="form-group">
-            <label htmlFor="name" className="form-label">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email" className="form-label">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="message" className="form-label">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              className="form-textarea"
-            ></textarea>
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            type="submit"
-            className="submit-button"
-          >
-            Send Message
-          </motion.button>
-        </form>
+        <a href="mailto:rongze.work@foxmail.com" className="contact-link">
+          rongze.work@foxmail.com
+        </a>
       </div>
     </section>
   </motion.div>
