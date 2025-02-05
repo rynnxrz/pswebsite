@@ -1,3 +1,4 @@
+// force update test
 import { motion } from 'framer-motion';
 
 interface ProjectCardProps {
@@ -18,5 +19,7 @@ export const ProjectCard = ({ title, description, image }: ProjectCardProps) => 
       <img src={image} alt={title} />
     </div>
     <h3 className="project-title">{title}</h3>
+    {/* Render the description */}
+    <p className="project-description">{description}</p>
   </motion.div>
 );
