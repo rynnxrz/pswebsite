@@ -1,47 +1,110 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { ProjectCard } from './ProjectCard';
 import { pageTransition } from '../utils/animations';
+import PasswordModal from './PasswordModal';
 
-export const Home = () => (
-  <motion.div {...pageTransition}>
-    <section className="home-container">
-      <div className="home-text">
-        <h1 className="home-title">Rongze is an innovative UX Designer and Developer base in London.</h1>
-        <p className="home-description">I find great joy in solving problems for others.</p>
-      </div>
-      <div className="profile-image">
-        <img src="/images/profile.jpg" alt="Profile" />
-      </div>
-    </section>
+const projects = [
+  {
+    id: 'p',
+    title: "Project P: InnerPeace Stress Management Android Application Design",
+    image: "/images/project-p.jpg",
+    locked: true,
+  },
+  {
+    id: 'one',
+    title: "Project One: Hitch'n Farm Bridging the Nature Gap in Cities",
+    image: "/images/project-one.jpg",
+    locked: true,
+  },
+];
 
-    <section id="projects" className="section-container">
-      <h2 className="home-title">Projects</h2>
-      <div className="projects-grid">
-        <Link to="/project/p" style={{ textDecoration: 'none' }}>
-          <ProjectCard
-            title="Project P: InnerPeace Stress Management Android Application Design"
-            description="A mobile app designed to help users manage stress and maintain mental well-being."
-            image="/images/project-p.jpg"
-          />
-        </Link>
-        <Link to="/project/one" style={{ textDecoration: 'none' }}>
-          <ProjectCard
-            title="Project One: Hitch'n Farm Bridging the Nature Gap in Cities"
-            description="An innovative solution to connect urban dwellers with nature and sustainable farming practices."
-            image="/images/project-one.jpg"
-          />
-        </Link>
-      </div>
-    </section>
+export const Home = () => {
+  const [unlockedProjects, setUnlockedProjects] = useState<string[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [currentProject, setCurrentProject] = useState<string | null>(null);
 
-    <section id="contact" className="section-container">
-      <div className="contact-section">
-        <h2 className="home-title">Contact</h2>
-        <a href="mailto:rongze.work@foxmail.com" className="contact-link">
-          rongze.work@foxmail.com
-        </a>
-      </div>
-    </section>
-  </motion.div>
-);
+  const handleLockedClick = (projectId: string) => {
+    setCurrentProject(projectId);
+    setShowModal(true);
+  };
+
+  const handlePasswordSubmit = (password: string) => {
+    if (password === 'uoa') {
+      if (currentProject) {
+        setUnlockedProjects(prev => [...prev, currentProject]);
+      }
+      setShowModal(false);
+    } else {
+      alert("Incorrect password. Please try again.");
+    }
+  };
+
+  return (
+    <motion.div {...pageTransition}>
+      <section className="home-container">
+        <div className="home-text">
+          <h1 className="home-title">Rongze is an innovative UX Designer and Developer base in London.</h1>
+          <p className="home-description">I find great joy in solving problems for others.</p>
+        </div>
+        <div className="profile-image">
+          <img src="/images/profile.jpg" alt="Profile" />
+        </div>
+      </section>
+
+      <section id="projects" className="section-container">
+        <h2 className="home-title">Projects</h2>
+        <div className="projects-grid">
+          {projects.map(project => {
+            if (project.locked && !unlockedProjects.includes(project.id)) {
+              return (
+                <div
+                  key={project.id}
+                  onClick={() => handleLockedClick(project.id)}
+                  style={{ textDecoration: 'none', cursor: 'pointer' }}
+                >
+                  <ProjectCard
+                    title={project.title}
+                    image={project.image}
+                    isLocked={true}
+                  />
+                </div>
+              );
+            } else {
+              return (
+                <Link
+                  key={project.id}
+                  to={`/project/${project.id}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <ProjectCard
+                    title={project.title}
+                    image={project.image}
+                    isLocked={false}
+                  />
+                </Link>
+              );
+            }
+          })}
+        </div>
+      </section>
+
+      <section id="contact" className="section-container">
+        <div className="contact-section">
+          <h2 className="home-title">Contact</h2>
+          <a href="mailto:rongze.work@foxmail.com" className="contact-link">
+            rongze.work@foxmail.com
+          </a>
+        </div>
+      </section>
+
+      {showModal && (
+        <PasswordModal
+          onSubmit={handlePasswordSubmit}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+    </motion.div>
+  );
+};
