@@ -12,6 +12,23 @@ interface ChatMessage {
   timestamp: Date;
 }
 
+interface Node3D {
+  id: string;
+  x: number;
+  y: number;
+  z: number;
+  type: 'user' | 'assistant';
+  content: string;
+}
+
+interface Connection3D {
+  id: string;
+  fromId: string;
+  toId: string;
+  from: Node3D;
+  to: Node3D;
+}
+
 export const ProjectDialogic = () => {
   const [currentState, setCurrentState] = useState<DialogicState>('intro');
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -23,6 +40,13 @@ export const ProjectDialogic = () => {
     }
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const threeContainerRef = useRef<HTMLDivElement>(null);
+
+  // 3D state
+  const [nodes, setNodes] = useState<Node3D[]>([]);
+  const [connections, setConnections] = useState<Connection3D[]>([]);
+  const [currentCoordinates, setCurrentCoordinates] = useState({ x: 0, y: 0, z: 0 });
+  const unitPx = 60; // scale 1.0 unit to pixels
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -32,6 +56,49 @@ export const ProjectDialogic = () => {
     scrollToBottom();
   }, [messages]);
 
+  // Initialize first 3D node from the initial assistant message
+  useEffect(() => {
+    if (messages.length > 0 && nodes.length === 0) {
+      const first = messages[0];
+      add3DNode(0.5, 0, 0, first.type, first.content);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages]);
+
+  const connectNodes = (from: Node3D, to: Node3D) => {
+    const id = `${from.id}->${to.id}`;
+    const connection: Connection3D = { id, fromId: from.id, toId: to.id, from, to };
+    setConnections(prev => [...prev, connection]);
+  };
+
+  const add3DNode = (
+    x: number,
+    y: number,
+    z: number,
+    type: 'user' | 'assistant',
+    content: string
+  ) => {
+    const node: Node3D = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      x,
+      y,
+      z,
+      type,
+      content
+    };
+
+    setNodes(prev => {
+      const next = [...prev, node];
+      if (prev.length > 0) {
+        const last = prev[prev.length - 1];
+        connectNodes(last, node);
+      }
+      return next;
+    });
+
+    setCurrentCoordinates({ x, y, z });
+  };
+
   const addChatMessage = (type: 'user' | 'assistant', content: string) => {
     const newMessage: ChatMessage = {
       id: Date.now().toString(),
@@ -40,6 +107,11 @@ export const ProjectDialogic = () => {
       timestamp: new Date()
     };
     setMessages(prev => [...prev, newMessage]);
+    // Basic sync to 3D: map participants to X, increment Y a bit per message, keep Z at 0 for now
+    const x = type === 'user' ? 0 : 0.5;
+    const y = nodes.length * 0.4; // simple progression to visualize spacing
+    const z = 0;
+    add3DNode(x, y, z, type, content);
   };
 
   const handleWatchDemo = () => {
@@ -191,15 +263,55 @@ export const ProjectDialogic = () => {
         {/* Header */}
         <div className="dialogic-header">
           <h2>Dialogic Framework</h2>
-          <div className="coordinates">X: 0.0, Y: 0.0, Z: 0.0</div>
+          <div className="coordinates">X: {currentCoordinates.x.toFixed(1)} | Y: {currentCoordinates.y.toFixed(1)} | Z: {currentCoordinates.z.toFixed(1)}</div>
         </div>
         
         {/* 3D Visualization Container */}
         <div className="visualization-container">
-          <div id="three-container" className="three-container">
-            <div className="placeholder-3d">
-              <div className="placeholder-text">3D Spatial Memory Interface</div>
-              <div className="placeholder-subtext">Coming in next phase</div>
+          <div id="three-container" className="three-container" ref={threeContainerRef}>
+            <div className="space-3d">
+              {/* 3D Nodes */}
+              {nodes.map(node => (
+                <div
+                  key={node.id}
+                  className={`node-3d ${node.type}`}
+                  style={{
+                    transform: `translate3d(${node.x * unitPx}px, ${node.y * unitPx}px, ${node.z * unitPx}px)`
+                  }}
+                  title={node.content}
+                >
+                  <div className="node-label">{node.type === 'user' ? 'U' : 'AI'}</div>
+                </div>
+              ))}
+
+              {/* Connection Lines */}
+              {connections.map(link => {
+                const fromX = link.from.x * unitPx;
+                const fromY = link.from.y * unitPx;
+                const fromZ = link.from.z * unitPx;
+                const toX = link.to.x * unitPx;
+                const toY = link.to.y * unitPx;
+                const toZ = link.to.z * unitPx;
+
+                const dx = toX - fromX;
+                const dy = toY - fromY;
+                const dz = toZ - fromZ;
+                const len = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                const yaw = Math.atan2(dz, dx) * (180 / Math.PI);
+                const pitch = Math.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * (180 / Math.PI);
+
+                return (
+                  <div
+                    key={link.id}
+                    className="connection-line"
+                    style={{
+                      width: `${len}px`,
+                      transform: `translate3d(${fromX}px, ${fromY}px, ${fromZ}px) rotateY(${yaw}deg) rotateX(${pitch}deg)`,
+                      transformOrigin: '0 50%'
+                    }}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
