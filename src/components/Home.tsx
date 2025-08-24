@@ -7,6 +7,12 @@ import PasswordModal from './PasswordModal';
 
 const projects = [
   {
+    id: 'dialogic',
+    title: "Dialogic Framework: Rethinking Memory and Authenticity in the Age of AI",
+    image: "/images/project-p.jpg",
+    locked: false,
+  },
+  {
     id: 'p',
     title: "Project P: InnerPeace Stress Management Android Application Design",
     image: "/images/project-p.jpg",

@@ -1,0 +1,489 @@
+/* ProjectDialogic Component Styles */
+.project-dialogic {
+  min-height: 100vh;
+  background-color: #212121;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Intro Screen Styles */
+.dialogic-intro {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dialogic-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #10a37f 0%, #00d9ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.dialogic-subtitle {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 400;
+  color: #e0e0e0;
+  margin-bottom: 3rem;
+  line-height: 1.4;
+  max-width: 600px;
+}
+
+/* Statement Boxes */
+.statement-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.statement-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.statement-box:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.statement-box h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.statement-box p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #d0d0d0;
+  margin: 0;
+}
+
+.problem-box {
+  border-left: 4px solid #ff6b6b;
+}
+
+.solution-box {
+  border-left: 4px solid #4ecdc4;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #10a37f 0%, #00d9ff 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(16, 163, 127, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 163, 127, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Split Screen Layout */
+.dialogic-split-screen {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Left Side - ChatGPT UI Clone */
+.chatgpt-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #212121;
+  border-right: 1px solid #424242;
+}
+
+.chatgpt-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #424242;
+  background-color: #212121;
+}
+
+.chatgpt-header h2 {
+  color: #e3e3e8;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.message {
+  display: flex;
+  padding: 24px 20px;
+  gap: 16px;
+  border-bottom: 1px solid #424242;
+}
+
+.message.user {
+  background-color: transparent;
+}
+
+.message.assistant {
+  background-color: #2f2f2f;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.message.user .avatar {
+  background-color: #8e8ea0;
+  color: #ffffff;
+}
+
+.message.assistant .avatar {
+  background-color: #10a37f;
+  color: #ffffff;
+}
+
+.message-content {
+  color: #e3e3e8;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.input-area {
+  padding: 20px;
+  border-top: 1px solid #424242;
+  background-color: #212121;
+}
+
+.input-area form {
+  position: relative;
+  display: flex;
+}
+
+.message-input {
+  flex: 1;
+  background-color: #2f2f2f;
+  border: 1px solid #424242;
+  border-radius: 12px;
+  padding: 12px 48px 12px 16px;
+  color: #e3e3e8;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.message-input::placeholder {
+  color: #8e8ea0;
+}
+
+.message-input:focus {
+  border-color: #10a37f;
+}
+
+.send-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background-color: #10a37f;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.send-button:hover {
+  background-color: #0d8a6f;
+}
+
+/* Right Side - Dialogic Framework */
+.dialogic-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #212121;
+}
+
+.dialogic-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #424242;
+  background-color: #212121;
+}
+
+.dialogic-header h2 {
+  color: #e3e3e8;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.coordinates {
+  color: #8e8ea0;
+  font-size: 0.875rem;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+.visualization-container {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.three-container {
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  border: 1px solid #424242;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-3d {
+  text-align: center;
+  color: #8e8ea0;
+}
+
+.placeholder-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #e3e3e8;
+}
+
+.placeholder-subtext {
+  font-size: 0.875rem;
+  color: #8e8ea0;
+}
+
+.control-buttons {
+  padding: 20px;
+  display: flex;
+  gap: 12px;
+  border-top: 1px solid #424242;
+  background-color: #212121;
+}
+
+.control-btn {
+  padding: 8px 16px;
+  background-color: #2f2f2f;
+  border: 1px solid #424242;
+  border-radius: 6px;
+  color: #e3e3e8;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background-color: #424242;
+  border-color: #10a37f;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .dialogic-split-screen {
+    flex-direction: column;
+  }
+  
+  .chatgpt-side,
+  .dialogic-side {
+    flex: none;
+  }
+  
+  .chatgpt-side {
+    height: 60vh;
+  }
+  
+  .dialogic-side {
+    height: 40vh;
+  }
+  
+  .dialogic-intro {
+    padding: 1.5rem;
+  }
+  
+  .statement-box {
+    padding: 1.5rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    min-width: 250px;
+    padding: 1.2rem 2rem;
+  }
+  
+  .dialogic-title {
+    font-size: 2.5rem;
+  }
+  
+  .dialogic-subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .chatgpt-side {
+    height: 50vh;
+  }
+  
+  .dialogic-side {
+    height: 50vh;
+  }
+  
+  .dialogic-intro {
+    padding: 1rem;
+  }
+  
+  .statement-box {
+    padding: 1.25rem;
+  }
+  
+  .btn {
+    min-width: 280px;
+    font-size: 1rem;
+  }
+  
+  .dialogic-title {
+    font-size: 2rem;
+  }
+  
+  .dialogic-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .control-buttons {
+    flex-direction: column;
+  }
+  
+  .control-btn {
+    width: 100%;
+  }
+}
+
+/* Smooth scrolling and focus styles */
+* {
+  scroll-behavior: smooth;
+}
+
+.btn:focus {
+  outline: 2px solid #00d9ff;
+  outline-offset: 2px;
+}
+
+.message-input:focus {
+  outline: none;
+}
+
+/* Glassmorphism enhancement for modern browsers */
+@supports (backdrop-filter: blur(20px)) {
+  .statement-box {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  
+  .statement-box:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* Scrollbar styling for messages container */
+.messages-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 4px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
