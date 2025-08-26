@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ProjectCard } from './ProjectCard';
 import { pageTransition } from '../utils/animations';
 import PasswordModal from './PasswordModal';
+import './LockOverlay.css';
 
 const projects = [
   {
