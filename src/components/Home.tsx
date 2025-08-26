@@ -53,6 +53,7 @@ export const Home = () => {
         <div className="home-text">
           <h1 className="home-title">Rongze is an innovative UX Designer and Developer base in London.</h1>
           <p className="home-description">I find great joy in solving problems for others.</p>
+          <Link to="/portfolio" className="portfolio-link">View portfolio</Link>
         </div>
         <div className="profile-image">
           <img src="/images/profile.jpg" alt="Profile" />
