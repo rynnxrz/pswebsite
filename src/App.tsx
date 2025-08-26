@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Home } from './components/Home';
+import { Portfolio } from './components/Portfolio';
 import { ProjectDetail } from './components/ProjectDetail';
 import './App.css';
 
@@ -20,6 +21,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/project/:id" element={<ProjectDetail />} />
+              <Route path="/portfolio" element={<Portfolio />} />
             </Routes>
           </AnimatePresence>
         </main>
