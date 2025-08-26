@@ -8,19 +8,19 @@ import PasswordModal from './PasswordModal';
 const projects = [
   {
     id: 'dialogic',
-    title: "Dialogic Framework: Rethinking Memory and Authenticity in the Age of AI",
-    image: "/images/project-p.jpg",
-    locked: false,
+    title: "Dialogic Framework",
+    image: "/images/Framework.png",
+    locked: true,
   },
   {
     id: 'p',
-    title: "Project P: InnerPeace Stress Management Android Application Design",
+    title: "InnerPeace",
     image: "/images/project-p.jpg",
     locked: true,
   },
   {
     id: 'one',
-    title: "Project One: Hitch'n Farm Bridging the Nature Gap in Cities",
+    title: "Hitch'n Farm",
     image: "/images/project-one.jpg",
     locked: true,
   },
@@ -100,8 +100,8 @@ export const Home = () => {
       <section id="contact" className="section-container">
         <div className="contact-section">
           <h2 className="home-title">Contact</h2>
-          <a href="mailto:rongze.work@foxmail.com" className="contact-link">
-            rongze.work@foxmail.com
+          <a href="mailto:rongze.work@gmail.com" className="contact-link">
+            rongze.work@gmail.com
           </a>
         </div>
       </section>
