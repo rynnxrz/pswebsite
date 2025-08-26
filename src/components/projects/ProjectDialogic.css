@@ -349,6 +349,10 @@
   box-shadow: 0 0 0 2px rgba(255,255,255,0.08), 0 0 18px rgba(16,163,127,0.5);
 }
 
+.node-3d.highlighted {
+  box-shadow: 0 0 0 2px rgba(16,163,127,0.5), 0 0 22px rgba(0,217,255,0.9), 0 0 40px rgba(0,217,255,0.5);
+}
+
 .node-label {
   position: absolute;
   top: 20px;
@@ -396,6 +400,75 @@
 .control-btn:hover {
   background-color: #424242;
   border-color: #10a37f;
+}
+
+/* Demo progress indicator */
+.demo-progress-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 16px 16px 16px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 30%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+}
+
+.demo-steps {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.demo-step {
+  color: #8e8ea0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.demo-step.active {
+  color: #10a37f;
+}
+
+.progress-bar {
+  position: relative;
+  height: 6px;
+  background: #2f2f2f;
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 720px;
+  margin: 0 auto;
+  border: 1px solid #424242;
+}
+
+.progress-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #10a37f, #00d9ff);
+  width: 0%;
+  transition: width 120ms linear;
+}
+
+/* Skip button */
+.skip-autoplay-btn {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.skip-autoplay-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.35);
 }
 
 /* Mobile Responsiveness */

@@ -19,6 +19,7 @@ interface Node3D {
   z: number;
   type: 'user' | 'assistant';
   content: string;
+  highlighted?: boolean;
 }
 
 interface Connection3D {
@@ -48,6 +49,15 @@ export const ProjectDialogic = () => {
   const [currentCoordinates, setCurrentCoordinates] = useState({ x: 0, y: 0, z: 0 });
   const unitPx = 60; // scale 1.0 unit to pixels
 
+  // Auto-play state
+  const [autoPlayStep, setAutoPlayStep] = useState<0 | 1 | 2 | 3>(0);
+  const [progress, setProgress] = useState(0);
+  const [spaceTransform, setSpaceTransform] = useState<string>('');
+  const timersRef = useRef<number[]>([]);
+  const progressIntervalRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number>(0);
+  const preservedNodeIdsRef = useRef<string[]>([]);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -56,14 +66,14 @@ export const ProjectDialogic = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Initialize first 3D node from the initial assistant message
+  // Initialize first 3D node from the initial assistant message (intro only)
   useEffect(() => {
-    if (messages.length > 0 && nodes.length === 0) {
+    if (currentState === 'intro' && messages.length > 0 && nodes.length === 0) {
       const first = messages[0];
       add3DNode(0.5, 0, 0, first.type, first.content);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages]);
+  }, [messages, nodes, currentState]);
 
   const connectNodes = (from: Node3D, to: Node3D) => {
     const id = `${from.id}->${to.id}`;
@@ -99,6 +109,17 @@ export const ProjectDialogic = () => {
     setCurrentCoordinates({ x, y, z });
   };
 
+  // Add message to chat only (no 3D side effects)
+  const addChatOnly = (type: 'user' | 'assistant', content: string) => {
+    const newMessage: ChatMessage = {
+      id: Date.now().toString(),
+      type,
+      content,
+      timestamp: new Date()
+    };
+    setMessages(prev => [...prev, newMessage]);
+  };
+
   const addChatMessage = (type: 'user' | 'assistant', content: string) => {
     const newMessage: ChatMessage = {
       id: Date.now().toString(),
@@ -114,6 +135,115 @@ export const ProjectDialogic = () => {
     add3DNode(x, y, z, type, content);
   };
 
+  // ---- Auto-play helpers ----
+  const clearAllTimeouts = () => {
+    timersRef.current.forEach(id => window.clearTimeout(id));
+    timersRef.current = [];
+  };
+
+  const stopProgressInterval = () => {
+    if (progressIntervalRef.current !== null) {
+      window.clearInterval(progressIntervalRef.current);
+      progressIntervalRef.current = null;
+    }
+  };
+
+  const cleanupAutoPlay = () => {
+    clearAllTimeouts();
+    stopProgressInterval();
+  };
+
+  useEffect(() => {
+    return () => {
+      cleanupAutoPlay();
+    };
+  }, []);
+
+  const schedule = (fn: () => void, delayMs: number) => {
+    const id = window.setTimeout(fn, delayMs);
+    timersRef.current.push(id);
+  };
+
+  const runAutoPlay = () => {
+    // reset scene
+    cleanupAutoPlay();
+    setMessages([]);
+    setNodes([]);
+    setConnections([]);
+    setSpaceTransform('rotateX(15deg) rotateY(-15deg)');
+    preservedNodeIdsRef.current = [];
+
+    // start tracking
+    setAutoPlayStep(1);
+    setProgress(0);
+    startTimeRef.current = Date.now();
+
+    // progress over 10s
+    progressIntervalRef.current = window.setInterval(() => {
+      const elapsed = Date.now() - startTimeRef.current;
+      const pct = Math.min(100, Math.round((elapsed / 10000) * 100));
+      setProgress(pct);
+      const step = pct < 50 ? 1 : pct < 80 ? 2 : 3;
+      setAutoPlayStep(step as 1 | 2 | 3);
+      if (pct >= 100) {
+        stopProgressInterval();
+      }
+    }, 100);
+
+    // ---- STEP 1 (0-5s): Problem Demonstration ----
+    schedule(() => {
+      addChatOnly('user', 'How can I improve my productivity?');
+      add3DNode(0, 0, 0, 'user', 'How can I improve my productivity?');
+    }, 0);
+
+    schedule(() => {
+      addChatOnly('assistant', 'Here are practical productivity tips: prioritize top tasks, time-block focused work, silence distractions, take short breaks, and review progress at the end of the day.');
+      add3DNode(0.5, 0, 0, 'assistant', 'Here are practical productivity tips: prioritize top tasks, time-block focused work, silence distractions, take short breaks, and review progress at the end of the day.');
+    }, 1000);
+
+    schedule(() => {
+      // remember current nodes as preserved branch
+      preservedNodeIdsRef.current = (nodes => nodes.map(n => n.id))( // snapshot
+        (function(current){ return current; })([] as Node3D[])
+      );
+      // Use functional update to reliably snapshot ids
+      setNodes(prev => {
+        preservedNodeIdsRef.current = prev.map(n => n.id);
+        return prev;
+      });
+      // destructive edit in chat UI
+      setMessages([]);
+      addChatOnly('user', 'Actually, how can I specifically improve focus while working from home?');
+      // refinement preserved in 3D at Z -0.8
+      add3DNode(0, 0, -0.8, 'user', 'Actually, how can I specifically improve focus while working from home?');
+    }, 3000);
+
+    // ---- STEP 2 (5-8s): Solution Preview ----
+    schedule(() => {
+      addChatOnly('assistant', 'To improve home focus: create a dedicated workspace, set clear focus sessions, use Pomodoro, silence notifications, and set boundaries with others.');
+      add3DNode(0.5, 0, -0.8, 'assistant', 'To improve home focus: create a dedicated workspace, set clear focus sessions, use Pomodoro, silence notifications, and set boundaries with others.');
+      setSpaceTransform('rotateY(30deg) rotateX(15deg)');
+    }, 5000);
+
+    // highlight preserved branches slightly after rotation
+    schedule(() => {
+      const preserved = new Set(preservedNodeIdsRef.current);
+      setNodes(prev => prev.map(n => preserved.has(n.id) ? { ...n, highlighted: true } : n));
+    }, 5200);
+
+    // ---- STEP 3 (8-10s): Interaction Demo ----
+    schedule(() => {
+      addChatOnly('user', 'What about work-life balance?');
+      add3DNode(0, 1.2, 0, 'user', 'What about work-life balance?');
+    }, 8000);
+
+    schedule(() => {
+      addChatOnly('assistant', 'For balance: set a shutdown ritual, schedule genuine breaks, protect non-work time, and recharge intentionally.');
+      add3DNode(0.5, 1.2, 0, 'assistant', 'For balance: set a shutdown ritual, schedule genuine breaks, protect non-work time, and recharge intentionally.');
+      setSpaceTransform('rotateY(45deg) rotateX(25deg) scale(0.8)');
+    }, 8600);
+  };
+
   const handleWatchDemo = () => {
     setCurrentState('demo');
   };
@@ -121,6 +251,20 @@ export const ProjectDialogic = () => {
   const handleSkipToExperience = () => {
     setCurrentState('experience');
   };
+
+  const handleSkipAutoPlay = () => {
+    cleanupAutoPlay();
+    setCurrentState('experience');
+  };
+
+  useEffect(() => {
+    if (currentState === 'demo') {
+      runAutoPlay();
+    } else {
+      cleanupAutoPlay();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentState]);
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -269,12 +413,12 @@ export const ProjectDialogic = () => {
         {/* 3D Visualization Container */}
         <div className="visualization-container">
           <div id="three-container" className="three-container" ref={threeContainerRef}>
-            <div className="space-3d">
+            <div className="space-3d" style={spaceTransform ? { transform: spaceTransform } : undefined}>
               {/* 3D Nodes */}
               {nodes.map(node => (
                 <div
                   key={node.id}
-                  className={`node-3d ${node.type}`}
+                  className={`node-3d ${node.type}${node.highlighted ? ' highlighted' : ''}`}
                   style={{
                     transform: `translate3d(${node.x * unitPx}px, ${node.y * unitPx}px, ${node.z * unitPx}px)`
                   }}
@@ -334,6 +478,24 @@ export const ProjectDialogic = () => {
       {currentState === 'intro' && renderIntro()}
       {currentState === 'demo' && renderDemo()}
       {currentState === 'experience' && renderExperience()}
+      {/* Skip to Interactive Mode button during demo */}
+      {currentState === 'demo' && (
+        <button className="skip-autoplay-btn" onClick={handleSkipAutoPlay}>Skip to Interactive Mode →</button>
+      )}
+
+      {/* Demo progress indicator */}
+      {currentState === 'demo' && (
+        <div className="demo-progress-container">
+          <div className="demo-steps">
+            <div className={`demo-step ${autoPlayStep === 1 ? 'active' : ''}`}>Problem Demo</div>
+            <div className={`demo-step ${autoPlayStep === 2 ? 'active' : ''}`}>Solution Preview</div>
+            <div className={`demo-step ${autoPlayStep === 3 ? 'active' : ''}`}>Interaction</div>
+          </div>
+          <div className="progress-bar">
+            <div className="progress-inner" style={{ width: `${progress}%` }} />
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 };
