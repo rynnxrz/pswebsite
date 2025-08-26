@@ -36,14 +36,16 @@ export const Portfolio = () => {
 
       {/* PDF Viewer Section */}
       <section className="portfolio-content">
-        <div className="pdf-controls">
-          <button onClick={toggleFullscreen} className="fullscreen-btn">
-            {isFullscreen ? 'Exit Fullscreen' : 'View Fullscreen'}
-          </button>
-        </div>
         <div className="pdf-container">
+          {/* Embedded fullscreen button */}
+          <button onClick={toggleFullscreen} className="embedded-fullscreen-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+            </svg>
+          </button>
+          
           <iframe
-            src="/portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
+            src="/portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=70"
             title="Portfolio PDF"
             className="pdf-viewer"
           />
