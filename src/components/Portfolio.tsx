@@ -9,7 +9,7 @@ export const Portfolio = () => {
       </div>
       <div className="pdf-container">
         <iframe
-          src="/portfolio.pdf"
+          src="/portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
           title="Portfolio PDF"
           className="pdf-viewer"
         />
