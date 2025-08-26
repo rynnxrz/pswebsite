@@ -78,6 +78,21 @@
   font-size: 1.125rem;
 }
 
+/* Portfolio link styles used on Home */
+.portfolio-link {
+  color: #333;
+  text-decoration: underline;
+  font-size: 1.125rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  display: block;
+  margin-top: 1.5rem;
+}
+
+.portfolio-link:hover {
+  color: #000;
+}
+
 /* Profile image styles with smooth hover */
 .profile-image {
   width: 12rem;
@@ -260,43 +275,68 @@
   opacity: 0.6;
 }
 
-/* Portfolio link styles - REPLACED per request */
-.portfolio-link {
-  color: #333;  /* Change from blue to dark gray to match text */
+/* Portfolio page styles - REPLACE ALL EXISTING PORTFOLIO STYLES */
+
+/* Portfolio hero section - matching home layout */
+.portfolio-page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio-hero {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;  /* Left-aligned like home page */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 40vh;  /* Shorter than home page */
+}
+
+.portfolio-hero-text {
+  flex: 1;
+  max-width: 600px;
+  text-align: left;  /* Left-aligned */
+}
+
+.portfolio-main-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.portfolio-subtitle {
+  color: #666666;
+  font-size: 1.125rem;
+  margin-bottom: 0;  /* No margin, let the link handle spacing */
+}
+
+.homepage-link {
+  color: #333;
   text-decoration: underline;
   font-size: 1.125rem;
   font-weight: 500;
   transition: color 0.2s ease;
-  display: block;  /* Change from inline-block to block for new line */
-  margin-top: 1.5rem;  /* Increase spacing */
+  display: block;
+  margin-top: 1.5rem;
 }
 
-.portfolio-link:hover {
-  color: #000;  /* Darker on hover instead of blue */
+.homepage-link:hover {
+  color: #000;
 }
 
-/* Portfolio page styles */
-.portfolio-container {
+/* Portfolio content section */
+.portfolio-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-}
-
-.portfolio-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.portfolio-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #333;
-  margin: 0;
+  padding: 0 2rem 2rem 2rem;
 }
 
 .pdf-container {
   width: 100%;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 300px);  /* Adjusted for the new header */
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
@@ -312,31 +352,31 @@
   transform-origin: top left;
 }
 
-/* Add loading indicator for large PDFs */
-.pdf-container::before {
-  content: 'Loading PDF...';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #666;
-  font-size: 1.2rem;
-  z-index: 1;
-  pointer-events: none;
-}
-
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-  .portfolio-title {
+  .portfolio-hero {
+    padding: 2rem 1rem;
+    min-height: 30vh;
+  }
+  
+  .portfolio-main-title {
     font-size: 2rem;
   }
   
-  .pdf-container {
-    height: calc(100vh - 150px);
+  .portfolio-subtitle {
+    font-size: 1rem;
   }
   
-  .portfolio-link {
+  .homepage-link {
     font-size: 1rem;
+  }
+  
+  .portfolio-content {
+    padding: 0 1rem 2rem 1rem;
+  }
+  
+  .pdf-container {
+    height: calc(100vh - 250px);
   }
 }
 
