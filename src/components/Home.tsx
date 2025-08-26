@@ -52,7 +52,7 @@ export const Home = () => {
     <motion.div {...pageTransition}>
       <section className="home-container">
         <div className="home-text">
-          <h1 className="home-title">Rongze is an innovative UX Designer and Developer base in London.</h1>
+          <h1 className="home-title">Rongze is an innovative Product Designer and Developer base in London.</h1>
           <p className="home-description">I find great joy in solving problems for others.</p>
           <Link to="/portfolio" className="portfolio-link">View portfolio</Link>
         </div>
