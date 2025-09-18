@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { pageTransition } from '../utils/animations';
+import './Portfolio.css'; // 引入新的CSS文件
 
 export const Portfolio = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -10,12 +11,10 @@ export const Portfolio = () => {
     const pdfContainer = document.querySelector('.pdf-container');
     
     if (!isFullscreen) {
-      // Enter fullscreen
       if (pdfContainer?.requestFullscreen) {
         pdfContainer.requestFullscreen();
       }
     } else {
-      // Exit fullscreen
       if (document.exitFullscreen) {
         document.exitFullscreen();
       }
@@ -25,7 +24,6 @@ export const Portfolio = () => {
 
   return (
     <motion.div {...pageTransition} className="portfolio-page">
-      {/* Header Section - matching home page layout */}
       <section className="portfolio-hero">
         <div className="portfolio-hero-text">
           <h1 className="portfolio-main-title">Rongze's Work</h1>
@@ -34,10 +32,8 @@ export const Portfolio = () => {
         </div>
       </section>
 
-      {/* PDF Viewer Section */}
       <section className="portfolio-content">
         <div className="pdf-container">
-          {/* Embedded fullscreen button */}
           <button onClick={toggleFullscreen} className="embedded-fullscreen-btn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>

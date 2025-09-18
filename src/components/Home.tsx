@@ -1,118 +1,68 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { ProjectCard } from './ProjectCard';
 import { pageTransition } from '../utils/animations';
-import PasswordModal from './PasswordModal';
-import './LockOverlay.css';
-
-const projects = [
-  {
-    id: 'dialogic',
-    title: "Dialogic Framework",
-    image: "/images/Framework.png",
-    locked: true,
-  },
-  {
-    id: 'p',
-    title: "InnerPeace",
-    image: "/images/project-p.jpg",
-    locked: true,
-  },
-  {
-    id: 'one',
-    title: "Hitch'n Farm",
-    image: "/images/project-one.jpg",
-    locked: true,
-  },
-];
+import './Home.css';
 
 export const Home = () => {
-  const [unlockedProjects, setUnlockedProjects] = useState<string[]>([]);
-  const [showModal, setShowModal] = useState(false);
-  const [currentProject, setCurrentProject] = useState<string | null>(null);
+  const [isMosaicExpanded, setIsMosaicExpanded] = useState(false);
 
-  const handleLockedClick = (projectId: string) => {
-    setCurrentProject(projectId);
-    setShowModal(true);
-  };
+  const handleMosaicClick = () => {
+    // --- 新增的日志 ---
+    console.log("Mosaic 窗口被点击了! 当前是否展开:", isMosaicExpanded);
 
-  const handlePasswordSubmit = (password: string) => {
-    if (password === 'uoa') {
-      if (currentProject) {
-        setUnlockedProjects(prev => [...prev, currentProject]);
-      }
-      setShowModal(false);
-    } else {
-      alert("Incorrect password. Please try again.");
+    if (!isMosaicExpanded) {
+      setIsMosaicExpanded(true);
     }
   };
 
   return (
     <motion.div {...pageTransition}>
+
+      <div 
+        className={`mosaic-container ${isMosaicExpanded ? 'expanded' : ''}`}
+        onClick={handleMosaicClick} // 使用新的处理函数
+      >
+        <iframe
+          src="/mosaic3d/index.html"
+          title="Mosaic 3D Interactive App"
+          className="mosaic-iframe"
+        ></iframe>
+        {isMosaicExpanded && (
+          <button 
+            className="mosaic-close-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMosaicExpanded(false);
+            }}
+          >
+            &times;
+          </button>
+        )}
+      </div>
+
       <section className="home-container">
         <div className="home-text">
           <h1 className="home-title">Rongze is an innovative Product Designer and Developer base in London.</h1>
           <p className="home-description">I find great joy in solving problems for others.</p>
           <Link to="/portfolio" className="portfolio-link">View portfolio</Link>
         </div>
-        <div className="profile-image">
-          <img src="/images/profile.jpg" alt="Profile" />
-        </div>
-      </section>
-
-      <section id="projects" className="section-container">
-        <h2 className="home-title">Projects</h2>
-        <div className="projects-grid">
-          {projects.map(project => {
-            if (project.locked && !unlockedProjects.includes(project.id)) {
-              return (
-                <div
-                  key={project.id}
-                  onClick={() => handleLockedClick(project.id)}
-                  style={{ textDecoration: 'none', cursor: 'pointer' }}
-                >
-                  <ProjectCard
-                    title={project.title}
-                    image={project.image}
-                    isLocked={true}
-                  />
-                </div>
-              );
-            } else {
-              return (
-                <Link
-                  key={project.id}
-                  to={`/project/${project.id}`}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <ProjectCard
-                    title={project.title}
-                    image={project.image}
-                    isLocked={false}
-                  />
-                </Link>
-              );
-            }
-          })}
-        </div>
       </section>
 
       <section id="contact" className="section-container">
         <div className="contact-section">
           <h2 className="home-title">Contact</h2>
-          <a href="mailto:rongze.work@gmail.com" className="contact-link">
-            rongze.work@gmail.com
-          </a>
+          <div className="contact-links-container">
+            <a href="https://www.instagram.com/rynn_rz/" target="_blank" rel="noopener noreferrer" className="contact-icon-link">
+              📷 Ins
+            </a>
+            <a href="mailto:rongze.work@gmail.com" className="contact-icon-link">
+              ✉️ 邮件
+            </a>
+          </div>
         </div>
       </section>
 
-      {showModal && (
-        <PasswordModal
-          onSubmit={handlePasswordSubmit}
-          onClose={() => setShowModal(false)}
-        />
-      )}
     </motion.div>
   );
 };

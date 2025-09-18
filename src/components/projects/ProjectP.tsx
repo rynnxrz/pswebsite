@@ -5,11 +5,31 @@ import './ProjectP.css';
 export const ProjectP = () => {
   return (
     <motion.div {...pageTransition} className="project-detail">
-      {/* Header Section */}
-      <section className="project-header">
-        <h1 className="project-title">InnerPeace Stress Management</h1>
-        <h2 className="project-subtitle">Android Application for Students</h2>
+      {/* --- Project Overview Section --- */}
+      <section className="ip-overview-section">
+        <div className="ip-overview-container">
+          <div className="ip-overview-number">04</div>
+          <div className="ip-overview-title-block">
+            <h2 className="ip-overview-title">InnerPeace / <span>内在平静</span></h2>
+            <p className="ip-overview-subtitle">Android Application</p>
+          </div>
+          <div className="ip-overview-details-block">
+            <div className="ip-overview-tags">
+              Team Work, 3 Months, UX Developer
+            </div>
+            <p className="ip-overview-description">
+              "InnerPeace" is a <strong>research-based</strong> mobile
+              app that aims to help students lower stress
+              and feel better using personalised activities
+              and a logical, visually-appealing summary
+              function. It fully supports <strong>academic
+              database research</strong> to investigate valuable
+              data for academic use.
+            </p>
+          </div>
+        </div>
       </section>
+      {/* --- END: Project Overview Section --- */}
 
       {/* Project Info Section */}
       <section className="project-info">

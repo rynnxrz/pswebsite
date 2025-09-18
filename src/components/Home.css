@@ -1,0 +1,157 @@
+/* rynnxrz/pswebsite/pswebsite-ae2efb3b6d7d26c32d5c577bef5d8c3e38c68970/src/components/Home.css */
+
+/* --- START: Mosaic3D IFrame Styles --- */
+.mosaic-container {
+    position: fixed;
+    top: 80px;
+    right: 40px;
+    width: 250px;
+    height: 250px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 40;
+  }
+  
+  .mosaic-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  /* --- END: Mosaic3D IFrame Styles --- */
+  
+  /* Home page styles */
+  .home-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 70vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .home-text {
+    flex: 1;
+    max-width: 700px;
+  }
+  
+  .home-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .home-description {
+    color: #666666;
+    font-size: 1.125rem;
+  }
+  
+  .portfolio-link {
+    color: #333;
+    text-decoration: underline;
+    font-size: 1.125rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    display: inline-block;
+    margin-top: 1.5rem;
+  }
+  
+  .portfolio-link:hover {
+    color: #000;
+  }
+  
+  /* Contact section styles */
+  .contact-section {
+    max-width: 32rem;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .contact-links-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  
+  .contact-icon-link {
+    color: #4A90E2;
+    text-decoration: none;
+    font-size: 1.125rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .contact-icon-link:hover {
+    color: rgba(74, 144, 226, 0.9);
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive styles for Home */
+  @media (max-width: 992px) {
+    /* Hide the mosaic app on smaller screens */
+    .mosaic-container {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .home-container {
+      min-height: 60vh;
+      padding: 1rem;
+    }
+  
+    .home-title {
+      font-size: 2rem;
+    }
+  }
+  /* --- START: Mosaic Interaction Styles --- */
+.mosaic-container {
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  
+  .mosaic-container:not(.expanded):hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .mosaic-container.expanded {
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+    z-index: 100;
+    cursor: default;
+  }
+  
+  .mosaic-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 110;
+    transition: background 0.2s;
+  }
+  
+  .mosaic-close-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  /* --- END: Mosaic Interaction Styles --- */

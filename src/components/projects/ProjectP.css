@@ -189,4 +189,138 @@
   .project-subtitle {
     font-size: 1.2rem;
   }
+  
 }
+/* --- START: InnerPeace Overview Section Styles --- */
+
+.ip-overview-section {
+  position: relative; 
+  background-color: #212121;
+  padding: 4rem 2rem;
+  color: #ffffff;
+  margin-bottom: 4rem;
+  overflow: hidden;
+  
+  /* 更新：增加最小高度 */
+  min-height: 60vh; 
+  display: flex; /* 新增：配合min-height让内容居中 */
+  align-items: center; /* 新增：垂直居中 */
+
+  /* 实现全宽布局 */
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: -4rem; 
+}
+
+.ip-overview-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/project-p/overview-background.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3; /* 更新：增加了透明度，让图片更清晰 */
+  z-index: 1;
+}
+
+.ip-overview-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative; 
+  z-index: 2;
+  width: 100%; /* 新增：确保容器宽度正确 */
+}
+
+.ip-overview-number {
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.ip-overview-title-block {
+  flex-shrink: 0;
+}
+
+.ip-overview-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: bold;
+  margin: 0;
+}
+
+.ip-overview-title span {
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ip-overview-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
+}
+
+.ip-overview-details-block {
+  max-width: 450px;
+  text-align: left;
+}
+
+.ip-overview-tags {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  margin-bottom: 1.5rem;
+}
+
+.ip-overview-description {
+  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ip-overview-description strong {
+  color: #96F0D7; 
+  font-weight: 600;
+}
+
+/* Responsive styles for the new section */
+@media (max-width: 992px) {
+  .ip-overview-section {
+    min-height: 50vh;
+  }
+  .ip-overview-container {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .ip-overview-details-block {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .ip-overview-section {
+    padding: 3rem 1rem;
+    margin-bottom: 2rem;
+    min-height: 40vh;
+  }
+  
+  .ip-overview-container {
+    gap: 1.5rem;
+  }
+}
+
+/* --- END: InnerPeace Overview Section Styles --- */
