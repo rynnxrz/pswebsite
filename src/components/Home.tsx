@@ -7,34 +7,40 @@ import './Home.css';
 export const Home = () => {
   const [isMosaicExpanded, setIsMosaicExpanded] = useState(false);
 
-  const handleMosaicClick = () => {
-    // --- 新增的日志 ---
-    console.log("Mosaic 窗口被点击了! 当前是否展开:", isMosaicExpanded);
+  const handleMosaicExpand = () => {
+    setIsMosaicExpanded(true);
+  };
 
-    if (!isMosaicExpanded) {
-      setIsMosaicExpanded(true);
-    }
+  const handleMosaicCollapse = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); // 防止事件冒泡到父级div
+    setIsMosaicExpanded(false);
   };
 
   return (
     <motion.div {...pageTransition}>
 
-      <div 
-        className={`mosaic-container ${isMosaicExpanded ? 'expanded' : ''}`}
-        onClick={handleMosaicClick} // 使用新的处理函数
-      >
+      <div className={`mosaic-container ${isMosaicExpanded ? 'expanded' : ''}`}>
+        
+        {/* 仅在未展开时显示点击覆盖层 */}
+        {!isMosaicExpanded && (
+          <div
+            className="mosaic-click-overlay"
+            onClick={handleMosaicExpand}
+          />
+        )}
+
         <iframe
           src="/mosaic3d/index.html"
           title="Mosaic 3D Interactive App"
           className="mosaic-iframe"
+          // 当展开时，允许与iframe交互
+          style={{ pointerEvents: isMosaicExpanded ? 'auto' : 'none' }}
         ></iframe>
+
         {isMosaicExpanded && (
-          <button 
+          <button
             className="mosaic-close-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsMosaicExpanded(false);
-            }}
+            onClick={handleMosaicCollapse}
           >
             &times;
           </button>
