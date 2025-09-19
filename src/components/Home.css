@@ -145,10 +145,11 @@
 }
 
 .mosaic-container.expanded {
+  position: fixed;
   top: 0;
   right: 0;
   width: 100vw;
-  height: 100dvh;
+  height: 100%;
   border-radius: 0;
   border: none;
   z-index: 100;
