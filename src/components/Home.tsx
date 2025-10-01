@@ -59,7 +59,7 @@ export const Home = () => {
         <div className="contact-section">
           <h2 className="home-title">Contact</h2>
           <div className="contact-links-container">
-            <a href="https://www.instagram.com/rynn_rz/" target="_blank" rel="noopener noreferrer" className="contact-icon-link">
+            <a href="https://www.instagram.com/rz.xu_/" target="_blank" rel="noopener noreferrer" className="contact-icon-link">
               📷 Ins
             </a>
             <a href="mailto:rongze.work@gmail.com" className="contact-icon-link">
