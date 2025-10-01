@@ -1,3 +1,5 @@
+// ProjectP.tsx
+
 import { motion } from 'framer-motion';
 import { pageTransition } from '../../utils/animations';
 import './ProjectP.css';
@@ -8,11 +10,17 @@ export const ProjectP = () => {
       {/* --- Project Overview Section --- */}
       <section className="ip-overview-section">
         <div className="ip-overview-container">
-          <div className="ip-overview-number">04</div>
-          <div className="ip-overview-title-block">
-            <h2 className="ip-overview-title">InnerPeace / <span>内在平静</span></h2>
-            <p className="ip-overview-subtitle">Android Application</p>
+          {/* --- START: MODIFIED BLOCK --- */}
+          {/* We group the number and title together in a new div */}
+          <div className="ip-overview-left">
+            <div className="ip-overview-number">04</div>
+            <div className="ip-overview-title-block">
+              <h2 className="ip-overview-title">InnerPeace / <span>内在平静</span></h2>
+              <p className="ip-overview-subtitle">Android Application</p>
+            </div>
           </div>
+          {/* --- END: MODIFIED BLOCK --- */}
+
           <div className="ip-overview-details-block">
             <div className="ip-overview-tags">
               Team Work, 3 Months, UX Developer
@@ -30,105 +38,149 @@ export const ProjectP = () => {
         </div>
       </section>
       {/* --- END: Project Overview Section --- */}
+      
 
-      {/* Project Info Section */}
-      <section className="project-info">
-        <div className="info-item">
-          <h3>ROLE</h3>
-          <p>UX Developer</p>
-        </div>
-        <div className="info-item">
-          <h3>TIME</h3>
-          <p>6 Months Group Project</p>
-        </div>
-        <div className="info-item">
-          <h3>PLATFORM</h3>
-          <p>Android (Kotlin)</p>
-        </div>
-      </section>
 
-      {/* Project Description */}
-      <section className="project-description">
-        <h2>Help students lower stress levels and feel better using easy and personalised activities, supported by a logical and visually-appealing summary function</h2>
-      </section>
+{/* --- Research Journey Section --- */}
+<section className="research-journey-section">
+  <h2>Research Journey</h2>
+  <div className="journey-diagram-container">
+    {/* 关键改动：将两张图片放在同一个 wrapper div 中 */}
+    <div className="journey-diagram-wrapper">
+      <img 
+        src="/assets/images/ProjectP/research-journey-left.png" 
+        alt="Research Journey: Discover and Define phases" 
+        className="journey-diamond-img"
+      />
+      <img 
+        src="/assets/images/ProjectP/research-journey-right.png" 
+        alt="Research Journey: Develop and Deliver phases"
+        className="journey-diamond-img"
+      />
+    </div>
+  </div>
+</section>
 
-      {/* Research Section */}
-      <section className="research-section">
-        <h2>Learn from limited resources about how student study life and mental health are and what client cares</h2>
-        <div className="research-grid">
-          <div className="research-item">
-            <img src="/images/project-p/research-1.jpg" alt="Qualitative Research" />
-            <p>Qualitative Research: retrieve youth mental health investigation</p>
-          </div>
-          <div className="research-item">
-            <img src="/images/project-p/research-2.jpg" alt="Expert Interview" />
-            <p>Interview: Reached out and interviewed expert stakeholders</p>
-          </div>
-          <div className="research-item">
-            <img src="/images/project-p/research-3.jpg" alt="Market Review" />
-            <p>Market Review: learn about leading companies pro & cons</p>
-          </div>
-        </div>
-      </section>
+{/* --- END: Research Journey Section --- */}
 
-      {/* Insights Section */}
-      <section className="insights-section">
-        <div className="insight-item">
-          <h3>INSIGHTS #1</h3>
-          <p>Students often face financial pressures, and the subscription costs of many mental health apps can be an additional burden they can't afford. How can we create an affordable and accessible app for students?</p>
-          <div className="insight-solution">
-            <p>"We adopted a lean design approach, focusing on core functionalities. Keep it simple, user-friendly, and compatible with a range of devices, even including older Android phones."</p>
+{/* --- START: The Issue Section --- */}
+<section className="issue-section">
+        <div className="issue-top-row">
+          <div className="issue-title-graphic">
+            <img src="/assets/images/ProjectP/the-issue-graphic.svg" alt="The Issue" />
           </div>
-        </div>
-
-        <div className="insight-item">
-          <h3>INSIGHTS #2</h3>
-          <p>Each Person's stress reason can be very different. How does InnerPeace handle that?</p>
-          <div className="stress-scenarios">
-            <img src="/images/project-p/stress-scenarios.jpg" alt="Different stress scenarios" />
-          </div>
-          <h3>Provide variety way for student to try it out</h3>
-          <div className="solution-preview">
-            <img src="/images/project-p/solution-preview.jpg" alt="Solution Preview" />
+          <div className="issue-emotions-box">
+            <h3>Students grapple with emotions like:</h3>
+            <div className="emotions-grid">
+              <div className="emotion-item">
+                <img src="/assets/images/ProjectP/icon-anxiety.png" alt="Anxiety Icon" />
+                <p>ANXIETY</p>
+              </div>
+              <div className="emotion-item">
+                <img src="/assets/images/ProjectP/icon-overwhelm.png" alt="Overwhelm Icon" />
+                <p>OVERWHELM</p>
+              </div>
+              <div className="emotion-item">
+                <img src="/assets/images/ProjectP/icon-lost.png" alt="Lost Icon" />
+                <p>LOST</p>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* Design Process Section */}
-      <section className="design-process">
-        <h2>DESIGN #2</h2>
-        <h3>Voluntary mood recording and data visualization</h3>
-        <div className="process-images">
-          <img src="/images/project-p/design-process.jpg" alt="Design Process" />
+        <div className="issue-heaviness-box">
+          <h4>In the midst of these feelings, students often grapple with...</h4>
+          <h2>"A HEAVINESS WITHIN"</h2>
+          <p>
+            A concerning 23% of students have indicated significant depressive
+            symptoms, nearly <strong>doubling</strong> for many demographics since 2012.
+            Female students, Māori and Pasifika students, Asian students, those in
+            lower-income communities, and those from sexual and gender
+            minority groups have been particularly affected. Moreover, there's
+            been a noted increase in <strong>suicide attempts</strong>, especially among males.
+          </p>
+          <p className="citation">
+            -- University’s Faculty of Health, Dr Terry (Theresa) Fleming
+          </p>
         </div>
-      </section>
 
-      {/* Final Design Section */}
-      <section className="final-design">
-        <h2>Final Design</h2>
-        <div className="final-screens">
-          <img src="/images/project-p/final-design.jpg" alt="Final Design Screens" />
-        </div>
-      </section>
-
-      {/* Summary Section */}
-      <section className="summary-section">
-        <h2>In summary, I constructed it based on...</h2>
-        <div className="summary-points">
-          <div className="summary-point">
-            <h3>Students's needs understanding</h3>
-            <p>Understanding the diverse stress triggers for students, their financial pressures, and varying technical capabilities.</p>
-          </div>
-          <div className="summary-point">
-            <h3>InnerPeace's technical resources</h3>
-            <p>Utilizing the three-tier architecture, ensuring compatibility with old Android devices, and keeping the app lightweight yet functional.</p>
-          </div>
-          <div className="summary-point">
-            <h3>InnerPeace's market positioning</h3>
-            <p>Affordability + Accessibility</p>
+        <div className="issue-research-method">
+          <h3>Research Method</h3>
+          {/* 这里我们复用之前 research-grid 的样式 */}
+          <div className="research-grid">
+            <div className="research-item">
+              <img src="/assets/images/ProjectP/method-qualitative.svg" alt="Qualitative Research" />
+              
+            </div>
+            <div className="research-item">
+              <img src="/assets/images/ProjectP/method-expert.svg" alt="Expert Interview" />
+              
+            </div>
+            <div className="research-item">
+              <img src="/assets/images/ProjectP/method-market.svg" alt="Market Review" />
+              
+            </div>
           </div>
         </div>
       </section>
+      {/* --- END: The Issue Section --- */}
+      {/* --- START: Insights & Design Section --- */}
+      <section className="insights-design-section">
+
+        {/* --- 红框部分 --- */}
+        <div className="insight-row-1">
+          <div className="card-image-wrapper">
+            <img src="/assets/images/ProjectP/insight-1-card.svg" alt="Insight #1: How can we create an affordable and accessible app for students?" />
+          </div>
+          <div className="connector-line horizontal"></div>
+          <div className="card-image-wrapper">
+            <img src="/assets/images/ProjectP/decision-card.svg" alt="Early Design Decision: Keep it simple, including older Android phones." />
+          </div>
+        </div>
+
+{/* --- 绿框部分 (REVISED JSX V2 - Mobile First Order) --- */}
+<div className="insight-row-2">
+          
+          {/* 模块1: Insights #2 卡片 */}
+          <div className="insight-card text-card">
+            <h3>Insights #2</h3>
+            <p>Each Person's stress reason can be very, very different. How does InnerPeace handle that?</p>
+          </div>
+          
+          {/* 模块2: 压力场景图片 */}
+          <div className="stress-photos-grid">
+            <div className="photo-item">
+              <img src="/assets/images/ProjectP/stress-study.svg" alt="A student struggling with studying" />
+              <p>STUDENT MAY STRUGGLE IN STUDY LIFE</p>
+            </div>
+            <div className="photo-item">
+              <img src="/assets/images/ProjectP/stress-pollution.svg" alt="Plastic pollution on a beach" />
+              <p>STUDENT MAY WORRYING POLLUTION AND SUSTAINBILITY</p>
+            </div>
+            <div className="photo-item">
+              <img src="/assets/images/ProjectP/stress-lost.svg" alt="A person standing alone in the fog" />
+              <p>STUDENT MAY JUST FEEL LOST SOMETIMES :(</p>
+            </div>
+          </div>
+
+          {/* 模块3: Design #1 卡片 */}
+          <div className="design-card text-card">
+            <h4>Design #1</h4>
+            <p>Provide variety way for student to try it out</p>
+          </div>
+
+          {/* 模块4: 设计方案大图 */}
+          <div className="design-diagram">
+            <img src="/assets/images/ProjectP/design-solution-diagram.svg" alt="Design Solution Diagram" />
+          </div>
+          
+        </div>
+
+      </section>
+      {/* --- END: Insights & Design Section --- */}
+
+
     </motion.div>
   );
+  
 };
