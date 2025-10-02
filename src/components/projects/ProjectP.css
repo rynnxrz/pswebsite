@@ -1,6 +1,12 @@
 /* ProjectP.css - 完整代码 */
 
+/* --- 关键修复：将溢出隐藏应用到 body --- */
+body {
+  overflow-x: hidden;
+}
+
 .project-detail {
+  /* 从这里移除了 overflow-x: hidden */
   width: 100%;
   margin: 0;
   padding: 0;
@@ -363,8 +369,6 @@
 /* --- END: InnerPeace Overview Section Styles --- */
 /* 请用下面的代码块完全替换你 CSS 文件中已有的 Research Journey 部分 */
 
-/* 请用下面的代码块完全替换你 CSS 文件中已有的 Research Journey 部分 */
-
 /* --- START: Research Journey Section Styles (REVISED V4 - Compact Layout) --- */
 
 .research-journey-section {
@@ -693,40 +697,40 @@
   display: none; 
 }
 
+/* 
+  ====================================================================
+  --- START: KEY CHANGE FOR INSIGHT-ROW-2 CONNECTOR LINES ---
+  We are overriding the generic connector line styles for row-2.
+  ====================================================================
+*/
 @media (min-width: 993px) {
-  .insight-card::before, .insight-card::after {
-    display: block;
-  }
-
-  /* 水平连接线 (无变化) */
-  .insight-card::before {
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-    width: 2.5rem;
-    height: 4px;
-    background-image: repeating-linear-gradient(to right, #3DB06C 0, #3DB06C 10px, transparent 10px, transparent 20px);
-  }
-
-  /* 垂直连接线 */
+  /* This is a generic rule that gives all insight cards a vertical line */
   .insight-card::after {
+    display: block;
+    content: '';
+    position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
     width: 4px;
-    
-    /* MODIFICATION 4: 匹配新的超大行间距 */
-    height: 18rem; 
-    
     background-image: repeating-linear-gradient(to bottom, #3DB06C 0, #3DB06C 10px, transparent 10px, transparent 20px);
   }
+
+  /* 1. SHORTEN the vertical connector line to match the grid gap */
+  .insight-row-2 > .insight-card::after {
+    height: 8rem; /* This value matches the row-gap in .insight-row-2 */
+  }
 }
-/* --- 连接线结束 --- */
+/* --- END: KEY CHANGE FOR INSIGHT-ROW-2 CONNECTOR LINES --- */
 
 
 /* 绿框内的文字卡片样式 */
 .text-card h3, .text-card h4 {
   margin-top: 0; font-size: 1.5rem; color: #333;
+}
+.text-card h3{
+  /* I change my mind, the first title insights is bigger */
+  font-size: 1.75rem;
 }
 .text-card h4 {
   font-size: 1.2rem; color: #3DB06C;
@@ -777,5 +781,339 @@
   .photo-item:nth-child(1),
   .photo-item:nth-child(3) {
     transform: none;
+  }
+}
+
+
+/* --- START: NEW SECTION (INSIGHTS #2) --- */
+.insight-row-3 {
+  /* Mobile-first: default column layout */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Desktop: Grid Layout for Row 3 */
+@media (min-width: 993px) {
+  .insight-row-3 {
+    display: grid;
+    /* Re-using the column ratio from the previous row for consistency */
+    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-rows: auto auto;
+    /* Re-using the gap values from the previous row */
+    gap: 8rem 2.5rem; 
+    /* This helps vertically align the text cards with the center of the images */
+    align-items: center; 
+  }
+
+  /* --- Explicit grid placement for each element in the row --- */
+  
+  /* Insights #2 Card (top-left) */
+  .insight-row-3 > .insight-card { 
+    grid-area: 1 / 1 / 2 / 2; 
+    position: relative; /* Required for the connector line pseudo-elements to work */
+  }
+
+  /* Design #2 Card (bottom-left) */
+  .insight-row-3 > .design-card { 
+    grid-area: 2 / 1 / 3 / 2; 
+  }
+
+  /* The FIRST diagram in HTML (notification-comparison.png) now goes to the BOTTOM-RIGHT cell */
+  .insight-row-3 > .design-diagram:nth-of-type(1) { 
+    grid-area: 2 / 2 / 3 / 3;
+  }
+
+  /* The SECOND diagram in HTML (meditation-features.png) now goes to the TOP-RIGHT cell */
+  .insight-row-3 > .design-diagram:nth-of-type(2) { 
+    grid-area: 1 / 2 / 2 / 3;
+  }
+  
+  /* --- Align cards within their grid cell (same as row-2) --- */
+  .insight-row-3 > .insight-card,
+  .insight-row-3 > .design-card {
+    align-self: start; 
+    justify-self: center; 
+  }
+
+  /* --- Vertical Connector Line for the new section --- */
+  /* We only need the vertical connector on the top card */
+  .insight-row-3 > .insight-card::after {
+    display: block; /* Make sure it's visible */
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 35rem; /* Increased height significantly */
+    background-image: repeating-linear-gradient(to bottom, #3DB06C 0, #3DB06C 10px, transparent 10px, transparent 20px);
+  }
+}
+/* --- END: NEW SECTION (INSIGHTS #2) --- */
+
+
+/* --- START: NEW SECTION STYLES (ITERATION & ARCHITECTURE) --- */
+
+.final-stages-section {
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Reduced gap since the red line now acts as a separator */
+}
+
+/* 
+  ====================================================================
+  --- START: KEY CHANGES FOR TITLE POSITION ---
+  ====================================================================
+*/
+
+/* 1. Make the container a positioning anchor and add padding for the absolute title */
+.design-iteration-container {
+  position: relative;
+  padding-top: 5rem; /* Make space for the overlapping title */
+  margin-bottom: 2rem; /* Space before the red line */
+}
+
+/* 2. Position the title SVG absolutely. This is the default for mobile. */
+.iteration-main-title {
+  position: absolute;
+  top: 0;
+  left: 0; /* Default position for mobile */
+  max-width: 250px;
+  height: auto;
+  z-index: 10;
+}
+
+/* --- END: KEY CHANGES FOR TITLE POSITION --- */
+
+
+.iteration-flow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* This aligns arrows and steps vertically */
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.iteration-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+/* Set a FIXED HEIGHT on images and use object-fit to ensure consistency */
+.iteration-step img {
+  height: 380px; /* Force all images to be the same height */
+  width: auto;   /* Allow width to adjust automatically */
+  object-fit: contain; /* Prevents image distortion */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  background-color: #f8f9fa; /* A light background for transparent/white images */
+  padding: 8px; /* Inner spacing for the image */
+  border: 1px solid #eee;
+}
+
+.iteration-step p {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #666;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  margin: 0;
+  min-height: 2.5em; /* Reserve space for two lines of text to prevent layout shifts */
+}
+
+.flow-arrow {
+  flex-shrink: 0;
+  width: 40px;
+}
+
+/* --- Final Design Showcase Styles (Dark Theme, Full Width) --- */
+.final-design-showcase {
+  text-align: center;
+  padding: 4rem 2rem;
+  margin-top: 4rem;
+  background-color: #292A2D;
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+
+  /* --- Full-width styles added --- */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  box-sizing: border-box;
+}
+
+.final-design-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  color: #FAFAFA;
+}
+
+.final-design-mockups {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.mockup-gif {
+  max-width: 280px;
+  height: auto;
+  border-radius: 20px;
+}
+
+.final-design-caption {
+  font-size: 1rem;
+  color: #FAFAFA;
+  margin-top: 2.5rem;
+}
+
+/* --- System & Comments Grid Styles --- */
+.system-comments-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  align-items: start; 
+  position: relative;
+}
+
+.system-architecture-col h3,
+.comments-col h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+.system-architecture-col img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+}
+
+.comments-col {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+  
+  /* The overlap effect is removed as per the new design */
+  position: relative;
+  z-index: 5;
+  /* transform: translateY(-60px); REMOVED */
+}
+
+.team-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.comment-text-block h4 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.comment-text-block p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.comment-text-block .citation {
+  text-align: right;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (min-width: 992px) {
+  /* 
+    ====================================================================
+    --- START: KEY CHANGE FOR TITLE POSITION (DESKTOP ONLY) ---
+    ====================================================================
+  */
+  .iteration-main-title {
+    left: -30px; /* This will ONLY apply when screen width is 992px or more */
+    top: 10px;
+  }
+  /* --- END: KEY CHANGE --- */
+}
+
+
+@media (max-width: 992px) {
+  .iteration-flow {
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
+  
+  .flow-arrow {
+    display: none; 
+  }
+  
+  .iteration-step {
+    flex-basis: 45%; 
+  }
+
+  /* In tablet view, the title overlap might be too much, let's reduce it */
+  .design-iteration-container {
+    padding-top: 3rem;
+  }
+  
+  .iteration-main-title {
+    max-width: 200px;
+  }
+
+  .iteration-step img {
+    height: 300px; /* Reduce height on smaller screens */
+  }
+
+  /* Responsive for final design section */
+  .final-design-showcase {
+    padding: 3rem 1rem;
+  }
+  .mockup-gif {
+    max-width: 240px;
+  }
+
+  .system-comments-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .mockup-gif {
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .iteration-step {
+    flex-basis: 80%; /* Show one item at a time but not full width */
+  }
+  .final-design-mockups {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mockup-gif {
+    max-width: 70%;
   }
 }
