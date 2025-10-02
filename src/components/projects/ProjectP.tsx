@@ -143,7 +143,7 @@ export const ProjectP = () => {
           
           {/* 模块1: Insights #2 卡片 */}
           <div className="insight-card text-card">
-            <h3>Insights #2</h3>
+            <h3>Insights #1</h3>
             <p>Each Person's stress reason can be very, very different. How does InnerPeace handle that?</p>
           </div>
           
@@ -171,13 +171,109 @@ export const ProjectP = () => {
 
           {/* 模块4: 设计方案大图 */}
           <div className="design-diagram">
-            <img src="/assets/images/ProjectP/design-solution-diagram.svg" alt="Design Solution Diagram" />
+            <img src="/assets/images/ProjectP/design-solution-diagram.png" alt="Design Solution Diagram" />
           </div>
           
         </div>
 
+        {/* --- START: NEW SECTION (INSIGHTS #2) --- */}
+        <div className="insight-row-3">
+          {/* Item 1: Insights #2 Card */}
+          <div className="insight-card text-card">
+            <h3>Insights #2</h3>
+            <p>Too many or aggressive notifications could add to a student's stress. How do we set the atmosphere calming and inviting?</p>
+          </div>
+
+          {/* Item 2: Notification Comparison Image */}
+          <div className="design-diagram">
+            <img src="/assets/images/ProjectP/notification-comparison.png" alt="Comparison of calming breathe app notifications versus aggressive stand up notifications" />
+          </div>
+
+          {/* Item 3: Design #2 Card */}
+          <div className="design-card text-card">
+            <h4>Design #2</h4>
+            <p>Voluntary mood recording and data visualisation</p>
+          </div>
+
+          {/* Item 4: Meditation Features Image */}
+          <div className="design-diagram">
+            <img src="/assets/images/ProjectP/meditation-features.png" alt="Guided meditation screen with options for time, and a voluntary mood recording button" />
+          </div>
+        </div>
+        {/* --- END: NEW SECTION (INSIGHTS #2) --- */}
+
       </section>
       {/* --- END: Insights & Design Section --- */}
+      {/* --- START: NEW SECTION (ITERATION & ARCHITECTURE) --- */}
+      <section className="final-stages-section">
+        {/* --- Design Iteration Process --- */}
+        <div className="design-iteration-container">
+          <img 
+            src="/assets/images/ProjectP/title-design-iteration.svg" 
+            alt="Design Iteration Process"
+            className="iteration-main-title"
+          />
+          <div className="iteration-flow">
+            <div className="iteration-step">
+              <img src="/assets/images/ProjectP/iter-1-brainstorm.png" alt="Early brainstorm sketches" />
+              <p>EARLY BRAINSTORM</p>
+            </div>
+            <img src="/assets/images/ProjectP/arrow-right.svg" alt="arrow" className="flow-arrow" />
+            <div className="iteration-step">
+              <img src="/assets/images/ProjectP/iter-2-concept.png" alt="Late concept art received" />
+              <p>LATE CONCEPT ART RECEIVED</p>
+            </div>
+            <img src="/assets/images/ProjectP/arrow-right.svg" alt="arrow" className="flow-arrow" />
+            <div className="iteration-step">
+              <img src="/assets/images/ProjectP/iter-3-summary.png" alt="Early stage of summary page" />
+              <p>EARLY STAGE OF SUMMARY PAGE</p>
+            </div>
+            <img src="/assets/images/ProjectP/arrow-right.svg" alt="arrow" className="flow-arrow" />
+            <div className="iteration-step">
+              <img src="/assets/images/ProjectP/iter-4-final.png" alt="A easy use layout" />
+              <p>A EASY USE LAYOUT</p>
+            </div>
+          </div>
+        </div>
+
+        {/* --- START: FINAL DESIGN SHOWCASE --- */}
+        <div className="final-design-showcase">
+          <h2 className="final-design-title">Final Design</h2>
+          <div className="final-design-mockups">
+            <img src="/assets/images/ProjectP/final-design-mood.gif" alt="InnerPeace final design: Mood Logging" className="mockup-gif" />
+            <img src="/assets/images/ProjectP/final-design-activity.gif" alt="InnerPeace final design: Guided Meditation" className="mockup-gif" />
+            <img src="/assets/images/ProjectP/final-design-summary.gif" alt="InnerPeace final design: Summary Dashboard" className="mockup-gif" />
+          </div>
+          <p className="final-design-caption">
+            InnerPeace running on Google NEXUS 5(2014)
+          </p>
+        </div>
+        {/* --- END: FINAL DESIGN SHOWCASE --- */}
+
+        {/* --- System Architecture & Comments --- */}
+        <div className="system-comments-grid">
+          {/* Left Column */}
+          <div className="system-architecture-col">
+            <h3>System Architecture</h3>
+            <img src="/assets/images/ProjectP/system-architecture.png" alt="System Architecture Diagram" />
+          </div>
+
+          {/* Right Column */}
+          <div className="comments-col">
+            <h3>Comments</h3>
+            <img src="/assets/images/ProjectP/team-photo.png" alt="InnerPeace team receiving an award" className="team-photo"/>
+            <div className="comment-text-block">
+              <h4>The designs were confirmed by students and industry experts</h4>
+              <p>
+                "The capstone course is a lot about team work, collaboration and engaging with the client and your team did an exemplary job on all these fronts. It is therefore little wonder that you were the nominees for one of the award categories and that you won the <strong>People’s Choice Award</strong>. This is a truly well deserved win"
+              </p>
+              <p className="citation">-- Course Director, Dr. Asma Shakil</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* --- END: NEW SECTION (ITERATION & ARCHITECTURE) --- */}
+      
 
 
     </motion.div>
