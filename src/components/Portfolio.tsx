@@ -7,16 +7,16 @@ import './Portfolio.css';
 export const Portfolio = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Effect to listen for fullscreen changes (e.g., user pressing ESC)
+  // 1. 确保这里是大文件的 Google Drive 下载链接
+  const highQualityPdfUrl = "https://drive.usercontent.google.com/download?id=1cfOeyQdeB95VFB889BVrqjhxi4_qVXqg&export=download&authuser=0";
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) {
         setIsFullscreen(false);
       }
     };
-
     document.addEventListener('fullscreenchange', handleFullscreenChange);
-
     return () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
@@ -51,16 +51,14 @@ export const Portfolio = () => {
 
       <section className="portfolio-content">
         <div className="pdf-container">
-          
-          {/* Controls Container for Buttons */}
           <div className="pdf-controls">
-            
-            {/* Download Button */}
             <a 
-              href="/portfolio.pdf" 
-              download="Rongze_Xu_Portfolio.pdf" 
+              href={highQualityPdfUrl} 
+              download="Rongze_Xu_Portfolio_HQ.pdf" 
               className="pdf-btn download-btn"
-              title="Download PDF"
+              title="Download High Quality PDF"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -68,8 +66,6 @@ export const Portfolio = () => {
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
             </a>
-
-            {/* Fullscreen Button */}
             <button onClick={toggleFullscreen} className="pdf-btn fullscreen-btn" title="Toggle Fullscreen">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
@@ -77,8 +73,9 @@ export const Portfolio = () => {
             </button>
           </div>
           
+          {/* 2. 确保这里是小文件 portfolio_small.pdf */}
           <iframe
-            src="/portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
+            src="/portfolio_small.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
             title="Portfolio PDF"
             className="pdf-viewer"
           />
