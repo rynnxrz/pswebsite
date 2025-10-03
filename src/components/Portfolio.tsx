@@ -1,25 +1,42 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { pageTransition } from '../utils/animations';
-import './Portfolio.css'; // 引入新的CSS文件
+import './Portfolio.css';
 
 export const Portfolio = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // Effect to listen for fullscreen changes (e.g., user pressing ESC)
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement) {
+        setIsFullscreen(false);
+      }
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
   const toggleFullscreen = () => {
     const pdfContainer = document.querySelector('.pdf-container');
-    
+    if (!pdfContainer) return;
+
     if (!isFullscreen) {
-      if (pdfContainer?.requestFullscreen) {
-        pdfContainer.requestFullscreen();
-      }
+      pdfContainer.requestFullscreen().catch(err => {
+        alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      });
+      setIsFullscreen(true);
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
       }
+      setIsFullscreen(false);
     }
-    setIsFullscreen(!isFullscreen);
   };
 
   return (
@@ -34,14 +51,34 @@ export const Portfolio = () => {
 
       <section className="portfolio-content">
         <div className="pdf-container">
-          <button onClick={toggleFullscreen} className="embedded-fullscreen-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
-            </svg>
-          </button>
+          
+          {/* Controls Container for Buttons */}
+          <div className="pdf-controls">
+            
+            {/* Download Button */}
+            <a 
+              href="/portfolio.pdf" 
+              download="Rongze_Xu_Portfolio.pdf" 
+              className="pdf-btn download-btn"
+              title="Download PDF"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </a>
+
+            {/* Fullscreen Button */}
+            <button onClick={toggleFullscreen} className="pdf-btn fullscreen-btn" title="Toggle Fullscreen">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+              </svg>
+            </button>
+          </div>
           
           <iframe
-            src="/portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=70"
+            src="/portfolio.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
             title="Portfolio PDF"
             className="pdf-viewer"
           />

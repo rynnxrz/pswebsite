@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { pageTransition } from '../utils/animations';
+import { ProjectCard } from './ProjectCard';
 import './Home.css';
 
 export const Home = () => {
@@ -12,7 +13,7 @@ export const Home = () => {
   };
 
   const handleMosaicCollapse = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); // 防止事件冒泡到父级div
+    e.stopPropagation();
     setIsMosaicExpanded(false);
   };
 
@@ -20,23 +21,18 @@ export const Home = () => {
     <motion.div {...pageTransition}>
 
       <div className={`mosaic-container ${isMosaicExpanded ? 'expanded' : ''}`}>
-        
-        {/* 仅在未展开时显示点击覆盖层 */}
         {!isMosaicExpanded && (
           <div
             className="mosaic-click-overlay"
             onClick={handleMosaicExpand}
           />
         )}
-
         <iframe
           src="/mosaic3d/index.html"
           title="Mosaic 3D Interactive App"
           className="mosaic-iframe"
-          // 当展开时，允许与iframe交互
           style={{ pointerEvents: isMosaicExpanded ? 'auto' : 'none' }}
         ></iframe>
-
         {isMosaicExpanded && (
           <button
             className="mosaic-close-btn"
@@ -55,15 +51,40 @@ export const Home = () => {
         </div>
       </section>
 
+      <section id="projects" className="section-container featured-projects">
+        <div className="project-grid">
+          <Link to="/project/p" className="project-card-link">
+            <ProjectCard 
+              title="Innerpeace" 
+              image="/assets/images/innerpeace-cover.png"
+              description="We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale.
+"
+              tags={["UX Research", "Android App", "Scalable"]}
+            />
+          </Link>
+          {/* 
+            You can add another project here to test the 2-column layout
+            <Link to="/project/one" className="project-card-link">
+              <ProjectCard 
+                title="Hitch'n Farm" 
+                image="/path/to/your/other-image.jpg"
+                description="A project bridging the nature gap in cities, nominated for a UX Design Award in 2023."
+                tags={["Product Design", "Branding"]}
+              />
+            </Link>
+          */}
+        </div>
+      </section>
+
       <section id="contact" className="section-container">
         <div className="contact-section">
-          <h2 className="home-title">Contact</h2>
+          <h2 className="section-title">Contact</h2>
           <div className="contact-links-container">
-            <a href="https://www.instagram.com/rz.xu_/" target="_blank" rel="noopener noreferrer" className="contact-icon-link">
-              📷 Ins
+            <a href="https://www.instagram.com/rzxu._/" target="_blank" rel="noopener noreferrer" className="contact-icon-link">
+              📷INS
             </a>
             <a href="mailto:rongze.work@gmail.com" className="contact-icon-link">
-              ✉️ 邮件
+              📩EMAIL
             </a>
           </div>
         </div>
