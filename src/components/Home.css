@@ -1,27 +1,96 @@
-/* rynnxrz/pswebsite/pswebsite-ae2efb3b6d7d26c32d5c577bef5d8c3e38c68970/src/components/Home.css */
+/* ================================== */
+/* ===         Mosaic 3D          === */
+/* ================================== */
 
-/* --- START: Mosaic3D IFrame Styles --- */
+/* --- Default (Desktop) Styles --- */
 .mosaic-container {
   position: fixed;
   top: 80px;
   right: 40px;
-  width: 250px;
-  height: 250px;
+  /* Adjusted smaller size for desktop */
+  width: 200px;
+  height: 200px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 40;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .mosaic-iframe {
+  /* Render iframe at double the container size */
+  width: 400px;
+  height: 400px;
+  border: none;
+  /* Scale it down to fit the container, making content look un-crowded */
+  transform: scale(0.5);
+  transform-origin: top left;
+}
+
+.mosaic-container:not(.expanded):hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.mosaic-click-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border: none;
+  z-index: 50; 
+  cursor: pointer;
 }
-/* --- END: Mosaic3D IFrame Styles --- */
 
-/* Home page styles */
+/* --- Expanded (Fullscreen) Styles --- */
+.mosaic-container.expanded {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100%;
+  border-radius: 0;
+  border: none;
+  z-index: 100;
+  cursor: default;
+}
+
+.mosaic-container.expanded .mosaic-iframe {
+  /* When expanded, reset iframe size and transform */
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+}
+
+.mosaic-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 110;
+  transition: background 0.2s;
+}
+
+.mosaic-close-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+
+/* ================================== */
+/* ===      Home Page Content     === */
+/* ================================== */
+
 .home-container {
   display: flex;
   align-items: center;
@@ -63,12 +132,59 @@
   color: #000;
 }
 
-/* Contact section styles */
+
+/* ================================== */
+/* ===   Featured Project Section === */
+/* ================================== */
+
+.section-container.featured-projects {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.project-grid {
+  display: grid;
+  /* Desktop: 2-column layout */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 2rem;
+  max-width: 1400px; 
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 650px; 
+  justify-self: center;
+}
+
+.project-card-link:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+}
+
+
+/* ================================== */
+/* ===       Contact Section      === */
+/* ================================== */
+
 .contact-section {
   max-width: 32rem;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  color: #333;
 }
 
 .contact-links-container {
@@ -93,37 +209,46 @@
   transform: translateY(-2px);
 }
 
-/* In src/components/Home.css */
 
-/* --- START: Responsive Mosaic Container Styles --- */
+/* ================================== */
+/* ===     Responsive Styles      === */
+/* ================================== */
 
-/* For Tablets and smaller devices */
+/* --- For Tablets (and smaller desktops) --- */
 @media (max-width: 992px) {
   .mosaic-container {
-    /* Make it smaller */
     width: 150px;
     height: 150px;
-    /* Reposition it closer to the corner */
     top: 20px;
     right: 20px;
   }
-}
+  .mosaic-iframe {
+    width: 300px; /* Double container size */
+    height: 300px;
+    transform: scale(0.5);
+  }
 
-/* For Mobile phones */
-@media (max-width: 768px) {
-  .mosaic-container {
-    /* Make it even smaller */
-    width: 120px;
-    height: 120px;
-    /* Adjust position slightly */
-    top: 15px;
-    right: 15px;
+  .project-grid {
+    /* Switch to single column for tablets */
+    grid-template-columns: 1fr;
+    padding: 0 20px;
   }
 }
 
-/* --- END: Responsive Mosaic Container Styles --- */
-
+/* --- For Mobile phones --- */
 @media (max-width: 768px) {
+  .mosaic-container {
+    width: 120px;
+    height: 120px;
+    top: 15px;
+    right: 15px;
+  }
+  .mosaic-iframe {
+    width: 240px; /* Double container size */
+    height: 240px;
+    transform: scale(0.5);
+  }
+
   .home-container {
     min-height: 60vh;
     padding: 1rem;
@@ -133,60 +258,3 @@
     font-size: 2rem;
   }
 }
-/* --- START: Mosaic Interaction Styles --- */
-.mosaic-container {
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.mosaic-container:not(.expanded):hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-.mosaic-container.expanded {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100vw;
-  height: 100%;
-  border-radius: 0;
-  border: none;
-  z-index: 100;
-  cursor: default;
-}
-
-.mosaic-close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  font-size: 24px;
-  line-height: 40px;
-  text-align: center;
-  cursor: pointer;
-  z-index: 110;
-  transition: background 0.2s;
-}
-
-.mosaic-close-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-/* --- END: Mosaic Interaction Styles --- */
-/* --- START: Added for Mosaic Click Overlay --- */
-.mosaic-click-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* 确保覆盖层在iframe之上，但在关闭按钮之下 */
-  z-index: 50; 
-  cursor: pointer;
-}
-/* --- END: Added for Mosaic Click Overlay --- */

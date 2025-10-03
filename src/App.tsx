@@ -3,11 +3,13 @@ import { AnimatePresence } from 'framer-motion';
 import { Home } from './components/Home';
 import { Portfolio } from './components/Portfolio';
 import { ProjectDetail } from './components/ProjectDetail';
+import { ScrollToTop } from './components/ScrollToTop'; // <-- 1. Import the new component
 import './App.css';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop /> {/* <-- 2. Place it here, inside the Router */}
       <div>
         <nav className="nav">
           <Link to="/" className="nav-brand">Rongze Xu</Link>
