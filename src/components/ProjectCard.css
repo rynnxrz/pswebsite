@@ -1,14 +1,18 @@
-/* src/components/ProjectCard.css */
+/* ================================== */
+/* ===     Desktop Styles (Default)    === */
+/* ================================== */
 
 .project-card {
     position: relative; /* Crucial for positioning the overlay */
     border-radius: 16px; /* A more pronounced border radius */
     overflow: hidden;    /* Hides the parts of the image that zoom outside the card */
     cursor: pointer;
-    background-color: #f0f0f0; /* A light background color while the image loads */
+    background-color: #ffffff; /* Changed from #f0f0f0 to white for a cleaner look */
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     height: 100%;
+    display: flex; /* Added to help with structure */
+    flex-direction: column; /* Added to help with structure */
   }
   
   .project-card:hover {
@@ -17,9 +21,9 @@
   
   .project-card-image {
     width: 100%;
-    height: 100%;
+    /* Removed height: 100% to allow the card to grow */
+    aspect-ratio: 4 / 3; /* Maintain a consistent aspect ratio for the image */
     object-fit: cover;
-    /* The "organic" transition for the zoom effect */
     transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
   
@@ -34,21 +38,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    
-    /* A dark semi-transparent gradient from bottom to top */
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
-    
-    /* Hide the overlay by default */
     opacity: 0; 
-    
-    /* The "organic" transition for the fade-in effect */
     transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-    
     display: flex;
     flex-direction: column;
     justify-content: flex-end; /* Align content to the bottom */
     padding: 2rem;
-    box-sizing: border-box; /* Ensures padding is included in the element's total width and height */
+    box-sizing: border-box;
   }
   
   /* On hover, fade in the overlay */
@@ -61,13 +58,11 @@
   }
   
   .overlay-title, .overlay-description, .overlay-tags {
-    /* Animate text sliding up from below */
     transform: translateY(15px);
     opacity: 0;
     transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
   
-  /* On hover, slide text into view */
   .project-card:hover .overlay-title,
   .project-card:hover .overlay-description,
   .project-card:hover .overlay-tags {
@@ -75,14 +70,12 @@
     opacity: 1;
   }
   
-  /* Stagger the animation of each text element for a more dynamic feel */
   .project-card:hover .overlay-description {
     transition-delay: 0.1s;
   }
   .project-card:hover .overlay-tags {
     transition-delay: 0.2s;
   }
-  
   
   /* --- Text Styling --- */
   .overlay-title {
@@ -96,7 +89,7 @@
     font-weight: 400;
     line-height: 1.6;
     margin: 0 0 1.5rem 0;
-    max-width: 90%; /* Prevent text from touching the edges */
+    max-width: 90%;
   }
   
   .overlay-tags {
@@ -112,4 +105,64 @@
     padding: 0.3rem 0.8rem;
     font-size: 0.8rem;
     font-weight: 500;
+  }
+  
+  /* ================================== */
+  /* ===      Mobile Styles         === */
+  /* ================================== */
+  
+  /* Apply these styles on screens 768px or narrower */
+  @media (max-width: 768px) {
+    
+    /* Disable hover effects on mobile */
+    .project-card:hover .project-card-image {
+      transform: scale(1); /* No zoom */
+    }
+    .project-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); /* No shadow change */
+    }
+  
+    /* --- Change the Layout from Overlay to Stacked --- */
+    
+    /* 1. Make the 'overlay' a static block below the image */
+    .project-card-overlay {
+      position: static; /* IMPORTANT: This makes it part of the normal document flow */
+      height: auto;     /* Let it size to its content */
+      opacity: 1;       /* Make it visible by default */
+      background: #ffffff; /* Change background to solid white */
+      padding: 1.5rem;  /* Adjust padding for mobile */
+    }
+    
+    /* 2. Make the content visible and dark-colored */
+    .project-card-overlay .overlay-content {
+      color: #333;
+    }
+    
+    /* 3. Reset all text animations and make text visible */
+    .project-card-overlay .overlay-title,
+    .project-card-overlay .overlay-description,
+    .project-card-overlay .overlay-tags {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    /* 4. Fine-tune mobile text styles */
+    .project-card-overlay .overlay-title {
+      font-size: 1.25rem;
+      color: #1a1a1a;
+    }
+  
+    .project-card-overlay .overlay-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      max-width: 100%; /* Allow full width on mobile */
+    }
+    
+    /* 5. Restyle tags for a light background */
+    .project-card-overlay .tag {
+      background-color: #f0f0f0; /* Light grey */
+      color: #555;             /* Darker text */
+      backdrop-filter: none;    /* Remove blur effect */
+    }
   }
