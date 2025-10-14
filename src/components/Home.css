@@ -86,20 +86,40 @@ body {
   }
   
   .portfolio-link {
-  color: #b0b0b0;
-  text-decoration: none;
-  font-size: 0.9rem;
-  border-bottom: 1px solid #777;
-  padding-bottom: 2px;
-  transition: all 0.2s ease;
-  margin-top: 2rem;
-  align-self: flex-start;
+    /* --- 修改点 1: 使用 flexbox 对齐文本和图标 --- */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem; /* 文本和图标之间的间距 */
+
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    margin-top: 2rem;
+    align-self: flex-start;
+  }
+
+  /* --- 修改点 2: 将下划线应用到 span 标签上，这样它就不会划过图标 --- */
+  .portfolio-link span {
+    border-bottom: 1px solid #777;
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+
+  .portfolio-link:hover {
+    color: #fff;
   }
   
-  .portfolio-link:hover {
-  color: #fff;
-  border-bottom-color: #fff;
+  /* --- 修改点 3: 悬停时只改变 span 的下划线颜色 --- */
+  .portfolio-link:hover span {
+    border-bottom-color: #fff;
   }
+
+  /* --- 修改点 4: 轻微向上移动图标，使其在视觉上更居中 --- */
+  .portfolio-link svg {
+    transform: translateY(-1px);
+  }
+
   
   /* ================================== /
   / ===        项目部分           === /
@@ -153,27 +173,27 @@ body {
   / ================================== */
   
   @media (max-width: 768px) {
-  .content-container {
-  padding: 60px 1.5rem;
-  gap: 2.5rem;
-  }
+    .content-container {
+      padding: 60px 1.5rem;
+      gap: 2.5rem;
+    }
   
-  .intro-section,
-  .projects-section {
-  grid-template-columns: 1fr;
-  grid-row-gap: 1.5rem;
-  }
+    .intro-section,
+    .projects-section {
+      grid-template-columns: 1fr;
+      grid-row-gap: 1.5rem;
+    }
   
-  .grid-col-left,
-  .grid-col-right {
-  grid-column: 1 / 2;
-  }
+    .grid-col-left,
+    .grid-col-right {
+      grid-column: 1 / 2;
+    }
   
-  .intro-text {
-  margin-top: 1rem;
-  }
+    .intro-text {
+      margin-top: 1rem;
+    }
   
-  .projects-section {
-  padding-top: 1.5rem;
-  }
+    .projects-section {
+      padding-top: 1.5rem;
+    }
   }

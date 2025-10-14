@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom'; // --- 1. 引入 Link 组件 ---
 import { pageTransition } from '../utils/animations';
 import { ProjectCard } from './ProjectCard';
 import { useNotification } from './NotificationContext';
@@ -27,7 +28,7 @@ export const Home = () => {
   const { showNotification } = useNotification();
 
   const handleProjectClick = () => {
-    showNotification('Still vibing and coding — stay tuned!');
+    showNotification('vibe coding in progress — stay tuned!');
   };
 
   return (
@@ -44,9 +45,25 @@ export const Home = () => {
               <p className="intro-statement">
                 rongze is an innovative product designer and developer based in london.
               </p>
-              <a href="#" onClick={(e) => e.preventDefault()} className="portfolio-link">
-                view portfolio
-              </a>
+              
+              {/* --- 2. 修改点: 将 a 标签替换为 Link 组件，并添加 SVG 图标 --- */}
+              <Link to="/portfolio" className="portfolio-link">
+                <span>view portfolio</span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="18" 
+                  height="18" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </Link>
             </div>
           </div>
         </section>
