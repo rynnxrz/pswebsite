@@ -28,7 +28,7 @@ export const Home = () => {
   const { showNotification } = useNotification();
 
   const handleProjectClick = () => {
-    showNotification('vibe coding in progress — stay tuned!');
+    showNotification('vibe coding in  — stay tuned!');
   };
 
   return (
