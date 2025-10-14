@@ -2,7 +2,6 @@
 
 import './ProjectCard.css';
 
-// Define the new props for the component
 interface ProjectCardProps {
   title: string;
   image: string;
@@ -16,11 +15,11 @@ export const ProjectCard = ({ title, image, description, tags }: ProjectCardProp
     
     <div className="project-card-overlay">
       <div className="overlay-content">
-        <h3 className="overlay-title">{title}</h3>
+        <h3 className="overlay-title">{title.toLowerCase()}</h3>
         <p className="overlay-description">{description}</p>
         <div className="overlay-tags">
           {tags.map((tag, index) => (
-            <span key={index} className="tag">{tag}</span>
+            <span key={index} className="tag">{tag.toLowerCase()}</span>
           ))}
         </div>
       </div>

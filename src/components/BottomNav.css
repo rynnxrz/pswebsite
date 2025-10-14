@@ -1,0 +1,63 @@
+/* src/components/BottomNav.css */
+
+.bottom-nav-container {
+    position: fixed;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+  }
+  
+  .bottom-nav {
+    width: 280px;
+    height: 64px;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    
+    /* The Magic: Apply the SVG filter */
+    /* This is Chrome-only */
+    backdrop-filter: url(#liquid-glass-filter);
+  }
+  
+  /* Fallback for Firefox and Safari */
+  @supports not (backdrop-filter: url(#liquid-glass-filter)) {
+    .bottom-nav {
+      background-color: rgba(30, 30, 30, 0.7); /* A fallback background */
+      backdrop-filter: blur(12px); /* A simple blur effect */
+    }
+  }
+  
+  .nav-item {
+    width: 80px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+    z-index: 2;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-item.active {
+    color: #fff;
+  }
+  
+  .active-indicator {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+  }

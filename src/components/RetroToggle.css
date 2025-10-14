@@ -1,0 +1,82 @@
+/* src/components/RetroToggle.css */
+
+.pull-chain-switch {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  cursor: pointer;
+  width: 64px;
+  height: 120px;
+}
+
+.switch-wrapper {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 
+  修改点: 
+  - 确保这里设置了初始高度，与 TSX 文件中的 `chainInitialHeight` 变量匹配。
+*/
+.pull-chain-switch .chain {
+  width: 2px;
+  height: 32px; /* 初始高度 */
+  background-color: rgba(255, 255, 255, 0.5);
+  transform-origin: top; 
+}
+
+.pull-chain-switch .handle {
+  width: 32px;
+  height: 32px;
+  background-color: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pull-chain-switch .handle::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+/* CRT 屏幕和 iframe 样式保持不变 */
+.crt-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.crt-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05) 0,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.content-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

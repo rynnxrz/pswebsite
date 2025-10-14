@@ -1,73 +1,33 @@
 /* rynnxrz/pswebsite/pswebsite-ae2efb3b6d7d26c32d5c577bef5d8c3e38c68970/src/App.css */
-/* Base layout styles */
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-}
 
-/* Navigation styles */
-.nav {
-  position: fixed;
-  left: 0;
-  top: 0;
+/* 
+  修改点：
+  为 html 和 body 设置100%高度和黑色背景，确保整个窗口都是黑色的。
+*/
+html, body {
   width: 100%;
-  background-color: white;
-  z-index: 50;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #e5e7eb;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
 }
 
-.nav-brand {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #000000;
-  text-decoration: none;
+/* 
+  修改点：
+  - 彻底移除 max-width, margin, 和 padding。
+  - 这让 #root 不再限制内容宽度，允许我们的 Home 组件全权控制布局。
+*/
+#root {
+  width: 100%;
 }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-right: auto;
-  padding-left: 2rem;
-}
+/* 
+  修改点：
+  - 之前已经移除，这里确保 .main-content 没有任何多余样式。
+*/
 
-.nav-link {
-  font-size: 0.875rem;
-  color: #666666;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
 
-.nav-link:hover {
-  color: #000000;
-}
-
-/* Main content styles */
-.main-content {
-  padding-top: 4rem;
-}
-
+/* 这部分可以保留，也可能在其他页面用到 */
 .section-container {
   margin-top: 3rem;
-}
-
-
-/* Responsive nav styles */
-@media (max-width: 768px) {
-  .nav {
-    padding: 0.75rem;
-  }
-
-  .nav-brand {
-    font-size: 1rem;
-  }
-
-  .nav-link {
-    font-size: 0.75rem;
-  }
 }

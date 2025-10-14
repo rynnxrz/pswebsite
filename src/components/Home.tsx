@@ -1,95 +1,102 @@
+// src/components/Home.tsx
+
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Fragment } from 'react';
 import { pageTransition } from '../utils/animations';
 import { ProjectCard } from './ProjectCard';
+import { useNotification } from './NotificationContext';
 import './Home.css';
 
+const projectsData = [
+  {
+    title: "Ora Web",
+    image: "/assets/images/ora-web-cover.png",
+    description: "We increased factory management efficiency by integrating contract and production data into a simple ERP tool.",
+    tags: ["ERP System", "Service Design", "Product Assistant"],
+  },
+  {
+    title: "Innerpeace",
+    image: "/assets/images/innerpeace-cover.png",
+    description: "We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale.",
+    tags: ["UX Research", "Android App", "Scalable"],
+  },
+];
+
+
 export const Home = () => {
-  const [isMosaicExpanded, setIsMosaicExpanded] = useState(false);
+  const { showNotification } = useNotification();
 
-  const handleMosaicExpand = () => {
-    setIsMosaicExpanded(true);
-  };
-
-  const handleMosaicCollapse = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    setIsMosaicExpanded(false);
+  const handleProjectClick = () => {
+    showNotification('Still vibing and coding — stay tuned!');
   };
 
   return (
     <motion.div {...pageTransition}>
-
-      <div className={`mosaic-container ${isMosaicExpanded ? 'expanded' : ''}`}>
-        {!isMosaicExpanded && (
-          <div
-            className="mosaic-click-overlay"
-            onClick={handleMosaicExpand}
-          />
-        )}
-        <iframe
-          src="/mosaic3d/index.html"
-          title="Mosaic 3D Interactive App"
-          className="mosaic-iframe"
-          style={{ pointerEvents: isMosaicExpanded ? 'auto' : 'none' }}
-        ></iframe>
-        {isMosaicExpanded && (
-          <button
-            className="mosaic-close-btn"
-            onClick={handleMosaicCollapse}
-          >
-            &times;
-          </button>
-        )}
-      </div>
-
-      <section className="home-container">
-        <div className="home-text">
-          <h1 className="home-title">Rongze is an innovative Product Designer and Developer base in London.</h1>
-          <p className="home-description">I find great joy in solving problems for others.</p>
-          <Link to="/portfolio" className="portfolio-link">View portfolio</Link>
-        </div>
-      </section>
-
-      <section id="projects" className="section-container featured-projects">
-        <div className="project-grid">
-          <Link to="/project/p" className="project-card-link">
-            <ProjectCard 
-              title="Innerpeace" 
-              image="/assets/images/innerpeace-cover.png"
-              description="We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale.
-"
-              tags={["UX Research", "Android App", "Scalable"]}
-            />
-          </Link>
-          {/* 
-            You can add another project here to test the 2-column layout
-            <Link to="/project/one" className="project-card-link">
-              <ProjectCard 
-                title="Hitch'n Farm" 
-                image="/path/to/your/other-image.jpg"
-                description="A project bridging the nature gap in cities, nominated for a UX Design Award in 2023."
-                tags={["Product Design", "Branding"]}
-              />
-            </Link>
-          */}
-        </div>
-      </section>
-
-      <section id="contact" className="section-container">
-        <div className="contact-section">
-          <h2 className="section-title">Contact</h2>
-          <div className="contact-links-container">
-            <a href="https://www.instagram.com/rzxu._/" target="_blank" rel="noopener noreferrer" className="contact-icon-link">
-              📷INS
-            </a>
-            <a href="mailto:rongze.work@gmail.com" className="contact-icon-link">
-              📩EMAIL
-            </a>
+      <main className="content-container">
+        {/* --- Section 1: 个人介绍 --- */}
+        <section className="intro-section">
+          <div className="grid-col-left">
+            <h1 className="intro-name">rongze xu</h1>
+            <p className="intro-subtitle">product designer & developer</p>
           </div>
-        </div>
-      </section>
+          <div className="grid-col-right">
+            <div className="intro-text">
+              <p className="intro-statement">
+                rongze is an innovative product designer and developer based in london.
+              </p>
+              <a href="#" onClick={(e) => e.preventDefault()} className="portfolio-link">
+                view portfolio
+              </a>
+            </div>
+          </div>
+        </section>
 
+        {/* --- Section 2: 项目列表 --- */}
+        <section className="projects-section">
+          <div className="grid-col-left">
+            <div className="projects-heading-wrapper">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="16" 
+                height="16" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                <path d="M3 9h18"></path>
+                <path d="M9 21V9"></path>
+              </svg>
+              <h2 className="projects-heading">projects</h2>
+            </div>
+          </div>
+          <div className="grid-col-right">
+            <div className="project-list">
+              
+              {projectsData.map((project, index) => (
+                <Fragment key={project.title}>
+                  <div className="project-card-link" onClick={handleProjectClick}>
+                    <ProjectCard 
+                      title={project.title} 
+                      image={project.image}
+                      description={project.description}
+                      tags={project.tags}
+                    />
+                  </div>
+                  
+                  {index < projectsData.length - 1 && (
+                    <hr className="project-separator" />
+                  )}
+                </Fragment>
+              ))}
+
+            </div>
+          </div>
+        </section>
+      </main>
     </motion.div>
   );
 };
