@@ -24,6 +24,13 @@ export const About = () => {
         <div className="grid-col-left-about">
           <h1 className="about-name">rongze xu</h1>
           <p className="about-subtitle">product designer & developer</p>
+          {/* --- 4. LinkedIn Link Added --- */}
+          <a href="https://www.linkedin.com/in/rongze-xu-493688233/" target="_blank" rel="noopener noreferrer" className="about-link">
+            <span>Linkedin</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>
+            </svg>
+          </a>
         </div>
         <div className="grid-col-right-about">
           <p className="about-bio">
@@ -32,8 +39,7 @@ export const About = () => {
           <Link to="/portfolio" className="about-link">
             <span>view portfolio</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7 7h10v10"></path>
-              <path d="M7 17 17 7"></path>
+              <path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>
             </svg>
           </Link>
         </div>
@@ -50,17 +56,13 @@ export const About = () => {
         <div className="grid-col-right-about">
           <div className="list-container">
             {experienceData.map((item) => (
-              <div className="list-item" key={item.company}>
-                <div className="item-main"><p className="item-title">{item.role}</p><p className="item-subtitle">{item.company}</p></div>
-                <p className="item-period">{item.period}</p>
-              </div>
+              <div className="list-item" key={item.company}><div className="item-main"><p className="item-title">{item.role}</p><p className="item-subtitle">{item.company}</p></div><p className="item-period">{item.period}</p></div>
             ))}
           </div>
         </div>
         
-        {/* Separator Row 1 */}
         <div className="grid-col-left-about"></div>
-        <div className="grid-col-right-about"><hr className="project-separator"/></div>
+        <div className="grid-col-right-about"><hr className="project-separator-about"/></div>
 
         {/* Education */}
         <div className="grid-col-left-about">
@@ -72,17 +74,13 @@ export const About = () => {
         <div className="grid-col-right-about">
           <div className="list-container">
             {educationData.map((item) => (
-              <div className="list-item" key={item.institution}>
-                <div className="item-main"><p className="item-title">{item.degree}</p><p className="item-subtitle">{item.institution}</p></div>
-                <p className="item-period">{item.period}</p>
-              </div>
+              <div className="list-item" key={item.institution}><div className="item-main"><p className="item-title">{item.degree}</p><p className="item-subtitle">{item.institution}</p></div><p className="item-period">{item.period}</p></div>
             ))}
           </div>
         </div>
         
-        {/* Separator Row 2 */}
         <div className="grid-col-left-about"></div>
-        <div className="grid-col-right-about"><hr className="project-separator"/></div>
+        <div className="grid-col-right-about"><hr className="project-separator-about"/></div>
         
         {/* Skills */}
         <div className="grid-col-left-about">
