@@ -1,260 +1,179 @@
-/* ================================== */
-/* ===         Mosaic 3D          === */
-/* ================================== */
+/* src/components/Home.css */
 
-/* --- Default (Desktop) Styles --- */
-.mosaic-container {
-  position: fixed;
-  top: 80px;
-  right: 40px;
-  /* Adjusted smaller size for desktop */
-  width: 200px;
-  height: 200px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 40;
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
+/* ================================== /
+/ ===         字体设置           === /
+/ ================================== */
 
-.mosaic-iframe {
-  /* Render iframe at double the container size */
-  width: 400px;
-  height: 400px;
-  border: none;
-  /* Scale it down to fit the container, making content look un-crowded */
-  transform: scale(0.5);
-  transform-origin: top left;
-}
-
-.mosaic-container:not(.expanded):hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-.mosaic-click-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 50; 
-  cursor: pointer;
-}
-
-/* --- Expanded (Fullscreen) Styles --- */
-.mosaic-container.expanded {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100vw;
-  height: 100%;
-  border-radius: 0;
-  border: none;
-  z-index: 100;
-  cursor: default;
-}
-
-.mosaic-container.expanded .mosaic-iframe {
-  /* When expanded, reset iframe size and transform */
-  width: 100%;
-  height: 100%;
-  transform: scale(1);
-}
-
-.mosaic-close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  font-size: 24px;
-  line-height: 40px;
-  text-align: center;
-  cursor: pointer;
-  z-index: 110;
-  transition: background 0.2s;
-}
-
-.mosaic-close-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-
-/* ================================== */
-/* ===      Home Page Content     === */
-/* ================================== */
-
-.home-container {
+body {
+  font-family: 'Soehne', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  }
+  
+  /* ================================== /
+  / ===      主要内容容器         === /
+  / ================================== */
+  
+  .content-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 80px 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  }
+  
+  /* ================================== /
+  / ===      共享的网格 Section 样式  === /
+  / ================================== */
+  
+  .intro-section,
+  .projects-section {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  grid-column-gap: 1.5rem;
+  }
+  
+  .projects-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1.5rem;
+  }
+  
+  /* ================================== /
+  / ===     网格栏和介绍部分        === /
+  / ================================== */
+  
+  .grid-col-left,
+  .grid-col-right {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  }
+  
+  .grid-col-left {
+  grid-column: 1 / 2;
+  padding-top: 0.1rem;
+  }
+  
+  .grid-col-right {
+  grid-column: 2 / 3;
+  }
+  
+  .intro-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+  }
+  
+  .intro-subtitle {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #a0a0a0;
+  margin-top: 0.25rem;
+  }
+  
+  .intro-text {
+  display: flex;
+  flex-direction: column;
+  }
+  
+  .intro-statement {
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  }
+  
+  .portfolio-link {
+  color: #b0b0b0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #777;
+  padding-bottom: 2px;
+  transition: all 0.2s ease;
+  margin-top: 2rem;
+  align-self: flex-start;
+  }
+  
+  .portfolio-link:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+  }
+  
+  /* ================================== /
+  / ===        项目部分           === /
+  / ================================== */
+  
+  .projects-heading-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 70vh;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.home-text {
-  flex: 1;
-  max-width: 700px;
-}
-
-.home-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.home-description {
-  color: #666666;
-  font-size: 1.125rem;
-}
-
-.portfolio-link {
-  color: #333;
-  text-decoration: underline;
-  font-size: 1.125rem;
-  font-weight: 500;
-  transition: color 0.2s ease;
-  display: inline-block;
-  margin-top: 1.5rem;
-}
-
-.portfolio-link:hover {
-  color: #000;
-}
-
-
-/* ================================== */
-/* ===   Featured Project Section === */
-/* ================================== */
-
-.section-container.featured-projects {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-.project-grid {
-  display: grid;
-  /* Desktop: 2-column layout */
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 2rem;
-  max-width: 1400px; 
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.project-card-link {
+  gap: 0.25rem;
+  }
+  
+  .projects-heading-wrapper svg {
+  color: #fff;
+  }
+  
+  .projects-heading {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+  }
+  
+  .project-list {
+  display: flex;
+  flex-direction: column;
+  }
+  
+  .project-separator {
+    border: none;
+    height: 0.25px;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+  
+  .project-card-link {
   text-decoration: none;
   color: inherit;
   display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 650px; 
-  justify-self: center;
-}
-
-.project-card-link:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
-}
-
-
-/* ================================== */
-/* ===       Contact Section      === */
-/* ================================== */
-
-.contact-section {
-  max-width: 32rem;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.section-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 2.5rem;
-  text-align: center;
-  color: #333;
-}
-
-.contact-links-container {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .project-card-link:hover {
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.05);
+  }
+  
+  /* ================================== /
+  / ===       响应式设计          === /
+  / ================================== */
+  
+  @media (max-width: 768px) {
+  .content-container {
+  padding: 60px 1.5rem;
+  gap: 2.5rem;
+  }
+  
+  .intro-section,
+  .projects-section {
+  grid-template-columns: 1fr;
+  grid-row-gap: 1.5rem;
+  }
+  
+  .grid-col-left,
+  .grid-col-right {
+  grid-column: 1 / 2;
+  }
+  
+  .intro-text {
   margin-top: 1rem;
-}
-
-.contact-icon-link {
-  color: #4A90E2;
-  text-decoration: none;
-  font-size: 1.125rem;
-  transition: color 0.2s ease, transform 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.contact-icon-link:hover {
-  color: rgba(74, 144, 226, 0.9);
-  transform: translateY(-2px);
-}
-
-
-/* ================================== */
-/* ===     Responsive Styles      === */
-/* ================================== */
-
-/* --- For Tablets (and smaller desktops) --- */
-@media (max-width: 992px) {
-  .mosaic-container {
-    width: 150px;
-    height: 150px;
-    top: 20px;
-    right: 20px;
   }
-  .mosaic-iframe {
-    width: 300px; /* Double container size */
-    height: 300px;
-    transform: scale(0.5);
+  
+  .projects-section {
+  padding-top: 1.5rem;
   }
-
-  .project-grid {
-    /* Switch to single column for tablets */
-    grid-template-columns: 1fr;
-    padding: 0 20px;
   }
-}
-
-/* --- For Mobile phones --- */
-@media (max-width: 768px) {
-  .mosaic-container {
-    width: 120px;
-    height: 120px;
-    top: 15px;
-    right: 15px;
-  }
-  .mosaic-iframe {
-    width: 240px; /* Double container size */
-    height: 240px;
-    transform: scale(0.5);
-  }
-
-  .home-container {
-    min-height: 60vh;
-    padding: 1rem;
-  }
-
-  .home-title {
-    font-size: 2rem;
-  }
-}

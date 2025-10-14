@@ -1,168 +1,158 @@
+/* src/components/ProjectCard.css */
+
 /* ================================== */
 /* ===     Desktop Styles (Default)    === */
 /* ================================== */
 
 .project-card {
-    position: relative; /* Crucial for positioning the overlay */
-    border-radius: 16px; /* A more pronounced border radius */
-    overflow: hidden;    /* Hides the parts of the image that zoom outside the card */
-    cursor: pointer;
-    background-color: #ffffff; /* Changed from #f0f0f0 to white for a cleaner look */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    height: 100%;
-    display: flex; /* Added to help with structure */
-    flex-direction: column; /* Added to help with structure */
-  }
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.project-card-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.project-card:hover .project-card-image {
+  transform: scale(1.05);
+}
+
+.project-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  opacity: 0; 
+  transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.project-card:hover .project-card-overlay {
+  opacity: 1;
+}
+
+.overlay-content {
+  font-family: 'Soehne', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #ffffff;
+}
+
+.overlay-title, .overlay-description, .overlay-tags {
+  transform: translateY(15px);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.project-card:hover .overlay-title,
+.project-card:hover .overlay-description,
+.project-card:hover .overlay-tags {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.project-card:hover .overlay-description {
+  transition-delay: 0.1s;
+}
+.project-card:hover .overlay-tags {
+  transition-delay: 0.2s;
+}
+
+/* --- Text Styling --- */
+.overlay-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.overlay-description {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+  max-width: 90%;
+}
+
+.overlay-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  /* 
+    修改点: 添加这一行来强制浏览器创建一个新的渲染层，
+    从而解决 backdrop-filter 在动画期间的渲染 bug。
+  */
+  transform: translateZ(0);
+}
+
+/* ================================== */
+/* ===      Mobile Styles         === */
+/* ================================== */
+
+@media (max-width: 768px) {
   
-  .project-card:hover {
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
-  }
-  
-  .project-card-image {
-    width: 100%;
-    /* Removed height: 100% to allow the card to grow */
-    aspect-ratio: 4 / 3; /* Maintain a consistent aspect ratio for the image */
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  
-  /* On hover, scale the image up slightly */
   .project-card:hover .project-card-image {
-    transform: scale(1.05);
+    transform: scale(1);
   }
-  
+  .project-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+
   .project-card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
-    opacity: 0; 
-    transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Align content to the bottom */
-    padding: 2rem;
-    box-sizing: border-box;
-  }
-  
-  /* On hover, fade in the overlay */
-  .project-card:hover .project-card-overlay {
+    position: static;
+    height: auto;
     opacity: 1;
+    background: #ffffff;
+    padding: 1.5rem;
   }
   
   .overlay-content {
-    color: #ffffff;
+    color: #333;
   }
   
-  .overlay-title, .overlay-description, .overlay-tags {
-    transform: translateY(15px);
-    opacity: 0;
-    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  
-  .project-card:hover .overlay-title,
-  .project-card:hover .overlay-description,
-  .project-card:hover .overlay-tags {
+  .overlay-title,
+  .overlay-description,
+  .overlay-tags {
     transform: translateY(0);
     opacity: 1;
   }
   
-  .project-card:hover .overlay-description {
-    transition-delay: 0.1s;
-  }
-  .project-card:hover .overlay-tags {
-    transition-delay: 0.2s;
-  }
-  
-  /* --- Text Styling --- */
   .overlay-title {
-    font-size: 1.75rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: #1a1a1a;
   }
-  
+
   .overlay-description {
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 0.95rem;
     line-height: 1.6;
-    margin: 0 0 1.5rem 0;
-    max-width: 90%;
+    margin-bottom: 1rem;
+    max-width: 100%;
   }
-  
-  .overlay-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  
-  .tag {
-    background-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(5px);
-    border-radius: 999px; /* Pill shape */
-    padding: 0.3rem 0.8rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-  
-  /* ================================== */
-  /* ===      Mobile Styles         === */
-  /* ================================== */
-  
-  /* Apply these styles on screens 768px or narrower */
-  @media (max-width: 768px) {
-    
-    /* Disable hover effects on mobile */
-    .project-card:hover .project-card-image {
-      transform: scale(1); /* No zoom */
-    }
-    .project-card:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); /* No shadow change */
-    }
-  
-    /* --- Change the Layout from Overlay to Stacked --- */
-    
-    /* 1. Make the 'overlay' a static block below the image */
-    .project-card-overlay {
-      position: static; /* IMPORTANT: This makes it part of the normal document flow */
-      height: auto;     /* Let it size to its content */
-      opacity: 1;       /* Make it visible by default */
-      background: #ffffff; /* Change background to solid white */
-      padding: 1.5rem;  /* Adjust padding for mobile */
-    }
-    
-    /* 2. Make the content visible and dark-colored */
-    .project-card-overlay .overlay-content {
-      color: #333;
-    }
-    
-    /* 3. Reset all text animations and make text visible */
-    .project-card-overlay .overlay-title,
-    .project-card-overlay .overlay-description,
-    .project-card-overlay .overlay-tags {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    
-    /* 4. Fine-tune mobile text styles */
-    .project-card-overlay .overlay-title {
-      font-size: 1.25rem;
-      color: #1a1a1a;
-    }
-  
-    .project-card-overlay .overlay-description {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-      max-width: 100%; /* Allow full width on mobile */
-    }
-    
-    /* 5. Restyle tags for a light background */
-    .project-card-overlay .tag {
-      background-color: #f0f0f0; /* Light grey */
-      color: #555;             /* Darker text */
-      backdrop-filter: none;    /* Remove blur effect */
-    }
-  }
+}
