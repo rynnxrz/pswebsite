@@ -3,6 +3,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Home } from './components/Home';
+import { About } from './components/About'; // Import the new About component
 import { Portfolio } from './components/Portfolio';
 import { ProjectDetail } from './components/ProjectDetail';
 import { ScrollToTop } from './components/ScrollToTop';
@@ -25,8 +26,8 @@ const AppContent = () => {
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* --- Change: Route is now /about --- */}
-            <Route path="/about" element={<Home />} />
+            {/* --- Change: Route now renders the About component --- */}
+            <Route path="/about" element={<About />} /> 
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/project/:id" element={<ProjectDetail />} />
             {/* Add fallbacks for old paths if desired */}

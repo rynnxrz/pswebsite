@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 3rem; 
+  margin-bottom: 3rem;
 }
 
 .portfolio-title {
@@ -37,7 +37,7 @@
 .action-buttons-container {
   display: flex;
   gap: 0.5rem;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 .action-btn {
@@ -83,37 +83,31 @@
   background-color: #000;
 }
 
-/* ================================== */
-/* ===      Mobile Styles         === */
-/* ================================== */
+.mobile-overlay {
+  display: none; /* Initially hidden */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  border-radius: 12px;
+}
 
+/* This media query now only handles the PDF viewer and overlay visibility */
 @media (max-width: 768px) {
-  .portfolio-page-container {
-    /* 减少左右内边距，使其在手机上更宽敞 */
-    padding: 4rem 1.5rem;
-  }
-
-  .portfolio-header {
-    /* 将标题和按钮垂直堆叠 */
-    flex-direction: column;
-    align-items: flex-start; /* 左对齐 */
-    gap: 1.5rem; /* 在标题和按钮之间增加间距 */
-    margin-bottom: 2rem;
-  }
-
-  /* 
-    在移动设备上隐藏全屏按钮，因为它不起作用 
-  */
-  .fullscreen-btn-container {
+  .pdf-viewer {
     display: none;
   }
 
-  .pdf-container {
-    /* 
-      使用 aspect-ratio 代替固定高度，
-      使其在不同尺寸的手机上都能保持良好比例 
-    */
-    height: auto;
-    aspect-ratio: 4 / 5;
+  .mobile-overlay {
+    display: flex;
   }
 }
