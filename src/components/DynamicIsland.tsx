@@ -1,12 +1,13 @@
 // src/components/DynamicIsland.tsx
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Info } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react'; // A more appropriate icon for success
 import { useNotification } from './NotificationContext';
 import './DynamicIsland.css';
 
 export const DynamicIsland = () => {
-  const { isVisible, message } = useNotification();
+  // Now includes subMessage
+  const { isVisible, message, subMessage } = useNotification();
 
   return (
     <div className="dynamic-island-wrapper">
@@ -14,33 +15,19 @@ export const DynamicIsland = () => {
         {isVisible && (
           <motion.div
             className="dynamic-island-base"
-            initial={{
-              scale: 0.85,
-              opacity: 0,
-              y: -30, // 从顶部更远一点的位置开始
-            }}
-            animate={{
-              scale: 1,
-              opacity: 1,
-              y: 0,
-            }}
-            exit={{
-              scale: 0.85,
-              opacity: 0,
-              y: -30,
-            }}
-            // 设置变换原点为顶部中心，让缩放感觉更自然
+            initial={{ scale: 0.85, opacity: 0, y: -30 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.85, opacity: 0, y: -30 }}
             style={{ transformOrigin: "top center" }}
-            transition={{
-              type: "spring",
-              stiffness: 400,
-              damping: 25,
-            }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
-            {/* 内容不再需要自己的动画，由父容器统一处理 */}
             <div className="island-content">
-              <Info size={16} className="icon" />
-              <p className="message">{message}</p>
+              <CheckCircle2 size={20} className="icon" />
+              <div className="message-wrapper">
+                <p className="message">{message}</p>
+                {/* Conditionally render the sub-message if it exists */}
+                {subMessage && <p className="sub-message">{subMessage}</p>}
+              </div>
             </div>
           </motion.div>
         )}

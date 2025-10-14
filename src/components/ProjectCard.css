@@ -1,12 +1,9 @@
 /* src/components/ProjectCard.css */
 
-/* ================================== */
-/* ===     Desktop Styles (Default)    === */
-/* ================================== */
-
 .project-card {
   position: relative;
-  border-radius: 16px;
+  /* --- Change: Unified border radius --- */
+  border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
   background-color: #ffffff;
@@ -31,6 +28,8 @@
 .project-card:hover .project-card-image {
   transform: scale(1.05);
 }
+
+/* ... rest of the file is unchanged ... */
 
 .project-card-overlay {
   position: absolute;
@@ -77,7 +76,6 @@
   transition-delay: 0.2s;
 }
 
-/* --- Text Styling --- */
 .overlay-title {
   font-size: 1.25rem;
   font-weight: 600;
@@ -105,26 +103,12 @@
   padding: 0.3rem 0.8rem;
   font-size: 0.9rem;
   font-weight: 400;
-  /* 
-    修改点: 添加这一行来强制浏览器创建一个新的渲染层，
-    从而解决 backdrop-filter 在动画期间的渲染 bug。
-  */
   transform: translateZ(0);
 }
 
-/* ================================== */
-/* ===      Mobile Styles         === */
-/* ================================== */
-
 @media (max-width: 768px) {
-  
-  .project-card:hover .project-card-image {
-    transform: scale(1);
-  }
-  .project-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  }
-
+  .project-card:hover .project-card-image { transform: scale(1); }
+  .project-card:hover { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05); }
   .project-card-overlay {
     position: static;
     height: auto;
@@ -132,27 +116,11 @@
     background: #ffffff;
     padding: 1.5rem;
   }
-  
-  .overlay-content {
-    color: #333;
-  }
-  
-  .overlay-title,
-  .overlay-description,
-  .overlay-tags {
+  .overlay-content { color: #333; }
+  .overlay-title, .overlay-description, .overlay-tags {
     transform: translateY(0);
     opacity: 1;
   }
-  
-  .overlay-title {
-    font-size: 1.25rem;
-    color: #1a1a1a;
-  }
-
-  .overlay-description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    max-width: 100%;
-  }
+  .overlay-title { font-size: 1.25rem; color: #1a1a1a; }
+  .overlay-description { font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem; max-width: 100%; }
 }

@@ -24,23 +24,16 @@ export const RetroToggle = () => {
     visible: { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1 },
   };
 
-  // 定义绳子的初始高度和被拉长后的高度
+  // --- 1. Revert to chain-stretch animation ---
   const chainInitialHeight = 32;
   const pullDistance = 20;
 
   return (
     <>
+      {/* 2. Tooltip has been removed */}
       <div className="pull-chain-switch" onClick={toggleSwitch}>
-        {/* 
-          修改点 1: 
-          - 这个 wrapper 不再有动画，它只是一个静态的布局容器。
-        */}
         <div className="switch-wrapper">
-          {/* 
-            修改点 2:
-            - 将动画应用到绳子 .chain 上。
-            - 我们动画的是它的 height 属性。
-          */}
+          {/* 3. Animate the height of the chain directly */}
           <motion.div
             className="chain"
             animate={{ 

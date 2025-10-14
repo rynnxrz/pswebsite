@@ -1,41 +1,32 @@
-// src/context/NotificationContext.tsx
+// src/components/NotificationContext.tsx
 
-// 修改点 1: 移除了未使用的 'React'
 import { createContext, useState, useContext, ReactNode } from 'react';
 
 interface NotificationContextType {
-  showNotification: (message: string) => void;
-  message: string;
   isVisible: boolean;
+  message: string;
+  subMessage: string;
+  showNotification: (msg: string, subMsg?: string) => void;
 }
 
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
 export const NotificationProvider = ({ children }: { children: ReactNode }) => {
-  const [message, setMessage] = useState('');
   const [isVisible, setIsVisible] = useState(false);
-  // 修改点 2: 将 NodeJS.Timeout 替换为 number
-  const [timeoutId, setTimeoutId] = useState<number | null>(null);
+  const [message, setMessage] = useState('');
+  const [subMessage, setSubMessage] = useState(''); // New state for the sub-message
 
-  const showNotification = (newMessage: string) => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-
-    setMessage(newMessage);
+  const showNotification = (msg: string, subMsg: string = '') => {
+    setMessage(msg);
+    setSubMessage(subMsg); // Set the sub-message
     setIsVisible(true);
-
-    const newTimeoutId = setTimeout(() => {
+    setTimeout(() => {
       setIsVisible(false);
-    }, 4000);
-    // setTimeout 在浏览器中返回的是 number 类型
-    setTimeoutId(newTimeoutId as unknown as number);
+    }, 4000); // Keep it visible for 4 seconds
   };
 
-  const value = { showNotification, message, isVisible };
-
   return (
-    <NotificationContext.Provider value={value}>
+    <NotificationContext.Provider value={{ isVisible, message, subMessage, showNotification }}>
       {children}
     </NotificationContext.Provider>
   );
@@ -43,7 +34,7 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
 
 export const useNotification = () => {
   const context = useContext(NotificationContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useNotification must be used within a NotificationProvider');
   }
   return context;
