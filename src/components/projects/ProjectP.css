@@ -1,1119 +1,391 @@
-/* ProjectP.css - 完整代码 */
+/* src/components/projects/ProjectP.css */
 
-/* --- 关键修复：将溢出隐藏应用到 body --- */
-body {
-  overflow-x: hidden;
-}
-
-.project-detail {
-  /* 从这里移除了 overflow-x: hidden */
+.project-detail-container {
+  box-sizing: border-box;
   width: 100%;
-  margin: 0;
-  padding: 0;
+  padding: 4rem 32px;
+  font-family: 'Soehne', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  /* FORCE LOWERCASE EVERYWHERE per user request */
+  text-transform: lowercase;
 }
 
-/* 注意：你原来代码中的 .project-header 部分似乎并没有在这个页面开头用到，
-   这个页面的开头用的是下面的 .ip-overview-section。
-   如果你确定不需要 .project-header，可以删除它，防止混淆。
-   我这里先保留它，但它不影响我们要改的部分。
-*/
+.project-content-wrapper {
+  /* Match Portfolio.css width */
+  max-width: 576px;
+  margin: 0 auto;
+}
+
 .project-header {
-  text-align: center;
-  position: relative;
-  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Centered visually */
+  margin-bottom: 3rem;
+  text-align: left;
+
+  /* Sticky Logic */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1rem 0;
+  /* Add padding for "row" feel */
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Ensure background covers content behind it when sticky */
+  background-color: transparent;
+  /* We might want a pseudo-element or negative margins to blur *full width* if desired, 
+     but keeping it simple (contained) for now as requested. */
+}
+
+.project-header.sticky-active {
+  /* Match BottomNav "liquid glass" style */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: url(#liquid-glass-filter);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  margin-bottom: 3rem;
+  /* Keep spacing */
+
+  /* Constrained width behavior */
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0 0 24px 24px;
+  /* Squircle-ish radius like nav */
+}
+
+@supports not (backdrop-filter: url(#liquid-glass-filter)) {
+  .project-header.sticky-active {
+    background-color: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(16px);
+  }
+}
+
+.project-header-text-container {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+}
+
+/* Header Info Transitions */
+.header-main-info {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.header-main-info.scrolled-mode {
+  flex-direction: row;
   align-items: center;
-  color: white;
-  padding-top: 120px;
-  /* 这里我保持你原来的占位符，因为这个section似乎没用到 */
-  background-image: url('/images/project-p/overview.jpg'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  margin-top: -4rem;
+  gap: 0.5rem;
+}
+
+.header-main-info.scrolled-mode .project-title {
+  font-size: 1rem;
+  /* Smaller size on scroll */
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.header-main-info.scrolled-mode .project-title:hover {
+  opacity: 1;
+}
+
+.header-main-info.scrolled-mode .project-date {
+  display: none;
+  /* Hide date on scroll */
+}
+
+/* Navigator Dropdown */
+.section-navigator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  /* Anchor for dropdown */
+  height: 100%;
+  padding-bottom: 0;
+  /*  Ensure no accidental padding issues */
+}
+
+.divider {
+  color: #555;
+  font-weight: 300;
+}
+
+.active-section-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+.section-navigator:hover .active-section-name {
+  color: #4b9fff;
+  /* Highlight on hover */
+}
+
+.section-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  /* Use padding-top on a pseudo-element instead of margin-top to avoid gap */
+  margin-top: 8px;
+  background-color: #1f1f1f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  min-width: 180px;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+
+  opacity: 0;
+  transform: translateY(-5px);
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transition-delay: 0.1s;
+  /* Small delay before hiding */
+}
+
+/* Invisible bridge to cover the margin gap */
+.section-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  /* Height of the gap + extra safety */
+  left: 0;
+  width: 100%;
+  height: 15px;
+}
+
+/* Show Dropdown on Hover of the Navigator Container */
+.section-navigator:hover .section-dropdown {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0s;
+  /* Appear instantly */
+}
+
+.dropdown-item {
+  font-size: 0.9rem;
+  color: #a0a0a0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.dropdown-item.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 500;
 }
 
 .project-title {
-  font-size: 5.5rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  position: relative;
-  z-index: 2;
-  max-width: 90%;
-}
-
-.project-subtitle {
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  position: relative;
-  z-index: 2;
-  max-width: 90%;
-}
-
-.project-overview-images {
-  display: none;
-}
-
-.project-overview-images img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.project-info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-bottom: 4rem;
-  text-align: center;
-}
-
-.info-item h3 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.project-description {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.project-description h2 {
-  font-size: 1.8rem;
-  line-height: 1.4;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.research-section {
-  margin-bottom: 4rem;
-}
-
-.research-section h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.research-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.research-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.research-item p {
-  text-align: center;
-}
-
-.insights-section {
-  margin-bottom: 4rem;
-}
-
-.insight-item {
-  margin-bottom: 3rem;
-}
-
-.insight-item h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.insight-solution {
-  background-color: #f5f5f5;
-  padding: 2rem;
-  border-radius: 8px;
-  margin-top: 1rem;
-}
-
-.stress-scenarios,
-.solution-preview {
-  margin: 2rem 0;
-}
-
-.stress-scenarios img,
-.solution-preview img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.design-process,
-.final-design {
-  margin-bottom: 4rem;
-}
-
-.process-images,
-.final-screens {
-  margin-top: 2rem;
-}
-
-.process-images img,
-.final-screens img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.summary-section {
-  background-color: #f5f5f5;
-  padding: 3rem;
-  border-radius: 8px;
-}
-
-.summary-points {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.summary-point h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-  .project-info,
-  .research-grid,
-  .summary-points {
-    grid-template-columns: 1fr;
-  }
-  
-  .project-title {
-    font-size: 2rem;
-  }
-  
-  .project-subtitle {
-    font-size: 1.2rem;
-  }
-}
-
-/* ==========================================================================
-   --- START: InnerPeace Overview Section Styles (这是我们要修改的核心部分) ---
-   ========================================================================== */
-
-.ip-overview-section {
-  position: relative; 
-  background-color: #212121;
-  padding: 6rem 2rem;
-  color: #ffffff;
-  margin-bottom: 4rem;
-  overflow: hidden;
-  min-height: 80vh; 
-  display: flex;
-  align-items: center;
-
-  /* 实现全宽布局 */
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  margin-top: -4rem; 
-}
-
-/* --- 中间层：手机背景图 --- */
-.ip-overview-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  /* --- 这里使用了你确认正确的路径 --- */
-  background-image: url('/assets/images/ProjectP/innerpeace-mockups.png'); 
-  
-  background-size: 80%; /* 保持图片完整显示 */
-  background-position: center; /* 居中 */
-  background-repeat: no-repeat;
-  
-  /* --- 我把透明度改成了 1.0 (不透明)，这样你应该能看到图片原貌了 --- */
-  opacity: 1.0; 
-  
-  z-index: 1; /* 确保图片在黑色背景之上 */
-}
-
-/* --- 最顶层：文字内容 --- */
-.ip-overview-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  position: relative; 
-  z-index: 2; /* 确保文字在图片之上 */
-  width: 100%;
-}
-
-/* --- 新增：用于组合 "04" 和标题的样式，实现图2的布局 --- */
-.ip-overview-left {
-  display: flex;
-  align-items: center;
-  gap: 2rem; 
-  flex-shrink: 0; 
-}
-
-.ip-overview-number {
-  font-size: clamp(6rem, 15vw, 12rem);
-  font-weight: bold;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.ip-overview-title-block {
-  flex-shrink: 0;
-}
-
-.ip-overview-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: bold;
-  margin: 0;
-}
-
-.ip-overview-title span {
-  font-weight: normal;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.ip-overview-subtitle {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 0.5rem;
-}
-
-.ip-overview-details-block {
-  max-width: 450px;
-  text-align: left;
-}
-
-.ip-overview-tags {
-  display: inline-block;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  font-size: clamp(0.8rem, 2vw, 1rem);
-  margin-bottom: 1.5rem;
-}
-
-.ip-overview-description {
-  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.ip-overview-description strong {
-  color: #96F0D7; 
+  /* Match Portfolio.css title size */
+  font-size: 1.25rem;
   font-weight: 600;
+  margin: 0;
+  color: #fff;
 }
 
-/* Responsive styles */
-@media (max-width: 992px) {
-  .ip-overview-section {
-    min-height: auto;
-    padding: 4rem 1.5rem;
-  }
-  .ip-overview-container {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    gap: 3rem;
-  }
-
-  /* 在小屏幕上调整背景图 */
-  .ip-overview-section::before {
-    background-size: 70%;
-    background-position: 90% 10%;
-    opacity: 1; /* 小屏幕上可以让它淡一点，防止干扰文字 */
-  }
-
-  .ip-overview-details-block {
-    max-width: 100%;
-  }
+.project-date {
+  /* Match Portfolio.css date size */
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #a0a0a0;
+  margin-top: 4px;
 }
 
-@media (max-width: 768px) {
-  .ip-overview-section {
-    padding: 3rem 1rem;
-    margin-bottom: 2rem;
-  }
-  
-  .ip-overview-container {
-    gap: 1.5rem;
-  }
-  
-  /* 小屏幕时，让左侧的数字和标题也垂直排列 */
-  .ip-overview-left {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-  }
+.action-buttons-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
-/* --- END: InnerPeace Overview Section Styles --- */
-/* 请用下面的代码块完全替换你 CSS 文件中已有的 Research Journey 部分 */
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  color: #a0a0a0;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
 
-/* --- START: Research Journey Section Styles (REVISED V4 - Compact Layout) --- */
+.action-btn:hover {
+  background-color: #2a2a2a;
+  color: #fff;
+}
 
-.research-journey-section {
-  /* --- 核心修改：减小了上下的 padding --- */
-  padding: 2rem 0 4rem 0; /* 上2rem, 下4rem，让它离上面更近 */
-  
-  background-color: #FAFAFA;
-  width: 100vw;
+.tooltip-container {
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  box-sizing: border-box; 
-  overflow: hidden; 
+  display: inline-block;
 }
 
-.research-journey-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  text-align: left;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 2rem; /* 给标题保留左右边距，防止贴边 */
-}
-
-/* 外部容器 */
-.journey-diagram-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-/* --- 大屏幕样式 (高度固定) --- */
-.journey-diagram-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  height: 400px; 
-}
-
-.journey-diamond-img {
-  height: 100%;
-  width: auto;
-  object-fit: contain;
-}
-
-
-/* --- 响应式布局：小屏幕样式 (旋转后) --- */
-@media (max-width: 992px) {
-  
-  .research-journey-section h2 {
-    text-align: center;
-  }
-  
-  .journey-diagram-container {
-    min-height: 120vw;
-    margin-top: 2rem;
-  }
-
-  .journey-diagram-wrapper {
-    height: auto;
-    width: 115vw; 
-    transform: rotate(90deg);
-    transform-origin: center;
-    gap: 0; 
-  }
-
-  .journey-diamond-img {
-    width: 50%;
-    height: auto;
-  }
-}
-
-/* --- END: Research Journey Section Styles --- */
-/* --- START: The Issue Section Styles --- */
-.issue-section {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem; /* 各个框之间的垂直间距 */
-  margin-bottom: 4rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-/* --- 上部 (红框区域) --- */
-.issue-top-row {
-  display: flex;
-  align-items: stretch; /* 让左右两列高度一致 */
-  gap: 2rem;
-}
-
-.issue-title-graphic {
-  flex: 1; /* 占据可用空间的一部分 */
-  max-width: 300px; /* 限制标题图的最大宽度 */
-}
-
-.issue-title-graphic img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* 确保图片完整显示 */
-}
-
-.issue-emotions-box {
-  flex: 2; /* 占据更多空间 */
-  border: 2px solid #333; /* 边框颜色 */
-  padding: 1.5rem;
-  background-color: #f9f9f9; /* 浅灰色背景 */
-}
-
-.issue-emotions-box h3 {
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
-}
-
-.emotions-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+.tooltip-text {
+  visibility: visible;
+  background-color: #333;
+  color: #fff;
   text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  /* Position above */
+  left: 50%;
+  margin-left: -60px;
+  /* Center it */
+  opacity: 1;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  pointer-events: none;
 }
 
-.emotion-item img {
-  width: 80px; /* 图标大小 */
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 0.5rem;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 0.5rem;
+.project-section {
+  margin-bottom: 3rem;
 }
 
-.emotion-item p {
-  font-size: 0.8rem;
-  font-weight: bold;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin: 0;
+.project-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #fff;
 }
 
-/* --- 中部 (绿框区域) --- */
-.issue-heaviness-box {
-  border: 2px solid #333;
-  padding: 2rem;
-  background-color: #f9f9f9;
+.project-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #e0e0e0;
 }
 
-.issue-heaviness-box h4 {
-  font-size: 1.1rem;
-  font-weight: normal;
-  color: #555;
-  margin: 0;
-}
-
-.issue-heaviness-box h2 {
-  font-size: clamp(2rem, 5vw, 3rem); /* 响应式字体大小 */
-  margin: 0.5rem 0 1.5rem 0;
-  color: #222;
-}
-
-.issue-heaviness-box p {
+.project-section p {
   font-size: 1rem;
   line-height: 1.6;
-  color: #333;
-  max-width: 80ch; /* 优化阅读行长 */
-}
-
-.issue-heaviness-box .citation {
-  text-align: right;
-  font-style: italic;
-  margin-top: 2rem;
-  color: #555;
-}
-
-/* --- 下部 (蓝框区域) --- */
-.issue-research-method {
-  border: 2px solid #333;
-  padding: 1.5rem;
-  background-color: #f9f9f9;
-}
-
-.issue-research-method h3 {
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
-}
-
-/* 注意：我们复用了 .research-grid 和 .research-item 的样式，无需重复编写 */
-
-
-/* --- 响应式设计 --- */
-@media (max-width: 768px) {
-  .issue-top-row {
-    flex-direction: column; /* 垂直堆叠 */
-  }
-
-  .issue-title-graphic {
-    max-width: 200px; /* 在手机上缩小标题图 */
-    margin-bottom: 1rem;
-  }
-
-
-
-  .emotion-item img {
-    width: 60px;
-    height: 60px;
-  }
-}
-/* 这是一个新的、更具体的规则，只会影响 issue-research-method 内部的图片 */
-.issue-research-method .research-item {
-  /* 确保 item 本身垂直对齐 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.issue-research-method .research-item img {
-  width: 100%; /* 图片宽度依然充满其容器 */
-  height: 250px; /* 关键：设置一个固定的高度，你可以根据需要调整这个数值 */
-  object-fit: contain; /* 关键：确保图片在指定高度内完整显示，且不变形 */
-  border-radius: 24px; /* 根据你的图片，可以调整圆角 */
-  margin-bottom: 0; /* 移除底部间距，因为没有文字了 */
-}
-
-/* 确保这个新样式在手机端也能正常工作 */
-@media (max-width: 768px) {
-  /* 在手机上，网格会变成单列，我们可能需要调整一下图片高度 */
-  .issue-research-method .research-item img {
-    height: 200px; /* 在小屏幕上可以适当减小高度 */
-  }
-}
-
-/* --- END: 关键修改 --- */
-/* --- START: Insights & Design Section Styles (REVISED V6 - Final Sizing & Spacing) --- */
-
-.insights-design-section {
-  padding: 4rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-}
-
-/* --- 卡片通用样式 --- */
-.text-card {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-}
-
-/* --- 红框部分布局 --- */
-.insight-row-1 {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  max-width: 1100px; 
-  width: 100%;
-  margin: 0 auto;
-}
-.connector-line.horizontal {
-  flex-grow: 1;
-  height: 4px;
-  background-image: repeating-linear-gradient(to right, #3DB06C 0, #3DB06C 10px, transparent 10px, transparent 20px);
-  background-size: 20px 100%;
-}
-.card-image-wrapper { flex: 1; }
-.card-image-wrapper img { width: 100%; height: auto; }
-
-
-/* --- 绿框部分布局 --- */
-.insight-row-2 {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* --- MODIFICATION 1: 精确控制 Insights/Design 卡片尺寸 --- */
-/* 这个规则同时对手机端和桌面端生效 */
-.insight-row-2 > .insight-card,
-.insight-row-2 > .design-card {
-  /* 设置最大宽度，防止卡片在任何情况下过宽 */
-  max-width: 420px; 
-  /* 确保在容器宽度小于max-width时能正常缩放 */
-  width: 100%; 
-  /* 在手机端（flex布局下）实现居中 */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-/* --- 桌面端使用 Grid 重新布局 --- */
-@media (min-width: 993px) {
-  .insight-row-2 {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    grid-template-rows: auto auto;
-    
-    /* MODIFICATION 2: 增加行间距，拉开垂直距离 */
-    gap: 8rem 2.5rem; 
-  }
-
-  /* 精准定位，无视 HTML 顺序 */
-  .insight-row-2 > .insight-card { grid-area: 1 / 1 / 2 / 2; position: relative; }
-  .insight-row-2 > .stress-photos-grid { grid-area: 1 / 2 / 2 / 3; }
-  .insight-row-2 > .design-card { grid-area: 2 / 1 / 3 / 2; }
-  .insight-row-2 > .design-diagram { grid-area: 2 / 2 / 3 / 3; }
-
-  /* MODIFICATION 3: 控制卡片在网格单元内的对齐方式 */
-  .insight-row-2 > .insight-card,
-  .insight-row-2 > .design-card {
-    /* 阻止卡片垂直拉伸，使其高度由内容决定 (变得更短) */
-    align-self: start; 
-    /* 在网格单元内水平居中 */
-    justify-self: center; 
-  }
-}
-
-
-/* --- 连接线 (使用伪元素绘制) --- */
-.insight-card::before, .insight-card::after {
-  content: '';
-  position: absolute;
-  display: none; 
-}
-
-/* 
-  ====================================================================
-  --- START: KEY CHANGE FOR INSIGHT-ROW-2 CONNECTOR LINES ---
-  We are overriding the generic connector line styles for row-2.
-  ====================================================================
-*/
-@media (min-width: 993px) {
-  /* This is a generic rule that gives all insight cards a vertical line */
-  .insight-card::after {
-    display: block;
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    background-image: repeating-linear-gradient(to bottom, #3DB06C 0, #3DB06C 10px, transparent 10px, transparent 20px);
-  }
-
-  /* 1. SHORTEN the vertical connector line to match the grid gap */
-  .insight-row-2 > .insight-card::after {
-    height: 8rem; /* This value matches the row-gap in .insight-row-2 */
-  }
-}
-/* --- END: KEY CHANGE FOR INSIGHT-ROW-2 CONNECTOR LINES --- */
-
-
-/* 绿框内的文字卡片样式 */
-.text-card h3, .text-card h4 {
-  margin-top: 0; font-size: 1.5rem; color: #333;
-}
-.text-card h3{
-  /* I change my mind, the first title insights is bigger */
-  font-size: 1.75rem;
-}
-.text-card h4 {
-  font-size: 1.2rem; color: #3DB06C;
-}
-.text-card p {
-  margin-bottom: 0; color: #555; line-height: 1.6;
-}
-
-/* 压力场景图片网格 */
-.stress-photos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  align-items: center;
-  padding-top: 25px;
-}
-.photo-item { text-align: center; }
-.photo-item img {
-  width: 100%; height: auto; border-radius: 16px; margin-bottom: 0.5rem; display: block;
-}
-.photo-item p {
-  font-size: 0.75rem; text-transform: uppercase; color: #666; letter-spacing: 0.05em; margin: 0;
-}
-
-/* 起伏效果 */
-.photo-item:nth-child(1),
-.photo-item:nth-child(3) {
-  transform: translateY(25px);
-}
-
-/* 设计方案大图 */
-.design-diagram img { width: 100%; height: auto; }
-
-
-/* --- 响应式调整 --- */
-@media (max-width: 992px) {
-  .insight-row-1 {
-    flex-direction: column;
-  }
-  .connector-line.horizontal { display: none; }
-
-  .stress-photos-grid {
-    grid-template-columns: 1fr;
-    padding-top: 0;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  .photo-item:nth-child(1),
-  .photo-item:nth-child(3) {
-    transform: none;
-  }
-}
-
-
-/* --- START: NEW SECTION (INSIGHTS #2) --- */
-.insight-row-3 {
-  /* Mobile-first: default column layout */
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* Desktop: Grid Layout for Row 3 */
-@media (min-width: 993px) {
-  .insight-row-3 {
-    display: grid;
-    /* Re-using the column ratio from the previous row for consistency */
-    grid-template-columns: 0.8fr 1.2fr;
-    grid-template-rows: auto auto;
-    /* Re-using the gap values from the previous row */
-    gap: 8rem 2.5rem; 
-    /* This helps vertically align the text cards with the center of the images */
-    align-items: center; 
-  }
-
-  /* --- Explicit grid placement for each element in the row --- */
-  
-  /* Insights #2 Card (top-left) */
-  .insight-row-3 > .insight-card { 
-    grid-area: 1 / 1 / 2 / 2; 
-    position: relative; /* Required for the connector line pseudo-elements to work */
-  }
-
-  /* Design #2 Card (bottom-left) */
-  .insight-row-3 > .design-card { 
-    grid-area: 2 / 1 / 3 / 2; 
-  }
-
-  /* The FIRST diagram in HTML (notification-comparison.png) now goes to the BOTTOM-RIGHT cell */
-  .insight-row-3 > .design-diagram:nth-of-type(1) { 
-    grid-area: 2 / 2 / 3 / 3;
-  }
-
-  /* The SECOND diagram in HTML (meditation-features.png) now goes to the TOP-RIGHT cell */
-  .insight-row-3 > .design-diagram:nth-of-type(2) { 
-    grid-area: 1 / 2 / 2 / 3;
-  }
-  
-  /* --- Align cards within their grid cell (same as row-2) --- */
-  .insight-row-3 > .insight-card,
-  .insight-row-3 > .design-card {
-    align-self: start; 
-    justify-self: center; 
-  }
-
-  /* --- Vertical Connector Line for the new section --- */
-  /* We only need the vertical connector on the top card */
-  .insight-row-3 > .insight-card::after {
-    display: block; /* Make sure it's visible */
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 35rem; /* Increased height significantly */
-    background-image: repeating-linear-gradient(to bottom, #3DB06C 0, #3DB06C 10px, transparent 10px, transparent 20px);
-  }
-}
-/* --- END: NEW SECTION (INSIGHTS #2) --- */
-
-
-/* --- START: NEW SECTION STYLES (ITERATION & ARCHITECTURE) --- */
-
-.final-stages-section {
-  padding: 4rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem; /* Reduced gap since the red line now acts as a separator */
-}
-
-/* 
-  ====================================================================
-  --- START: KEY CHANGES FOR TITLE POSITION ---
-  ====================================================================
-*/
-
-/* 1. Make the container a positioning anchor and add padding for the absolute title */
-.design-iteration-container {
-  position: relative;
-  padding-top: 5rem; /* Make space for the overlapping title */
-  margin-bottom: 2rem; /* Space before the red line */
-}
-
-/* 2. Position the title SVG absolutely. This is the default for mobile. */
-.iteration-main-title {
-  position: absolute;
-  top: 0;
-  left: 0; /* Default position for mobile */
-  max-width: 250px;
-  height: auto;
-  z-index: 10;
-}
-
-/* --- END: KEY CHANGES FOR TITLE POSITION --- */
-
-
-.iteration-flow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* This aligns arrows and steps vertically */
-  width: 100%;
-  gap: 1.5rem;
-}
-
-.iteration-step {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1rem;
-}
-
-/* Set a FIXED HEIGHT on images and use object-fit to ensure consistency */
-.iteration-step img {
-  height: 380px; /* Force all images to be the same height */
-  width: auto;   /* Allow width to adjust automatically */
-  object-fit: contain; /* Prevents image distortion */
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  background-color: #f8f9fa; /* A light background for transparent/white images */
-  padding: 8px; /* Inner spacing for the image */
-  border: 1px solid #eee;
-}
-
-.iteration-step p {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: #666;
-  letter-spacing: 0.05em;
-  font-weight: 500;
-  margin: 0;
-  min-height: 2.5em; /* Reserve space for two lines of text to prevent layout shifts */
-}
-
-.flow-arrow {
-  flex-shrink: 0;
-  width: 40px;
-}
-
-/* --- Final Design Showcase Styles (Dark Theme, Full Width) --- */
-.final-design-showcase {
-  text-align: center;
-  padding: 4rem 2rem;
-  margin-top: 4rem;
-  background-color: #292A2D;
-  border-top: 1px solid #444;
-  border-bottom: 1px solid #444;
-
-  /* --- Full-width styles added --- */
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  box-sizing: border-box;
-}
-
-.final-design-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 3rem;
-  color: #FAFAFA;
-}
-
-.final-design-mockups {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.mockup-gif {
-  max-width: 280px;
-  height: auto;
-  border-radius: 20px;
-}
-
-.final-design-caption {
-  font-size: 1rem;
-  color: #FAFAFA;
-  margin-top: 2.5rem;
-}
-
-/* --- System & Comments Grid Styles --- */
-.system-comments-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 2rem;
-  align-items: start; 
-  position: relative;
-}
-
-.system-architecture-col h3,
-.comments-col h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  margin-top: 0;
-}
-
-.system-architecture-col img {
-  width: 100%;
-  height: auto;
-  border: 1px solid #e0e0e0;
-  border-radius: 16px;
-}
-
-.comments-col {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
-  
-  /* The overlap effect is removed as per the new design */
-  position: relative;
-  z-index: 5;
-  /* transform: translateY(-60px); REMOVED */
-}
-
-.team-photo {
-  width: 100%;
-  height: auto;
-  border-radius: 16px;
-  margin-bottom: 1.5rem;
-}
-
-.comment-text-block h4 {
-  font-size: 1.1rem;
-  margin-top: 0;
   margin-bottom: 1rem;
-  color: #333;
+  color: #ccc;
 }
 
-.comment-text-block p {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #555;
-  margin-bottom: 1.5rem;
+.project-section ul,
+.project-section ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  color: #ccc;
 }
 
-.comment-text-block .citation {
-  text-align: right;
-  font-weight: bold;
+.project-section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.project-quote {
+  border-left: 4px solid #4a4a4a;
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
   font-style: italic;
-  margin-top: 1rem;
-  margin-bottom: 0;
+  color: #b0b0b0;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
+.section-image {
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #1a1a1a;
 
-/* --- Responsive Adjustments --- */
-@media (min-width: 992px) {
-  /* 
-    ====================================================================
-    --- START: KEY CHANGE FOR TITLE POSITION (DESKTOP ONLY) ---
-    ====================================================================
-  */
-  .iteration-main-title {
-    left: -30px; /* This will ONLY apply when screen width is 992px or more */
-    top: 10px;
-  }
-  /* --- END: KEY CHANGE --- */
+  /* Match Portfolio PDF Viewer size */
+  height: 378px;
+  width: 100%;
+
+  position: relative;
 }
 
+.section-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  /* Ensure image fits like PDF viewer */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
 
-@media (max-width: 992px) {
-  .iteration-flow {
-    flex-wrap: wrap; 
-    justify-content: center;
-  }
-  
-  .flow-arrow {
-    display: none; 
-  }
-  
-  .iteration-step {
-    flex-basis: 45%; 
-  }
+/* Hover Effect: Scale Up */
+.section-image:hover img {
+  transform: scale(1.03);
+  /* Subtle zoom */
+  cursor: pointer;
+}
 
-  /* In tablet view, the title overlap might be too much, let's reduce it */
-  .design-iteration-container {
-    padding-top: 3rem;
-  }
-  
-  .iteration-main-title {
-    max-width: 200px;
-  }
+.section-divider {
+  border: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 3rem 0;
+}
 
-  .iteration-step img {
-    height: 300px; /* Reduce height on smaller screens */
-  }
-
-  /* Responsive for final design section */
-  .final-design-showcase {
-    padding: 3rem 1rem;
-  }
-  .mockup-gif {
-    max-width: 240px;
+/* Print specific styles */
+@media print {
+  .project-detail-container {
+    background-color: #fff;
+    color: #000;
+    padding: 20px;
+    height: auto;
   }
 
-  .system-comments-grid {
-    grid-template-columns: 1fr;
+  .project-title,
+  .project-section h2,
+  .project-section h3,
+  .project-section p,
+  .project-section ul,
+  .project-section ol {
+    color: #000;
+  }
+
+  .action-buttons-container {
+    display: none;
+  }
+
+  .section-image {
+    border: 1px solid #ccc;
+    background-color: transparent;
+    break-inside: avoid;
+    height: auto;
+    max-height: 400px;
+  }
+
+  .section-image img {
+    object-fit: contain;
   }
 }
 
 @media (max-width: 768px) {
-  .mockup-gif {
-    max-width: 45%;
-  }
-}
-
-@media (max-width: 576px) {
-  .iteration-step {
-    flex-basis: 80%; /* Show one item at a time but not full width */
-  }
-  .final-design-mockups {
-    flex-direction: column;
-    align-items: center;
-  }
-  .mockup-gif {
-    max-width: 70%;
+  .project-title {
+    font-size: 1.15rem;
+    /* Slightly adjust for mobile */
   }
 }
