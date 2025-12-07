@@ -1,0 +1,172 @@
+/* src/components/projects/WorkloadAnalysisGraph.css */
+
+@keyframes grow-width {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.workload-graph-container {
+    width: 100%;
+    background: rgba(26, 26, 26, 0.6);
+    /* Slightly transparent dark background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    margin: 2rem 0;
+    backdrop-filter: blur(10px);
+    /* Glassmorphism */
+    font-family: 'Soehne', sans-serif;
+    /* Ensure font consistency */
+}
+
+.workload-graph-title {
+    font-size: 0.8rem;
+    color: #a0a0a0;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    text-align: left;
+}
+
+.bar-container {
+    display: flex;
+    width: 100%;
+    height: 2.5rem;
+    /* Slightly taller for impact */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #27272a;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bar-segment {
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: 700;
+    font-size: 0.85rem;
+    overflow: hidden;
+    /* Hide text if segment is too small initially */
+
+    /* Initial state: width 0 is handled effectively by the animation starting from 0, 
+     but we want to prevent it from running until visible. 
+     We can override width to 0 when not animating, OR just only apply animation on class.
+  */
+}
+
+/* Animations Trigger */
+.animate-start .bar-segment {
+    animation: grow-width 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Colors */
+.bg-emerald-500 {
+    background-color: #10b981;
+}
+
+.bg-amber-500 {
+    background-color: #f59e0b;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+    z-index: 1;
+}
+
+/* Highlight focal point */
+.bg-gray-600 {
+    background-color: #4b5563;
+}
+
+.legend-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0;
+    /* Hidden initially */
+    text-align: left;
+}
+
+.animate-start .legend-item {
+    animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-start .legend-item:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.animate-start .legend-item:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+/* Focal point delay */
+.animate-start .legend-item:nth-child(3) {
+    animation-delay: 0.7s;
+}
+
+.legend-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+.legend-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.legend-header {
+    color: #fff;
+    font-weight: 500;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.legend-percentage {
+    font-weight: 700;
+    opacity: 0.9;
+}
+
+.legend-desc {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-top: 0.2rem;
+}
+
+.text-emerald-400 {
+    color: #34d399;
+}
+
+.text-amber-400 {
+    color: #fbbf24;
+}
+
+.text-gray-400 {
+    color: #9ca3af;
+}

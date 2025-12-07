@@ -3,9 +3,10 @@
 import { motion } from 'framer-motion';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom'; // --- 1. 引入 Link 组件 ---
+import { useNavigate } from 'react-router-dom';
 import { pageTransition } from '../utils/animations';
 import { ProjectCard } from './ProjectCard';
-import { useNotification } from './NotificationContext';
+
 import './Home.css';
 
 const projectsData = [
@@ -13,22 +14,25 @@ const projectsData = [
     title: "Ora Web",
     image: "/assets/images/ora-web-cover.png",
     description: "We increased factory management efficiency by integrating contract and production data into a simple ERP tool.",
-    tags: ["ERP System", "Service Design", "Product Assistant"],
+    id: "p",
+    tags: ["UX Design", "End-to-end", "Data Integration"],
   },
   {
     title: "Innerpeace",
     image: "/assets/images/innerpeace-cover.png",
     description: "We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale.",
+    id: "one",
     tags: ["UX Research", "Android App", "Scalable"],
   },
 ];
 
 
 export const Home = () => {
-  const { showNotification } = useNotification();
 
-  const handleProjectClick = () => {
-    showNotification('vibe coding in progress  — stay tuned!');
+
+  const navigate = useNavigate();
+  const handleProjectClick = (id: string) => {
+    navigate(`/project/${id}`);
   };
 
   return (
@@ -45,19 +49,19 @@ export const Home = () => {
               <p className="intro-statement">
                 rongze is an innovative product designer and developer based in london.
               </p>
-              
+
               {/* --- 2. 修改点: 将 a 标签替换为 Link 组件，并添加 SVG 图标 --- */}
               <Link to="/portfolio" className="portfolio-link">
                 <span>view portfolio</span>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="18" 
-                  height="18" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                   strokeLinejoin="round"
                 >
                   <path d="M7 7h10v10"></path>
@@ -72,15 +76,15 @@ export const Home = () => {
         <section className="projects-section">
           <div className="grid-col-left">
             <div className="projects-heading-wrapper">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="16" 
-                height="16" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               >
                 <rect width="18" height="18" x="3" y="3" rx="2"></rect>
@@ -92,18 +96,18 @@ export const Home = () => {
           </div>
           <div className="grid-col-right">
             <div className="project-list">
-              
+
               {projectsData.map((project, index) => (
                 <Fragment key={project.title}>
-                  <div className="project-card-link" onClick={handleProjectClick}>
-                    <ProjectCard 
-                      title={project.title} 
+                  <div className="project-card-link" onClick={() => handleProjectClick(project.id)}>
+                    <ProjectCard
+                      title={project.title}
                       image={project.image}
                       description={project.description}
                       tags={project.tags}
                     />
                   </div>
-                  
+
                   {index < projectsData.length - 1 && (
                     <hr className="project-separator" />
                   )}
