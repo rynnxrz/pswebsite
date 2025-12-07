@@ -1,0 +1,141 @@
+/* src/components/common/StackedGallery/StackedGallery.css */
+
+/* --- Main Container & Image --- */
+.gallery-container {
+    overflow: visible !important;
+    /* Allow widget to extend beyond bounds */
+    position: relative;
+    /* Keep standard styles for .section-image wrapping */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #1a1a1a;
+    height: 378px;
+    width: 100%;
+}
+
+.gallery-container img.gallery-main-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    /* Smooth fade transition for main image swap */
+    animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Ensure cursor is default unless interacting with widget/button */
+    cursor: default;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- Expand Image Button --- */
+.expand-image-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    color: #a0a0a0;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0;
+    z-index: 15;
+    backdrop-filter: blur(8px);
+}
+
+.gallery-container:hover .expand-image-button {
+    opacity: 1;
+}
+
+.expand-image-button:hover {
+    background-color: rgba(42, 42, 42, 0.9);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* --- Stacked Gallery Widget --- */
+.stacked-gallery-widget {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    flex-direction: row;
+    /* Fixed: normal row order */
+    gap: 0;
+    cursor: pointer;
+    z-index: 10;
+    transform: scale(0.75);
+    transform-origin: top left;
+}
+
+.gallery-thumbnail {
+    position: relative;
+    width: 64px;
+    height: 80px;
+    background: white;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center center;
+    cursor: pointer;
+}
+
+/* Consistent stacking: each card overlaps the previous */
+.gallery-thumbnail:not(:first-child) {
+    margin-left: -40px;
+}
+
+.gallery-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+    pointer-events: none;
+}
+
+/* Hover: Fan out */
+.stacked-gallery-widget:hover .gallery-thumbnail {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Fixed spacing for each card on hover - maintain rotation */
+.stacked-gallery-widget:hover .gallery-thumbnail:nth-child(1) {
+    margin-left: 0;
+    transform: rotate(-5deg);
+    /* Keep original angle */
+}
+
+.stacked-gallery-widget:hover .gallery-thumbnail:nth-child(2) {
+    margin-left: 12px;
+    transform: rotate(0deg);
+    /* Keep original angle */
+}
+
+.stacked-gallery-widget:hover .gallery-thumbnail:nth-child(3) {
+    margin-left: 12px;
+    transform: rotate(5deg);
+    /* Keep original angle */
+}
+
+/* Individual card hover: scale up and lift */
+.gallery-thumbnail:hover {
+    transform: scale(1.15) translateY(-4px) !important;
+    z-index: 20 !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}

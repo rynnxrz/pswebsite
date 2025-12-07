@@ -1,12 +1,12 @@
 // ProjectP.tsx
 import { motion } from 'framer-motion';
 import { pageTransition } from '../../utils/animations';
-import { Download, Copy, Expand } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import { Download, Copy } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useNotification } from '../NotificationContext';
 import './ProjectP.css';
 import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
-
+import { StackedGallery } from '../common/StackedGallery/StackedGallery';
 
 // Reusing the TooltipButton logic but keeping it local or it could be shared if refactored.
 // For now, defining it here for simplicity as per instructions to modify this file.
@@ -62,18 +62,6 @@ export const ProjectP = () => {
     { id: 3, src: '/assets/images/ora-web/stacked-card-2.png', alt: 'Initial Sketch' },
   ];
 
-  const [activeImage, setActiveImage] = useState(galleryImages[0].src);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
-
-  const toggleImageFullscreen = () => {
-    const element = imageContainerRef.current;
-    if (!element) return;
-    if (!document.fullscreenElement) {
-      element.requestFullscreen().catch(err => console.error(err));
-    } else {
-      document.exitFullscreen();
-    }
-  };
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -338,31 +326,7 @@ export const ProjectP = () => {
           </ol>
 
           {/* Interactive Stacked Image Gallery */}
-          <div ref={imageContainerRef} className="section-image gallery-container">
-            <img src={activeImage} alt="Design Process" className="gallery-main-image" key={activeImage} />
-
-            {/* Expand Button (shows on hover) */}
-            <button className="expand-image-button" onClick={toggleImageFullscreen} title="Expand image">
-              <Expand size={16} />
-            </button>
-
-            {/* Stacked Cards Widget */}
-            <div className="stacked-gallery-widget">
-              {galleryImages.map((image, index) => (
-                <div
-                  key={image.id}
-                  className="gallery-thumbnail"
-                  style={{
-                    zIndex: galleryImages.length - index,
-                    transform: `rotate(${[-5, 0, 5][index % 3]}deg)`,
-                  }}
-                  onClick={() => setActiveImage(image.src)}
-                >
-                  <img src={image.src} alt={image.alt} />
-                </div>
-              ))}
-            </div>
-          </div>
+          <StackedGallery images={galleryImages} />
         </section>
 
         <hr className="section-divider" />
