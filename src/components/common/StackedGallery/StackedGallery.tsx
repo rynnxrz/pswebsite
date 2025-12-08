@@ -1,12 +1,12 @@
-
 import React, { useState, useRef } from 'react';
-import { Expand } from 'lucide-react';
+import { ExpandableImage } from '../ExpandableImage/ExpandableImage';
 import './StackedGallery.css';
 
 interface GalleryImage {
     id: number | string;
     src: string;
     alt: string;
+    interactiveSrc?: string; // Optional interactive content
 }
 
 interface StackedGalleryProps {
@@ -15,50 +15,37 @@ interface StackedGalleryProps {
 }
 
 export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultImage }) => {
-    const [activeImage, setActiveImage] = useState(defaultImage || images[0]?.src);
-    const imageContainerRef = useRef<HTMLDivElement>(null);
+    // Determine initial active image object
+    const initialImage = defaultImage
+        ? images.find(img => img.src === defaultImage) || images[0]
+        : images[0];
 
-    const toggleImageFullscreen = () => {
-        const element = imageContainerRef.current;
-        if (!element) return;
-        if (!document.fullscreenElement) {
-            element.requestFullscreen().catch((err) => console.error(err));
-        } else {
-            document.exitFullscreen();
-        }
-    };
+    const [activeImage, setActiveImage] = useState<GalleryImage>(initialImage);
+    const imageContainerRef = useRef<HTMLDivElement>(null);
 
     return (
         <div ref={imageContainerRef} className="section-image gallery-container">
-            {/* Main Active Image */}
-            <img
-                src={activeImage}
-                alt="Active Gallery View"
+            {/* Main Active Image / Interactive Component */}
+            <ExpandableImage
+                src={activeImage.src}
+                alt={activeImage.alt}
+                interactiveSrc={activeImage.interactiveSrc}
+                containerClassName="gallery-main-image-wrapper"
                 className="gallery-main-image"
-                key={activeImage}
             />
-
-            {/* Expand Button (shows on hover) */}
-            <button
-                className="expand-image-button"
-                onClick={toggleImageFullscreen}
-                title="Expand image"
-            >
-                <Expand size={16} />
-            </button>
 
             {/* Stacked Cards Widget */}
             <div className="stacked-gallery-widget">
                 {images.map((image, index) => (
                     <div
                         key={image.id}
-                        className="gallery-thumbnail"
+                        className={`gallery-thumbnail ${activeImage.id === image.id ? 'active' : ''}`}
                         style={{
                             zIndex: images.length - index,
-                            // Initial random rotation logic preserved (e.g. -5, 0, 5)
+                            // Cycle through -5, 0, 5 degrees
                             transform: `rotate(${[-5, 0, 5][index % 3]}deg)`,
                         }}
-                        onClick={() => setActiveImage(image.src)}
+                        onClick={() => setActiveImage(image)}
                     >
                         <img src={image.src} alt={image.alt} />
                     </div>
