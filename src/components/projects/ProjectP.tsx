@@ -7,6 +7,7 @@ import { useNotification } from '../NotificationContext';
 import './ProjectP.css';
 import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
+import { ExpandableImage } from '../common/ExpandableImage/ExpandableImage';
 
 // Reusing the TooltipButton logic but keeping it local or it could be shared if refactored.
 // For now, defining it here for simplicity as per instructions to modify this file.
@@ -104,10 +105,10 @@ export const ProjectP = () => {
     if (element) {
       const offset = 80; // Header height offset
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const elementPositionAdjusted = elementPosition + window.pageYOffset - offset;
 
       window.scrollTo({
-        top: offsetPosition,
+        top: elementPositionAdjusted,
         behavior: 'smooth'
       });
     }
@@ -133,12 +134,6 @@ export const ProjectP = () => {
         {/* Sticky Header */}
         <header className={`project-header ${isScrolled ? 'sticky-active' : ''}`}>
           <div className="project-header-text-container">
-            {/* Default Title (Always visible initially, hidden when scrolled unless hovering header? 
-                 Actually user wants: "stay on top". "Every project section title appearing there on scroll".
-                 Let's interpret: 
-                 - Not scrolled: Standard Title + Date
-                 - Scrolled: "ORA Web" (small) + Active Section Title
-             */}
             <div className={`header-main-info ${isScrolled && activeSection ? 'scrolled-mode' : ''}`}>
               <h1 className="project-title" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>ORA Web</h1>
 
@@ -180,9 +175,22 @@ export const ProjectP = () => {
         <section id="intro" className="project-section">
           <h2>Intro</h2>
           <p>The project is defined as ORA Web, a small-scale software system for a contract manufacturing company, focusing on integrating contract production data management and efficiency.</p>
-          <div className="section-image">
-            <img src="/assets/images/ora-web/intro-placeholder.png" alt="ORA Web Introduction" />
-          </div>
+          <StackedGallery
+            defaultImage="/assets/images/ora-web/intro-placeholder.png"
+            images={[
+              {
+                id: 'dashboard',
+                src: '/assets/images/ora-web/dashboard-thumbnail.png',
+                alt: 'Interactive Dashboard',
+                interactiveSrc: '/dashboard_refactor.html'
+              },
+              {
+                id: 'intro',
+                src: '/assets/images/ora-web/intro-placeholder.png',
+                alt: 'ORA Web Introduction'
+              }
+            ]}
+          />
         </section>
 
         <hr className="section-divider" />
@@ -195,11 +203,10 @@ export const ProjectP = () => {
             <li>Founded in 2019, scaled into one of the leading nutrition contract manufacturers in Auckland.</li>
             <li>Acquired in 2025 by a China-listed company.</li>
           </ul>
+
           <p>The factory has no in-house design team, so I operated as the sole designer embedded in cross-functional delivery.</p>
 
-          <div className="section-image">
-            <img src="/assets/images/ora-web/team-placeholder.png" alt="Team Structure" />
-          </div>
+          <ExpandableImage src="/assets/images/ora-web/team-placeholder.png" alt="Team Structure" />
 
           <p><strong>My Role:</strong> UX Designer (Solo)</p>
           <ul>
@@ -224,9 +231,7 @@ export const ProjectP = () => {
             <li><strong>Shift/Planning Managers:</strong> They need accurate status and capacity signals to allocate work.</li>
             <li><strong>Operators/Executors:</strong> They need structured input and clear next-step prompts to keep data reliable.</li>
           </ul>
-          <div className="section-image">
-            <img src="/assets/images/ora-web/user-scope-placeholder.png" alt="User Scope Diagram" />
-          </div>
+          <ExpandableImage src="/assets/images/ora-web/user-scope-placeholder.png" alt="User Scope Diagram" />
         </section>
 
         <hr className="section-divider" />
@@ -237,9 +242,7 @@ export const ProjectP = () => {
           <blockquote className="project-quote">
             "The project aims to enhance efficiency by reducing time wastage caused by fragmented data and manual reconciliation across the contract-to-shipment lifecycle. This directly translates to cost savings, addressing the high labor costs prevalent in the New Zealand context by freeing up high-value managers from repetitive 'Excel checking' tasks".
           </blockquote>
-          <div className="section-image">
-            <img src="/assets/images/ora-web/rationale-placeholder.png" alt="Efficiency Rationale" />
-          </div>
+          <ExpandableImage src="/assets/images/ora-web/rationale-placeholder.png" alt="Efficiency Rationale" />
         </section>
 
         <hr className="section-divider" />
@@ -294,11 +297,7 @@ export const ProjectP = () => {
             <li>Take the next action without switching documents.</li>
           </ol>
 
-
-
-          <div className="section-image">
-            <img src="/assets/images/ora-web/design-choices-placeholder.png" alt="Design Choices - Workflow" />
-          </div>
+          <ExpandableImage src="/assets/images/ora-web/design-choices-placeholder.png" alt="Design Choices - Workflow" />
 
           <h3>Designing import & manual input for today, while preparing for tomorrow</h3>
           <p>Many key fields in the current operation—such as signing date, deposit date, packaging material storage and production-related data—still rely on manual input. Instead of ignoring this reality, I designed a set of structured dialogs for entering contract, product and financial details.</p>
@@ -344,9 +343,7 @@ export const ProjectP = () => {
             <li><strong>The Process Lead Time view (P2)</strong> visualises how long contracts spend in each stage, and whether we are meeting or exceeding our own SLA targets.</li>
           </ul>
 
-          <div className="section-image">
-            <img src="/assets/images/ora-web/unique-excellence-placeholder.png" alt="Dashboard Excellence" />
-          </div>
+          <ExpandableImage src="/assets/images/ora-web/unique-excellence-placeholder.png" alt="Dashboard Excellence" />
 
           <p>What differentiates this dashboard is that it does not try to show everything. It deliberately moves away from raw, dense data and focuses on:</p>
           <ul>
@@ -385,9 +382,7 @@ export const ProjectP = () => {
             <li><strong>Delighters:</strong> For example, exception alerts and narrative views that help managers explain issues to clients.</li>
           </ul>
 
-          <div className="section-image">
-            <img src="/assets/images/ora-web/reflection-placeholder.png" alt="Kano Model Reflection" />
-          </div>
+          <ExpandableImage src="/assets/images/ora-web/reflection-placeholder.png" alt="Kano Model Reflection" />
 
           <p>By mapping stakeholder requests and existing widgets onto the Kano model, I could:</p>
           <ul>
@@ -398,7 +393,7 @@ export const ProjectP = () => {
           <p>Including this reflection is my way of demonstrating a growth mindset: I’m willing to learn, borrow tools from product/strategy (like Kano), and use them to make more grounded design choices.</p>
         </section>
 
-      </div >
-    </motion.div >
+      </div>
+    </motion.div>
   );
 };

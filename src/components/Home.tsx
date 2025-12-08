@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'; // --- 1. 引入 Link 组件 ---
 import { useNavigate } from 'react-router-dom';
 import { pageTransition } from '../utils/animations';
 import { ProjectCard } from './ProjectCard';
+import { useNotification } from './NotificationContext';
 
 import './Home.css';
 
@@ -30,8 +31,14 @@ const projectsData = [
 export const Home = () => {
 
 
+  const { showNotification } = useNotification();
   const navigate = useNavigate();
-  const handleProjectClick = (id: string) => {
+
+  const handleProjectClick = (id: string, title: string) => {
+    if (id === 'one') {
+      showNotification('Vibe Coding in Progress 🚧', `${title} is currently being updated.`);
+      return;
+    }
     navigate(`/project/${id}`);
   };
 
@@ -99,7 +106,7 @@ export const Home = () => {
 
               {projectsData.map((project, index) => (
                 <Fragment key={project.title}>
-                  <div className="project-card-link" onClick={() => handleProjectClick(project.id)}>
+                  <div className="project-card-link" onClick={() => handleProjectClick(project.id, project.title)}>
                     <ProjectCard
                       title={project.title}
                       image={project.image}
