@@ -1,8 +1,12 @@
 /* src/components/projects/WorkloadAnalysisGraph.css */
 
-@keyframes grow-width {
+@keyframes wipe-enter {
     from {
-        width: 0;
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        clip-path: inset(0 0 0 0);
     }
 }
 
@@ -53,6 +57,16 @@
     background-color: #27272a;
     margin-bottom: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.05);
+
+    /* Single Bar Animation Logic */
+    clip-path: inset(0 100% 0 0);
+    /* Start hidden */
+    will-change: clip-path;
+}
+
+/* Trigger animation on container when visible */
+.animate-start .bar-container {
+    animation: wipe-enter 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .bar-segment {
@@ -65,17 +79,7 @@
     font-weight: 700;
     font-size: 0.85rem;
     overflow: hidden;
-    /* Hide text if segment is too small initially */
-
-    /* Initial state: width 0 is handled effectively by the animation starting from 0, 
-     but we want to prevent it from running until visible. 
-     We can override width to 0 when not animating, OR just only apply animation on class.
-  */
-}
-
-/* Animations Trigger */
-.animate-start .bar-segment {
-    animation: grow-width 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    /* No individual animation needed */
 }
 
 /* Colors */

@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import './ProjectP.css';
 import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
+import { JourneyMap } from './JourneyMap';
 import { UserJourneyGraph } from './UserJourneyGraph';
 import '../Tooltip.css';
 
@@ -277,67 +278,11 @@ export const ProjectP = () => {
           <h2>{t('project_p.choices.title')}</h2>
           <h3>{t('project_p.choices.subtitle')}</h3>
 
-          {/* Choice 1 */}
-          <div className="design-choice">
-            <h4>{t('project_p.choices.section1.title')}</h4>
-            <p>{t('project_p.choices.section1.content')}</p>
-            <ul>
-              {(t('project_p.choices.section1.list', { returnObjects: true }) as string[]).map((point, i) => (
-                <li key={i}>{point}</li>
-              ))}
-            </ul>
-            <p>{t('project_p.choices.section1.content2')}</p>
-            <ol>
-              {(t('project_p.choices.section1.steps', { returnObjects: true }) as string[]).map((point, i) => (
-                <li key={i}>{point}</li>
-              ))}
-            </ol>
-          </div>
-          <StackedGallery images={[{ id: 'choices-workflow', src: '/assets/images/ora-web/design-choices-placeholder.png', alt: 'Design Choices - Workflow' }]} />
+          <p className="whitespace-pre-line mb-8 font-medium text-gray-300 text-lg">
+            {t('project_p.choices.intro')}
+          </p>
 
-          {/* Choice 2 */}
-          <div className="design-choice">
-            <h4>{t('project_p.choices.section2.title')}</h4>
-            <p>{t('project_p.choices.section2.content')}</p>
-
-            {/* IMAGE PLACEHOLDER 1 */}
-            <StackedGallery
-              images={[{ id: 'choices-dialog', src: '/assets/images/ora-web/dialog-flow.png', alt: 'Structured Dialogs Flow' }]}
-            />
-            <p className="caption">Structured data entry dialogs replacing manual cell inputs</p>
-
-            <p>{t('project_p.choices.section2.content2')}</p>
-
-            <ul>
-              {(t('project_p.choices.section2.list', { returnObjects: true }) as string[]).map((point, i) => (
-                <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
-              ))}
-            </ul>
-            <p>{t('project_p.choices.section2.content3')}</p>
-          </div>
-
-          {/* Choice 3 */}
-          <div className="design-choice">
-            <h4>{t('project_p.choices.section3.title')}</h4>
-            <p>{t('project_p.choices.section3.content')}</p>
-            <ul>
-              {(t('project_p.choices.section3.list', { returnObjects: true }) as string[]).map((point, i) => (
-                <li key={i}>{point}</li>
-              ))}
-            </ul>
-            <p>{t('project_p.choices.section3.content2')}</p>
-          </div>
-
-          {/* In short summary */}
-          <p><strong>{t('project_p.choices.summary.title')}</strong></p>
-          <ol>
-            {(t('project_p.choices.summary.steps', { returnObjects: true }) as string[]).map((point, i) => (
-              <li key={i}>{point}</li>
-            ))}
-          </ol>
-
-          {/* Interactive Stacked Image Gallery */}
-          <StackedGallery images={galleryImages} />
+          <JourneyMap />
         </section>
 
         <hr className="section-divider" />

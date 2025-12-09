@@ -23,19 +23,19 @@ export const WorkloadAnalysisGraph = () => {
                 {/* 54% Standard Input - Green */}
                 <div
                     className="bar-segment bg-emerald-500"
-                    style={{ width: '54%', animationDelay: '0s' }}
+                    style={{ width: '54%' }}
                 ></div>
 
                 {/* 37% Formatting - Amber (Focal Point) */}
                 <div
                     className="bar-segment bg-amber-500"
-                    style={{ width: '37%', animationDelay: '0.2s' }}
+                    style={{ width: '37%' }}
                 ></div>
 
                 {/* 9% Clear/Delete - Gray */}
                 <div
                     className="bar-segment bg-gray-600"
-                    style={{ width: '9%', animationDelay: '0.4s' }}
+                    style={{ width: '9%' }}
                 ></div>
             </div>
 

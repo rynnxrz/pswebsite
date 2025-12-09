@@ -96,8 +96,15 @@
     </script>
 
     <style>
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            height: 100%;
+            width: 100%;
         }
 
         /* Card & Layout */
@@ -254,1379 +261,1432 @@
             border-radius: 50%;
             display: inline-block;
         }
+
+        /* Desktop Scaler Wrapper */
+        #desktop-scaler {
+            width: 200%;
+            height: 200%;
+            transform: scale(0.5);
+            transform-origin: top left;
+            display: flex;
+            flex-direction: row;
+            /* Horizontal layout for Sidebar + Main */
+            overflow: hidden;
+            transition: all 0.3s ease;
+            /* Smooth transition when maximizing */
+        }
+
+        /* Fullscreen Override Class */
+        #desktop-scaler.is-fullscreen-mode {
+            width: 100%;
+            height: 100%;
+            transform: scale(1);
+        }
     </style>
+    <script>
+        // Auto-scale Logic
+        function adjustScale() {
+            const scaler = document.getElementById('desktop-scaler');
+            if (window.innerWidth > 1024) { // Threshold for "Full Screen"
+                scaler.classList.add('is-fullscreen-mode');
+            } else {
+                scaler.classList.remove('is-fullscreen-mode');
+            }
+        }
+
+        window.addEventListener('resize', adjustScale);
+        document.addEventListener('DOMContentLoaded', adjustScale);
+    </script>
 </head>
 
-<body class="bg-gray-50 flex h-screen overflow-hidden text-gray-800">
+<body class="bg-gray-50 h-screen w-full overflow-hidden text-gray-800">
+    <div id="desktop-scaler" class="flex h-full overflow-hidden">
 
-    <!-- Sidebar -->
-    <aside class="w-20 flex-shrink-0 flex flex-col z-20 shadow-sm transition-all bg-[#297A88]">
-        <div class="h-16 flex items-center justify-center bg-white border-b border-gray-100">
-            <img src="./assets/images/ora-web/slogo.png" alt="Ora" class="w-10 h-10 object-contain">
-        </div>
-        <nav class="flex-1 overflow-y-auto flex flex-col items-center gap-0 bg-[#297A88]">
-            <!-- Dashboard (Active) -->
-            <a href="#" class="w-full h-20 flex items-center justify-center bg-[#066070] transition-all shadow-inner">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC0SURBVHgB7ZRBCsMgFER/y4dkkX3WHq0naY/QI+Ro3QsqgqKCtFrIoiudQOgieSBuRgf8zlyMMe9hGKiFtXaZ5/kmpXxM03Rv6VNKpJQSXC8fx7GlJ+fcd2fmLv3KlXbmNPi/ARNI/X4hhKYuxrjNwHv/LGvp0QohXrBBOWTKZnr1sAGcZAJBk8zrMFrknGkLrLUWndrud/8xqJOmHWG0rgkErmuUs+wOYAAnGa5rNMloXX8AcOJjGvOkhXMAAAAASUVORK5CYII="
-                    alt="Dashboard" class="w-6 h-6">
-            </a>
-            <!-- Report -->
-            <a href="#"
-                class="w-full h-20 flex items-center justify-center text-white/70 hover:bg-[#066070]/30 transition-all group">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAXCAYAAAAP6L+eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHPSURBVHgBrVVZboJQFL0gzn6QOEV/KjtwB9UVtEvQHXQHxZXYrqDtClhC3QHqj3GKxCHO0nNpIGgUkyfn58HjcjjvDgciH2azmbFer22sbQqAaZoVy7Jsjh2NRo1rMbL/JhqNUiKRoEgkQvcQj8ed2FuQ+OuqqrYlSaokk0k1FoupUGLtdjsriDidTlcURaHFYmHh3e5yufwulUotL2A6nf7aIeB4PNr9fr/h8iqpVKrKF8hr53Q6dUgASMtrJpNRwfWM2w+H2H243W5/cBSdBIBC1rCo/j2PGAV7QYWfSABcl8s9jzifz3NKqhQSPGLuBCwWCQCnrUD1+SY3OWMwGOgkCOTYZI7JZOINlkwhAK1Gm83GWV0oFAKy2ax2uReKYheY4ipPMl+HopiBGr3ncjl9v99baNt6KMRQWUN+e5hcYr8B+dfDqWCl5XLZgDM+j8fjJhcRhvT5ULsxKdR5JjQcDtucZ34mrNjNKVunDz1N0/6NTESxX6lP7dn70mq1smF3NJ/PuwjoXiM6HA5UKBTq15RywTBxrWKxeEbs/OfumTj+EjbHcvVhr4FKXSiY8yaOpaOqNy0Tij1zkmU5WKkIuOJImYF2MtBab0GxfwMGnz5RbhevAAAAAElFTkSuQmCC"
-                    alt="Report" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition-opacity">
-            </a>
-            <!-- Calendar -->
-            <a href="#"
-                class="w-full h-20 flex items-center justify-center text-white/70 hover:bg-[#066070]/30 transition-all group">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAYCAYAAAAVibZIAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAG0SURBVHgBtZXLbcJAEIZnwbyFZHGCm91BSiAduATSQToIHSQdxFRAOiAlUACSVxzgAAiDeL+c+S07OE7sSMZ80nof/j3amdlZEwWYTqfmdrt11uu1Y1nWA8UwHA4NaNHG43E7+E4JTnK5HBWLRTqdTpiqcUZZq0L7FwKP+Xz+ks1mm9weyuWyerlcaLPZ9IUQdoxdrVKpaBiwZ5K/kdx3Go2GSYvF4tVJifP57IxGo2eB+PHuXJc9txORz+cpk8lgk1LBwHeBw/BICanX65YfYyX0TqMUEDgSUVlMAtzP0B34dp9jau92uw9KSLVabSFZLnAf2LZt0Q0E7fxyn0vVWK1WPbTBYGBgjYVdzCeTSTdKEyScfUJVcaU0vWkHj0KhYHjlK6M0sUYPhwNxbH+s7fd7t+eKidTEGuWaf+Nmejtya5+LQv9PE2vUQ/N6yQ0fqXS9tWSE5ko4+7yrtn9BcBJaSTT3PfyBnfc5ISbGHC+JfrlcmlwcSJAdpQkbSf3wK7jlQalUUnGYKSGKEnAahpwU4VC9C/5rarVarceXgUY3cjweP2ez2ZPwF2CcbkTXdYn+C38a9HUI1r8wAAAAAElFTkSuQmCC"
-                    alt="Calendar" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition-opacity">
-            </a>
-        </nav>
-
-    </aside>
-
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col overflow-hidden relative">
-
-        <!-- Header & Global Filters (PRD 1.2) -->
-        <header class="bg-white border-b border-gray-200 z-10 shadow-sm flex-shrink-0">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between px-6 py-3 gap-4">
-                <div>
-                    <h1 class="text-xl font-bold text-gray-900">OraNutrition 内部流程与客户洞察总览</h1>
-                    <p class="text-xs text-gray-500">上次更新: 2024-11-28 09:00 AM</p>
-                </div>
-
-                <div class="flex flex-wrap gap-2 items-center">
-                    <!-- Date Range -->
-                    <select
-                        class="text-xs border-gray-300 rounded shadow-sm focus:border-ora-primary py-1.5 px-2 bg-gray-50">
-                        <option>📅 时间范围: 本季度 (Q4)</option>
-                        <option>📅 2024-06-01 ~ 2024-08-31 (Previous)</option>
-                    </select>
-                    <!-- Brand -->
-                    <select
-                        class="text-xs border-gray-300 rounded shadow-sm focus:border-ora-primary py-1.5 px-2 bg-gray-50">
-                        <option>品牌: 全部</option>
-                        <option>Little Umbrella</option>
-                        <option>PowerGums</option>
-                    </select>
-                    <!-- Line Category -->
-                    <select
-                        class="text-xs border-gray-300 rounded shadow-sm focus:border-ora-primary py-1.5 px-2 bg-gray-50">
-                        <option>产线类型: 全部</option>
-                        <option>Gummies</option>
-                        <option>Powder</option>
-                    </select>
-                    <!-- Status Filter (Hidden logic: Default ALL for Part 1/3) -->
-                    <button
-                        class="bg-ora-primary text-white px-3 py-1.5 rounded text-xs hover:bg-teal-700 transition shadow-sm font-bold">
-                        <i class="fa-solid fa-rotate-right mr-1"></i> 刷新数据
-                    </button>
-                    <!-- User Profile -->
-                    <div class="ml-2 pl-2 border-l border-gray-200 flex items-center gap-2">
-                        <div
-                            class="w-8 h-8 rounded-full bg-ora-primary/20 text-ora-primary flex items-center justify-center text-xs font-bold ring-2 ring-white shadow-sm cursor-pointer hover:ring-ora-primary/50 transition">
-                            JD
-                        </div>
-                    </div>
-                </div>
+        <!-- Sidebar -->
+        <aside class="w-16 flex-shrink-0 flex flex-col z-20 shadow-sm transition-all bg-[#297A88]">
+            <div class="h-16 flex items-center justify-center bg-white border-b border-gray-100">
+                <img src="./assets/images/ora-web/slogo.png" alt="Ora" class="w-10 h-10 object-contain">
             </div>
-        </header>
+            <nav class="flex-1 overflow-y-auto flex flex-col items-center gap-0 bg-[#297A88]">
+                <!-- Dashboard (Active) -->
+                <a href="#"
+                    class="w-full h-16 flex items-center justify-center bg-[#066070] transition-all shadow-inner">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC0SURBVHgB7ZRBCsMgFER/y4dkkX3WHq0naY/QI+Ro3QsqgqKCtFrIoiudQOgieSBuRgf8zlyMMe9hGKiFtXaZ5/kmpXxM03Rv6VNKpJQSXC8fx7GlJ+fcd2fmLv3KlXbmNPi/ARNI/X4hhKYuxrjNwHv/LGvp0QohXrBBOWTKZnr1sAGcZAJBk8zrMFrknGkLrLUWndrud/8xqJOmHWG0rgkErmuUs+wOYAAnGa5rNMloXX8AcOJjGvOkhXMAAAAASUVORK5CYII="
+                        alt="Dashboard" class="w-6 h-6">
+                </a>
+                <!-- Report -->
+                <a href="#"
+                    class="w-full h-16 flex items-center justify-center text-white/70 hover:bg-[#066070]/30 transition-all group">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAXCAYAAAAP6L+eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHPSURBVHgBrVVZboJQFL0gzn6QOEV/KjtwB9UVtEvQHXQHxZXYrqDtClhC3QHqj3GKxCHO0nNpIGgUkyfn58HjcjjvDgciH2azmbFer22sbQqAaZoVy7Jsjh2NRo1rMbL/JhqNUiKRoEgkQvcQj8ed2FuQ+OuqqrYlSaokk0k1FoupUGLtdjsriDidTlcURaHFYmHh3e5yufwulUotL2A6nf7aIeB4PNr9fr/h8iqpVKrKF8hr53Q6dUgASMtrJpNRwfWM2w+H2H243W5/cBSdBIBC1rCo/j2PGAV7QYWfSABcl8s9jzifz3NKqhQSPGLuBCwWCQCnrUD1+SY3OWMwGOgkCOTYZI7JZOINlkwhAK1Gm83GWV0oFAKy2ax2uReKYheY4ipPMl+HopiBGr3ncjl9v99baNt6KMRQWUN+e5hcYr8B+dfDqWCl5XLZgDM+j8fjJhcRhvT5ULsxKdR5JjQcDtucZ34mrNjNKVunDz1N0/6NTESxX6lP7dn70mq1smF3NJ/PuwjoXiM6HA5UKBTq15RywTBxrWKxeEbs/OfumTj+EjbHcvVhr4FKXSiY8yaOpaOqNy0Tij1zkmU5WKkIuOJImYF2MtBab0GxfwMGnz5RbhevAAAAAElFTkSuQmCC"
+                        alt="Report" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                </a>
+                <!-- Calendar -->
+                <a href="#"
+                    class="w-full h-16 flex items-center justify-center text-white/70 hover:bg-[#066070]/30 transition-all group">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAYCAYAAAAVibZIAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAG0SURBVHgBtZXLbcJAEIZnwbyFZHGCm91BSiAduATSQToIHSQdxFRAOiAlUACSVxzgAAiDeL+c+S07OE7sSMZ80nof/j3amdlZEwWYTqfmdrt11uu1Y1nWA8UwHA4NaNHG43E7+E4JTnK5HBWLRTqdTpiqcUZZq0L7FwKP+Xz+ks1mm9weyuWyerlcaLPZ9IUQdoxdrVKpaBiwZ5K/kdx3Go2GSYvF4tVJifP57IxGo2eB+PHuXJc9txORz+cpk8lgk1LBwHeBw/BICanX65YfYyX0TqMUEDgSUVlMAtzP0B34dp9jau92uw9KSLVabSFZLnAf2LZt0Q0E7fxyn0vVWK1WPbTBYGBgjYVdzCeTSTdKEyScfUJVcaU0vWkHj0KhYHjlK6M0sUYPhwNxbH+s7fd7t+eKidTEGuWaf+Nmejtya5+LQv9PE2vUQ/N6yQ0fqXS9tWSE5ko4+7yrtn9BcBJaSTT3PfyBnfc5ISbGHC+JfrlcmlwcSJAdpQkbSf3wK7jlQalUUnGYKSGKEnAahpwU4VC9C/5rarVarceXgUY3cjweP2ez2ZPwF2CcbkTXdYn+C38a9HUI1r8wAAAAAElFTkSuQmCC"
+                        alt="Calendar" class="w-6 h-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                </a>
+            </nav>
 
-        <!-- Scrollable Area -->
-        <div id="main-scroller" class="flex-1 overflow-y-auto bg-gray-50 p-6 scroller space-y-8 scroll-smooth">
+        </aside>
 
-            <!-- ========================================== -->
-            <!-- PART 1: INTERNAL EXCEPTION RADAR (PRD 2) -->
-            <!-- ========================================== -->
-            <section>
-                <div class="flex items-center gap-2 mb-4">
-                    <h2
-                        class="text-base font-bold text-gray-800 uppercase tracking-wide border-l-4 border-ora-primary pl-3">
-                        Part 1. 内部异常雷达 (Internal Exception Radar)</h2>
-                    <span class="text-xs text-gray-400 italic ml-2"><i class="fa-solid fa-circle-info mr-1"></i>Click
-                        cards to filter details</span>
-                </div>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden relative">
 
-                <!-- Widget 1A: KPI Summary Bar (PRD 2.1) -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                    <!-- Card 1: Lead Time Breach -->
-                    <div class="card p-4 border-l-4 border-red-500 cursor-pointer hover:shadow-md transition kpi-card"
-                        id="card-lead-time" onclick="toggleKpiFilterP1('card-lead-time', 'leadtime')"
-                        title="Based on 142 contracts">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <div class="text-xs text-gray-500 uppercase font-bold">整体周期超出内部目标</div>
-                                <div class="text-2xl font-bold text-red-600 mt-1">18 <span
-                                        class="text-sm text-gray-400 font-normal">/ 142</span></div>
-                            </div>
-                            <div class="bg-red-100 p-2 rounded-full text-red-500"><i class="fa-solid fa-clock"></i>
-                            </div>
-                        </div>
-                        <div class="mt-2 text-xs text-red-500 font-medium"><i class="fa-solid fa-arrow-up"></i> 5 vs
-                            last week</div>
-                        <div class="mt-1 text-[10px] text-gray-400">Stage SLA > 目标</div>
+            <!-- Header & Global Filters (PRD 1.2) -->
+            <header class="bg-white border-b border-gray-200 z-10 shadow-sm flex-shrink-0">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between px-6 py-3 gap-4">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">OraNutrition 内部流程与客户洞察总览</h1>
+                        <p class="text-xs text-gray-500">上次更新: 2024-11-28 09:00 AM</p>
                     </div>
 
-                    <!-- Card 2: Payment Blocked -->
-                    <div class="card p-4 border-l-4 border-orange-400 cursor-pointer hover:shadow-md transition kpi-card"
-                        id="card-payment" onclick="toggleKpiFilterP1('card-payment', 'money')"
-                        title="Based on 45 active contracts">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <div class="text-xs text-gray-500 uppercase font-bold">收款环节有阻塞</div>
-                                <div class="text-2xl font-bold text-orange-500 mt-1">8 <span
-                                        class="text-sm text-gray-400 font-normal">Contracts</span></div>
-                            </div>
-                            <div class="bg-orange-100 p-2 rounded-full text-orange-500"><i
-                                    class="fa-solid fa-hand-holding-dollar"></i></div>
-                        </div>
-                        <div class="mt-2 text-xs text-orange-500 font-medium">High Priority</div>
-                        <div class="mt-1 text-[10px] text-gray-400">款项待确认 > 3 天</div>
-                    </div>
-
-                    <!-- Card 3: Material Risk -->
-                    <div class="card p-4 border-l-4 border-yellow-400 cursor-pointer hover:shadow-md transition kpi-card"
-                        id="card-material" onclick="toggleKpiFilterP1('card-material', 'materials')"
-                        title="Based on 45 active contracts">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <div class="text-xs text-gray-500 uppercase font-bold">物料准备存在风险</div>
-                                <div class="text-2xl font-bold text-yellow-600 mt-1">12 <span
-                                        class="text-sm text-gray-400 font-normal">Contracts</span></div>
-                            </div>
-                            <div class="bg-yellow-100 p-2 rounded-full text-yellow-600"><i
-                                    class="fa-solid fa-boxes-stacked"></i></div>
-                        </div>
-                        <div class="mt-2 text-xs text-gray-500 font-medium">Requires Attention</div>
-                        <div class="mt-1 text-[10px] text-gray-400">物料未到+临近排产</div>
-                    </div>
-
-                    <!-- Card 4: Data Issues -->
-                    <div class="card p-4 border-l-4 border-gray-400 cursor-pointer hover:shadow-md transition kpi-card"
-                        id="card-data" onclick="toggleKpiFilterP1('card-data', 'data_issue')"
-                        title="Based on all records">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <div class="text-xs text-gray-500 uppercase font-bold">数据记录需补充</div>
-                                <div class="text-2xl font-bold text-gray-600 mt-1">15 <span
-                                        class="text-sm text-gray-400 font-normal">Records</span></div>
-                            </div>
-                            <div class="bg-gray-100 p-2 rounded-full text-gray-600"><i class="fa-solid fa-database"></i>
-                            </div>
-                        </div>
-                        <div class="mt-2 text-xs text-red-500 font-medium">Affects Forecast</div>
-                        <div class="mt-1 text-[10px] text-gray-400">字段缺失/异常</div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-                    <!-- Widget P1-B: Key Contracts Stage Overview (Merged 1B & 1C) -->
-                    <div id="widget-p1b" class="card lg:col-span-2">
-                        <div class="card-header">
-                            <div class="flex items-center gap-4">
-                                <h3 class="card-title"><i class="fa-solid fa-list-check text-ora-primary"></i> P1-B.
-                                    关键订单阶段总览 (Key Contracts)</h3>
-                                <div class="flex bg-gray-100 rounded p-0.5 space-x-1">
-                                    <button onclick="switchView('p1b', 'list')" id="btn-p1b-view-list"
-                                        class="px-2 py-0.5 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200">列表</button>
-                                    <button onclick="switchView('p1b', 'graph')" id="btn-p1b-view-graph"
-                                        class="px-2 py-0.5 text-xs rounded text-gray-500 hover:text-gray-800">图表</button>
-                                </div>
-                            </div>
-                            <!-- Internal Filters -->
-                            <div class="flex space-x-2 text-xs">
-                                <span class="text-gray-400 self-center">Filter:</span>
-                                <button onclick="filterP1B('all')" class="tab-btn tab-active"
-                                    id="btn-p1b-all">全部</button>
-                                <button onclick="filterP1B('blocker')" class="tab-btn tab-inactive"
-                                    id="btn-p1b-blocker">待解决 (Blocker)</button>
-                                <button onclick="filterP1B('delay')" class="tab-btn tab-inactive"
-                                    id="btn-p1b-delay">严重超时</button>
-                            </div>
-                        </div>
-
-                        <!-- List View -->
-                        <div class="p-0 overflow-x-auto flex-1" id="p1b-view-list">
-                            <table class="w-full text-left text-xs">
-                                <thead class="bg-gray-50 text-gray-500 uppercase border-b border-gray-200">
-                                    <tr>
-                                        <th class="px-4 py-3 font-semibold">合同 / 品牌</th>
-                                        <th class="px-4 py-3 font-semibold">当前阶段</th>
-                                        <th class="px-4 py-3 font-semibold">最严重阶段 (Delay)</th>
-                                        <th class="px-4 py-3 font-semibold">状态 / 原因</th>
-                                        <th class="px-4 py-3 font-semibold text-right">时间 (签约/更新)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-100" id="p1b-tbody">
-                                    <!-- Mock Data: Blocker - Money -->
-                                    <tr class="hover:bg-gray-50 row-blocker row-money">
-                                        <td class="px-4 py-3">
-                                            <div class="font-bold text-gray-800">C2411-003</div>
-                                            <div class="text-[10px] text-gray-500">Little Umbrella</div>
-                                        </td>
-                                        <td class="px-4 py-3"><span
-                                                class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-[10px]">S1
-                                                款项</span></td>
-                                        <td class="px-4 py-3"><span class="text-red-500 font-bold">+45d</span></td>
-                                        <td class="px-4 py-3"><span
-                                                class="bg-red-50 text-red-600 px-2 py-0.5 rounded border border-red-100 text-[10px]">款项未到</span>
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            <div class="font-bold">45d</div>
-                                            <div class="text-[10px] text-gray-400">2d ago</div>
-                                        </td>
-                                    </tr>
-                                    <!-- Mock Data: Blocker - Materials -->
-                                    <tr class="hover:bg-gray-50 row-blocker row-materials">
-                                        <td class="px-4 py-3">
-                                            <div class="font-bold text-gray-800">C2411-008</div>
-                                            <div class="text-[10px] text-gray-500">PowerGums</div>
-                                        </td>
-                                        <td class="px-4 py-3"><span
-                                                class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-[10px]">S2
-                                                物料</span></td>
-                                        <td class="px-4 py-3"><span class="text-orange-500 font-bold">+20d</span></td>
-                                        <td class="px-4 py-3"><span
-                                                class="bg-orange-50 text-orange-600 px-2 py-0.5 rounded border border-orange-100 text-[10px]">物料未齐</span>
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            <div class="font-bold">20d</div>
-                                            <div class="text-[10px] text-gray-400">1d ago</div>
-                                        </td>
-                                    </tr>
-                                    <!-- Mock Data: SLA Breach (Lead Time) -->
-                                    <tr class="hover:bg-gray-50 row-delay row-leadtime">
-                                        <td class="px-4 py-3">
-                                            <div class="font-bold text-gray-800">C2410-001</div>
-                                            <div class="text-[10px] text-gray-500">Vitality</div>
-                                        </td>
-                                        <td class="px-4 py-3"><span
-                                                class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-[10px]">S4
-                                                生产</span></td>
-                                        <td class="px-4 py-3"><span class="text-red-500 font-bold">+15d</span></td>
-                                        <td class="px-4 py-3"><span class="text-gray-500 text-[10px]">超出内部目标</span></td>
-                                        <td class="px-4 py-3 text-right">
-                                            <div class="font-bold">60d</div>
-                                            <div class="text-[10px] text-gray-400">Active</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="p-2 text-center text-xs text-gray-400 border-t border-gray-100">
-                                列表按严重程度排序，优先显示待解决事项。仅展示前 20 份最需要关注的订单。
-                            </div>
-                        </div>
-
-                        <!-- Graph View (Matrix) -->
-                        <div id="p1b-view-graph" class="hidden p-4 overflow-x-auto">
-                            <div class="min-w-[500px]">
-                                <!-- Header -->
-                                <div class="grid grid-cols-6 gap-1 mb-2 text-xs font-bold text-gray-500 text-center">
-                                    <div class="text-left pl-2">合同</div>
-                                    <div>S1 款项</div>
-                                    <div>S2 物料</div>
-                                    <div>S3 等待</div>
-                                    <div>S4 生产</div>
-                                    <div>S5 发货</div>
-                                </div>
-                                <!-- Row 1 -->
-                                <div class="grid grid-cols-6 gap-1 mb-1 text-xs">
-                                    <div class="flex flex-col justify-center pl-2">
-                                        <span class="font-bold">C2411-003</span>
-                                        <span class="text-[10px] text-gray-400">Little Umbrella</span>
-                                    </div>
-                                    <div
-                                        class="bg-red-500 text-white flex flex-col items-center justify-center p-1 rounded">
-                                        <span class="font-bold">+45</span>
-                                        <span class="text-[8px]">款项未到</span>
-                                    </div>
-                                    <div class="bg-gray-100 rounded"></div>
-                                    <div class="bg-gray-100 rounded"></div>
-                                    <div class="bg-gray-100 rounded"></div>
-                                    <div class="bg-gray-100 rounded"></div>
-                                </div>
-                                <!-- Row 2 -->
-                                <div class="grid grid-cols-6 gap-1 mb-1 text-xs">
-                                    <div class="flex flex-col justify-center pl-2">
-                                        <span class="font-bold">C2411-008</span>
-                                        <span class="text-[10px] text-gray-400">PowerGums</span>
-                                    </div>
-                                    <div
-                                        class="bg-green-500 text-white flex items-center justify-center rounded font-bold">
-                                        OK</div>
-                                    <div
-                                        class="bg-orange-500 text-white flex flex-col items-center justify-center p-1 rounded">
-                                        <span class="font-bold">+20</span>
-                                        <span class="text-[8px]">物料未齐</span>
-                                    </div>
-                                    <div class="bg-gray-100 rounded"></div>
-                                    <div class="bg-gray-100 rounded"></div>
-                                    <div class="bg-gray-100 rounded"></div>
-                                </div>
-                                <!-- Row 3 -->
-                                <div class="grid grid-cols-6 gap-1 mb-1 text-xs">
-                                    <div class="flex flex-col justify-center pl-2">
-                                        <span class="font-bold">C2410-001</span>
-                                        <span class="text-[10px] text-gray-400">Vitality</span>
-                                    </div>
-                                    <div
-                                        class="bg-green-500 text-white flex items-center justify-center rounded font-bold">
-                                        OK</div>
-                                    <div
-                                        class="bg-green-500 text-white flex items-center justify-center rounded font-bold">
-                                        OK</div>
-                                    <div
-                                        class="bg-green-500 text-white flex items-center justify-center rounded font-bold">
-                                        OK</div>
-                                    <div
-                                        class="bg-red-400 text-white flex flex-col items-center justify-center p-1 rounded">
-                                        <span class="font-bold">+15</span>
-                                        <span class="text-[8px]">生产延迟</span>
-                                    </div>
-                                    <div class="bg-gray-100 rounded"></div>
-                                </div>
-                            </div>
-                            <div class="mt-4 text-xs text-gray-400 text-center">
-                                彩色格子表示该阶段比内部目标多用的天数。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Widget P1-C: Zombie & Inventory (Renamed from 1D) -->
-                    <div id="widget-p1c" class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-skull text-gray-500"></i> P1-C. 僵尸合同与库存</h3>
-                            <div class="flex bg-gray-100 rounded p-0.5 space-x-1">
-                                <button onclick="toggleZombieView('contracts')" id="btn-zombie-contracts"
-                                    class="px-3 py-1 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200">停滞中的合同</button>
-                                <button onclick="toggleZombieView('inventory')" id="btn-zombie-inventory"
-                                    class="px-3 py-1 text-xs rounded text-gray-500 hover:text-gray-800">滞留成品/半成品</button>
-                            </div>
-                        </div>
-                        <div class="p-4 flex-1 overflow-y-auto">
-                            <!-- View: Contracts -->
-                            <div id="view-zombie-contracts" class="space-y-3">
-                                <div class="text-xs text-gray-400 mb-2">超过 45 天无更新 (Inactive > 45d)</div>
-                                <div class="space-y-2">
-                                    <div>
-                                        <div class="flex justify-between text-xs mb-1">
-                                            <span class="font-bold text-gray-700">C2408-002 (Vitality)</span>
-                                            <span class="text-red-500 font-bold">120d</span>
-                                        </div>
-                                        <div class="w-full bg-gray-100 rounded-full h-2" title="120d (Inactive)">
-                                            <div class="bg-gray-400 h-2 rounded-full" style="width: 100%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-xs mb-1">
-                                            <span class="font-bold text-gray-700">C2409-015 (Muscle)</span>
-                                            <span class="text-red-500 font-bold">95d</span>
-                                        </div>
-                                        <div class="w-full bg-gray-100 rounded-full h-2" title="95d (Inactive)">
-                                            <div class="bg-gray-400 h-2 rounded-full" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- View: Inventory -->
-                            <div id="view-zombie-inventory" class="hidden space-y-3">
-                                <div class="text-xs text-gray-400 mb-2">发货逾期超过 7 天 (Overdue > 7d)</div>
-                                <ul class="space-y-2">
-                                    <li class="flex justify-between items-center p-2 bg-red-50 rounded border border-red-100"
-                                        title="Produced: 5000, Shipped: 0, Stuck: 5000">
-                                        <div>
-                                            <div class="text-xs font-bold text-gray-800">C2410-001 (Gummies)</div>
-                                            <div class="text-[10px] text-red-500">Produced but not shipped (15d)</div>
-                                        </div>
-                                        <div class="text-xs font-bold text-gray-800">5k Units</div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-footer">Showing Top 5 by Inactive/Overdue Days</div>
-                    </div>
-
-                    <!-- Widget P1-D: Data Quality (Renamed from 1E) -->
-                    <!-- Widget P1-D: Data Quality Monitor (Left-Right Layout) -->
-                    <div id="widget-p1d"
-                        class="card bg-white border border-gray-200 shadow-sm rounded-lg lg:col-span-3 flex flex-col h-96">
-                        <div
-                            class="card-header flex justify-between items-center mb-2 px-4 py-3 border-b border-gray-100">
-                            <h3 class="font-bold text-gray-800 text-lg flex items-center gap-2">
-                                <i class="fas fa-database text-purple-600"></i> 数据记录完整度 (Data Quality)
-                            </h3>
-                            <span class="text-xs text-gray-500">Last Update: 10 mins ago</span>
-                        </div>
-
-                        <div class="flex flex-1 overflow-hidden p-4 gap-4">
-                            <!-- Left: Charts (50%) -->
-                            <div class="w-1/2 flex flex-col justify-center">
-                                <div class="flex flex-1 gap-2 items-center justify-center">
-                                    <!-- Chart 1: Good vs Bad -->
-                                    <div class="w-1/2 relative h-40">
-                                        <canvas id="dataQualityGoodBad"></canvas>
-                                        <div
-                                            class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                            <div class="text-center">
-                                                <span class="text-2xl font-bold text-gray-800">92%</span><br>
-                                                <span class="text-xs text-gray-500">完整度</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Chart 2: Issue Types -->
-                                    <div class="w-1/2 relative h-40">
-                                        <canvas id="dataQualityChart"></canvas>
-                                    </div>
-                                </div>
-                                <div class="mt-2 text-xs text-gray-500 text-center bg-gray-50 p-2 rounded">
-                                    <i class="fas fa-info-circle mr-1"></i>左侧展示整体记录完整度，右侧展示问题类型分布。一条记录可能同时包含多种问题。
-                                </div>
-                            </div>
-
-                            <!-- Right: Detail List (50%) -->
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <!-- Date Range -->
+                        <select
+                            class="text-xs border-gray-300 rounded shadow-sm focus:border-ora-primary py-1.5 px-2 bg-gray-50">
+                            <option>📅 时间范围: 本季度 (Q4)</option>
+                            <option>📅 2024-06-01 ~ 2024-08-31 (Previous)</option>
+                        </select>
+                        <!-- Brand -->
+                        <select
+                            class="text-xs border-gray-300 rounded shadow-sm focus:border-ora-primary py-1.5 px-2 bg-gray-50">
+                            <option>品牌: 全部</option>
+                            <option>Little Umbrella</option>
+                            <option>PowerGums</option>
+                        </select>
+                        <!-- Line Category -->
+                        <select
+                            class="text-xs border-gray-300 rounded shadow-sm focus:border-ora-primary py-1.5 px-2 bg-gray-50">
+                            <option>产线类型: 全部</option>
+                            <option>Gummies</option>
+                            <option>Powder</option>
+                        </select>
+                        <!-- Status Filter (Hidden logic: Default ALL for Part 1/3) -->
+                        <button
+                            class="bg-ora-primary text-white px-3 py-1.5 rounded text-xs hover:bg-teal-700 transition shadow-sm font-bold">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> 刷新数据
+                        </button>
+                        <!-- User Profile -->
+                        <div class="ml-2 pl-2 border-l border-gray-200 flex items-center gap-2">
                             <div
-                                class="w-1/2 flex flex-col bg-white border border-gray-100 rounded-lg shadow-sm h-full">
-                                <div
-                                    class="px-3 py-2 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-lg">
-                                    <span class="font-bold text-xs text-gray-700">问题合同列表 (Issue List)</span>
-                                    <span id="p1d-current-filter"
-                                        class="text-xs px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full font-medium">当前筛选:
-                                        全部问题</span>
+                                class="w-8 h-8 rounded-full bg-ora-primary/20 text-ora-primary flex items-center justify-center text-xs font-bold ring-2 ring-white shadow-sm cursor-pointer hover:ring-ora-primary/50 transition">
+                                JD
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Scrollable Area -->
+            <div id="main-scroller" class="flex-1 overflow-y-auto bg-gray-50 p-6 scroller space-y-8 scroll-smooth">
+
+                <!-- ========================================== -->
+                <!-- PART 1: INTERNAL EXCEPTION RADAR (PRD 2) -->
+                <!-- ========================================== -->
+                <section>
+                    <div class="flex items-center gap-2 mb-4">
+                        <h2
+                            class="text-base font-bold text-gray-800 uppercase tracking-wide border-l-4 border-ora-primary pl-3">
+                            Part 1. 内部异常雷达 (Internal Exception Radar)</h2>
+                        <span class="text-xs text-gray-400 italic ml-2"><i
+                                class="fa-solid fa-circle-info mr-1"></i>Click
+                            cards to filter details</span>
+                    </div>
+
+                    <!-- Widget 1A: KPI Summary Bar (PRD 2.1) -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <!-- Card 1: Lead Time Breach -->
+                        <div class="card p-4 border-l-4 border-red-500 cursor-pointer hover:shadow-md transition kpi-card"
+                            id="card-lead-time" onclick="toggleKpiFilterP1('card-lead-time', 'leadtime')"
+                            title="Based on 142 contracts">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="text-xs text-gray-500 uppercase font-bold">整体周期超出内部目标</div>
+                                    <div class="text-2xl font-bold text-red-600 mt-1">18 <span
+                                            class="text-sm text-gray-400 font-normal">/ 142</span></div>
                                 </div>
-                                <div class="flex-1 overflow-y-auto p-0">
-                                    <table class="w-full text-left border-collapse">
-                                        <thead class="sticky top-0 bg-gray-50 text-xs font-semibold text-gray-500 z-10">
-                                            <tr>
-                                                <th class="p-2 border-b">合同/产品 (Contract)</th>
-                                                <th class="p-2 border-b">问题 (Issue)</th>
-                                                <th class="p-2 border-b">更新 (Update)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="p1d-tbody" class="text-xs divide-y divide-gray-100">
-                                            <!-- Mock Data Rows -->
-                                            <tr class="hover:bg-gray-50 transition-colors row-issue-date">
-                                                <td class="p-2">
-                                                    <div class="font-medium text-gray-800">C-2024-001</div>
-                                                    <div class="text-gray-500 scale-90 origin-left">Gummies</div>
-                                                </td>
-                                                <td class="p-2 text-red-600"><i
-                                                        class="fas fa-calendar-times mr-1"></i>缺少发货日期</td>
-                                                <td class="p-2 text-gray-500">10m ago<br>by System</td>
-                                            </tr>
-                                            <tr class="hover:bg-gray-50 transition-colors row-issue-qty">
-                                                <td class="p-2">
-                                                    <div class="font-medium text-gray-800">C-2024-005</div>
-                                                    <div class="text-gray-500 scale-90 origin-left">Powder</div>
-                                                </td>
-                                                <td class="p-2 text-orange-600"><i
-                                                        class="fas fa-balance-scale-right mr-1"></i>数量不一致</td>
-                                                <td class="p-2 text-gray-500">2h ago<br>by John</td>
-                                            </tr>
-                                            <tr class="hover:bg-gray-50 transition-colors row-issue-date">
-                                                <td class="p-2">
-                                                    <div class="font-medium text-gray-800">C-2024-008</div>
-                                                    <div class="text-gray-500 scale-90 origin-left">Liquids</div>
-                                                </td>
-                                                <td class="p-2 text-red-600"><i
-                                                        class="fas fa-calendar-times mr-1"></i>缺少发货日期</td>
-                                                <td class="p-2 text-gray-500">1d ago<br>by System</td>
-                                            </tr>
-                                            <tr class="hover:bg-gray-50 transition-colors row-issue-other">
-                                                <td class="p-2">
-                                                    <div class="font-medium text-gray-800">C-2024-012</div>
-                                                    <div class="text-gray-500 scale-90 origin-left">Capsules</div>
-                                                </td>
-                                                <td class="p-2 text-gray-600"><i
-                                                        class="fas fa-exclamation-circle mr-1"></i>付款日期缺失</td>
-                                                <td class="p-2 text-gray-500">3d ago<br>by Finance</td>
-                                            </tr>
-                                            <tr class="hover:bg-gray-50 transition-colors row-issue-logic">
-                                                <td class="p-2">
-                                                    <div class="font-medium text-gray-800">C-2024-015</div>
-                                                    <div class="text-gray-500 scale-90 origin-left">Gummies</div>
-                                                </td>
-                                                <td class="p-2 text-red-600"><i class="fas fa-clock mr-1"></i>时间顺序异常
-                                                </td>
-                                                <td class="p-2 text-gray-500">5m ago<br>by System</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- Empty State (Hidden by default) -->
-                                    <div id="p1d-empty-state"
-                                        class="hidden flex flex-col items-center justify-center h-full text-gray-400">
-                                        <i class="fas fa-check-circle text-4xl text-green-500 mb-2"></i>
-                                        <p class="text-sm">记录完整 · 无需补充</p>
+                                <div class="bg-red-100 p-2 rounded-full text-red-500"><i class="fa-solid fa-clock"></i>
+                                </div>
+                            </div>
+                            <div class="mt-2 text-xs text-red-500 font-medium"><i class="fa-solid fa-arrow-up"></i> 5 vs
+                                last week</div>
+                            <div class="mt-1 text-[10px] text-gray-400">Stage SLA > 目标</div>
+                        </div>
+
+                        <!-- Card 2: Payment Blocked -->
+                        <div class="card p-4 border-l-4 border-orange-400 cursor-pointer hover:shadow-md transition kpi-card"
+                            id="card-payment" onclick="toggleKpiFilterP1('card-payment', 'money')"
+                            title="Based on 45 active contracts">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="text-xs text-gray-500 uppercase font-bold">收款环节有阻塞</div>
+                                    <div class="text-2xl font-bold text-orange-500 mt-1">8 <span
+                                            class="text-sm text-gray-400 font-normal">Contracts</span></div>
+                                </div>
+                                <div class="bg-orange-100 p-2 rounded-full text-orange-500"><i
+                                        class="fa-solid fa-hand-holding-dollar"></i></div>
+                            </div>
+                            <div class="mt-2 text-xs text-orange-500 font-medium">High Priority</div>
+                            <div class="mt-1 text-[10px] text-gray-400">款项待确认 > 3 天</div>
+                        </div>
+
+                        <!-- Card 3: Material Risk -->
+                        <div class="card p-4 border-l-4 border-yellow-400 cursor-pointer hover:shadow-md transition kpi-card"
+                            id="card-material" onclick="toggleKpiFilterP1('card-material', 'materials')"
+                            title="Based on 45 active contracts">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="text-xs text-gray-500 uppercase font-bold">物料准备存在风险</div>
+                                    <div class="text-2xl font-bold text-yellow-600 mt-1">12 <span
+                                            class="text-sm text-gray-400 font-normal">Contracts</span></div>
+                                </div>
+                                <div class="bg-yellow-100 p-2 rounded-full text-yellow-600"><i
+                                        class="fa-solid fa-boxes-stacked"></i></div>
+                            </div>
+                            <div class="mt-2 text-xs text-gray-500 font-medium">Requires Attention</div>
+                            <div class="mt-1 text-[10px] text-gray-400">物料未到+临近排产</div>
+                        </div>
+
+                        <!-- Card 4: Data Issues -->
+                        <div class="card p-4 border-l-4 border-gray-400 cursor-pointer hover:shadow-md transition kpi-card"
+                            id="card-data" onclick="toggleKpiFilterP1('card-data', 'data_issue')"
+                            title="Based on all records">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="text-xs text-gray-500 uppercase font-bold">数据记录需补充</div>
+                                    <div class="text-2xl font-bold text-gray-600 mt-1">15 <span
+                                            class="text-sm text-gray-400 font-normal">Records</span></div>
+                                </div>
+                                <div class="bg-gray-100 p-2 rounded-full text-gray-600"><i
+                                        class="fa-solid fa-database"></i>
+                                </div>
+                            </div>
+                            <div class="mt-2 text-xs text-red-500 font-medium">Affects Forecast</div>
+                            <div class="mt-1 text-[10px] text-gray-400">字段缺失/异常</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                        <!-- Widget P1-B: Key Contracts Stage Overview (Merged 1B & 1C) -->
+                        <div id="widget-p1b" class="card lg:col-span-2">
+                            <div class="card-header">
+                                <div class="flex items-center gap-4">
+                                    <h3 class="card-title"><i class="fa-solid fa-list-check text-ora-primary"></i> P1-B.
+                                        关键订单阶段总览 (Key Contracts)</h3>
+                                    <div class="flex bg-gray-100 rounded p-0.5 space-x-1">
+                                        <button onclick="switchView('p1b', 'list')" id="btn-p1b-view-list"
+                                            class="px-2 py-0.5 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200">列表</button>
+                                        <button onclick="switchView('p1b', 'graph')" id="btn-p1b-view-graph"
+                                            class="px-2 py-0.5 text-xs rounded text-gray-500 hover:text-gray-800">图表</button>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div
-                            class="px-4 py-2 border-t border-gray-100 text-xs text-gray-400 flex justify-between items-center bg-gray-50 rounded-b-lg">
-                            <span><i class="fas fa-info-circle mr-1"></i>左侧展示整体数据记录的完整度，右侧列出具体有问题的合同与产品，便于快速回溯并补全信息。当前
-                                Demo 环境使用的是示例数据。</span>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- ========================================== -->
-            <!-- PART 2: PROCESS LEAD TIME (Collapsed)  -->
-            <!-- ========================================== -->
-            <!-- ========================================== -->
-            <!-- PART 2: PROCESS LEAD TIME (PRD 3)      -->
-            <!-- ========================================== -->
-            <section class="mt-8">
-                <div class="flex items-center gap-2 mb-4">
-                    <h2
-                        class="text-base font-bold text-gray-800 uppercase tracking-wide border-l-4 border-gray-600 pl-3">
-                        Part 2. 内部流程周期 (Process Lead Time)</h2>
-                    <span class="text-xs text-gray-400">分析视图 (Analysis Mode)</span>
-                </div>
-
-                <!-- P0: Contract Entry Latency (Banner) -->
-                <div
-                    class="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-6 flex items-center justify-between shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
-                            <i class="fa-solid fa-stopwatch-20"></i>
-                        </div>
-                        <div>
-                            <div class="text-sm font-bold text-gray-800">合同录入提醒</div>
-                            <div class="text-xs text-gray-600">约 15% 的合同在签约后 3 天才录入系统。</div>
-                        </div>
-                    </div>
-                    <button
-                        class="text-xs bg-white border border-gray-300 px-3 py-1 rounded font-bold text-gray-600 hover:bg-gray-50">查看明细</button>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-
-                    <!-- P1: Lead Time Waterfall -->
-                    <div class="card lg:col-span-2">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-water text-blue-500"></i> P1. 从收齐款项到发货的平均用时拆解
-                            </h3>
-                            <span class="text-xs text-gray-400">平均天数 (Avg Days)</span>
-                        </div>
-                        <div class="p-4 h-64">
-                            <canvas id="p1WaterfallChart"></canvas>
-                        </div>
-                        <div class="card-footer flex justify-between">
-                            <span>整体中位周期：42 天</span>
-                            <span>基于已完成的合同</span>
-                        </div>
-                        <div class="px-4 pb-2 text-xs text-gray-500">目前从收齐货款到发货平均约 42 天，其中生产和发货两个阶段耗时最长。</div>
-                    </div>
-
-                    <!-- P2: Stage SLA Breach Rate -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-chart-column text-red-500"></i> P2.
-                                各阶段超出内部目标的比例</h3>
-                        </div>
-                        <div class="p-4 h-64 flex flex-col">
-                            <div class="flex-1 relative">
-                                <canvas id="p2BreachChart"></canvas>
-                            </div>
-                            <div class="mt-2 text-xs text-gray-600 border-t pt-2">
-                                <div class="font-bold mb-1">主要瓶颈 (Top Bottlenecks):</div>
-                                <div class="flex justify-between"><span>1. 物料准备阶段</span> <span
-                                        class="text-red-600 font-bold">68% 超出目标</span></div>
-                                <div class="flex justify-between"><span>2. 生产阶段</span> <span
-                                        class="text-orange-500 font-bold">45% 超出目标</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- P3: Plan Adherence -->
-                    <div class="card lg:col-span-2">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-calendar-check text-green-600"></i> P3.
-                                各产线按时交付情况</h3>
-                        </div>
-                        <div class="p-4 h-64">
-                            <canvas id="p3AdherenceChart"></canvas>
-                        </div>
-                        <div class="card-footer">软糖和胶囊的交付最稳定，粉剂延迟较多。</div>
-                    </div>
-
-                    <!-- P4: Materials vs Production -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-boxes-stacked text-ora-warning"></i> P4.
-                                开工前物料准备情况</h3>
-                        </div>
-                        <div class="p-4 flex flex-col h-full">
-                            <div class="h-40 relative">
-                                <canvas id="p4MaterialChart"></canvas>
-                                <div
-                                    class="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
-                                    <span class="text-2xl font-bold text-gray-700">85%</span>
-                                    <span class="text-[10px] text-gray-400">准备就绪</span>
+                                <!-- Internal Filters -->
+                                <div class="flex space-x-2 text-xs">
+                                    <span class="text-gray-400 self-center">Filter:</span>
+                                    <button onclick="filterP1B('all')" class="tab-btn tab-active"
+                                        id="btn-p1b-all">全部</button>
+                                    <button onclick="filterP1B('blocker')" class="tab-btn tab-inactive"
+                                        id="btn-p1b-blocker">待解决 (Blocker)</button>
+                                    <button onclick="filterP1B('delay')" class="tab-btn tab-inactive"
+                                        id="btn-p1b-delay">严重超时</button>
                                 </div>
                             </div>
-                            <div class="text-center text-xs text-gray-500 mt-1 mb-2">当前约 85% 的生产批次在开工前物料已准备就绪。</div>
-                            <div class="flex-1 mt-2 overflow-y-auto border-t pt-2">
-                                <div class="text-xs font-bold text-gray-700 mb-2">风险批次（开工时物料未完全到位）</div>
-                                <ul class="space-y-1">
-                                    <li class="flex justify-between text-xxs text-gray-600"><span>C2411-05
-                                            (Gummies)</span> <span class="text-red-500 font-bold">-2d</span></li>
-                                    <li class="flex justify-between text-xxs text-gray-600"><span>C2411-08
-                                            (Powder)</span> <span class="text-red-500 font-bold">-1d</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- G1: Factory Growth -->
-                <div class="card mb-8">
-                    <div class="card-header">
-                        <h3 class="card-title"><i class="fa-solid fa-arrow-trend-up text-ora-primary"></i> G1. 工厂产出与效率提升
-                        </h3>
-                        <span class="text-xs text-gray-400">季度出货趋势</span>
-                    </div>
-                    <div class="p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
-                        <!-- Chart -->
-                        <div class="lg:col-span-3 h-64">
-                            <canvas id="g1GrowthChart"></canvas>
-                            <div class="text-center text-xs text-gray-500 mt-2">Q4 预计出货 120 万件，较上季度增长 15%；平均交付时间比初始阶段缩短约
-                                3 天。</div>
-                        </div>
-                        <!-- KPIs -->
-                        <div class="space-y-4">
-                            <div class="bg-gray-50 p-4 rounded border border-gray-100">
-                                <div class="text-xs text-gray-500 uppercase font-bold">本季度出货总量</div>
-                                <div class="text-2xl font-bold text-gray-800 mt-1">1.2M</div>
-                                <div class="text-xs text-green-600 mt-1"><i class="fa-solid fa-arrow-up"></i> 15% QoQ
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded border border-gray-100">
-                                <div class="text-xs text-gray-500 uppercase font-bold">平均交付时间</div>
-                                <div class="text-2xl font-bold text-gray-800 mt-1">42d</div>
-                                <div class="text-xs text-green-600 mt-1"><i class="fa-solid fa-arrow-down"></i> 3d vs
-                                    Baseline</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ========================================== -->
-            <!-- PART 3: CLIENT & OPPORTUNITY RADAR (PRD 4) -->
-            <!-- ========================================== -->
-            <section class="pb-10 mt-8">
-                <div class="flex items-center gap-2 mb-4">
-                    <h2
-                        class="text-base font-bold text-gray-800 uppercase tracking-wide border-l-4 border-purple-500 pl-3">
-                        Part 3. 客户洞察与机会 (Client Radar)</h2>
-                    <span class="text-xs text-gray-400">Q3 2024 vs Q4 2024</span>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-                    <!-- 3A: Client Risk -->
-                    <div class="card lg:col-span-2">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="fa-solid fa-user-injured text-purple-500"></i>
-                                客户活跃度风险 (Dormant & Cooling)
-                            </h3>
-                        </div>
-                        <div class="p-4">
-                            <!-- Visual: Bar Chart for Vol Comparison -->
-                            <div class="w-full h-40">
-                                <canvas id="clientRiskChart"></canvas>
-                                <div class="text-center text-xs text-gray-500 mt-2">红色表示本季度完全没下单，橙色表示订单量明显下降。</div>
-                            </div>
-                            <!-- List: Details -->
-                            <div class="w-full overflow-x-auto mt-4">
+                            <!-- List View -->
+                            <div class="p-0 overflow-x-auto flex-1" id="p1b-view-list">
                                 <table class="w-full text-left text-xs">
                                     <thead class="bg-gray-50 text-gray-500 uppercase border-b border-gray-200">
                                         <tr>
-                                            <th class="px-4 py-2">品牌</th>
-                                            <th class="px-4 py-2">状态</th>
-                                            <th class="px-4 py-2 text-right">最近几季出货量 (对比)</th>
+                                            <th class="px-4 py-3 font-semibold">合同 / 品牌</th>
+                                            <th class="px-4 py-3 font-semibold">当前阶段</th>
+                                            <th class="px-4 py-3 font-semibold">最严重阶段 (Delay)</th>
+                                            <th class="px-4 py-3 font-semibold">状态 / 原因</th>
+                                            <th class="px-4 py-3 font-semibold text-right">时间 (签约/更新)</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="divide-y divide-gray-100">
-                                        <tr>
-                                            <td class="px-4 py-2 font-bold">Vitality</td>
-                                            <td class="px-4 py-2"><span
-                                                    class="bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xxs">本季未下单</span>
+                                    <tbody class="divide-y divide-gray-100" id="p1b-tbody">
+                                        <!-- Mock Data: Blocker - Money -->
+                                        <tr class="hover:bg-gray-50 row-blocker row-money">
+                                            <td class="px-4 py-3">
+                                                <div class="font-bold text-gray-800">C2411-003</div>
+                                                <div class="text-[10px] text-gray-500">Little Umbrella</div>
                                             </td>
-                                            <td class="px-4 py-2 text-right text-gray-400">60k <i
-                                                    class="fa-solid fa-arrow-right text-gray-300 mx-1"></i> <span
-                                                    class="text-red-600 font-bold">0</span></td>
+                                            <td class="px-4 py-3"><span
+                                                    class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-[10px]">S1
+                                                    款项</span></td>
+                                            <td class="px-4 py-3"><span class="text-red-500 font-bold">+45d</span></td>
+                                            <td class="px-4 py-3"><span
+                                                    class="bg-red-50 text-red-600 px-2 py-0.5 rounded border border-red-100 text-[10px]">款项未到</span>
+                                            </td>
+                                            <td class="px-4 py-3 text-right">
+                                                <div class="font-bold">45d</div>
+                                                <div class="text-[10px] text-gray-400">2d ago</div>
+                                            </td>
+                                        </tr>
+                                        <!-- Mock Data: Blocker - Materials -->
+                                        <tr class="hover:bg-gray-50 row-blocker row-materials">
+                                            <td class="px-4 py-3">
+                                                <div class="font-bold text-gray-800">C2411-008</div>
+                                                <div class="text-[10px] text-gray-500">PowerGums</div>
+                                            </td>
+                                            <td class="px-4 py-3"><span
+                                                    class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-[10px]">S2
+                                                    物料</span></td>
+                                            <td class="px-4 py-3"><span class="text-orange-500 font-bold">+20d</span>
+                                            </td>
+                                            <td class="px-4 py-3"><span
+                                                    class="bg-orange-50 text-orange-600 px-2 py-0.5 rounded border border-orange-100 text-[10px]">物料未齐</span>
+                                            </td>
+                                            <td class="px-4 py-3 text-right">
+                                                <div class="font-bold">20d</div>
+                                                <div class="text-[10px] text-gray-400">1d ago</div>
+                                            </td>
+                                        </tr>
+                                        <!-- Mock Data: SLA Breach (Lead Time) -->
+                                        <tr class="hover:bg-gray-50 row-delay row-leadtime">
+                                            <td class="px-4 py-3">
+                                                <div class="font-bold text-gray-800">C2410-001</div>
+                                                <div class="text-[10px] text-gray-500">Vitality</div>
+                                            </td>
+                                            <td class="px-4 py-3"><span
+                                                    class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-[10px]">S4
+                                                    生产</span></td>
+                                            <td class="px-4 py-3"><span class="text-red-500 font-bold">+15d</span></td>
+                                            <td class="px-4 py-3"><span class="text-gray-500 text-[10px]">超出内部目标</span>
+                                            </td>
+                                            <td class="px-4 py-3 text-right">
+                                                <div class="font-bold">60d</div>
+                                                <div class="text-[10px] text-gray-400">Active</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="p-2 text-center text-xs text-gray-400 border-t border-gray-100">
+                                    列表按严重程度排序，优先显示待解决事项。仅展示前 20 份最需要关注的订单。
+                                </div>
+                            </div>
+
+                            <!-- Graph View (Matrix) -->
+                            <div id="p1b-view-graph" class="hidden p-4 overflow-x-auto">
+                                <div class="min-w-[500px]">
+                                    <!-- Header -->
+                                    <div
+                                        class="grid grid-cols-6 gap-1 mb-2 text-xs font-bold text-gray-500 text-center">
+                                        <div class="text-left pl-2">合同</div>
+                                        <div>S1 款项</div>
+                                        <div>S2 物料</div>
+                                        <div>S3 等待</div>
+                                        <div>S4 生产</div>
+                                        <div>S5 发货</div>
+                                    </div>
+                                    <!-- Row 1 -->
+                                    <div class="grid grid-cols-6 gap-1 mb-1 text-xs">
+                                        <div class="flex flex-col justify-center pl-2">
+                                            <span class="font-bold">C2411-003</span>
+                                            <span class="text-[10px] text-gray-400">Little Umbrella</span>
+                                        </div>
+                                        <div
+                                            class="bg-red-500 text-white flex flex-col items-center justify-center p-1 rounded">
+                                            <span class="font-bold">+45</span>
+                                            <span class="text-[8px]">款项未到</span>
+                                        </div>
+                                        <div class="bg-gray-100 rounded"></div>
+                                        <div class="bg-gray-100 rounded"></div>
+                                        <div class="bg-gray-100 rounded"></div>
+                                        <div class="bg-gray-100 rounded"></div>
+                                    </div>
+                                    <!-- Row 2 -->
+                                    <div class="grid grid-cols-6 gap-1 mb-1 text-xs">
+                                        <div class="flex flex-col justify-center pl-2">
+                                            <span class="font-bold">C2411-008</span>
+                                            <span class="text-[10px] text-gray-400">PowerGums</span>
+                                        </div>
+                                        <div
+                                            class="bg-green-500 text-white flex items-center justify-center rounded font-bold">
+                                            OK</div>
+                                        <div
+                                            class="bg-orange-500 text-white flex flex-col items-center justify-center p-1 rounded">
+                                            <span class="font-bold">+20</span>
+                                            <span class="text-[8px]">物料未齐</span>
+                                        </div>
+                                        <div class="bg-gray-100 rounded"></div>
+                                        <div class="bg-gray-100 rounded"></div>
+                                        <div class="bg-gray-100 rounded"></div>
+                                    </div>
+                                    <!-- Row 3 -->
+                                    <div class="grid grid-cols-6 gap-1 mb-1 text-xs">
+                                        <div class="flex flex-col justify-center pl-2">
+                                            <span class="font-bold">C2410-001</span>
+                                            <span class="text-[10px] text-gray-400">Vitality</span>
+                                        </div>
+                                        <div
+                                            class="bg-green-500 text-white flex items-center justify-center rounded font-bold">
+                                            OK</div>
+                                        <div
+                                            class="bg-green-500 text-white flex items-center justify-center rounded font-bold">
+                                            OK</div>
+                                        <div
+                                            class="bg-green-500 text-white flex items-center justify-center rounded font-bold">
+                                            OK</div>
+                                        <div
+                                            class="bg-red-400 text-white flex flex-col items-center justify-center p-1 rounded">
+                                            <span class="font-bold">+15</span>
+                                            <span class="text-[8px]">生产延迟</span>
+                                        </div>
+                                        <div class="bg-gray-100 rounded"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 text-xs text-gray-400 text-center">
+                                    彩色格子表示该阶段比内部目标多用的天数。
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Widget P1-C: Zombie & Inventory (Renamed from 1D) -->
+                        <div id="widget-p1c" class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa-solid fa-skull text-gray-500"></i> P1-C. 僵尸合同与库存
+                                </h3>
+                                <div class="flex bg-gray-100 rounded p-0.5 space-x-1">
+                                    <button onclick="toggleZombieView('contracts')" id="btn-zombie-contracts"
+                                        class="px-3 py-1 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200">停滞中的合同</button>
+                                    <button onclick="toggleZombieView('inventory')" id="btn-zombie-inventory"
+                                        class="px-3 py-1 text-xs rounded text-gray-500 hover:text-gray-800">滞留成品/半成品</button>
+                                </div>
+                            </div>
+                            <div class="p-4 flex-1 overflow-y-auto">
+                                <!-- View: Contracts -->
+                                <div id="view-zombie-contracts" class="space-y-3">
+                                    <div class="text-xs text-gray-400 mb-2">超过 45 天无更新 (Inactive > 45d)</div>
+                                    <div class="space-y-2">
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span class="font-bold text-gray-700">C2408-002 (Vitality)</span>
+                                                <span class="text-red-500 font-bold">120d</span>
+                                            </div>
+                                            <div class="w-full bg-gray-100 rounded-full h-2" title="120d (Inactive)">
+                                                <div class="bg-gray-400 h-2 rounded-full" style="width: 100%"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between text-xs mb-1">
+                                                <span class="font-bold text-gray-700">C2409-015 (Muscle)</span>
+                                                <span class="text-red-500 font-bold">95d</span>
+                                            </div>
+                                            <div class="w-full bg-gray-100 rounded-full h-2" title="95d (Inactive)">
+                                                <div class="bg-gray-400 h-2 rounded-full" style="width: 80%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- View: Inventory -->
+                                <div id="view-zombie-inventory" class="hidden space-y-3">
+                                    <div class="text-xs text-gray-400 mb-2">发货逾期超过 7 天 (Overdue > 7d)</div>
+                                    <ul class="space-y-2">
+                                        <li class="flex justify-between items-center p-2 bg-red-50 rounded border border-red-100"
+                                            title="Produced: 5000, Shipped: 0, Stuck: 5000">
+                                            <div>
+                                                <div class="text-xs font-bold text-gray-800">C2410-001 (Gummies)</div>
+                                                <div class="text-[10px] text-red-500">Produced but not shipped (15d)
+                                                </div>
+                                            </div>
+                                            <div class="text-xs font-bold text-gray-800">5k Units</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer">Showing Top 5 by Inactive/Overdue Days</div>
+                        </div>
+
+                        <!-- Widget P1-D: Data Quality (Renamed from 1E) -->
+                        <!-- Widget P1-D: Data Quality Monitor (Left-Right Layout) -->
+                        <div id="widget-p1d"
+                            class="card bg-white border border-gray-200 shadow-sm rounded-lg lg:col-span-3 flex flex-col h-96">
+                            <div
+                                class="card-header flex justify-between items-center mb-2 px-4 py-3 border-b border-gray-100">
+                                <h3 class="font-bold text-gray-800 text-lg flex items-center gap-2">
+                                    <i class="fas fa-database text-purple-600"></i> 数据记录完整度 (Data Quality)
+                                </h3>
+                                <span class="text-xs text-gray-500">Last Update: 10 mins ago</span>
+                            </div>
+
+                            <div class="flex flex-1 overflow-hidden p-4 gap-4">
+                                <!-- Left: Charts (50%) -->
+                                <div class="w-1/2 flex flex-col justify-center">
+                                    <div class="flex flex-1 gap-2 items-center justify-center">
+                                        <!-- Chart 1: Good vs Bad -->
+                                        <div class="w-1/2 relative h-40">
+                                            <canvas id="dataQualityGoodBad"></canvas>
+                                            <div
+                                                class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                                <div class="text-center">
+                                                    <span class="text-2xl font-bold text-gray-800">92%</span><br>
+                                                    <span class="text-xs text-gray-500">完整度</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Chart 2: Issue Types -->
+                                        <div class="w-1/2 relative h-40">
+                                            <canvas id="dataQualityChart"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 text-xs text-gray-500 text-center bg-gray-50 p-2 rounded">
+                                        <i class="fas fa-info-circle mr-1"></i>左侧展示整体记录完整度，右侧展示问题类型分布。一条记录可能同时包含多种问题。
+                                    </div>
+                                </div>
+
+                                <!-- Right: Detail List (50%) -->
+                                <div
+                                    class="w-1/2 flex flex-col bg-white border border-gray-100 rounded-lg shadow-sm h-full">
+                                    <div
+                                        class="px-3 py-2 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-lg">
+                                        <span class="font-bold text-xs text-gray-700">问题合同列表 (Issue List)</span>
+                                        <span id="p1d-current-filter"
+                                            class="text-xs px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full font-medium">当前筛选:
+                                            全部问题</span>
+                                    </div>
+                                    <div class="flex-1 overflow-y-auto p-0">
+                                        <table class="w-full text-left border-collapse">
+                                            <thead
+                                                class="sticky top-0 bg-gray-50 text-xs font-semibold text-gray-500 z-10">
+                                                <tr>
+                                                    <th class="p-2 border-b">合同/产品 (Contract)</th>
+                                                    <th class="p-2 border-b">问题 (Issue)</th>
+                                                    <th class="p-2 border-b">更新 (Update)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="p1d-tbody" class="text-xs divide-y divide-gray-100">
+                                                <!-- Mock Data Rows -->
+                                                <tr class="hover:bg-gray-50 transition-colors row-issue-date">
+                                                    <td class="p-2">
+                                                        <div class="font-medium text-gray-800">C-2024-001</div>
+                                                        <div class="text-gray-500 scale-90 origin-left">Gummies</div>
+                                                    </td>
+                                                    <td class="p-2 text-red-600"><i
+                                                            class="fas fa-calendar-times mr-1"></i>缺少发货日期</td>
+                                                    <td class="p-2 text-gray-500">10m ago<br>by System</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 transition-colors row-issue-qty">
+                                                    <td class="p-2">
+                                                        <div class="font-medium text-gray-800">C-2024-005</div>
+                                                        <div class="text-gray-500 scale-90 origin-left">Powder</div>
+                                                    </td>
+                                                    <td class="p-2 text-orange-600"><i
+                                                            class="fas fa-balance-scale-right mr-1"></i>数量不一致</td>
+                                                    <td class="p-2 text-gray-500">2h ago<br>by John</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 transition-colors row-issue-date">
+                                                    <td class="p-2">
+                                                        <div class="font-medium text-gray-800">C-2024-008</div>
+                                                        <div class="text-gray-500 scale-90 origin-left">Liquids</div>
+                                                    </td>
+                                                    <td class="p-2 text-red-600"><i
+                                                            class="fas fa-calendar-times mr-1"></i>缺少发货日期</td>
+                                                    <td class="p-2 text-gray-500">1d ago<br>by System</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 transition-colors row-issue-other">
+                                                    <td class="p-2">
+                                                        <div class="font-medium text-gray-800">C-2024-012</div>
+                                                        <div class="text-gray-500 scale-90 origin-left">Capsules</div>
+                                                    </td>
+                                                    <td class="p-2 text-gray-600"><i
+                                                            class="fas fa-exclamation-circle mr-1"></i>付款日期缺失</td>
+                                                    <td class="p-2 text-gray-500">3d ago<br>by Finance</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 transition-colors row-issue-logic">
+                                                    <td class="p-2">
+                                                        <div class="font-medium text-gray-800">C-2024-015</div>
+                                                        <div class="text-gray-500 scale-90 origin-left">Gummies</div>
+                                                    </td>
+                                                    <td class="p-2 text-red-600"><i class="fas fa-clock mr-1"></i>时间顺序异常
+                                                    </td>
+                                                    <td class="p-2 text-gray-500">5m ago<br>by System</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- Empty State (Hidden by default) -->
+                                        <div id="p1d-empty-state"
+                                            class="hidden flex flex-col items-center justify-center h-full text-gray-400">
+                                            <i class="fas fa-check-circle text-4xl text-green-500 mb-2"></i>
+                                            <p class="text-sm">记录完整 · 无需补充</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="px-4 py-2 border-t border-gray-100 text-xs text-gray-400 flex justify-between items-center bg-gray-50 rounded-b-lg">
+                                <span><i
+                                        class="fas fa-info-circle mr-1"></i>左侧展示整体数据记录的完整度，右侧列出具体有问题的合同与产品，便于快速回溯并补全信息。当前
+                                    Demo 环境使用的是示例数据。</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- ========================================== -->
+                <!-- PART 2: PROCESS LEAD TIME (Collapsed)  -->
+                <!-- ========================================== -->
+                <!-- ========================================== -->
+                <!-- PART 2: PROCESS LEAD TIME (PRD 3)      -->
+                <!-- ========================================== -->
+                <section class="mt-8">
+                    <div class="flex items-center gap-2 mb-4">
+                        <h2
+                            class="text-base font-bold text-gray-800 uppercase tracking-wide border-l-4 border-gray-600 pl-3">
+                            Part 2. 内部流程周期 (Process Lead Time)</h2>
+                        <span class="text-xs text-gray-400">分析视图 (Analysis Mode)</span>
+                    </div>
+
+                    <!-- P0: Contract Entry Latency (Banner) -->
+                    <div
+                        class="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-6 flex items-center justify-between shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+                                <i class="fa-solid fa-stopwatch-20"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold text-gray-800">合同录入提醒</div>
+                                <div class="text-xs text-gray-600">约 15% 的合同在签约后 3 天才录入系统。</div>
+                            </div>
+                        </div>
+                        <button
+                            class="text-xs bg-white border border-gray-300 px-3 py-1 rounded font-bold text-gray-600 hover:bg-gray-50">查看明细</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+
+                        <!-- P1: Lead Time Waterfall -->
+                        <div class="card lg:col-span-2">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa-solid fa-water text-blue-500"></i> P1.
+                                    从收齐款项到发货的平均用时拆解
+                                </h3>
+                                <span class="text-xs text-gray-400">平均天数 (Avg Days)</span>
+                            </div>
+                            <div class="p-4 h-64">
+                                <canvas id="p1WaterfallChart"></canvas>
+                            </div>
+                            <div class="card-footer flex justify-between">
+                                <span>整体中位周期：42 天</span>
+                                <span>基于已完成的合同</span>
+                            </div>
+                            <div class="px-4 pb-2 text-xs text-gray-500">目前从收齐货款到发货平均约 42 天，其中生产和发货两个阶段耗时最长。</div>
+                        </div>
+
+                        <!-- P2: Stage SLA Breach Rate -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa-solid fa-chart-column text-red-500"></i> P2.
+                                    各阶段超出内部目标的比例</h3>
+                            </div>
+                            <div class="p-4 h-64 flex flex-col">
+                                <div class="flex-1 relative">
+                                    <canvas id="p2BreachChart"></canvas>
+                                </div>
+                                <div class="mt-2 text-xs text-gray-600 border-t pt-2">
+                                    <div class="font-bold mb-1">主要瓶颈 (Top Bottlenecks):</div>
+                                    <div class="flex justify-between"><span>1. 物料准备阶段</span> <span
+                                            class="text-red-600 font-bold">68% 超出目标</span></div>
+                                    <div class="flex justify-between"><span>2. 生产阶段</span> <span
+                                            class="text-orange-500 font-bold">45% 超出目标</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- P3: Plan Adherence -->
+                        <div class="card lg:col-span-2">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa-solid fa-calendar-check text-green-600"></i> P3.
+                                    各产线按时交付情况</h3>
+                            </div>
+                            <div class="p-4 h-64">
+                                <canvas id="p3AdherenceChart"></canvas>
+                            </div>
+                            <div class="card-footer">软糖和胶囊的交付最稳定，粉剂延迟较多。</div>
+                        </div>
+
+                        <!-- P4: Materials vs Production -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa-solid fa-boxes-stacked text-ora-warning"></i> P4.
+                                    开工前物料准备情况</h3>
+                            </div>
+                            <div class="p-4 flex flex-col h-full">
+                                <div class="h-40 relative">
+                                    <canvas id="p4MaterialChart"></canvas>
+                                    <div
+                                        class="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
+                                        <span class="text-2xl font-bold text-gray-700">85%</span>
+                                        <span class="text-[10px] text-gray-400">准备就绪</span>
+                                    </div>
+                                </div>
+                                <div class="text-center text-xs text-gray-500 mt-1 mb-2">当前约 85% 的生产批次在开工前物料已准备就绪。</div>
+                                <div class="flex-1 mt-2 overflow-y-auto border-t pt-2">
+                                    <div class="text-xs font-bold text-gray-700 mb-2">风险批次（开工时物料未完全到位）</div>
+                                    <ul class="space-y-1">
+                                        <li class="flex justify-between text-xxs text-gray-600"><span>C2411-05
+                                                (Gummies)</span> <span class="text-red-500 font-bold">-2d</span></li>
+                                        <li class="flex justify-between text-xxs text-gray-600"><span>C2411-08
+                                                (Powder)</span> <span class="text-red-500 font-bold">-1d</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- G1: Factory Growth -->
+                    <div class="card mb-8">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fa-solid fa-arrow-trend-up text-ora-primary"></i> G1.
+                                工厂产出与效率提升
+                            </h3>
+                            <span class="text-xs text-gray-400">季度出货趋势</span>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+                            <!-- Chart -->
+                            <div class="lg:col-span-3 h-64">
+                                <canvas id="g1GrowthChart"></canvas>
+                                <div class="text-center text-xs text-gray-500 mt-2">Q4 预计出货 120 万件，较上季度增长
+                                    15%；平均交付时间比初始阶段缩短约
+                                    3 天。</div>
+                            </div>
+                            <!-- KPIs -->
+                            <div class="space-y-4">
+                                <div class="bg-gray-50 p-4 rounded border border-gray-100">
+                                    <div class="text-xs text-gray-500 uppercase font-bold">本季度出货总量</div>
+                                    <div class="text-2xl font-bold text-gray-800 mt-1">1.2M</div>
+                                    <div class="text-xs text-green-600 mt-1"><i class="fa-solid fa-arrow-up"></i> 15%
+                                        QoQ
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded border border-gray-100">
+                                    <div class="text-xs text-gray-500 uppercase font-bold">平均交付时间</div>
+                                    <div class="text-2xl font-bold text-gray-800 mt-1">42d</div>
+                                    <div class="text-xs text-green-600 mt-1"><i class="fa-solid fa-arrow-down"></i> 3d
+                                        vs
+                                        Baseline</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ========================================== -->
+                <!-- PART 3: CLIENT & OPPORTUNITY RADAR (PRD 4) -->
+                <!-- ========================================== -->
+                <section class="pb-10 mt-8">
+                    <div class="flex items-center gap-2 mb-4">
+                        <h2
+                            class="text-base font-bold text-gray-800 uppercase tracking-wide border-l-4 border-purple-500 pl-3">
+                            Part 3. 客户洞察与机会 (Client Radar)</h2>
+                        <span class="text-xs text-gray-400">Q3 2024 vs Q4 2024</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                        <!-- 3A: Client Risk -->
+                        <div class="card lg:col-span-2">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa-solid fa-user-injured text-purple-500"></i>
+                                    客户活跃度风险 (Dormant & Cooling)
+                                </h3>
+                            </div>
+                            <div class="p-4">
+                                <!-- Visual: Bar Chart for Vol Comparison -->
+                                <div class="w-full h-40">
+                                    <canvas id="clientRiskChart"></canvas>
+                                    <div class="text-center text-xs text-gray-500 mt-2">红色表示本季度完全没下单，橙色表示订单量明显下降。</div>
+                                </div>
+                                <!-- List: Details -->
+                                <div class="w-full overflow-x-auto mt-4">
+                                    <table class="w-full text-left text-xs">
+                                        <thead class="bg-gray-50 text-gray-500 uppercase border-b border-gray-200">
+                                            <tr>
+                                                <th class="px-4 py-2">品牌</th>
+                                                <th class="px-4 py-2">状态</th>
+                                                <th class="px-4 py-2 text-right">最近几季出货量 (对比)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-100">
+                                            <tr>
+                                                <td class="px-4 py-2 font-bold">Vitality</td>
+                                                <td class="px-4 py-2"><span
+                                                        class="bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xxs">本季未下单</span>
+                                                </td>
+                                                <td class="px-4 py-2 text-right text-gray-400">60k <i
+                                                        class="fa-solid fa-arrow-right text-gray-300 mx-1"></i> <span
+                                                        class="text-red-600 font-bold">0</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-2 font-bold">Muscle</td>
+                                                <td class="px-4 py-2"><span
+                                                        class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full text-xxs">下单明显变少</span>
+                                                </td>
+                                                <td class="px-4 py-2 text-right text-gray-400">60k <i
+                                                        class="fa-solid fa-arrow-right text-gray-300 mx-1"></i> <span
+                                                        class="text-orange-500 font-bold">25k</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">Based on quarterly volume comparison</div>
+                        </div>
+
+                        <!-- Widget 3C: Capacity Concentration -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa-solid fa-chart-pie text-blue-500"></i> 未来 90
+                                    天产能集中在谁身上？
+                                </h3>
+                            </div>
+                            <div class="p-4 flex flex-col justify-between h-full">
+                                <div class="h-32 relative">
+                                    <canvas id="concentrationChart"></canvas>
+                                </div>
+                                <!-- Risk Warning -->
+                                <div class="mt-2 text-xs border-l-2 border-ora-danger pl-2 text-gray-600">
+                                    <span class="font-bold text-ora-danger">High Risk:</span> 当前前三大客户占用排产产能约 72%，集中度偏高。
+                                </div>
+                            </div>
+                            <div class="card-footer">Based on scheduled units</div>
+                        </div>
+
+                        <!-- Widget 3D: White Space Matrix (PRD 4.4) -->
+                        <div class="card lg:col-span-3">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fa-solid fa-border-all text-teal-600"></i> P3-D. 剂型白地
+                                    (White Space)</h3>
+                                <div class="flex items-center gap-2 text-xxs">
+                                    <span class="w-3 h-3 bg-teal-600 rounded-sm"></span> 核心业务
+                                    <span class="w-3 h-3 bg-teal-100 rounded-sm"></span> 偶尔生产
+                                    <span class="w-3 h-3 border border-gray-300 border-dashed rounded-sm"></span>
+                                    从未合作
+                                </div>
+                            </div>
+                            <div class="p-4 overflow-x-auto">
+                                <table class="w-full text-xs text-center border-collapse">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-3 py-2 text-left font-bold text-gray-600 bg-gray-50 w-40">品牌 /
+                                                剂型
+                                            </th>
+                                            <th class="px-1 py-2 font-medium text-gray-500 bg-gray-50">Gummies</th>
+                                            <th class="px-1 py-2 font-medium text-gray-500 bg-gray-50">Powder</th>
+                                            <th class="px-1 py-2 font-medium text-gray-500 bg-gray-50">Liquids</th>
+                                            <th class="px-1 py-2 font-medium text-gray-500 bg-gray-50">Capsules</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-600">
+                                        <tr class="border-b border-gray-50">
+                                            <td class="p-3 text-left font-bold">Little Umbrella</td>
+                                            <td class="p-1">
+                                                <div class="bg-teal-600 text-white py-2 rounded shadow-sm"
+                                                    title="Volume > strong_threshold in last 2y">核心业务</div>
+                                            </td>
+                                            <td class="p-1">
+                                                <div class="bg-teal-100 text-teal-800 py-2 rounded"
+                                                    title="Volume between 0 and threshold">偶尔生产</div>
+                                            </td>
+                                            <td class="p-1">
+                                                <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
+                                                    title="No production in last 2y">
+                                                    从未合作</div>
+                                            </td>
+                                            <td class="p-1">
+                                                <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
+                                                    title="No production in last 2y">
+                                                    从未合作</div>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td class="px-4 py-2 font-bold">Muscle</td>
-                                            <td class="px-4 py-2"><span
-                                                    class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full text-xxs">下单明显变少</span>
+                                            <td class="p-3 text-left font-bold">PowerGums</td>
+                                            <td class="p-1">
+                                                <div class="bg-teal-600 text-white py-2 rounded shadow-sm"
+                                                    title="Volume > strong_threshold in last 2y">Strong</div>
                                             </td>
-                                            <td class="px-4 py-2 text-right text-gray-400">60k <i
-                                                    class="fa-solid fa-arrow-right text-gray-300 mx-1"></i> <span
-                                                    class="text-orange-500 font-bold">25k</span></td>
+                                            <td class="p-1">
+                                                <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
+                                                    title="No production in last 2y">Gap</div>
+                                            </td>
+                                            <td class="p-1">
+                                                <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
+                                                    title="No production in last 2y">Gap</div>
+                                            </td>
+                                            <td class="p-1">
+                                                <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
+                                                    title="No production in last 2y">Gap</div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <div class="card-footer">Based on quarterly volume comparison</div>
+
                     </div>
+                </section>
+            </div>
+        </main>
 
-                    <!-- Widget 3C: Capacity Concentration -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-chart-pie text-blue-500"></i> 未来 90 天产能集中在谁身上？
-                            </h3>
-                        </div>
-                        <div class="p-4 flex flex-col justify-between h-full">
-                            <div class="h-32 relative">
-                                <canvas id="concentrationChart"></canvas>
-                            </div>
-                            <!-- Risk Warning -->
-                            <div class="mt-2 text-xs border-l-2 border-ora-danger pl-2 text-gray-600">
-                                <span class="font-bold text-ora-danger">High Risk:</span> 当前前三大客户占用排产产能约 72%，集中度偏高。
-                            </div>
-                        </div>
-                        <div class="card-footer">Based on scheduled units</div>
-                    </div>
+        <!-- LOGIC -->
+        <script>
+            // --- Global State ---
+            let currentFilter = null;
 
-                    <!-- Widget 3D: White Space Matrix (PRD 4.4) -->
-                    <div class="card lg:col-span-3">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-border-all text-teal-600"></i> P3-D. 剂型白地
-                                (White Space)</h3>
-                            <div class="flex items-center gap-2 text-xxs">
-                                <span class="w-3 h-3 bg-teal-600 rounded-sm"></span> 核心业务
-                                <span class="w-3 h-3 bg-teal-100 rounded-sm"></span> 偶尔生产
-                                <span class="w-3 h-3 border border-gray-300 border-dashed rounded-sm"></span>
-                                从未合作
-                            </div>
-                        </div>
-                        <div class="p-4 overflow-x-auto">
-                            <table class="w-full text-xs text-center border-collapse">
-                                <thead>
-                                    <tr>
-                                        <th class="px-3 py-2 text-left font-bold text-gray-600 bg-gray-50 w-40">品牌 / 剂型
-                                        </th>
-                                        <th class="px-1 py-2 font-medium text-gray-500 bg-gray-50">Gummies</th>
-                                        <th class="px-1 py-2 font-medium text-gray-500 bg-gray-50">Powder</th>
-                                        <th class="px-1 py-2 font-medium text-gray-500 bg-gray-50">Liquids</th>
-                                        <th class="px-1 py-2 font-medium text-gray-500 bg-gray-50">Capsules</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-600">
-                                    <tr class="border-b border-gray-50">
-                                        <td class="p-3 text-left font-bold">Little Umbrella</td>
-                                        <td class="p-1">
-                                            <div class="bg-teal-600 text-white py-2 rounded shadow-sm"
-                                                title="Volume > strong_threshold in last 2y">核心业务</div>
-                                        </td>
-                                        <td class="p-1">
-                                            <div class="bg-teal-100 text-teal-800 py-2 rounded"
-                                                title="Volume between 0 and threshold">偶尔生产</div>
-                                        </td>
-                                        <td class="p-1">
-                                            <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
-                                                title="No production in last 2y">
-                                                从未合作</div>
-                                        </td>
-                                        <td class="p-1">
-                                            <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
-                                                title="No production in last 2y">
-                                                从未合作</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-3 text-left font-bold">PowerGums</td>
-                                        <td class="p-1">
-                                            <div class="bg-teal-600 text-white py-2 rounded shadow-sm"
-                                                title="Volume > strong_threshold in last 2y">Strong</div>
-                                        </td>
-                                        <td class="p-1">
-                                            <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
-                                                title="No production in last 2y">Gap</div>
-                                        </td>
-                                        <td class="p-1">
-                                            <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
-                                                title="No production in last 2y">Gap</div>
-                                        </td>
-                                        <td class="p-1">
-                                            <div class="border border-dashed border-gray-300 text-gray-300 py-2 rounded hover:bg-gray-50 cursor-pointer"
-                                                title="No production in last 2y">Gap</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            // --- Widget P1-A: KPI Filter Logic ---
+            function toggleKpiFilterP1(cardId, filterType) {
+                const card = document.getElementById(cardId);
+                const allCards = document.querySelectorAll('.kpi-card');
 
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- LOGIC -->
-    <script>
-        // --- Global State ---
-        let currentFilter = null;
-
-        // --- Widget P1-A: KPI Filter Logic ---
-        function toggleKpiFilterP1(cardId, filterType) {
-            const card = document.getElementById(cardId);
-            const allCards = document.querySelectorAll('.kpi-card');
-
-            // Toggle Active State
-            if (currentFilter === cardId) {
-                card.classList.remove('active-filter');
-                currentFilter = null;
-                // Reset P1-B to All
-                filterP1B('all');
-                return;
-            }
-
-            allCards.forEach(c => c.classList.remove('active-filter'));
-            card.classList.add('active-filter');
-            currentFilter = cardId;
-
-            // Handle Filter Actions
-            if (filterType === 'data_issue') {
-                // Scroll to P1-D
-                const p1d = document.getElementById('widget-p1d');
-                p1d.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                p1d.classList.add('target-highlight');
-                setTimeout(() => p1d.classList.remove('target-highlight'), 2000);
-                // Show all bad records
-                filterDataQuality('bad');
-            } else {
-                // Scroll to P1-B
-                const p1b = document.getElementById('widget-p1b');
-                p1b.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                p1b.classList.add('target-highlight');
-                setTimeout(() => p1b.classList.remove('target-highlight'), 2000);
-
-                // Apply Filter to P1-B
-                if (filterType === 'leadtime') {
-                    filterP1B('delay');
-                } else if (filterType === 'money') {
-                    filterP1B('blocker'); // For demo, we just show blockers. In real app, filter by reason=money
-                } else if (filterType === 'materials') {
-                    filterP1B('blocker');
+                // Toggle Active State
+                if (currentFilter === cardId) {
+                    card.classList.remove('active-filter');
+                    currentFilter = null;
+                    // Reset P1-B to All
+                    filterP1B('all');
+                    return;
                 }
-            }
-        }
 
-        // --- Widget P1-B: Internal Filter ---
-        function filterP1B(filterType) {
-            // Update Buttons
-            ['all', 'blocker', 'delay'].forEach(t => {
-                const btn = document.getElementById(`btn-p1b-${t}`);
-                if (t === filterType) {
-                    btn.classList.remove('tab-inactive');
-                    btn.classList.add('tab-active');
+                allCards.forEach(c => c.classList.remove('active-filter'));
+                card.classList.add('active-filter');
+                currentFilter = cardId;
+
+                // Handle Filter Actions
+                if (filterType === 'data_issue') {
+                    // Scroll to P1-D
+                    const p1d = document.getElementById('widget-p1d');
+                    p1d.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    p1d.classList.add('target-highlight');
+                    setTimeout(() => p1d.classList.remove('target-highlight'), 2000);
+                    // Show all bad records
+                    filterDataQuality('bad');
                 } else {
-                    btn.classList.remove('tab-active');
-                    btn.classList.add('tab-inactive');
+                    // Scroll to P1-B
+                    const p1b = document.getElementById('widget-p1b');
+                    p1b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    p1b.classList.add('target-highlight');
+                    setTimeout(() => p1b.classList.remove('target-highlight'), 2000);
+
+                    // Apply Filter to P1-B
+                    if (filterType === 'leadtime') {
+                        filterP1B('delay');
+                    } else if (filterType === 'money') {
+                        filterP1B('blocker'); // For demo, we just show blockers. In real app, filter by reason=money
+                    } else if (filterType === 'materials') {
+                        filterP1B('blocker');
+                    }
                 }
-            });
-
-            // Filter Rows
-            const rows = document.querySelectorAll('#p1b-tbody tr');
-            rows.forEach(row => {
-                if (filterType === 'all') {
-                    row.classList.remove('hidden');
-                } else if (filterType === 'blocker') {
-                    if (row.classList.contains('row-blocker')) row.classList.remove('hidden');
-                    else row.classList.add('hidden');
-                } else if (filterType === 'delay') {
-                    if (row.classList.contains('row-delay')) row.classList.remove('hidden');
-                    else row.classList.add('hidden');
-                }
-            });
-        }
-
-        // --- View Switching (List vs Graph) ---
-        function switchView(widgetId, viewType) {
-            const btnList = document.getElementById(`btn-${widgetId}-view-list`);
-            const btnGraph = document.getElementById(`btn-${widgetId}-view-graph`);
-            const viewList = document.getElementById(`${widgetId}-view-list`);
-            const viewGraph = document.getElementById(`${widgetId}-view-graph`);
-
-            if (viewType === 'list') {
-                btnList.className = 'px-2 py-0.5 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200';
-                btnGraph.className = 'px-2 py-0.5 text-xs rounded text-gray-500 hover:text-gray-800';
-                viewList.classList.remove('hidden');
-                viewGraph.classList.add('hidden');
-            } else {
-                btnList.className = 'px-2 py-0.5 text-xs rounded text-gray-500 hover:text-gray-800';
-                btnGraph.className = 'px-2 py-0.5 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200';
-                viewList.classList.add('hidden');
-                viewGraph.classList.remove('hidden');
-            }
-        }
-
-        // --- Widget P1-D: Data Quality Filter ---
-        function filterDataQuality(type) {
-            const tbody = document.getElementById('p1d-tbody');
-            const rows = tbody.querySelectorAll('tr');
-            const emptyState = document.getElementById('p1d-empty-state');
-            const filterLabel = document.getElementById('p1d-current-filter');
-            const tableContainer = tbody.parentElement; // table element
-
-            // Reset View
-            tableContainer.classList.remove('hidden');
-            emptyState.classList.add('hidden');
-
-            // Update Label
-            const labelMap = {
-                'good': '记录完整 · 无需补充',
-                'bad': '所有问题 (All Issues)',
-                'date': '缺少发货日期',
-                'qty': '数量不一致',
-                'logic': '时间顺序异常',
-                'other': '其他字段缺失'
-            };
-            filterLabel.textContent = `当前筛选: ${labelMap[type] || type}`;
-
-            if (type === 'good') {
-                tableContainer.classList.add('hidden');
-                emptyState.classList.remove('hidden');
-                return;
             }
 
-            // Filter Rows
-            let visibleCount = 0;
-            rows.forEach(row => {
-                if (type === 'bad') {
-                    row.classList.remove('hidden');
-                    visibleCount++;
+            // --- Widget P1-B: Internal Filter ---
+            function filterP1B(filterType) {
+                // Update Buttons
+                ['all', 'blocker', 'delay'].forEach(t => {
+                    const btn = document.getElementById(`btn-p1b-${t}`);
+                    if (t === filterType) {
+                        btn.classList.remove('tab-inactive');
+                        btn.classList.add('tab-active');
+                    } else {
+                        btn.classList.remove('tab-active');
+                        btn.classList.add('tab-inactive');
+                    }
+                });
+
+                // Filter Rows
+                const rows = document.querySelectorAll('#p1b-tbody tr');
+                rows.forEach(row => {
+                    if (filterType === 'all') {
+                        row.classList.remove('hidden');
+                    } else if (filterType === 'blocker') {
+                        if (row.classList.contains('row-blocker')) row.classList.remove('hidden');
+                        else row.classList.add('hidden');
+                    } else if (filterType === 'delay') {
+                        if (row.classList.contains('row-delay')) row.classList.remove('hidden');
+                        else row.classList.add('hidden');
+                    }
+                });
+            }
+
+            // --- View Switching (List vs Graph) ---
+            function switchView(widgetId, viewType) {
+                const btnList = document.getElementById(`btn-${widgetId}-view-list`);
+                const btnGraph = document.getElementById(`btn-${widgetId}-view-graph`);
+                const viewList = document.getElementById(`${widgetId}-view-list`);
+                const viewGraph = document.getElementById(`${widgetId}-view-graph`);
+
+                if (viewType === 'list') {
+                    btnList.className = 'px-2 py-0.5 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200';
+                    btnGraph.className = 'px-2 py-0.5 text-xs rounded text-gray-500 hover:text-gray-800';
+                    viewList.classList.remove('hidden');
+                    viewGraph.classList.add('hidden');
                 } else {
-                    if (row.classList.contains(`row-issue-${type}`)) {
+                    btnList.className = 'px-2 py-0.5 text-xs rounded text-gray-500 hover:text-gray-800';
+                    btnGraph.className = 'px-2 py-0.5 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200';
+                    viewList.classList.add('hidden');
+                    viewGraph.classList.remove('hidden');
+                }
+            }
+
+            // --- Widget P1-D: Data Quality Filter ---
+            function filterDataQuality(type) {
+                const tbody = document.getElementById('p1d-tbody');
+                const rows = tbody.querySelectorAll('tr');
+                const emptyState = document.getElementById('p1d-empty-state');
+                const filterLabel = document.getElementById('p1d-current-filter');
+                const tableContainer = tbody.parentElement; // table element
+
+                // Reset View
+                tableContainer.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+
+                // Update Label
+                const labelMap = {
+                    'good': '记录完整 · 无需补充',
+                    'bad': '所有问题 (All Issues)',
+                    'date': '缺少发货日期',
+                    'qty': '数量不一致',
+                    'logic': '时间顺序异常',
+                    'other': '其他字段缺失'
+                };
+                filterLabel.textContent = `当前筛选: ${labelMap[type] || type}`;
+
+                if (type === 'good') {
+                    tableContainer.classList.add('hidden');
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+
+                // Filter Rows
+                let visibleCount = 0;
+                rows.forEach(row => {
+                    if (type === 'bad') {
                         row.classList.remove('hidden');
                         visibleCount++;
                     } else {
-                        row.classList.add('hidden');
+                        if (row.classList.contains(`row-issue-${type}`)) {
+                            row.classList.remove('hidden');
+                            visibleCount++;
+                        } else {
+                            row.classList.add('hidden');
+                        }
                     }
-                }
-            });
-        }
-
-        // --- Widget P1-C: Zombie View Logic ---
-        function toggleZombieView(view) {
-            const btnC = document.getElementById('btn-zombie-contracts');
-            const btnI = document.getElementById('btn-zombie-inventory');
-            const viewC = document.getElementById('view-zombie-contracts');
-            const viewI = document.getElementById('view-zombie-inventory');
-
-            if (view === 'contracts') {
-                btnC.className = 'px-3 py-1 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200';
-                btnI.className = 'px-3 py-1 text-xs rounded text-gray-500 hover:text-gray-800';
-                viewC.classList.remove('hidden');
-                viewI.classList.add('hidden');
-            } else {
-                btnC.className = 'px-3 py-1 text-xs rounded text-gray-500 hover:text-gray-800';
-                btnI.className = 'px-3 py-1 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200';
-                viewC.classList.add('hidden');
-                viewI.classList.remove('hidden');
+                });
             }
-        }
 
-        // --- Charts Initialization ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Register DataLabels plugin globally
-            Chart.register(ChartDataLabels);
-            Chart.defaults.set('plugins.datalabels', {
-                color: '#fff',
-                font: { weight: 'bold', size: 10 },
-                display: 'auto' // Only show if fits
-            });
-            Chart.defaults.font.family = "Inter, system-ui, sans-serif";
+            // --- Widget P1-C: Zombie View Logic ---
+            function toggleZombieView(view) {
+                const btnC = document.getElementById('btn-zombie-contracts');
+                const btnI = document.getElementById('btn-zombie-inventory');
+                const viewC = document.getElementById('view-zombie-contracts');
+                const viewI = document.getElementById('view-zombie-inventory');
 
-            // 1E: Data Quality Donut (Good vs Bad)
-            new Chart(document.getElementById('dataQualityGoodBad'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['完整 (Good)', '缺失 (Bad)'],
-                    datasets: [{
-                        data: [185, 15],
-                        backgroundColor: ['#2A9D8F', '#E76F51'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '60%',
-                    onClick: (e, activeElements) => {
-                        if (activeElements.length > 0) {
-                            const index = activeElements[0].index;
-                            const type = index === 0 ? 'good' : 'bad';
-                            filterDataQuality(type);
-                        }
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: false },
-                        datalabels: { display: false }
-                    }
+                if (view === 'contracts') {
+                    btnC.className = 'px-3 py-1 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200';
+                    btnI.className = 'px-3 py-1 text-xs rounded text-gray-500 hover:text-gray-800';
+                    viewC.classList.remove('hidden');
+                    viewI.classList.add('hidden');
+                } else {
+                    btnC.className = 'px-3 py-1 text-xs rounded text-gray-500 hover:text-gray-800';
+                    btnI.className = 'px-3 py-1 text-xs rounded bg-white shadow-sm font-bold text-gray-800 border border-gray-200';
+                    viewC.classList.add('hidden');
+                    viewI.classList.remove('hidden');
                 }
-            });
+            }
 
-            // 1E: Data Quality Donut (Issue Type)
-            // 1E: Data Quality Donut (Issue Type)
-            new Chart(document.getElementById('dataQualityChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['缺少发货日期', '数量不一致', '时间顺序异常', '其他字段缺失'],
-                    datasets: [{
-                        data: [12, 3, 1, 1],
-                        backgroundColor: ['#E76F51', '#F4A261', '#E9C46A', '#264653'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '50%',
-                    layout: {
-                        padding: 20 // Ensure space for outside labels
+            // --- Charts Initialization ---
+            document.addEventListener('DOMContentLoaded', () => {
+                // Register DataLabels plugin globally
+                Chart.register(ChartDataLabels);
+                Chart.defaults.set('plugins.datalabels', {
+                    color: '#fff',
+                    font: { weight: 'bold', size: 10 },
+                    display: 'auto' // Only show if fits
+                });
+                Chart.defaults.font.family = "Inter, system-ui, sans-serif";
+
+                // 1E: Data Quality Donut (Good vs Bad)
+                new Chart(document.getElementById('dataQualityGoodBad'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['完整 (Good)', '缺失 (Bad)'],
+                        datasets: [{
+                            data: [185, 15],
+                            backgroundColor: ['#2A9D8F', '#E76F51'],
+                            borderWidth: 0
+                        }]
                     },
-                    onClick: (e, activeElements) => {
-                        if (activeElements.length > 0) {
-                            const index = activeElements[0].index;
-                            const types = ['date', 'qty', 'logic', 'other'];
-                            filterDataQuality(types[index]);
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        onClick: (e, activeElements) => {
+                            if (activeElements.length > 0) {
+                                const index = activeElements[0].index;
+                                const type = index === 0 ? 'good' : 'bad';
+                                filterDataQuality(type);
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false },
+                            datalabels: { display: false }
                         }
+                    }
+                });
+
+                // 1E: Data Quality Donut (Issue Type)
+                // 1E: Data Quality Donut (Issue Type)
+                new Chart(document.getElementById('dataQualityChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['缺少发货日期', '数量不一致', '时间顺序异常', '其他字段缺失'],
+                        datasets: [{
+                            data: [12, 3, 1, 1],
+                            backgroundColor: ['#E76F51', '#F4A261', '#E9C46A', '#264653'],
+                            borderWidth: 0
+                        }]
                     },
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: {
-                            display: true,
-                            color: '#666',
-                            anchor: 'end',
-                            align: 'end',
-                            offset: 10,
-                            font: { size: 10, weight: 'normal' },
-                            formatter: (value, ctx) => {
-                                return ctx.chart.data.labels[ctx.dataIndex];
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '50%',
+                        layout: {
+                            padding: 20 // Ensure space for outside labels
+                        },
+                        onClick: (e, activeElements) => {
+                            if (activeElements.length > 0) {
+                                const index = activeElements[0].index;
+                                const types = ['date', 'qty', 'logic', 'other'];
+                                filterDataQuality(types[index]);
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            datalabels: {
+                                display: true,
+                                color: '#666',
+                                anchor: 'end',
+                                align: 'end',
+                                offset: 10,
+                                font: { size: 10, weight: 'normal' },
+                                formatter: (value, ctx) => {
+                                    return ctx.chart.data.labels[ctx.dataIndex];
+                                }
                             }
                         }
-                    }
-                },
-                plugins: [{
-                    id: 'outsideLine',
-                    afterDraw: (chart) => {
-                        const { ctx, chartArea: { width, height } } = chart;
-                        ctx.save();
+                    },
+                    plugins: [{
+                        id: 'outsideLine',
+                        afterDraw: (chart) => {
+                            const { ctx, chartArea: { width, height } } = chart;
+                            ctx.save();
 
-                        chart.data.datasets.forEach((dataset, i) => {
-                            const meta = chart.getDatasetMeta(i);
-                            meta.data.forEach((element, index) => {
-                                // Only draw if visible
-                                if (!element.hidden) {
-                                    const { x, y } = element.tooltipPosition();
-                                    const center = element.getCenterPoint();
+                            chart.data.datasets.forEach((dataset, i) => {
+                                const meta = chart.getDatasetMeta(i);
+                                meta.data.forEach((element, index) => {
+                                    // Only draw if visible
+                                    if (!element.hidden) {
+                                        const { x, y } = element.tooltipPosition();
+                                        const center = element.getCenterPoint();
 
-                                    // Calculate outer point (approximate based on radius)
-                                    // We can use the tooltip position as a start, and draw to the label position
-                                    // But we don't know exact label position easily.
-                                    // Let's draw a line from the outer arc to a fixed offset.
+                                        // Calculate outer point (approximate based on radius)
+                                        // We can use the tooltip position as a start, and draw to the label position
+                                        // But we don't know exact label position easily.
+                                        // Let's draw a line from the outer arc to a fixed offset.
 
-                                    const angle = element.startAngle + (element.endAngle - element.startAngle) / 2;
-                                    const outerRadius = element.outerRadius;
-                                    const lineLength = 10;
+                                        const angle = element.startAngle + (element.endAngle - element.startAngle) / 2;
+                                        const outerRadius = element.outerRadius;
+                                        const lineLength = 10;
 
-                                    const startX = center.x + Math.cos(angle) * outerRadius;
-                                    const startY = center.y + Math.sin(angle) * outerRadius;
+                                        const startX = center.x + Math.cos(angle) * outerRadius;
+                                        const startY = center.y + Math.sin(angle) * outerRadius;
 
-                                    const endX = center.x + Math.cos(angle) * (outerRadius + lineLength);
-                                    const endY = center.y + Math.sin(angle) * (outerRadius + lineLength);
+                                        const endX = center.x + Math.cos(angle) * (outerRadius + lineLength);
+                                        const endY = center.y + Math.sin(angle) * (outerRadius + lineLength);
 
-                                    ctx.beginPath();
-                                    ctx.moveTo(startX, startY);
-                                    ctx.lineTo(endX, endY);
-                                    ctx.strokeStyle = '#999';
-                                    ctx.lineWidth = 1;
-                                    ctx.stroke();
-                                }
+                                        ctx.beginPath();
+                                        ctx.moveTo(startX, startY);
+                                        ctx.lineTo(endX, endY);
+                                        ctx.strokeStyle = '#999';
+                                        ctx.lineWidth = 1;
+                                        ctx.stroke();
+                                    }
+                                });
                             });
-                        });
-                        ctx.restore();
-                    }
-                }]
-            });
-
-            // 3A: Client Risk Bar
-            new Chart(document.getElementById('clientRiskChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Vitality', 'Muscle'],
-                    datasets: [
-                        { label: '上季度 (Prev Q)', data: [60, 60], backgroundColor: '#E5E7EB', barPercentage: 0.6, datalabels: { color: '#666', anchor: 'end', align: 'top' } },
-                        { label: '本季度 (Curr Q)', data: [5, 25], backgroundColor: ['#E76F51', '#F4A261'], barPercentage: 0.6, datalabels: { color: '#666', anchor: 'end', align: 'top' } }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
-                        tooltip: {
-                            callbacks: {
-                                afterBody: function (context) {
-                                    const idx = context[0].dataIndex;
-                                    const risk = idx === 0 ? 'Dormant (休眠)' : 'Cooling (降温)';
-                                    return `Risk: ${risk}\nPrev: 60k / 3 Contracts\nCurr: ${context[0].raw}k / 1 Contract`;
-                                }
-                            }
-                        },
-                        datalabels: { display: true }
-                    },
-                    scales: { y: { display: false, max: 80 }, x: { grid: { display: false } } }
-                }
-            });
-
-            // 3C: Capacity Bar
-            new Chart(document.getElementById('concentrationChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Little Umbrella', 'PowerGums', '其他 (Others)'],
-                    datasets: [{
-                        data: [42, 30, 28],
-                        backgroundColor: ['#2A9D8F', '#264653', '#E5E7EB'],
-                        borderRadius: 4,
-                        barPercentage: 0.5
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: { x: { display: false }, y: { grid: { display: false } } },
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: {
-                            anchor: 'end',
-                            align: 'end',
-                            color: '#666',
-                            formatter: (value) => value + '%'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    return `${context.raw}% 份额 (${context.raw * 1000} Units)`;
-                                }
-                            }
+                            ctx.restore();
                         }
-                    }
-                }
-            });
-
-            // P1: Waterfall (Simulated with Floating Bars)
-            new Chart(document.getElementById('p1WaterfallChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['款项到位', '物料就绪', '等待排产', '生产制造', '发货'],
-                    datasets: [{
-                        label: '阶段耗时',
-                        data: [
-                            [0, 5],    // Stage 1: 0-5
-                            [5, 15],   // Stage 2: 5-15 (10d)
-                            [15, 20],  // Stage 3: 15-20 (5d)
-                            [20, 35],  // Stage 4: 20-35 (15d)
-                            [35, 42]   // Stage 5: 35-42 (7d)
-                        ],
-                        backgroundColor: [
-                            '#2A9D8F', '#2A9D8F', '#E9C46A', '#264653', '#2A9D8F'
-                        ],
-                        borderRadius: 4,
-                        barPercentage: 0.6
                     }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: {
-                            formatter: (value) => (value[1] - value[0]) + '天',
-                            color: '#fff',
-                            font: { weight: 'bold' }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    const v = context.raw;
-                                    return `耗时: ${v[1] - v[0]} 天`;
+                });
+
+                // 3A: Client Risk Bar
+                new Chart(document.getElementById('clientRiskChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Vitality', 'Muscle'],
+                        datasets: [
+                            { label: '上季度 (Prev Q)', data: [60, 60], backgroundColor: '#E5E7EB', barPercentage: 0.6, datalabels: { color: '#666', anchor: 'end', align: 'top' } },
+                            { label: '本季度 (Curr Q)', data: [5, 25], backgroundColor: ['#E76F51', '#F4A261'], barPercentage: 0.6, datalabels: { color: '#666', anchor: 'end', align: 'top' } }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+                            tooltip: {
+                                callbacks: {
+                                    afterBody: function (context) {
+                                        const idx = context[0].dataIndex;
+                                        const risk = idx === 0 ? 'Dormant (休眠)' : 'Cooling (降温)';
+                                        return `Risk: ${risk}\nPrev: 60k / 3 Contracts\nCurr: ${context[0].raw}k / 1 Contract`;
+                                    }
                                 }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: { beginAtZero: true, title: { display: true, text: '累计天数 (Cumulative Days)' } }
+                            },
+                            datalabels: { display: true }
+                        },
+                        scales: { y: { display: false, max: 80 }, x: { grid: { display: false } } }
                     }
-                }
-            });
+                });
 
-            // P2: Breach Rate
-            new Chart(document.getElementById('p2BreachChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['S1 款项', 'S2 物料', 'S3 等待', 'S4 生产', 'S5 发货'],
-                    datasets: [{
-                        label: '超时比例 (Breach %)',
-                        data: [10, 68, 20, 45, 5],
-                        backgroundColor: [
-                            '#2A9D8F', // <20%
-                            '#E76F51', // >50% (Red)
-                            '#E9C46A', // 20-50% (Orange)
-                            '#E9C46A',
-                            '#2A9D8F'
-                        ],
-                        borderRadius: 4,
-                        barPercentage: 0.6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: {
-                            formatter: (value) => value + '%',
-                            anchor: 'end',
-                            align: 'top',
-                            color: '#666'
-                        }
-                    },
-                    scales: { y: { beginAtZero: true, max: 100 } }
-                }
-            });
-
-            // P3: Plan Adherence (Mixed)
-            new Chart(document.getElementById('p3AdherenceChart'), {
-                data: {
-                    labels: ['软糖 (Gummies)', '粉剂 (Powder)', '液体 (Liquids)', '胶囊 (Capsules)'],
-                    datasets: [
-                        {
-                            type: 'bar',
-                            label: '按时交付率 (Adherence %)',
-                            data: [95, 82, 60, 88],
-                            backgroundColor: '#264653',
-                            yAxisID: 'y',
-                            barPercentage: 0.5,
+                // 3C: Capacity Bar
+                new Chart(document.getElementById('concentrationChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Little Umbrella', 'PowerGums', '其他 (Others)'],
+                        datasets: [{
+                            data: [42, 30, 28],
+                            backgroundColor: ['#2A9D8F', '#264653', '#E5E7EB'],
                             borderRadius: 4,
+                            barPercentage: 0.5
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { x: { display: false }, y: { grid: { display: false } } },
+                        plugins: {
+                            legend: { display: false },
                             datalabels: {
-                                color: '#fff',
+                                anchor: 'end',
+                                align: 'end',
+                                color: '#666',
                                 formatter: (value) => value + '%'
-                            }
-                        },
-                        {
-                            type: 'line',
-                            label: '平均延迟 (Avg Delay Days)',
-                            data: [1, 4, 12, 2],
-                            borderColor: '#E76F51',
-                            borderWidth: 2,
-                            yAxisID: 'y1',
-                            tension: 0.4,
-                            datalabels: {
-                                align: 'top',
-                                color: '#E76F51',
-                                formatter: (value) => value + 'd'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return `${context.raw}% 份额 (${context.raw * 1000} Units)`;
+                                    }
+                                }
                             }
                         }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
-                    },
-                    scales: {
-                        y: { beginAtZero: true, max: 100, position: 'left', title: { display: true, text: '交付率 (%)' } },
-                        y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: '延迟天数 (Days)' } }
                     }
-                }
-            });
+                });
 
-            // P4: Material Readiness
-            new Chart(document.getElementById('p4MaterialChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['就绪/安全', '等待中', '高风险'],
-                    datasets: [{
-                        data: [85, 10, 5],
-                        backgroundColor: ['#2A9D8F', '#E9C46A', '#E76F51'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '75%',
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: { display: false }
-                    }
-                }
-            });
-
-            // G1: Factory Growth (Mixed: Bar + Line)
-            new Chart(document.getElementById('g1GrowthChart'), {
-                data: {
-                    labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024 (Est)'],
-                    datasets: [
-                        {
-                            type: 'bar',
-                            label: '季度出货量 (Units)',
-                            data: [800000, 950000, 1050000, 1200000],
-                            backgroundColor: 'rgba(42, 157, 143, 0.6)',
-                            yAxisID: 'y',
-                            barPercentage: 0.5,
+                // P1: Waterfall (Simulated with Floating Bars)
+                new Chart(document.getElementById('p1WaterfallChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['款项到位', '物料就绪', '等待排产', '生产制造', '发货'],
+                        datasets: [{
+                            label: '阶段耗时',
+                            data: [
+                                [0, 5],    // Stage 1: 0-5
+                                [5, 15],   // Stage 2: 5-15 (10d)
+                                [15, 20],  // Stage 3: 15-20 (5d)
+                                [20, 35],  // Stage 4: 20-35 (15d)
+                                [35, 42]   // Stage 5: 35-42 (7d)
+                            ],
+                            backgroundColor: [
+                                '#2A9D8F', '#2A9D8F', '#E9C46A', '#264653', '#2A9D8F'
+                            ],
                             borderRadius: 4,
+                            barPercentage: 0.6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
                             datalabels: {
+                                formatter: (value) => (value[1] - value[0]) + '天',
                                 color: '#fff',
-                                formatter: (value) => (value / 10000) + '万'
+                                font: { weight: 'bold' }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const v = context.raw;
+                                        return `耗时: ${v[1] - v[0]} 天`;
+                                    }
+                                }
                             }
                         },
-                        {
-                            type: 'line',
-                            label: '平均交付周期 (Days)',
-                            data: [48, 46, 45, 42],
-                            borderColor: '#264653',
-                            borderWidth: 2,
-                            yAxisID: 'y1',
-                            tension: 0.4,
-                            datalabels: {
-                                align: 'top',
-                                color: '#264653',
-                                formatter: (value) => value + 'd'
-                            }
+                        scales: {
+                            y: { beginAtZero: true, title: { display: true, text: '累计天数 (Cumulative Days)' } }
                         }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
-                    },
-                    scales: {
-                        y: { beginAtZero: true, position: 'left', title: { display: true, text: '出货量 (Units)' } },
-                        y1: { beginAtZero: false, min: 30, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: '周期 (Days)' } }
                     }
-                }
+                });
+
+                // P2: Breach Rate
+                new Chart(document.getElementById('p2BreachChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['S1 款项', 'S2 物料', 'S3 等待', 'S4 生产', 'S5 发货'],
+                        datasets: [{
+                            label: '超时比例 (Breach %)',
+                            data: [10, 68, 20, 45, 5],
+                            backgroundColor: [
+                                '#2A9D8F', // <20%
+                                '#E76F51', // >50% (Red)
+                                '#E9C46A', // 20-50% (Orange)
+                                '#E9C46A',
+                                '#2A9D8F'
+                            ],
+                            borderRadius: 4,
+                            barPercentage: 0.6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            datalabels: {
+                                formatter: (value) => value + '%',
+                                anchor: 'end',
+                                align: 'top',
+                                color: '#666'
+                            }
+                        },
+                        scales: { y: { beginAtZero: true, max: 100 } }
+                    }
+                });
+
+                // P3: Plan Adherence (Mixed)
+                new Chart(document.getElementById('p3AdherenceChart'), {
+                    data: {
+                        labels: ['软糖 (Gummies)', '粉剂 (Powder)', '液体 (Liquids)', '胶囊 (Capsules)'],
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: '按时交付率 (Adherence %)',
+                                data: [95, 82, 60, 88],
+                                backgroundColor: '#264653',
+                                yAxisID: 'y',
+                                barPercentage: 0.5,
+                                borderRadius: 4,
+                                datalabels: {
+                                    color: '#fff',
+                                    formatter: (value) => value + '%'
+                                }
+                            },
+                            {
+                                type: 'line',
+                                label: '平均延迟 (Avg Delay Days)',
+                                data: [1, 4, 12, 2],
+                                borderColor: '#E76F51',
+                                borderWidth: 2,
+                                yAxisID: 'y1',
+                                tension: 0.4,
+                                datalabels: {
+                                    align: 'top',
+                                    color: '#E76F51',
+                                    formatter: (value) => value + 'd'
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+                        },
+                        scales: {
+                            y: { beginAtZero: true, max: 100, position: 'left', title: { display: true, text: '交付率 (%)' } },
+                            y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: '延迟天数 (Days)' } }
+                        }
+                    }
+                });
+
+                // P4: Material Readiness
+                new Chart(document.getElementById('p4MaterialChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['就绪/安全', '等待中', '高风险'],
+                        datasets: [{
+                            data: [85, 10, 5],
+                            backgroundColor: ['#2A9D8F', '#E9C46A', '#E76F51'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '75%',
+                        plugins: {
+                            legend: { display: false },
+                            datalabels: { display: false }
+                        }
+                    }
+                });
+
+                // G1: Factory Growth (Mixed: Bar + Line)
+                new Chart(document.getElementById('g1GrowthChart'), {
+                    data: {
+                        labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024 (Est)'],
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: '季度出货量 (Units)',
+                                data: [800000, 950000, 1050000, 1200000],
+                                backgroundColor: 'rgba(42, 157, 143, 0.6)',
+                                yAxisID: 'y',
+                                barPercentage: 0.5,
+                                borderRadius: 4,
+                                datalabels: {
+                                    color: '#fff',
+                                    formatter: (value) => (value / 10000) + '万'
+                                }
+                            },
+                            {
+                                type: 'line',
+                                label: '平均交付周期 (Days)',
+                                data: [48, 46, 45, 42],
+                                borderColor: '#264653',
+                                borderWidth: 2,
+                                yAxisID: 'y1',
+                                tension: 0.4,
+                                datalabels: {
+                                    align: 'top',
+                                    color: '#264653',
+                                    formatter: (value) => value + 'd'
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+                        },
+                        scales: {
+                            y: { beginAtZero: true, position: 'left', title: { display: true, text: '出货量 (Units)' } },
+                            y1: { beginAtZero: false, min: 30, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: '周期 (Days)' } }
+                        }
+                    }
+                });
             });
-        });
-    </script>
+        </script>
 </body>
 
 </html>
