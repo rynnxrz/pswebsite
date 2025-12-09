@@ -22,11 +22,11 @@
             "copied": "Successfully copied to clipboard"
         },
         "intro": {
-            "title": "Intro",
+            "title": "INTRO",
             "content": "The project is defined as ORA Web, a small-scale software system for a contract manufacturing company, focusing on integrating contract production data management and efficiency."
         },
         "team": {
-            "title": "Team & My Role",
+            "title": "TEAM & MY ROLE",
             "client": "Client",
             "clientDesc": "Ora Nutrition Ltd (contract-manufacturing factory).",
             "clientPoints": [
@@ -86,48 +86,35 @@
         },
         "choices": {
             "title": "Key Design Choices",
-            "subtitle": "Workflow & Interaction",
-            "section1": {
-                "title": "Turning scattered files into a single, navigable workflow",
-                "content": "In the previous setup, staff had to jump between multiple Excel files and tabs to find the right contract or understand its latest status. Based on those interviews, I reframed the UI around a single contract workspace with:",
-                "list": [
-                    "A sidebar listing contracts as the main entry point.",
-                    "Status filters (e.g. To be entered, Entered, Pending payment) to quickly narrow down what needs attention."
-                ],
-                "content2": "This directly answered a core pain point: too much time was spent just finding the right file. By integrating navigation and status filtering in one place, the system turns a fragmented experience into a clear, linear workflow where users can:",
-                "steps": [
-                    "Locate the contract.",
-                    "See its current stage.",
-                    "Take the next action without switching documents."
-                ]
-            },
-            "section2": {
-                "title": "Designing import & manual input for today, while preparing for tomorrow",
-                "content": "Many key fields in the current operation—such as signing date, deposit date, packaging material storage and production-related data—still rely on manual input. Instead of ignoring this reality, I designed a set of structured dialogs for entering contract, product and financial details.",
-                "content2": "On top of this, I introduced an <strong>Auto-Contract Import</strong> flow that allows users to pull base information from existing contract files, and then complete or correct the details in the dialogs. This strikes a balance:",
-                "list": [
-                    "<strong>Immediate value:</strong> Reduced repetitive typing and fewer copy–paste errors for contracts that already exist in file form.",
-                    "<strong>Future readiness:</strong> The dialog structure is intentionally designed so that, later on, we can plug in Excel/PDF parsing and compare “manual vs. automated” data in the same UI without redesigning the entire flow."
-                ],
-                "content3": "In other words, the design accepts that today is still partially manual, but the workflow and information architecture are already shaped for a more automated future."
-            },
-            "section3": {
-                "title": "Unified Status Updates & `updateContractStatus` (Design #4 & Develop)",
-                "content": "One major operational pain point was that contract status lived in multiple places. When a contract stage changed, different sheets and views had to be manually updated, and they often fell out of sync.",
-                "content2": "In the new design, I simplified this into a single source of truth for status:",
-                "list": [
-                    "<strong>On the UI side:</strong> Users update the contract’s status once, from a unified control that is visible wherever the contract appears.",
-                    "<strong>On the engineering side:</strong> I collaborated with the developer to implement a shared `updateContractStatus` function that propagates this change across all relevant views and data tables."
-                ],
-                "content3": "By explicitly connecting the interaction pattern with the underlying function, I wanted to show that I understand not only what the UI should do, but also how it needs to behave technically for status to stay consistent across the system."
-            },
-            "summary": {
-                "title": "In short: these design choices focus on three things:",
-                "steps": [
-                    "Reduce document switching by integrating navigation and status.",
-                    "Respect the current manual reality while paving a clear path to automation.",
-                    "Ensure that a single status update reliably reflects everywhere in the system—demonstrating both workflow thinking and an ability to collaborate closely with engineering."
-                ]
+            "subtitle": "Connecting the Workflow",
+            "intro": "We mapped the end-to-end flow to make sure read/plan/input stay aligned across stages.",
+            "journeyMap": {
+                "stage1": {
+                    "title": "01. Pre-Contract",
+                    "pains": "Contracts stuck in Dropbox, detached from tracking.",
+                    "move": "Centralized intake.",
+                    "tags": [
+                        "input"
+                    ]
+                },
+                "stage2": {
+                    "title": "02. Preparation",
+                    "pains": "Formatting used as reminders instead of real fields.",
+                    "move": "Structured input + auto-import.",
+                    "tags": [
+                        "plan",
+                        "input"
+                    ]
+                },
+                "stage3": {
+                    "title": "03. Traceability",
+                    "pains": "Status drifts across teams.",
+                    "move": "Single source of truth.",
+                    "tags": [
+                        "read",
+                        "plan"
+                    ]
+                }
             }
         },
         "excellence": {
@@ -212,8 +199,8 @@
         "title": "Workload Analysis",
         "dataEntry": "Data Entry",
         "dataEntryDesc": "Pure data input (typing numbers/dates)",
-        "formatting": "Formatting & \"Hacking\"",
-        "formattingDesc": "User \"hacks\" (colors/borders) used as ad-hoc reminders",
+        "formatting": "Formatting",
+        "formattingDesc": "Users used colors/borders to mark progress, flag blockers, and create reminders",
         "clearDelete": "Clear / Delete",
         "clearDeleteDesc": "Correcting errors or resetting cells"
     }

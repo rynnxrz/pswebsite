@@ -23,24 +23,69 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
     const containerRef = useRef<HTMLDivElement>(null);
     const [isFullscreen, setIsFullscreen] = useState(false);
 
-    const toggleFullscreen = () => {
+    const toggleFullscreen = async () => {
         const element = containerRef.current;
         if (!element) return;
 
-        if (!document.fullscreenElement) {
-            element.requestFullscreen().catch((err) => console.error('Error attempting to enable fullscreen:', err));
-        } else {
-            document.exitFullscreen().catch((err) => console.error('Error attempting to exit fullscreen:', err));
+        try {
+            if (!isFullscreen) {
+                // Try native fullscreen first
+                if (element.requestFullscreen) {
+                    await element.requestFullscreen();
+                } else if ((element as any).webkitRequestFullscreen) {
+                    (element as any).webkitRequestFullscreen();
+                } else {
+                    // Fallback for iOS Safari which often doesn't support fullscreen API on divs
+                    setIsFullscreen(true);
+                }
+            } else {
+                if (document.fullscreenElement) {
+                    await document.exitFullscreen();
+                } else if ((document as any).webkitExitFullscreen) {
+                    (document as any).webkitExitFullscreen();
+                }
+                // Always unset state
+                setIsFullscreen(false);
+            }
+        } catch (err) {
+            console.warn('Fullscreen API failed, falling back to CSS mode:', err);
+            // Fallback to CSS-only fullscreen
+            setIsFullscreen(!isFullscreen);
         }
     };
 
     useEffect(() => {
         const handleFullscreenChange = () => {
-            setIsFullscreen(!!document.fullscreenElement);
+            // Sync state with native fullscreen changes (e.g. user pressed Esc)
+            const isNativeFullscreen = document.fullscreenElement !== null || (document as any).webkitFullscreenElement !== null;
+            if (isNativeFullscreen) {
+                setIsFullscreen(true);
+            } else {
+                // Only reset if we were strictly in native mode? 
+                // Issue: if we are in CSS mode, this event won't fire.
+                // If we were in native mode and exited, this fires.
+                // We should accept the source of truth if native API is involved.
+                if (document.fullscreenElement === null) setIsFullscreen(false);
+            }
+        };
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                // If in CSS fallback mode, or just to be safe, turn off fullscreen state
+                // Native ESC already handled by browser + fullscreenchange, but this covers CSS mode
+                setIsFullscreen(false);
+            }
         };
 
         document.addEventListener('fullscreenchange', handleFullscreenChange);
-        return () => window.removeEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('fullscreenchange', handleFullscreenChange);
+            window.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+            window.removeEventListener('keydown', handleKeyDown);
+        };
     }, []);
 
     return (
