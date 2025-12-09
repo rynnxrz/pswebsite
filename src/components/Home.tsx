@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom'; // --- 1. 引入 Link 组件 ---
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { pageTransition } from '../utils/animations';
 import { ProjectCard } from './ProjectCard';
 import { useNotification } from './NotificationContext';
@@ -12,31 +13,29 @@ import './Home.css';
 
 const projectsData = [
   {
-    title: "Ora Web",
-    image: "/assets/images/ora-web-cover.png",
-    description: "We increased factory management efficiency by integrating contract and production data into a simple ERP tool.",
     id: "p",
+    image: "/assets/images/ora-web-cover.png",
     tags: ["UX Design", "End-to-end", "Data Integration"],
   },
   {
-    title: "Innerpeace",
-    image: "/assets/images/innerpeace-cover.png",
-    description: "We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale.",
     id: "one",
+    image: "/assets/images/innerpeace-cover.png",
     tags: ["UX Research", "Android App", "Scalable"],
   },
 ];
 
 
 export const Home = () => {
-
-
+  const { t } = useTranslation();
   const { showNotification } = useNotification();
   const navigate = useNavigate();
 
   const handleProjectClick = (id: string, title: string) => {
     if (id === 'one') {
-      showNotification('Vibe Coding in Progress 🚧', `${title} is currently being updated.`);
+      showNotification(
+        t('home.projects.notification.title'),
+        t('home.projects.notification.description', { title })
+      );
       return;
     }
     navigate(`/project/${id}`);
@@ -48,18 +47,18 @@ export const Home = () => {
         {/* --- Section 1: 个人介绍 --- */}
         <section className="intro-section">
           <div className="grid-col-left">
-            <h1 className="intro-name">rongze xu</h1>
-            <p className="intro-subtitle">product designer & developer</p>
+            <h1 className="intro-name">{t('home.intro.name')}</h1>
+            <p className="intro-subtitle">{t('home.intro.subtitle')}</p>
           </div>
           <div className="grid-col-right">
             <div className="intro-text">
               <p className="intro-statement">
-                rongze is an innovative product designer and developer based in london.
+                {t('home.intro.statement')}
               </p>
 
               {/* --- 2. 修改点: 将 a 标签替换为 Link 组件，并添加 SVG 图标 --- */}
               <Link to="/portfolio" className="portfolio-link">
-                <span>view portfolio</span>
+                <span>{t('home.intro.viewPortfolio')}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -98,28 +97,33 @@ export const Home = () => {
                 <path d="M3 9h18"></path>
                 <path d="M9 21V9"></path>
               </svg>
-              <h2 className="projects-heading">projects</h2>
+              <h2 className="projects-heading">{t('home.projects.heading')}</h2>
             </div>
           </div>
           <div className="grid-col-right">
             <div className="project-list">
 
-              {projectsData.map((project, index) => (
-                <Fragment key={project.title}>
-                  <div className="project-card-link" onClick={() => handleProjectClick(project.id, project.title)}>
-                    <ProjectCard
-                      title={project.title}
-                      image={project.image}
-                      description={project.description}
-                      tags={project.tags}
-                    />
-                  </div>
+              {projectsData.map((project, index) => {
+                const title = t(`home.projects.${project.id}.title`);
+                const description = t(`home.projects.${project.id}.description`);
 
-                  {index < projectsData.length - 1 && (
-                    <hr className="project-separator" />
-                  )}
-                </Fragment>
-              ))}
+                return (
+                  <Fragment key={project.id}>
+                    <div className="project-card-link" onClick={() => handleProjectClick(project.id, title)}>
+                      <ProjectCard
+                        title={title}
+                        image={project.image}
+                        description={description}
+                        tags={project.tags}
+                      />
+                    </div>
+
+                    {index < projectsData.length - 1 && (
+                      <hr className="project-separator" />
+                    )}
+                  </Fragment>
+                );
+              })}
 
             </div>
           </div>

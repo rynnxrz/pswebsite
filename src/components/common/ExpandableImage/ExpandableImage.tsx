@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Expand, Minimize2 } from 'lucide-react';
 import './ExpandableImage.css';
+import '../../Tooltip.css';
 
 interface ExpandableImageProps {
     src: string;
@@ -8,6 +9,7 @@ interface ExpandableImageProps {
     className?: string;
     containerClassName?: string;
     interactiveSrc?: string; // Optional URL for interactive content (iframe)
+    isNested?: boolean;
 }
 
 export const ExpandableImage: React.FC<ExpandableImageProps> = ({
@@ -15,7 +17,8 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
     alt,
     className = '',
     containerClassName = '',
-    interactiveSrc
+    interactiveSrc,
+    isNested = false // New prop to disable outer frame
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isFullscreen, setIsFullscreen] = useState(false);
@@ -43,7 +46,7 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
     return (
         <div
             ref={containerRef}
-            className={`section-image expanded-image-container ${containerClassName} ${isFullscreen ? 'fullscreen-mode' : ''}`}
+            className={`expanded-image-container ${!isNested ? 'section-image' : ''} ${containerClassName} ${isFullscreen ? 'fullscreen-mode' : ''}`}
         >
             {/* Main Content Area */}
             <div className="content-wrapper">
@@ -60,14 +63,19 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
             </div>
 
             <div className={`controls-overlay ${interactiveSrc ? 'visible' : ''}`}>
-                <button
-                    className="control-button"
-                    onClick={toggleFullscreen}
-                    title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
-                    aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
-                >
-                    {isFullscreen ? <Minimize2 size={20} /> : <Expand size={20} />}
-                </button>
+                <div className="tooltip-container">
+                    <button
+                        className="action-btn"
+                        onClick={toggleFullscreen}
+                        aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                        style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                    >
+                        {isFullscreen ? <Minimize2 size={20} /> : <Expand size={20} />}
+                    </button>
+                    <span className="tooltip-text">
+                        {isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                    </span>
+                </div>
             </div>
         </div>
     );

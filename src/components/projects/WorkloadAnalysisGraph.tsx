@@ -1,8 +1,12 @@
+// src/components/projects/WorkloadAnalysisGraph.tsx
+
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import './WorkloadAnalysisGraph.css';
 import { useOnScreen } from '../../hooks/useOnScreen';
 
 export const WorkloadAnalysisGraph = () => {
+    const { t } = useTranslation();
     const ref = useRef<HTMLDivElement>(null);
     // triggerOnce: false allows animation to replay every time it enters viewport
     const isVisible = useOnScreen(ref, '0px', 0.2, false);
@@ -12,7 +16,7 @@ export const WorkloadAnalysisGraph = () => {
 
     return (
         <div className={containerClass} ref={ref}>
-            <div className="workload-graph-title">Workload Analysis</div>
+            <div className="workload-graph-title">{t('workloadGraph.title')}</div>
 
             {/* 3. Animation: animate-grow-width handled in CSS */}
             <div className="bar-container">
@@ -42,9 +46,9 @@ export const WorkloadAnalysisGraph = () => {
                     <div className="legend-content">
                         <div className="legend-header">
                             <span className="legend-percentage text-emerald-400">54%</span>
-                            <span>Data Entry</span>
+                            <span>{t('workloadGraph.dataEntry')}</span>
                         </div>
-                        <span className="legend-desc">Pure data input (typing numbers/dates)</span>
+                        <span className="legend-desc">{t('workloadGraph.dataEntryDesc')}</span>
                     </div>
                 </div>
 
@@ -54,11 +58,11 @@ export const WorkloadAnalysisGraph = () => {
                     <div className="legend-content">
                         <div className="legend-header">
                             <span className="legend-percentage text-amber-400">37%</span>
-                            <span>Formatting & "Hacking"</span>
+                            <span>{t('workloadGraph.formatting')}</span>
                         </div>
                         {/* Explicit narrative: "Ad-hoc reminders" */}
                         <span className="legend-desc legend-highlight text-amber-400">
-                            User "hacks" (colors/borders) used as ad-hoc reminders
+                            {t('workloadGraph.formattingDesc')}
                         </span>
                     </div>
                 </div>
@@ -68,9 +72,9 @@ export const WorkloadAnalysisGraph = () => {
                     <div className="legend-content">
                         <div className="legend-header">
                             <span className="legend-percentage text-gray-400">9%</span>
-                            <span>Clear / Delete</span>
+                            <span>{t('workloadGraph.clearDelete')}</span>
                         </div>
-                        <span className="legend-desc">Correcting errors or resetting cells</span>
+                        <span className="legend-desc">{t('workloadGraph.clearDeleteDesc')}</span>
                     </div>
                 </div>
             </div>

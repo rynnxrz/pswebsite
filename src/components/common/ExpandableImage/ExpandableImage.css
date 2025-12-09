@@ -2,8 +2,8 @@
 
 .expanded-image-container {
     position: relative;
-    overflow: hidden;
-    /* Ensure content stays within rounded corners */
+    overflow: visible;
+    /* Allow tooltip to overflow */
     transition: all 0.3s ease;
     width: 100%;
     /* Keep aspect ratio consistent if needed, but flex handling below is better */
@@ -18,12 +18,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 12px;
+    overflow: hidden;
+    /* Clip content here instead */
 }
 
 .expanded-image-container img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
     display: block;
     transition: transform 0.3s ease;
 }
@@ -56,44 +59,7 @@
     opacity: 1;
 }
 
-.control-button {
-    height: 36px;
-    background-color: rgba(26, 26, 26, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 999px;
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(8px);
-    padding: 0 12px;
-    gap: 6px;
-}
 
-.control-button .label {
-    font-size: 13px;
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-.expand-button {
-    width: 36px;
-    padding: 0;
-}
-
-.control-button:hover {
-    background-color: rgba(42, 42, 42, 0.9);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.control-button.active {
-    background-color: #2A9D8F;
-    /* Primary color */
-    border-color: #2A9D8F;
-}
 
 /* --- Interactive Hint --- */
 .interactive-hint {

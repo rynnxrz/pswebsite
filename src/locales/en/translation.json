@@ -1,0 +1,214 @@
+{
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "portfolio": "Portfolio",
+        "language": "Language"
+    },
+    "about": {
+        "role": "product designer & developer",
+        "bio": "an innovative product designer and developer based in london.",
+        "viewPortfolio": "view portfolio",
+        "experience": "experience",
+        "education": "education",
+        "skills": "skills"
+    },
+    "project_p": {
+        "header": {
+            "title": "ORA Web",
+            "date": "December 6th, 2025",
+            "download": "Download PDF",
+            "copy": "Copy URL",
+            "copied": "Successfully copied to clipboard"
+        },
+        "intro": {
+            "title": "Intro",
+            "content": "The project is defined as ORA Web, a small-scale software system for a contract manufacturing company, focusing on integrating contract production data management and efficiency."
+        },
+        "team": {
+            "title": "Team & My Role",
+            "client": "Client",
+            "clientDesc": "Ora Nutrition Ltd (contract-manufacturing factory).",
+            "clientPoints": [
+                "Founded in 2019, scaled into one of the leading nutrition contract manufacturers in Auckland.",
+                "Acquired in 2025 by a China-listed company."
+            ],
+            "context": "The factory has no in-house design team, so I operated as the sole designer embedded in cross-functional delivery.",
+            "role": "My Role",
+            "roleDesc": "UX Designer (Solo)",
+            "rolePoints": [
+                "Led end-to-end UX for ORA Web, from problem framing to workflow design and system structure.",
+                "Mapped contract-to-shipment processes and translated operational logic into scalable data and UI models.",
+                "Facilitated alignment across Finance, Production Planning, Warehouse/Procurement, and Management.",
+                "Worked closely with engineering to ensure feasibility and consistent status logic across views."
+            ],
+            "duration": "Project Duration",
+            "durationDesc": "Case study scope: Jul 2023 – Aug 2024 · Ongoing"
+        },
+        "scope": {
+            "title": "User Scope",
+            "content": "This system spans three operational layers across the contract-to-production lifecycle:",
+            "points": [
+                "<strong>Decision Makers:</strong> They read and consolidated data for timing, risk, and client decisions.",
+                "<strong>Shift/Planning Managers:</strong> They need accurate status and capacity signals to allocate work.",
+                "<strong>Operators/Executors:</strong> They need structured input and clear next-step prompts to keep data reliable."
+            ]
+        },
+        "rationale": {
+            "title": "Project Rationale",
+            "subtitle": "Enhancing Efficiency",
+            "quote": "\"The project aims to enhance efficiency by reducing time wastage caused by fragmented data and manual reconciliation across the contract-to-shipment lifecycle. This directly translates to cost savings, addressing the high labor costs prevalent in the New Zealand context by freeing up high-value managers from repetitive 'Excel checking' tasks\"."
+        },
+        "research": {
+            "title": "Research Findings",
+            "subtitle1": "Research Approach and Key Findings",
+            "content1": "Instead of jumping straight into generic interviews, I started with quantitative analysis of how the shared Excel file was actually used. By logging user operations, I found that around <strong>54%</strong> of actions were pure data input and <strong>37%</strong> were just formatting changes—often used as ad-hoc reminders or unit conversions.",
+            "insights": "Key insights from the research:",
+            "points1": [
+                "A large portion of effort was spent on low-value work rather than decision-making.",
+                "The Excel file was already being “hacked” into a makeshift status/reminder system, not just a static spreadsheet."
+            ],
+            "subtitle2": "Transitioning from Data Analysis to Qualitative Interviews",
+            "content2": "With that big-picture signal, I then moved into qualitative interviews to understand the “why” behind these behaviors. In conversations, users described:",
+            "points2": [
+                "Constantly switching between different documents to keep track of what was “actually happening”.",
+                "Relying on manual formatting tweaks (colors, merged cells, comments) to remember statuses and deadlines.",
+                "The mental load and error risk of repeatedly entering and re-entering similar information."
+            ],
+            "subtitle3": "Design Opportunities",
+            "content3": "The real issue wasn’t “Excel is messy”; it was that Excel was being forced to act as a workflow and reminder system without any real support for status tracking or connected data."
+        },
+        "choices": {
+            "title": "Key Design Choices",
+            "subtitle": "Workflow & Interaction",
+            "section1": {
+                "title": "Turning scattered files into a single, navigable workflow",
+                "content": "In the previous setup, staff had to jump between multiple Excel files and tabs to find the right contract or understand its latest status. Based on those interviews, I reframed the UI around a single contract workspace with:",
+                "list": [
+                    "A sidebar listing contracts as the main entry point.",
+                    "Status filters (e.g. To be entered, Entered, Pending payment) to quickly narrow down what needs attention."
+                ],
+                "content2": "This directly answered a core pain point: too much time was spent just finding the right file. By integrating navigation and status filtering in one place, the system turns a fragmented experience into a clear, linear workflow where users can:",
+                "steps": [
+                    "Locate the contract.",
+                    "See its current stage.",
+                    "Take the next action without switching documents."
+                ]
+            },
+            "section2": {
+                "title": "Designing import & manual input for today, while preparing for tomorrow",
+                "content": "Many key fields in the current operation—such as signing date, deposit date, packaging material storage and production-related data—still rely on manual input. Instead of ignoring this reality, I designed a set of structured dialogs for entering contract, product and financial details.",
+                "content2": "On top of this, I introduced an <strong>Auto-Contract Import</strong> flow that allows users to pull base information from existing contract files, and then complete or correct the details in the dialogs. This strikes a balance:",
+                "list": [
+                    "<strong>Immediate value:</strong> Reduced repetitive typing and fewer copy–paste errors for contracts that already exist in file form.",
+                    "<strong>Future readiness:</strong> The dialog structure is intentionally designed so that, later on, we can plug in Excel/PDF parsing and compare “manual vs. automated” data in the same UI without redesigning the entire flow."
+                ],
+                "content3": "In other words, the design accepts that today is still partially manual, but the workflow and information architecture are already shaped for a more automated future."
+            },
+            "section3": {
+                "title": "Unified Status Updates & `updateContractStatus` (Design #4 & Develop)",
+                "content": "One major operational pain point was that contract status lived in multiple places. When a contract stage changed, different sheets and views had to be manually updated, and they often fell out of sync.",
+                "content2": "In the new design, I simplified this into a single source of truth for status:",
+                "list": [
+                    "<strong>On the UI side:</strong> Users update the contract’s status once, from a unified control that is visible wherever the contract appears.",
+                    "<strong>On the engineering side:</strong> I collaborated with the developer to implement a shared `updateContractStatus` function that propagates this change across all relevant views and data tables."
+                ],
+                "content3": "By explicitly connecting the interaction pattern with the underlying function, I wanted to show that I understand not only what the UI should do, but also how it needs to behave technically for status to stay consistent across the system."
+            },
+            "summary": {
+                "title": "In short: these design choices focus on three things:",
+                "steps": [
+                    "Reduce document switching by integrating navigation and status.",
+                    "Respect the current manual reality while paving a clear path to automation.",
+                    "Ensure that a single status update reliably reflects everywhere in the system—demonstrating both workflow thinking and an ability to collaborate closely with engineering."
+                ]
+            }
+        },
+        "excellence": {
+            "title": "Unified Experience",
+            "subtitle": "Dashboard and Business Impact",
+            "section1": {
+                "title": "From data to decisions: Internal Exception Radar & Process Lead Time",
+                "content": "To take this project’s design solution integrate in user’s daily workflow, I extended the solution into an internal decision-support dashboard. Instead of repeating raw tables, the dashboard focuses on where time is lost and where processes break.",
+                "list": [
+                    "<strong>The Internal Exception Radar (P1-A)</strong> aggregates contract data and flags three key risk types: lead-time breach, payment blocked and material risk.",
+                    "<strong>The Key Contracts Stage Overview (P1-B)</strong> then shows which specific contracts are affected and at which internal stage they are stuck. In our analysis, for example, around 68% of delays were linked to material readiness and 45% to production exceeding internal targets, giving management a clear view of the main bottlenecks without digging through spreadsheets.",
+                    "<strong>The Process Lead Time view (P2)</strong> visualises how long contracts spend in each stage, and whether we are meeting or exceeding our own SLA targets."
+                ],
+                "content2": "What differentiates this dashboard is that it does not try to show everything. It deliberately moves away from raw, dense data and focuses on:",
+                "points": [
+                    "Where we are losing time",
+                    "Which processes are failing",
+                    "Which contracts are impacted and need attention"
+                ],
+                "content3": "This makes it useful for decision-makers who need immediate, actionable signals, not just a static report."
+            },
+            "section2": {
+                "title": "Working with the “messy reality” of stakeholder feedback",
+                "content": "When I first shared the dashboard prototype, it was intentionally simple: a few focused widgets and a clear story about bottlenecks. That early version quickly triggered a wave of stakeholder responses, such as:",
+                "list": [
+                    "Requests for discrepancy alerts between planned vs. actual timelines.",
+                    "Interest in trend analysis over time, not just a snapshot.",
+                    "Comments like: “This data would help me a lot when I talk to our clients.”"
+                ],
+                "content2": "I chose to include this “messy middle” in my case study because it shows what actually happens after a first design goes live: priorities shift, new expectations surface, and the scope grows.",
+                "content3": "Instead of treating this as a failure of planning, I used it as a chance to:",
+                "points": [
+                    "Re-prioritize features with stakeholders.",
+                    "Clarify which insights are “must-have now” vs. “good to have later”.",
+                    "Refine the dashboard so it could support both internal operations and client-facing conversations."
+                ],
+                "content4": "This part of the story demonstrates my ability to work through ambiguity, respond to evolving needs, and keep the design grounded in what the business really cares about."
+            }
+        },
+        "reflection": {
+            "title": "Reflection",
+            "subtitle": "Using the Kano Model",
+            "content": "In my reflection, I used the <strong>Kano model</strong> to make sense of the different types of dashboard features:",
+            "list": [
+                "<strong>Basic expectations:</strong> E.g. being able to see contract status and lead time without digging through spreadsheets.",
+                "<strong>Performance features:</strong> Clearer bottleneck visualization that directly improves planning and internal coordination.",
+                "<strong>Delighters:</strong> For example, exception alerts and narrative views that help managers explain issues to clients."
+            ],
+            "content2": "By mapping stakeholder requests and existing widgets onto the Kano model, I could:",
+            "points": [
+                "Distinguish between \"must not fail\" basics and \"high-impact\" improvements.",
+                "Avoid overloading the dashboard with nice-to-have charts that don’t change decisions.",
+                "Show that I’m not only designing UI, but also prioritizing features systematically."
+            ],
+            "content3": "Including this reflection is my way of demonstrating a growth mindset: I’m willing to learn, borrow tools from product/strategy (like Kano), and use them to make more grounded design choices."
+        }
+    },
+    "home": {
+        "intro": {
+            "name": "rongze xu",
+            "subtitle": "product designer & developer",
+            "statement": "rongze is an innovative product designer and developer based in london.",
+            "viewPortfolio": "view portfolio"
+        },
+        "projects": {
+            "heading": "projects",
+            "p": {
+                "title": "Ora Web",
+                "description": "We increased factory management efficiency by integrating contract and production data into a simple ERP tool."
+            },
+            "one": {
+                "title": "Innerpeace",
+                "description": "We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale."
+            },
+            "notification": {
+                "title": "Vibe Coding in Progress 🚧",
+                "description": "{{title}} is currently being updated."
+            }
+        }
+    },
+    "workloadGraph": {
+        "title": "Workload Analysis",
+        "dataEntry": "Data Entry",
+        "dataEntryDesc": "Pure data input (typing numbers/dates)",
+        "formatting": "Formatting & \"Hacking\"",
+        "formattingDesc": "User \"hacks\" (colors/borders) used as ad-hoc reminders",
+        "clearDelete": "Clear / Delete",
+        "clearDeleteDesc": "Correcting errors or resetting cells"
+    }
+}

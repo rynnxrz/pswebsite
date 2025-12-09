@@ -41,6 +41,58 @@
             zombie: { contract: 45, inventory: 7 },
             cooling: { vol_ratio: 0.6 }
         };
+
+        // i18n Script
+        const i18nData = {
+            en: {
+                pageTitle: "OraNutrition Process & Client Insight Board",
+                lastUpdate: "Last Update: 2024-11-28 09:00 AM",
+                kpi1Title: "Lead Time Breach",
+                kpi2Title: "Payment Blocked",
+                kpi3Title: "Material Risk",
+                kpi4Title: "Data Issues",
+                part1Title: "Part 1. Internal Exception Radar",
+                part2Title: "Part 2. Process Lead Time"
+            },
+            zh: {
+                pageTitle: "OraNutrition 内部流程与客户洞察总览",
+                lastUpdate: "上次更新: 2024-11-28 09:00 AM",
+                kpi1Title: "整体周期超出内部目标",
+                kpi2Title: "收款环节有阻塞",
+                kpi3Title: "物料准备存在风险",
+                kpi4Title: "数据记录需补充",
+                part1Title: "Part 1. 内部异常雷达 (Internal Exception Radar)",
+                part2Title: "Part 2. 内部流程周期 (Process Lead Time)"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang') || 'en'; // Default to English as per requirements
+
+            const t = i18nData[lang] || i18nData['en'];
+
+            // Helper to safely set text
+            const setText = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = text;
+            };
+
+            setText('header-title', t.pageTitle);
+            setText('header-update', t.lastUpdate);
+            setText('kpi-1-title', t.kpi1Title);
+            setText('kpi-2-title', t.kpi2Title);
+            setText('kpi-3-title', t.kpi3Title);
+            setText('kpi-4-title', t.kpi4Title);
+
+            // For Part Titles which are inside h2
+            const part1 = document.getElementById('part-1-title');
+            if (part1) part1.innerText = t.part1Title;
+
+            const part2 = document.getElementById('part-2-title');
+            if (part2) part2.innerText = t.part2Title;
+        });
+    </script>
     </script>
 
     <style>
@@ -210,8 +262,7 @@
     <!-- Sidebar -->
     <aside class="w-20 flex-shrink-0 flex flex-col z-20 shadow-sm transition-all bg-[#297A88]">
         <div class="h-16 flex items-center justify-center bg-white border-b border-gray-100">
-            <img src="data:image/png;base64,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"
-                alt="Ora" class="w-10 h-10 object-contain">
+            <img src="./assets/images/ora-web/slogo.png" alt="Ora" class="w-10 h-10 object-contain">
         </div>
         <nav class="flex-1 overflow-y-auto flex flex-col items-center gap-0 bg-[#297A88]">
             <!-- Dashboard (Active) -->
