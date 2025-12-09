@@ -52,7 +52,13 @@
                 "<strong>Decision Makers:</strong> They read and consolidated data for timing, risk, and client decisions.",
                 "<strong>Shift/Planning Managers:</strong> They need accurate status and capacity signals to allocate work.",
                 "<strong>Operators/Executors:</strong> They need structured input and clear next-step prompts to keep data reliable."
-            ]
+            ],
+            "read": "Read",
+            "readDesc": "Decide timing and client priorities.",
+            "plan": "Plan",
+            "planDesc": "Allocate capacity with live status.",
+            "input": "Input",
+            "inputDesc": "Keep structured data accurate."
         },
         "rationale": {
             "title": "Project Rationale",
