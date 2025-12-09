@@ -2,15 +2,15 @@ import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScanEye, CalendarClock, Keyboard } from 'lucide-react';
 import { useOnScreen } from '../../hooks/useOnScreen';
-import './UserJourneyGraph.css';
+import './UserScopeList.css';
 
-export const UserJourneyGraph = () => {
+export const UserScopeList = () => {
     const { t } = useTranslation();
     const ref = useRef<HTMLDivElement>(null);
     const isVisible = useOnScreen(ref, '0px', 0.2, false);
 
     return (
-        <div ref={ref} className={`user-journey-list ${isVisible ? 'animate-start' : ''}`}>
+        <div ref={ref} className={`user-scope-list ${isVisible ? 'animate-start' : ''}`}>
             <div className="uj-list-item">
                 <div className="uj-item-icon">
                     <ScanEye size={18} strokeWidth={2} />

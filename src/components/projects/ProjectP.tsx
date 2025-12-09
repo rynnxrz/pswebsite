@@ -11,7 +11,7 @@ import './ProjectP.css';
 import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
 import { JourneyMap } from './JourneyMap';
-import { UserJourneyGraph } from './UserJourneyGraph';
+import { UserScopeList } from './UserScopeList';
 import '../Tooltip.css';
 
 export const ProjectP = () => {
@@ -36,12 +36,7 @@ export const ProjectP = () => {
     { id: 'reflection', title: 'Reflection' },
   ];
 
-  // Gallery images for the stacked widget
-  const galleryImages = [
-    { id: 1, src: '/assets/images/ora-web/design-choices-placeholder.png', alt: 'Final Design' },
-    { id: 2, src: '/assets/images/ora-web/stacked-card-1.png', alt: 'Wireframe' },
-    { id: 3, src: '/assets/images/ora-web/stacked-card-2.png', alt: 'Initial Sketch' },
-  ];
+
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -216,7 +211,7 @@ export const ProjectP = () => {
           <h2>{t('project_p.scope.title')}</h2>
           <p className="intro-text">{t('project_p.scope.content')}</p>
           {/* New User Journey Graph replaces the old list and image */}
-          <UserJourneyGraph />
+          <UserScopeList />
         </section>
 
         <hr className="section-divider" />
