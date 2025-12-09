@@ -1,60 +1,104 @@
 /* src/components/BottomNav.css */
 
 .bottom-nav-container {
-    position: fixed;
-    bottom: 24px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    z-index: 100;
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
 }
-  
+
 .bottom-nav {
-    /* --- Change 1: Adjusted width and corner radius --- */
-    width: 240px;
-    height: 64px;
-    border-radius: 24px; /* Squircle style radius */
-    
-    display: flex;
-    align-items: center;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: url(#liquid-glass-filter);
+  /* --- Change 1: Adjusted width and corner radius --- */
+  width: 320px;
+  height: 64px;
+  border-radius: 24px;
+  /* Squircle style radius */
+
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: url(#liquid-glass-filter);
 }
-  
+
 @supports not (backdrop-filter: url(#liquid-glass-filter)) {
-    .bottom-nav {
-      background-color: rgba(240, 240, 240, 0.7);
-      backdrop-filter: blur(16px);
-    }
+  .bottom-nav {
+    background-color: rgba(240, 240, 240, 0.7);
+    backdrop-filter: blur(16px);
+  }
 }
 
 .nav-tooltip-wrapper {
   width: 80px;
   height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.nav-item-link,
-.nav-item {
+/* Renamed to avoid using the global .tooltip-text style from Tooltip.css */
+.nav-tooltip-wrapper .nav-tooltip-text {
+  position: absolute;
+  bottom: 80px;
+  /* Position above the nav item */
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  /* Initial state: slightly down */
+  background-color: #18181b;
+  color: #fff;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+/* Hover state for tooltip */
+.nav-tooltip-wrapper:hover .nav-tooltip-text {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-item-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
+  text-decoration: none;
 }
-  
+
 .nav-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 2;
-    transition: color 0.3s ease, transform 0.2s ease;
-    color: #888;
-    /* --- Change 2: Add position relative for the hover target --- */
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.3s ease;
+  /* Removed transform transition from parent */
+  color: #888;
+  position: relative;
+}
+
+/* Apply transform to the SVG or inner content instead */
+.nav-item svg {
+  transition: transform 0.2s ease;
 }
 
 /* --- Change 3: Add an invisible, larger hover/click target --- */
@@ -64,31 +108,37 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60px; /* A large, forgiving circular area */
+  width: 60px;
+  /* A large, forgiving circular area */
   height: 60px;
   border-radius: 50%;
   background-color: transparent;
 }
 
 .nav-item.active {
-    color: #fff;
+  color: #fff;
+}
+
+/* Only scale the SVG on hover */
+.nav-tooltip-wrapper:hover .nav-item svg {
+  transform: scale(1.15);
 }
 
 .nav-tooltip-wrapper:hover .nav-item {
-  transform: scale(1.15);
   color: #ddd;
 }
+
 .nav-tooltip-wrapper:hover .nav-item.active {
   color: #fff;
 }
-  
+
 .active-indicator {
-    position: absolute;
-    top: 8px;
-    left: 0;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.15);
-    z-index: 1;
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  z-index: 1;
 }

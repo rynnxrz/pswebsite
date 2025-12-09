@@ -27,30 +27,34 @@ export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultI
         <div ref={imageContainerRef} className="section-image gallery-container">
             {/* Main Active Image / Interactive Component */}
             <ExpandableImage
+                key={activeImage.id}
                 src={activeImage.src}
                 alt={activeImage.alt}
                 interactiveSrc={activeImage.interactiveSrc}
                 containerClassName="gallery-main-image-wrapper"
                 className="gallery-main-image"
+                isNested={true}
             />
 
-            {/* Stacked Cards Widget */}
-            <div className="stacked-gallery-widget">
-                {images.map((image, index) => (
-                    <div
-                        key={image.id}
-                        className={`gallery-thumbnail ${activeImage.id === image.id ? 'active' : ''}`}
-                        style={{
-                            zIndex: images.length - index,
-                            // Cycle through -5, 0, 5 degrees
-                            transform: `rotate(${[-5, 0, 5][index % 3]}deg)`,
-                        }}
-                        onClick={() => setActiveImage(image)}
-                    >
-                        <img src={image.src} alt={image.alt} />
-                    </div>
-                ))}
-            </div>
+            {/* Stacked Cards Widget - Only show if more than 1 image */}
+            {images.length > 1 && (
+                <div className="stacked-gallery-widget">
+                    {images.map((image, index) => (
+                        <div
+                            key={image.id}
+                            className={`gallery-thumbnail ${activeImage.id === image.id ? 'active' : ''}`}
+                            style={{
+                                zIndex: images.length - index,
+                                // Cycle through -5, 0, 5 degrees
+                                transform: `rotate(${[-5, 0, 5][index % 3]}deg)`,
+                            }}
+                            onClick={() => setActiveImage(image)}
+                        >
+                            <img src={image.src} alt={image.alt} />
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
