@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import './ProjectP.css';
 import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
+import { UserJourneyGraph } from './UserJourneyGraph';
 import '../Tooltip.css';
 
 export const ProjectP = () => {
@@ -212,13 +213,9 @@ export const ProjectP = () => {
         {/* 4. User Scope */}
         <section id="scope" className="project-section">
           <h2>{t('project_p.scope.title')}</h2>
-          <p>{t('project_p.scope.content')}</p>
-          <ul className="scope-list">
-            {(t('project_p.scope.points', { returnObjects: true }) as string[]).map((point, i) => (
-              <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
-            ))}
-          </ul>
-          <StackedGallery images={[{ id: 'intro-scope', src: '/assets/images/ora-web/user-scope-placeholder.png', alt: 'User Scope Diagram' }]} />
+          <p className="intro-text">{t('project_p.scope.content')}</p>
+          {/* New User Journey Graph replaces the old list and image */}
+          <UserJourneyGraph />
         </section>
 
         <hr className="section-divider" />

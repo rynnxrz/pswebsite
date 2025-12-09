@@ -59,6 +59,45 @@
     opacity: 1;
 }
 
+/* Mobile: Always show controls (hover: none) */
+@media (hover: none) {
+    .controls-overlay {
+        opacity: 1 !important;
+    }
+}
+
+/* --- Iframe Preview Scaling (Non-Fullscreen) --- */
+.content-wrapper iframe {
+    /* Default behavior */
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* When NOT fullscreen, force desktop scale for iframe */
+.expanded-image-container:not(.is-fullscreen) .content-wrapper iframe {
+    width: 1440px !important;
+    /* Force desktop width */
+    height: 900px !important;
+    /* Force desktop height aspect */
+    transform: scale(0.2625);
+    /* Scale down: 378px / 1440px approx height based or width based */
+    transform-origin: top left;
+    /* We need to be careful with fixed height. 
+       Let's assume container is roughly fixed height or auto. 
+       Actually, standard image height is 378px. 
+       If width is 100% of container (~700px?), scale is ~0.5.
+       Let's try a safer approach: Use CSS variables or JS.
+       But for CSS scaling, let's try a dynamic container query approach or just a fixed scale for now.
+       
+       Better approach: Let the iframe be 200% width/height and scale 0.5?
+    */
+    width: 200% !important;
+    height: 200% !important;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+}
+
 
 
 /* --- Interactive Hint --- */
