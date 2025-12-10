@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScanEye, CalendarClock, Keyboard } from 'lucide-react';
+import { HorizontalScrollContainer } from '../common/HorizontalScrollContainer/HorizontalScrollContainer';
 import './JourneyMap.css';
 
 export const JourneyMap: React.FC = () => {
@@ -24,7 +25,7 @@ export const JourneyMap: React.FC = () => {
     const stages = ['stage1', 'stage2', 'stage3'];
 
     return (
-        <div className="journey-map-container">
+        <HorizontalScrollContainer className="journey-map-container">
             {stages.map((stageKey) => {
                 const stageData = t(`project_p.choices.journeyMap.${stageKey}`, { returnObjects: true }) as any;
                 const tags = stageData.tags || [];
@@ -60,6 +61,6 @@ export const JourneyMap: React.FC = () => {
                     </div>
                 );
             })}
-        </div>
+        </HorizontalScrollContainer>
     );
 };

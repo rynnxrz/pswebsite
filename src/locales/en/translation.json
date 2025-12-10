@@ -115,7 +115,8 @@
                         "plan"
                     ]
                 }
-            }
+            },
+            "stage1_title": "1. Turning scattered files into one contract workspace"
         },
         "excellence": {
             "title": "Unified Experience",

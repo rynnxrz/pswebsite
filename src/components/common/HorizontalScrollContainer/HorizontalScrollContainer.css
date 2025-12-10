@@ -1,0 +1,76 @@
+/* src/components/common/HorizontalScrollContainer/HorizontalScrollContainer.css */
+
+.horizontal-scroll-wrapper {
+    width: 100%;
+    position: relative;
+    /* Wrapper handles positioning context for buttons and gradient */
+}
+
+/* Nav Buttons - Hidden on desktop by default as per previous design, 
+   but we can make them responsive or desktop-visible if needed later. 
+   Keeping mobile-only behavior for now. */
+/* Nav Buttons - Visible by default for all screen sizes */
+.scroll-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+}
+
+.scroll-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.nav-left {
+    left: 0;
+}
+
+.nav-right {
+    right: 0;
+}
+
+/* Gradient overlay - Visible by default */
+.horizontal-scroll-wrapper.has-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 60px;
+    background: linear-gradient(to right, transparent, #000);
+    pointer-events: none;
+    z-index: 10;
+    border-radius: 0 12px 12px 0;
+    /* Optional radius matching */
+}
+
+@media (max-width: 768px) {
+    /* No specific overrides needed unless sizes change */
+}
+
+/* Inner viewport handling - ensures scroll behavior is applied if layout overflows */
+.horizontal-scroll-viewport {
+    width: 100%;
+    /* Parent layout (e.g. grid/flex) comes from the passed className */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+.horizontal-scroll-viewport::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}

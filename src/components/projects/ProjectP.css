@@ -17,225 +17,7 @@
   margin: 0 auto;
 }
 
-.project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* Centered visually */
-  margin-bottom: 3rem;
-  text-align: left;
-
-  /* Sticky Logic */
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 1rem 0;
-  /* Add padding for "row" feel */
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* Ensure background covers content behind it when sticky */
-  background-color: transparent;
-  /* We might want a pseudo-element or negative margins to blur *full width* if desired, 
-     but keeping it simple (contained) for now as requested. */
-}
-
-.project-header.sticky-active {
-  /* Match BottomNav "liquid glass" style */
-  background-color: rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: url(#liquid-glass-filter);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-
-  margin-bottom: 3rem;
-  /* Keep spacing */
-
-  /* Constrained width behavior */
-  margin-left: -1rem;
-  margin-right: -1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  border-radius: 0 0 24px 24px;
-  /* Squircle-ish radius like nav */
-}
-
-@supports not (backdrop-filter: url(#liquid-glass-filter)) {
-  .project-header.sticky-active {
-    background-color: rgba(20, 20, 20, 0.85);
-    backdrop-filter: blur(16px);
-  }
-}
-
-.project-header-text-container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* Header Info Transitions */
-.header-main-info {
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-}
-
-.header-main-info.scrolled-mode {
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.header-main-info.scrolled-mode .project-title {
-  font-size: 1rem;
-  /* Smaller size on scroll */
-  opacity: 0.7;
-  cursor: pointer;
-}
-
-.header-main-info.scrolled-mode .project-title:hover {
-  opacity: 1;
-}
-
-.header-main-info.scrolled-mode .project-date {
-  display: none;
-  /* Hide date on scroll */
-}
-
-/* Navigator Dropdown */
-.section-navigator {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  position: relative;
-  /* Anchor for dropdown */
-  height: 100%;
-  padding-bottom: 0;
-  /*  Ensure no accidental padding issues */
-}
-
-.divider {
-  color: #555;
-  font-weight: 300;
-}
-
-.active-section-name {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  padding: 2px 0;
-}
-
-.section-navigator:hover .active-section-name {
-  color: #4b9fff;
-  /* Highlight on hover */
-}
-
-.section-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  /* Use padding-top on a pseudo-element instead of margin-top to avoid gap */
-  margin-top: 8px;
-  background-color: #1f1f1f;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-  min-width: 180px;
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-
-  opacity: 0;
-  transform: translateY(-5px);
-  pointer-events: none;
-  transition: all 0.2s ease;
-  transition-delay: 0.1s;
-  /* Small delay before hiding */
-}
-
-/* Invisible bridge to cover the margin gap */
-.section-dropdown::before {
-  content: '';
-  position: absolute;
-  top: -15px;
-  /* Height of the gap + extra safety */
-  left: 0;
-  width: 100%;
-  height: 15px;
-}
-
-/* Show Dropdown on Hover of the Navigator Container */
-.section-navigator:hover .section-dropdown {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-  transition-delay: 0s;
-  /* Appear instantly */
-}
-
-.dropdown-item {
-  font-size: 0.9rem;
-  color: #a0a0a0;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-.dropdown-item.active {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.05);
-  font-weight: 500;
-}
-
-.project-title {
-  /* Match Portfolio.css title size */
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0;
-  color: #fff;
-}
-
-.project-date {
-  /* Match Portfolio.css date size */
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #a0a0a0;
-  margin-top: 4px;
-}
-
-.action-buttons-container {
-  display: flex;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-.action-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  color: #a0a0a0;
-  cursor: pointer;
-  padding: 0;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.action-btn:hover {
-  background-color: #2a2a2a;
-  color: #fff;
-}
+/* Header styles moved to ProjectHeader.css */
 
 
 
@@ -256,6 +38,13 @@
   margin-top: 2rem;
   margin-bottom: 1rem;
   color: #e0e0e0;
+}
+
+.stage-title {
+  margin-top: 4rem !important;
+  font-size: 1.5rem !important;
+  /* Make it slightly bigger as per user hint styling */
+  color: #fff !important;
 }
 
 .project-section p {
@@ -369,4 +158,61 @@
     font-size: 1.15rem;
     /* Slightly adjust for mobile */
   }
+
+  .role-card {
+    flex: 0 0 85% !important;
+    /* Force mobile width */
+    min-width: 85% !important;
+  }
+}
+
+/* Horizontal Scroll Styles for Role Section */
+.role-grid {
+  display: flex !important;
+  /* Force flex layout */
+  gap: 1rem;
+  padding-bottom: 1rem;
+  /* Reuse clean scrollbar styles if needed, or rely on wrapper */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.role-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.role-card {
+  flex: 0 0 320px;
+  /* Desktop width */
+  min-width: 320px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  scroll-snap-align: center;
+  transition: background 0.2s ease;
+  height: auto;
+  /* Allow height to fit content */
+  display: flex;
+  flex-direction: column;
+}
+
+.role-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.role-card h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.role-card ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
 }
