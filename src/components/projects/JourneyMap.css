@@ -42,8 +42,8 @@
     transition: transform 0.2s ease, background 0.2s ease;
 
     /* Default desktop width - ensures scrolling is needed or cards are sized nicely */
-    flex: 0 0 40%;
-    min-width: 320px;
+    flex: 0 0 450px;
+    min-width: 450px;
     scroll-snap-align: center;
 }
 

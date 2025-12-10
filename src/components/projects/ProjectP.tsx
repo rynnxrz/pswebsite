@@ -120,7 +120,7 @@ export const ProjectP = () => {
                   <li key={i}>{point}</li>
                 ))}
               </ul>
-              <p className="context-note">{t('project_p.team.context')}</p>
+              <p className="context-note" dangerouslySetInnerHTML={{ __html: t('project_p.team.context') }} />
             </div>
             <div className="role-card">
               <h3>{t('project_p.team.role')}</h3>
