@@ -10,10 +10,8 @@
     scroll-snap-type: x mandatory;
     gap: 1rem;
     padding-bottom: 1rem;
-    /* Clean background */
     background: transparent;
     border: none;
-    /* Hide scrollbar for cleaner look */
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -32,16 +30,16 @@
 .journey-stage {
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
     gap: 1rem;
-    /* Control spacing via gap */
+
+    /* Unified padding using variables */
+    padding: var(--graph-card-padding-y, 1.25rem) var(--graph-card-padding-x, 1.5rem);
+
     background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.05);
     transition: transform 0.2s ease, background 0.2s ease;
 
-    /* Default desktop width - ensures scrolling is needed or cards are sized nicely */
     flex: 0 0 450px;
     min-width: 450px;
     scroll-snap-align: center;
@@ -52,32 +50,28 @@
 }
 
 .journey-stage-title {
-    font-size: var(--graph-font-title-size);
-    font-weight: var(--graph-font-title-weight);
-    color: #fff;
-    margin-bottom: 0.5rem;
-    /* Reduced because of parent gap */
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #a0a0a0;
+    margin-bottom: 0.4rem;
     text-transform: uppercase;
-    letter-spacing: var(--graph-font-title-spacing);
-    opacity: 0.8;
+    letter-spacing: 0.05em;
+    opacity: 1;
 }
 
 .journey-section {
     display: flex;
     flex-direction: column;
     margin: 0;
-    /* Remove margin, use gap */
 }
 
 /* Block-level alignment constraints */
 .pains-section {
     min-height: 7rem;
-    /* Fixed height for Label + Text */
 }
 
 .move-section {
     min-height: 5rem;
-    /* Fixed height for Label + Text */
 }
 
 .journey-section-label {
@@ -100,32 +94,27 @@
 
 .dot-pains {
     background-color: #ef4444;
-    /* Red */
     box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
 }
 
 .dot-move {
     background-color: #10b981;
-    /* Green */
     box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
 }
 
 .journey-content-text {
     color: var(--graph-text-primary);
-    /* Neutral readable text */
     font-size: var(--graph-text-body-size);
     line-height: 1.5;
     font-weight: 400;
 }
 
-/* Remove text-level specific heights */
 .pains-text,
 .move-text {
     min-height: 0;
 }
 
 .journey-tags {
-    /* Removed margin-top: auto to allow top-alignment of the tags block */
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
@@ -141,7 +130,6 @@
     padding: 0.3rem 0.7rem;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.08);
-    /* Subtle chip bg */
     color: #9ca3af;
     font-weight: 500;
     text-transform: lowercase;
@@ -151,8 +139,6 @@
     width: 18px;
     height: 18px;
     min-width: 18px;
-    /* Force size */
     min-height: 18px;
     stroke-width: 2px;
-    /* Ensure visual weight matches */
 }

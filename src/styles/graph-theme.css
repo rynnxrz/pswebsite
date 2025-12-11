@@ -38,6 +38,12 @@
     /* Unified letter spacing */
     --graph-text-body-size: 0.95rem;
     /* Unified body text size */
+
+    /* 6. Spacing Standards */
+    --graph-card-padding-y: 1.25rem;
+    /* Vertical padding */
+    --graph-card-padding-x: 1.5rem;
+    /* Horizontal padding */
 }
 
 /* Utility class for graph body text */

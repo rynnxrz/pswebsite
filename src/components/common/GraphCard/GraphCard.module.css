@@ -3,7 +3,9 @@
     background: var(--graph-bg);
     border: var(--graph-border);
     border-radius: var(--graph-radius);
-    padding: var(--graph-padding);
+    border-radius: var(--graph-radius);
+    /* Unified padding using variables */
+    padding: var(--graph-card-padding-y, 1.25rem) var(--graph-card-padding-x, 1.5rem) 1.5rem;
     margin: 2rem 0;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -12,13 +14,17 @@
     /* Ensure font consistency */
 }
 
+/* 统一所有 graph 标题样式，去掉 h3 默认 margin-top */
 .title {
-    font-size: var(--graph-font-title-size);
-    color: var(--graph-text-secondary);
+    /* 和 user flow 一致，小号灰色 label */
+    font-size: var(--graph-font-title-size, 0.75rem);
+    color: var(--graph-text-secondary, #a0a0a0);
     text-transform: uppercase;
-    letter-spacing: var(--graph-font-title-spacing);
-    font-weight: var(--graph-font-title-weight);
-    margin-bottom: 1rem;
+    letter-spacing: var(--graph-font-title-spacing, 0.05em);
+    font-weight: var(--graph-font-title-weight, 600);
+
+    /* 关键：清掉默认的 margin-top，只保留 bottom */
+    margin: 0 0 0.4rem;
     text-align: left;
     line-height: 1.4;
 }
