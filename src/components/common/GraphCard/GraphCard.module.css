@@ -1,0 +1,28 @@
+.card {
+    width: 100%;
+    background: var(--graph-bg);
+    border: var(--graph-border);
+    border-radius: var(--graph-radius);
+    padding: var(--graph-padding);
+    margin: 2rem 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    font-family: 'Soehne', sans-serif;
+    /* Ensure font consistency */
+}
+
+.title {
+    font-size: var(--graph-font-title-size);
+    color: var(--graph-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: var(--graph-font-title-spacing);
+    font-weight: var(--graph-font-title-weight);
+    margin-bottom: 1rem;
+    text-align: left;
+    line-height: 1.4;
+}
+
+.content {
+    width: 100%;
+}

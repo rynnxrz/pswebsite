@@ -33,19 +33,19 @@
 
 /* Staggered Animation */
 .animate-start .uj-list-item {
-    animation: slide-fade-in 0.6s ease-out forwards;
+    animation: slide-fade-in var(--anim-speed-fast) var(--anim-ease-smooth) forwards;
 }
 
 .animate-start .uj-list-item:nth-child(1) {
-    animation-delay: 0.1s;
+    animation-delay: 0.05s;
 }
 
 .animate-start .uj-list-item:nth-child(2) {
-    animation-delay: 0.2s;
+    animation-delay: 0.15s;
 }
 
 .animate-start .uj-list-item:nth-child(3) {
-    animation-delay: 0.3s;
+    animation-delay: 0.25s;
 }
 
 .uj-list-item:hover {

@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import './WorkloadAnalysisGraph.css';
 import { useOnScreen } from '../../hooks/useOnScreen';
+import { GraphCard } from '../common/GraphCard/GraphCard';
 
 export const WorkloadAnalysisGraph = () => {
     const { t } = useTranslation();
@@ -15,8 +16,8 @@ export const WorkloadAnalysisGraph = () => {
     const containerClass = `workload-graph-container ${isVisible ? 'animate-start' : ''}`;
 
     return (
-        <div className={containerClass} ref={ref}>
-            <div className="workload-graph-title">{t('workloadGraph.title')}</div>
+        <GraphCard title={t('workloadGraph.title')} className={containerClass} forwardRef={ref}>
+            {/* Title is now handled by GraphCard */}
 
             {/* 3. Animation: animate-grow-width handled in CSS */}
             <div className="bar-container">
@@ -78,6 +79,6 @@ export const WorkloadAnalysisGraph = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </GraphCard >
     );
 };

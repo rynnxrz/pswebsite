@@ -52,13 +52,13 @@
 }
 
 .journey-stage-title {
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: var(--graph-font-title-size);
+    font-weight: var(--graph-font-title-weight);
     color: #fff;
     margin-bottom: 0.5rem;
     /* Reduced because of parent gap */
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--graph-font-title-spacing);
     opacity: 0.8;
 }
 
@@ -93,8 +93,8 @@
 }
 
 .journey-dot {
-    width: 6px;
-    height: 6px;
+    width: var(--dot-size-s);
+    height: var(--dot-size-s);
     border-radius: 50%;
 }
 
@@ -111,9 +111,9 @@
 }
 
 .journey-content-text {
-    color: #e5e7eb;
+    color: var(--graph-text-primary);
     /* Neutral readable text */
-    font-size: 0.95rem;
+    font-size: var(--graph-text-body-size);
     line-height: 1.5;
     font-weight: 400;
 }
