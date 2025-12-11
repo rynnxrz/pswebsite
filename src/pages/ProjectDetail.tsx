@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
-import { ProjectP } from './projects/ProjectP';
-import { ProjectOne } from './projects/ProjectOne';
-import { ProjectDialogic } from './projects/ProjectDialogic';
+import { ProjectP } from '../components/projects/ProjectP';
+import { ProjectOne } from '../components/projects/ProjectOne';
+import { ProjectDialogic } from '../components/projects/ProjectDialogic';
 
 export const ProjectDetail = () => {
   const { id } = useParams();

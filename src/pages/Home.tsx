@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { pageTransition } from '../utils/animations';
-import { ProjectCard } from './ProjectCard';
-import { useNotification } from './NotificationContext';
+import { ProjectCard } from '../components/ProjectCard';
+import { useNotification } from '../components/NotificationContext';
 
 import './Home.css';
 
