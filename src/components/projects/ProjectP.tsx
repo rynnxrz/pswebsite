@@ -11,26 +11,30 @@ import { HorizontalScrollContainer } from '../common/HorizontalScrollContainer/H
 import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
 import { JourneyMap } from './JourneyMap';
 import { UserScopeList } from './UserScopeList';
+import { UserStakeholdersGraph } from './UserStakeholdersGraph';
+import { UserVoiceQuotes } from './UserVoiceQuotes';
 import '../Tooltip.css';
 
 export const ProjectP = () => {
   const { t, i18n } = useTranslation();
+  const [activeQuoteFilter, setActiveQuoteFilter] = useState<string | null>(null);
   // const { showNotification } = useNotification();
 
   // State
   const [activeSection, setActiveSection] = useState('');
 
-  // Section definitions
-  const sections = [
-    { id: 'intro', title: 'Intro' },
-    { id: 'team', title: 'Team & My Role' },
-    { id: 'scope', title: 'User Scope' },
-    { id: 'rationale', title: 'Project Rationale' },
+  // Section definitions for Navigation
+  // Grouping intro, team, scope, rationale under "Project Info"
+  const navSections = [
+    { id: 'intro', title: 'Project Info' },
     { id: 'research', title: 'Research Findings' },
     { id: 'choices', title: 'Key Design Choices' },
     { id: 'excellence', title: 'Unique Excellence' },
     { id: 'reflection', title: 'Reflection' },
   ];
+
+  // IDs that belong to "Project Info"
+  const projectInfoIds = ['intro', 'team', 'scope', 'rationale'];
 
   useEffect(() => {
     // Intersection Observer for active section
@@ -45,7 +49,9 @@ export const ProjectP = () => {
       { threshold: 0, rootMargin: '-20% 0px -60% 0px' }
     );
 
-    sections.forEach(({ id }) => {
+    // Observe all sections including the ones grouped under Project Info
+    const observableIds = [...projectInfoIds, 'research', 'choices', 'excellence', 'reflection'];
+    observableIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
     });
@@ -53,7 +59,7 @@ export const ProjectP = () => {
     return () => {
       observer.disconnect();
     };
-  }, [sections]);
+  }, []);
 
   const scrollToSection = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -66,6 +72,9 @@ export const ProjectP = () => {
     }
   };
 
+  // Determine which nav ID should be active based on the currently intersecting section
+  const headerActiveSection = projectInfoIds.includes(activeSection) ? 'intro' : activeSection;
+
   return (
     <motion.div {...pageTransition} className="project-detail-container">
       <div className="project-content-wrapper">
@@ -73,8 +82,8 @@ export const ProjectP = () => {
         <ProjectHeader
           title={t('project_p.header.title')}
           date={t('project_p.header.date')}
-          sections={sections}
-          activeSection={activeSection}
+          sections={navSections}
+          activeSection={headerActiveSection}
           onSectionClick={scrollToSection}
           downloadTooltip={t('project_p.header.download')}
           copyTooltip={t('project_p.header.copy')}
@@ -173,31 +182,19 @@ export const ProjectP = () => {
             <h3>{t('project_p.research.subtitle1')}</h3>
             <p dangerouslySetInnerHTML={{ __html: t('project_p.research.content1') }} />
 
-            <div className="insight-box">
-              <h4>{t('project_p.research.insights')}</h4>
-              <ul>
-                {(t('project_p.research.points1', { returnObjects: true }) as string[]).map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
-            </div>
+
           </div>
 
           <WorkloadAnalysisGraph />
 
-          <div className="research-subsection">
-            <h3>{t('project_p.research.subtitle2')}</h3>
-            <p>{t('project_p.research.content2')}</p>
-            <ul className="plain-list">
-              {(t('project_p.research.points2', { returnObjects: true }) as string[]).map((point, i) => (
-                <li key={i}>{point}</li>
-              ))}
-            </ul>
+          <div className="research-interactive-wrapper">
+            <UserStakeholdersGraph onFilterChange={setActiveQuoteFilter} />
+            <UserVoiceQuotes filterTag={activeQuoteFilter} />
           </div>
 
           <div className="research-subsection highlight-bg">
-            <h3>{t('project_p.research.subtitle3')}</h3>
-            <p>{t('project_p.research.content3')}</p>
+            <h3>{t('project_p.research.design_opportunities.subtitle')}</h3>
+            <p>{t('project_p.research.design_opportunities.content')}</p>
           </div>
         </section>
 

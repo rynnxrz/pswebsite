@@ -1,0 +1,211 @@
+/* src/components/projects/UserStakeholdersGraph.css */
+
+.stakeholders-container {
+    margin: 3rem 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.stakeholders-header h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-family: 'Soehne', sans-serif;
+}
+
+.stakeholders-header p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary, #a0a0a0);
+    max-width: 800px;
+}
+
+/* Interaction Hint like portfolio-link */
+.interaction-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    /* Space from previous sentence */
+    color: #fff;
+    /* or match the link style e.g. white */
+    cursor: default;
+    /* Not a real link but a hint, or make it clickable? User said "Click on EACH ROLE" so this hint is just text instructions */
+    /* portfolio-link style simulation */
+    font-weight: 500;
+}
+
+.interaction-hint>span {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    transition: border-color 0.2s ease;
+}
+
+.interaction-hint svg {
+    opacity: 0.7;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Optional hover if we want it to feel alive */
+/* .interaction-hint:hover > span {
+    border-bottom-color: #fff;
+} */
+
+.stakeholders-accordion-wrapper {
+    /* Removed padding and background to align edges with the cards below */
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.accordion-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.accordion-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.accordion-item.open {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Reduced horizontal padding to 0 if we want it totally flush? 
+       No, usually text needs padding inside the box. 
+       If the user wants the "Dot" to align with the "Card Edge", 
+       then the card edge is at 0. 
+       The internal dot is at padding-left.
+       The card itself has border-radius.
+       
+       Letting the accordion items match the width of the cards. 
+       The cards are likely in a container that has 0 padding?
+       
+       Let's keep minimal padding here but remove the wrapper padding.
+    */
+    padding: 1rem 1.2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #e5e7eb;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* Status Dot Styles */
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-input {
+    background-color: #10b981;
+    /* Green */
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.dot-plan {
+    background-color: #f59e0b;
+    /* Orange */
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.dot-read {
+    background-color: #217988;
+    /* Custom Blue */
+    box-shadow: 0 0 8px rgba(33, 121, 136, 0.4);
+}
+
+.header-icon-raw {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a0a0a0;
+    /* Neutral icon color */
+}
+
+.header-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #e5e7eb;
+}
+
+.header-right {
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-item.open .accordion-content {
+    max-height: 500px;
+}
+
+.content-inner {
+    padding: 0 1.2rem 1.2rem 3rem;
+    /* Indented to align with text */
+    /* border-top: 1px solid rgba(255, 255, 255, 0.05); */
+    padding-top: 0.5rem;
+}
+
+.group-role-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.people-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.people-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.people-names {
+    font-size: 0.95rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.people-title {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+}
+
+.group-context {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #9ca3af;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}

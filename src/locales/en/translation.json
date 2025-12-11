@@ -46,7 +46,7 @@
             "durationDesc": "Case study scope: Jul 2023 – Aug 2024 · Ongoing"
         },
         "scope": {
-            "title": "User Scope",
+            "title": "System Scope",
             "content": "This system spans three operational layers across the contract-to-production lifecycle:",
             "points": [
                 "<strong>Decision Makers:</strong> They read and consolidated data for timing, risk, and client decisions.",
@@ -68,21 +68,118 @@
         "research": {
             "title": "Research Findings",
             "subtitle1": "Research Approach and Key Findings",
-            "content1": "Instead of jumping straight into generic interviews, I started with quantitative analysis of how the shared Excel file was actually used. By logging user operations, I found that around <strong>54%</strong> of actions were pure data input and <strong>37%</strong> were just formatting changes—often used as ad-hoc reminders or unit conversions.",
-            "insights": "Key insights from the research:",
-            "points1": [
-                "A large portion of effort was spent on low-value work rather than decision-making.",
-                "The Excel file was already being “hacked” into a makeshift status/reminder system, not just a static spreadsheet."
-            ],
-            "subtitle2": "Transitioning from Data Analysis to Qualitative Interviews",
-            "content2": "With that big-picture signal, I then moved into qualitative interviews to understand the “why” behind these behaviors. In conversations, users described:",
-            "points2": [
-                "Constantly switching between different documents to keep track of what was “actually happening”.",
-                "Relying on manual formatting tweaks (colors, merged cells, comments) to remember statuses and deadlines.",
-                "The mental load and error risk of repeatedly entering and re-entering similar information."
-            ],
-            "subtitle3": "Design Opportunities",
-            "content3": "The real issue wasn’t “Excel is messy”; it was that Excel was being forced to act as a workflow and reminder system without any real support for status tracking or connected data."
+            "content1": "Instead of jumping straight into generic interviews, I started with quantitative analysis of how the shared Excel file was actually used. By logging user operations, I found that around <strong>54%</strong> of actions were pure data input and <strong>37%</strong> were just formatting changes—often used as reminders or unit conversions.",
+            "stakeholders": {
+                "title": "Who are the Users Behind the Data?",
+                "description": "To understand the \"why\" behind the manual formatting behaviors, I mapped the stakeholders into three engagement layers. This helped me identify exactly who was struggling with what.",
+                "graph_title": "Mapping the Humans Behind the Data",
+                "graph_subtitle": "Categorizing stakeholders by their primary interaction with the system.",
+                "groups": [
+                    {
+                        "layer_name": "Read Layer",
+                        "name": "Decision Makers",
+                        "role_title": "Directors & Procurement",
+                        "subgroups": [
+                            {
+                                "names": "Wang",
+                                "title": "The Factory Manager"
+                            },
+                            {
+                                "names": "Lilian",
+                                "title": "The Packaging Coordinator"
+                            }
+                        ],
+                        "tags": [
+                            "read",
+                            "plan"
+                        ],
+                        "context": "High-level oversight & pattern recognition."
+                    },
+                    {
+                        "layer_name": "Plan Layer",
+                        "name": "Shift Managers",
+                        "role_title": "Production & Reporting",
+                        "subgroups": [
+                            {
+                                "names": "Flora",
+                                "title": "The Production Supervisor"
+                            },
+                            {
+                                "names": "Ethan",
+                                "title": "The Production Planner"
+                            }
+                        ],
+                        "tags": [
+                            "plan"
+                        ],
+                        "context": "Connecting dots between orders and capacity."
+                    },
+                    {
+                        "layer_name": "Input Layer",
+                        "name": "Operators",
+                        "role_title": "Admins & Receivers",
+                        "subgroups": [
+                            {
+                                "names": "Nancy",
+                                "title": "The Contract Receiver"
+                            },
+                            {
+                                "names": "Cleo",
+                                "title": "The Contract Manager"
+                            }
+                        ],
+                        "tags": [
+                            "input"
+                        ],
+                        "context": "Heavy data entry & initial validation."
+                    }
+                ]
+            },
+            "user_voice": {
+                "title": "From Data to User Voice",
+                "description": "While the quantitative data revealed what was happening (heavy manual entry), I needed to understand the why. I traced these patterns back to the specific users to uncover the root friction behind the numbers.",
+                "quotes": [
+                    {
+                        "text": "We spend hours analyzing rows just to get a 'vague feeling' of whether we have the capacity to negotiate more orders.",
+                        "role": "Wang, The Factory Manager",
+                        "tags": [
+                            "read"
+                        ]
+                    },
+                    {
+                        "text": "I’m juggling design, ordering, and clients every day. I simply don't have time to manually fix spreadsheet formatting.",
+                        "role": "Lilian, The Packaging Coordinator",
+                        "tags": [
+                            "read"
+                        ]
+                    },
+                    {
+                        "text": "I need to add notes when things change, but I’m afraid to break the Excel formulas if I insert a new row.",
+                        "role": "Flora, The Production Supervisor",
+                        "tags": [
+                            "plan"
+                        ]
+                    },
+                    {
+                        "text": "It would be a game-changer if the data was linked—so I know instantly when materials or packaging actually arrive.",
+                        "role": "Ethan, The Production Planner",
+                        "tags": [
+                            "plan"
+                        ]
+                    },
+                    {
+                        "text": "I constantly switch between different sheets just to verify if the information is actually correct.",
+                        "role": "Cleo, The Contract Manager",
+                        "tags": [
+                            "input"
+                        ]
+                    }
+                ]
+            },
+            "design_opportunities": {
+                "subtitle": "Design Opportunities",
+                "content": "The real issue wasn’t “Excel is messy”; it was that Excel was being forced to act as a workflow and reminder system without any real support for status tracking or connected data."
+            }
         },
         "choices": {
             "title": "Key Design Choices",
