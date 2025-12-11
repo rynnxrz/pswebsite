@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { pageTransition } from '../utils/animations';
 import { Expand, Download, Copy } from 'lucide-react';
-import { useNotification } from './NotificationContext';
+import { useNotification } from '../components/NotificationContext';
 import './Portfolio.css';
 
 const TooltipButton = ({ onClick, children, tooltipText, href, download, isMobile }: any) => {
