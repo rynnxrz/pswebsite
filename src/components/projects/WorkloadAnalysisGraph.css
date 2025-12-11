@@ -22,9 +22,27 @@
     }
 }
 
-/* .workload-graph-container styles are now handled by GraphCard */
+/* .workload-graph-container styles override */
+.workload-graph-container {
+    position: relative;
+    /* 整块离上一段内容稍微留一点点就好 */
+    margin-top: 0.5rem;
+}
 
-/* Title style is now in GraphCard, removing .workload-graph-title */
+/* 强制覆盖 title（包括 margin-top），防止任何全局 h3 规则抢权 */
+.workload-graph-container.workload-graph-container h3 {
+    font-size: 0.75rem !important;
+    color: #a0a0a0 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    font-weight: 600 !important;
+    text-align: left !important;
+    line-height: 1.4 !important;
+
+    /* 关键：把顶部空间干掉，只留下面一点间距 */
+    margin-top: 0 !important;
+    margin-bottom: 0.4rem !important;
+}
 
 .bar-container {
     display: flex;
