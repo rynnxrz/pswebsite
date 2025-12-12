@@ -25,6 +25,15 @@
   margin-bottom: 3rem;
 }
 
+/* Tighter spacing for Project Info group */
+.compact-section {
+  margin-bottom: 1.5rem;
+}
+
+.compact-divider {
+  margin: 1.5rem 0;
+}
+
 .project-section h2 {
   font-size: 1.5rem;
   font-weight: 600;
