@@ -25,7 +25,7 @@ export const LanguageTransitionOverlay = ({ fromLang, toLang, onComplete }: Lang
         const targetChars = targetStr.split('');
 
         // Timers array to clear on unmount
-        const timers: NodeJS.Timeout[] = [];
+        const timers: ReturnType<typeof setTimeout>[] = [];
 
         // Staggered update
         // Start the sequence after an initial Pause
