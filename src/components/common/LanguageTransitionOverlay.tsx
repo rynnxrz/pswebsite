@@ -47,9 +47,10 @@ export const LanguageTransitionOverlay = ({ fromLang, toLang, onComplete }: Lang
         });
 
         // 2. Complete callback
-        // Wait for startDelay + ripple time (7 * 80) + animation time (~500ms buffer)
-        // Increased buffer to 2000ms to ensure the final text is clearly visible before reload
-        const totalDuration = startDelay + (LEN * 80) + 2000;
+        // Dynamic buffer based on language length/complexity
+        // ZH: 1s, EN: 1.25s
+        const buffer = toLang === 'zh' ? 1000 : 1250;
+        const totalDuration = startDelay + (LEN * 80) + buffer;
 
         const completeTimer = setTimeout(() => {
             onComplete();

@@ -41,7 +41,11 @@ const AppContent = () => {
   );
 };
 
+// import { useIpadCursor } from './hooks/useIpadCursor';
+
 function App() {
+  // useIpadCursor();
+
   return (
     <NotificationProvider>
       <Router>
