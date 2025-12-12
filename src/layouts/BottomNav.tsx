@@ -5,7 +5,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, User, Briefcase, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { AnimatePresence } from 'framer-motion';
 import { generateDisplacementMap } from '../utils/displacementUtils';
+import { LanguageTransitionOverlay } from '../components/common/LanguageTransitionOverlay';
 import './BottomNav.css';
 // import './Tooltip.css'; // No longer needed for BottomNav due to custom styles
 
@@ -39,15 +41,25 @@ const navItems = [
   { id: 'language', icon: Globe, to: null, tooltip: 'menu.language' }, // Special item
 ];
 
-const NavItem = ({ item, isActive, onClick, currentLang }: { item: any; isActive: boolean, onClick?: () => void, currentLang?: string }) => {
+const NavItem = ({ item, isActive, onClick, currentLang }: { item: any; isActive: boolean, onClick?: (e: React.MouseEvent) => void, currentLang?: string }) => {
   // Pure CSS tooltip handling now, so state is removed
   const { t } = useTranslation();
 
   // Translate tooltip functionality
   const tooltipText = item.id === 'language' ? t('nav.language') : t(`nav.${item.id}`);
 
+  const handleClick = (e: React.MouseEvent) => {
+    // Only prevent default for custom actions (like Language toggle).
+    // For router Links, we must allow the event to propagate.
+    if (onClick) {
+      e.preventDefault();
+      e.stopPropagation();
+      onClick(e);
+    }
+  };
+
   const content = (
-    <button className={`nav-item ${isActive ? 'active' : ''}`} onClick={onClick}>
+    <button type="button" className={`nav-item ${isActive ? 'active' : ''}`} onClick={handleClick}>
       {item.id === 'language' && currentLang ? (
         <LanguageSwitchIcon lang={currentLang} />
       ) : (
@@ -90,13 +102,35 @@ export const BottomNav = () => {
     generateDisplacementMap(navWidth, navHeight, navBorderRadius, 16).then(setDisplacementMap);
   }, [navWidth, navHeight, navBorderRadius]);
 
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [targetLang, setTargetLang] = useState('');
+
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'zh' : 'en';
-    i18n.changeLanguage(newLang);
+
+    // Always trigger the transition overlay for language switching
+    setTargetLang(newLang);
+    setIsTransitioning(true);
+  };
+
+  const handleTransitionComplete = () => {
+    i18n.changeLanguage(targetLang).then(() => {
+      // Force a page reload to ensure all external resources (like iframe) update correctly
+      window.location.reload();
+    });
   };
 
   return (
     <>
+      <AnimatePresence>
+        {isTransitioning && (
+          <LanguageTransitionOverlay
+            fromLang={i18n.language}
+            toLang={targetLang}
+            onComplete={handleTransitionComplete}
+          />
+        )}
+      </AnimatePresence>
       {/* SVG Filters for Liquid Effect */}
       <svg width="0" height="0">
         <filter id="liquid-glass-filter">
