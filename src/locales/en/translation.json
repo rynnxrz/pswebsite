@@ -53,12 +53,12 @@
                 "<strong>Shift/Planning Managers:</strong> They need accurate status and capacity signals to allocate work.",
                 "<strong>Operators/Executors:</strong> They need structured input and clear next-step prompts to keep data reliable."
             ],
-            "read": "Read",
+            "read": "Read: Decide timing and client priorities.",
             "readDesc": "Decide timing and client priorities.",
-            "plan": "Plan",
-            "planDesc": "Allocate capacity with live status.",
-            "input": "Input",
-            "inputDesc": "Keep structured data accurate."
+            "plan": "Plan: Connect orders to capacity.",
+            "planDesc": "Connect orders to capacity.",
+            "input": "Input: Heavy data entry & initial validation.",
+            "inputDesc": "Heavy data entry & initial validation."
         },
         "rationale": {
             "title": "Project Rationale",
@@ -175,45 +175,80 @@
                         ]
                     }
                 ]
-            },
-            "design_opportunities": {
-                "subtitle": "Design Opportunities",
-                "content": "The real issue wasn’t “Excel is messy”; it was that Excel was being forced to act as a workflow and reminder system without any real support for status tracking or connected data."
             }
+        },
+        "design_moves": {
+            "title": "Turning these pain points into three core design moves.",
+            "tabs": [
+                {
+                    "id": "link",
+                    "title": "01. Link the Data",
+                    "subtitle": "Structure the Input"
+                },
+                {
+                    "id": "unify",
+                    "title": "02. Unify the View",
+                    "subtitle": "Filter the Noise"
+                },
+                {
+                    "id": "reveal",
+                    "title": "03. Reveal Capacity",
+                    "subtitle": "Support Decisions"
+                }
+            ],
+            "moves": [
+                {
+                    "id": "link",
+                    "headline": "From Free-form to Guided Flow",
+                    "context": {
+                        "pain": "Operators often added rows randomly in Excel, breaking formulas and creating \"orphan data\" that didn't match the contract.",
+                        "strategy": "I designed a linear flow: Contract → Schedule → Report. Users can now only report production on tasks that actually exist.",
+                        "scope": [
+                            "input",
+                            "plan"
+                        ]
+                    },
+                    "image": {
+                        "alt": "Production Table",
+                        "annotation": "Tasks are linked to contracts. No more random manual entry."
+                    }
+                },
+                {
+                    "id": "unify",
+                    "headline": "One Master Table, Four Lenses",
+                    "context": {
+                        "pain": "Teams (Finance, Packing, Planning) wasted time switching between different spreadsheets just to find \"their\" columns.",
+                        "strategy": "A Single Source of Truth with role-based tabs. Everyone works on the same live data, but sees a filtered view tailored to their job (e.g., Finance only sees payment status).",
+                        "scope": [
+                            "plan",
+                            "read"
+                        ]
+                    },
+                    "image": {
+                        "alt": "Contract Table",
+                        "annotation": "One click to filter irrelevant data."
+                    }
+                },
+                {
+                    "id": "reveal",
+                    "headline": "Answers, Not Just Rows",
+                    "context": {
+                        "pain": "Managers relied on \"gut feelings\" to accept new orders because calculating actual capacity from raw rows took too long.",
+                        "strategy": "Transformed the dashboard from a data list into a Decision Tool. It visualizes future capacity and bottlenecks, giving an instant \"Yes/No\" on whether to take new orders.",
+                        "scope": [
+                            "read"
+                        ]
+                    },
+                    "image": {
+                        "alt": "Dashboard Demo",
+                        "annotation": "Visualizing free slots to help negotiate new orders."
+                    }
+                }
+            ]
         },
         "choices": {
             "title": "Key Design Choices",
-            "subtitle": "Connecting the Workflow",
-            "intro": "We mapped the end-to-end flow to make sure read/plan/input stay aligned across stages.",
-            "journeyMap": {
-                "stage1": {
-                    "title": "01. Pre-Contract",
-                    "pains": "Contracts stuck in Dropbox, detached from tracking.",
-                    "move": "Centralized intake.",
-                    "tags": [
-                        "input"
-                    ]
-                },
-                "stage2": {
-                    "title": "02. Preparation",
-                    "pains": "Formatting used as reminders instead of real fields.",
-                    "move": "Structured input + auto-import.",
-                    "tags": [
-                        "plan",
-                        "input"
-                    ]
-                },
-                "stage3": {
-                    "title": "03. Traceability",
-                    "pains": "Status drifts across teams.",
-                    "move": "Single source of truth.",
-                    "tags": [
-                        "read",
-                        "plan"
-                    ]
-                }
-            },
-            "stage1_title": "1. Turning scattered files into one contract workspace"
+            "subtitle": ""
         },
         "excellence": {
             "title": "Unified Experience",

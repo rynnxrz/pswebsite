@@ -17,7 +17,6 @@ export const UserScopeList = () => {
                 </div>
                 <div className="uj-item-main">
                     <p className="uj-item-title">{t('project_p.scope.read')}</p>
-                    <p className="uj-item-subtitle">{t('project_p.scope.readDesc')}</p>
                 </div>
             </div>
             <div className="uj-list-item">
@@ -26,7 +25,6 @@ export const UserScopeList = () => {
                 </div>
                 <div className="uj-item-main">
                     <p className="uj-item-title">{t('project_p.scope.plan')}</p>
-                    <p className="uj-item-subtitle">{t('project_p.scope.planDesc')}</p>
                 </div>
             </div>
             <div className="uj-list-item">
@@ -35,7 +33,6 @@ export const UserScopeList = () => {
                 </div>
                 <div className="uj-item-main">
                     <p className="uj-item-title">{t('project_p.scope.input')}</p>
-                    <p className="uj-item-subtitle">{t('project_p.scope.inputDesc')}</p>
                 </div>
             </div>
         </div>

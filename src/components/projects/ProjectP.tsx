@@ -9,7 +9,7 @@ import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
 import { HorizontalScrollContainer } from '../common/HorizontalScrollContainer/HorizontalScrollContainer';
 import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
-import { JourneyMap } from './JourneyMap';
+import { DesignMoves } from './DesignMoves';
 import { UserScopeList } from './UserScopeList';
 import { UserStakeholdersGraph } from './UserStakeholdersGraph';
 import { UserVoiceQuotes } from './UserVoiceQuotes';
@@ -29,7 +29,6 @@ export const ProjectP = () => {
     { id: 'intro', title: 'Project Info' },
     { id: 'research', title: 'Research Findings' },
     { id: 'choices', title: 'Key Design Choices' },
-    { id: 'excellence', title: 'Unique Excellence' },
     { id: 'reflection', title: 'Reflection' },
   ];
 
@@ -50,7 +49,7 @@ export const ProjectP = () => {
     );
 
     // Observe all sections including the ones grouped under Project Info
-    const observableIds = [...projectInfoIds, 'research', 'choices', 'excellence', 'reflection'];
+    const observableIds = [...projectInfoIds, 'research', 'choices', 'reflection'];
     observableIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
@@ -91,7 +90,7 @@ export const ProjectP = () => {
         />
 
         {/* 2. Intro Section */}
-        <section id="intro" className="project-section">
+        <section id="intro" className="project-section compact-section">
           <h2>{t('project_p.intro.title')}</h2>
           <p className="intro-text">
             {t('project_p.intro.content')}
@@ -115,10 +114,10 @@ export const ProjectP = () => {
           />
         </section>
 
-        <hr className="section-divider" />
+        <hr className="section-divider compact-divider" />
 
         {/* 3. Team & My Role */}
-        <section id="team" className="project-section">
+        <section id="team" className="project-section compact-section">
           <h2>{t('project_p.team.title')}</h2>
           <HorizontalScrollContainer className="role-grid">
             <div className="role-card">
@@ -148,20 +147,20 @@ export const ProjectP = () => {
 
         </section>
 
-        <hr className="section-divider" />
+        <hr className="section-divider compact-divider" />
 
         {/* 4. User Scope */}
-        <section id="scope" className="project-section">
+        <section id="scope" className="project-section compact-section">
           <h2>{t('project_p.scope.title')}</h2>
           <p className="intro-text">{t('project_p.scope.content')}</p>
           {/* New User Journey Graph replaces the old list and image */}
           <UserScopeList />
         </section>
 
-        <hr className="section-divider" />
+        <hr className="section-divider compact-divider" />
 
         {/* 5. Project Rationale */}
-        <section id="rationale" className="project-section">
+        <section id="rationale" className="project-section compact-section">
           <h2>{t('project_p.rationale.title')}</h2>
           <div className="rationale-block">
             <h3>{t('project_p.rationale.subtitle')}</h3>
@@ -191,11 +190,6 @@ export const ProjectP = () => {
             <UserStakeholdersGraph onFilterChange={setActiveQuoteFilter} />
             <UserVoiceQuotes filterTag={activeQuoteFilter} />
           </div>
-
-          <div className="research-subsection highlight-bg">
-            <h3>{t('project_p.research.design_opportunities.subtitle')}</h3>
-            <p>{t('project_p.research.design_opportunities.content')}</p>
-          </div>
         </section>
 
         <hr className="section-divider" />
@@ -203,70 +197,9 @@ export const ProjectP = () => {
         {/* 7. Key Design Choices */}
         <section id="choices" className="project-section">
           <h2>{t('project_p.choices.title')}</h2>
-          <h3>{t('project_p.choices.subtitle')}</h3>
 
-          <p className="whitespace-pre-line mb-8 font-medium text-gray-300 text-lg">
-            {t('project_p.choices.intro')}
-          </p>
+          <DesignMoves />
 
-          <JourneyMap />
-
-          <h3 className="stage-title">{t('project_p.choices.stage1_title')}</h3>
-        </section>
-
-        <hr className="section-divider" />
-
-        {/* 8. Unique Excellence */}
-        <section id="excellence" className="project-section">
-          <h2>{t('project_p.excellence.title')}</h2>
-          <h3>{t('project_p.excellence.subtitle')}</h3>
-
-          <div className="excellence-block">
-            <h4>{t('project_p.excellence.section1.title')}</h4>
-            <p>{t('project_p.excellence.section1.content')}</p>
-            <ul>
-              {(t('project_p.excellence.section1.list', { returnObjects: true }) as string[]).map((point, i) => (
-                <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
-              ))}
-            </ul>
-
-            {/* Stacked Cards for Unified Experience */}
-            <StackedGallery
-              defaultImage="/assets/images/ora-web/stacked-card-1.png"
-              images={[
-                { id: 1, src: '/assets/images/ora-web/stacked-card-1.png', alt: 'Unified View 1' },
-                { id: 2, src: '/assets/images/ora-web/stacked-card-2.png', alt: 'Unified View 2' }
-              ]}
-            />
-
-            <p>{t('project_p.excellence.section1.content2')}</p>
-            <ul>
-              {(t('project_p.excellence.section1.points', { returnObjects: true }) as string[]).map((point, i) => (
-                <li key={i}>{point}</li>
-              ))}
-            </ul>
-            <p>{t('project_p.excellence.section1.content3')}</p>
-          </div>
-
-          <div className="excellence-block">
-            <h4>{t('project_p.excellence.section2.title')}</h4>
-            <p>{t('project_p.excellence.section2.content')}</p>
-            <ul>
-              {(t('project_p.excellence.section2.list', { returnObjects: true }) as string[]).map((point, i) => (
-                <li key={i}>{point}</li>
-              ))}
-            </ul>
-            <p>{t('project_p.excellence.section2.content2')}</p>
-            <p>{t('project_p.excellence.section2.content3')}</p>
-            <ul>
-              {(t('project_p.excellence.section2.points', { returnObjects: true }) as string[]).map((point, i) => (
-                <li key={i}>{point}</li>
-              ))}
-            </ul>
-            <p className="final-note">
-              {t('project_p.excellence.section2.content4')}
-            </p>
-          </div>
         </section>
 
         <hr className="section-divider" />
