@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ScanEye, CalendarClock, Keyboard, ArrowRight } from 'lucide-react';
+import { ScanEye, CalendarClock, Keyboard, ArrowUpRight } from 'lucide-react';
 import './DesignMoves.css';
 
 interface DesignMove {
@@ -44,7 +44,7 @@ export const DesignMoves = () => {
 
     // Placeholder images map
     const imageMap: Record<string, string> = {
-        link: '/assets/images/ora-web/move-link-placeholder.png', // Replace later
+        link: '/assets/images/ora-web/Unify.mp4', // Replaced with video
         unify: '/assets/images/ora-web/move-unify-placeholder.png', // Replace later
         reveal: '/assets/images/ora-web/move-reveal-placeholder.png'  // Replace later
     };
@@ -104,13 +104,24 @@ export const DesignMoves = () => {
                         {/* Row 3: Visual */}
                         <div className="dm-visual-row">
                             <div className="dm-image-wrapper">
-                                <img
-                                    src={imageMap[activeTabId]}
-                                    alt={activeMove.image.alt}
-                                    className="dm-main-image"
-                                />
+                                {imageMap[activeTabId].endsWith('.mp4') ? (
+                                    <video
+                                        src={imageMap[activeTabId]}
+                                        className="dm-main-image"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                    />
+                                ) : (
+                                    <img
+                                        src={imageMap[activeTabId]}
+                                        alt={activeMove.image.alt}
+                                        className="dm-main-image"
+                                    />
+                                )}
                                 <div className="dm-annotation">
-                                    <ArrowRight size={16} className="dm-arrow" />
+                                    <ArrowUpRight size={16} className="dm-arrow" />
                                     <span>{activeMove.image.annotation}</span>
                                 </div>
                             </div>
