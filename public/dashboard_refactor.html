@@ -1201,10 +1201,10 @@
             <!-- PAGE: CONTRACT TABLE -->
             <div id="page-contracts" class="hidden flex-1 flex flex-col overflow-hidden relative h-full bg-white">
                 <!-- Contract Content (Scrollable) -->
-                <div class="flex-1 overflow-auto bg-white relative p-6">
-                    <!-- Header Controls (Moved to Content) -->
-                    <div class="mb-6">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <div class="flex-1 overflow-auto bg-white relative p-4">
+                    <!-- Header Controls -->
+                    <div class="mb-4">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                             <div>
                                 <h1 class="text-xl font-bold text-gray-900" data-i18n="ct_title">Contract Table</h1>
                                 <p class="text-xs text-gray-500" data-i18n="ct_date_range">2024-06-01 ~ 2024-08-31</p>
@@ -1223,8 +1223,6 @@
                                     class="bg-[#297A88] text-white px-4 py-1.5 rounded text-sm hover:bg-[#066070] transition shadow-sm font-bold flex items-center gap-2">
                                     <i class="fa-solid fa-plus"></i> <span data-i18n="ct_import">Import New</span>
                                 </button>
-
-
                             </div>
                         </div>
 
@@ -1244,132 +1242,305 @@
                                 </button>
                             </div>
 
-                            <!-- Right Role Tabs -->
+                            <!-- Right Role Tabs (Now Functional) -->
                             <div
-                                class="flex items-center gap-8 text-sm font-bold text-gray-800 w-full sm:w-auto justify-end">
-                                <span
-                                    class="bg-[#E0F7FA] text-[#006064] px-4 py-1.5 rounded-md cursor-pointer shadow-sm">Reqs</span>
-                                <span class="hover:text-[#297A88] cursor-pointer transition-colors">Finance</span>
-                                <span class="hover:text-[#297A88] cursor-pointer transition-colors">Pkg</span>
-                                <span class="hover:text-[#297A88] cursor-pointer transition-colors">Plan</span>
-                                <i class="fa-solid fa-gear text-gray-400 cursor-pointer hover:text-gray-600"></i>
+                                class="flex items-center gap-1 text-xs font-bold text-gray-600 bg-gray-100 p-1 rounded-lg">
+                                <button onclick="switchContractTab('reqs')" id="tab-ct-reqs"
+                                    class="px-3 py-1 rounded-md bg-white text-[#006064] shadow-sm transition-all"
+                                    data-i18n="ct_role_reqs">Reqs</button>
+                                <button onclick="switchContractTab('fin')" id="tab-ct-fin"
+                                    class="px-3 py-1 rounded-md hover:bg-white/50 text-gray-500 transition-all font-normal"
+                                    data-i18n="ct_role_fin">Finance</button>
+                                <button onclick="switchContractTab('pkg')" id="tab-ct-pkg"
+                                    class="px-3 py-1 rounded-md hover:bg-white/50 text-gray-500 transition-all font-normal"
+                                    data-i18n="ct_role_pkg">Pkg</button>
+                                <button onclick="switchContractTab('plan')" id="tab-ct-plan"
+                                    class="px-3 py-1 rounded-md hover:bg-white/50 text-gray-500 transition-all font-normal"
+                                    data-i18n="ct_role_plan">Plan</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Table Container -->
-                    <div class="relative">
-                        <!-- Grid Background Lines (CSS Trick for infinite spreadsheet look) -->
-                        <div class="absolute inset-0 z-0 pointer-events-none"
-                            style="background-image: linear-gradient(#f3f4f6 1px, transparent 1px); background-size: 100% 40px; margin-top: 40px;">
-                        </div>
-
-                        <table class="w-full text-left border-collapse relative z-10">
+                    <div class="relative overflow-x-auto border rounded-lg border-gray-200">
+                        <table class="w-full text-left border-collapse whitespace-nowrap">
                             <thead class="bg-gray-50 text-gray-500 text-xs uppercase border-b border-gray-200">
                                 <tr>
-                                    <th class="px-6 py-3 font-semibold" data-i18n="ct_th_date">Date</th>
-                                    <th class="px-6 py-3 font-semibold" data-i18n="ct_th_no">Contract No</th>
-                                    <th class="px-6 py-3 font-semibold" data-i18n="ct_th_brand">Brand</th>
-                                    <th class="px-6 py-3 font-semibold" data-i18n="ct_th_prod">Product</th>
-                                    <th class="px-6 py-3 font-semibold" data-i18n="ct_th_spec">Spec</th>
-                                    <th class="px-6 py-3 font-semibold" data-i18n="ct_th_qty">Qty</th>
-                                    <th class="px-6 py-3 font-semibold" data-i18n="ct_th_status">Status</th>
-                                    <th class="px-6 py-3 font-semibold text-center" data-i18n="ct_th_action">Action</th>
+                                    <!-- Fixed Columns -->
+                                    <th class="px-3 py-3 font-semibold w-24" data-i18n="ct_th_date">Date</th>
+                                    <th class="px-3 py-3 font-semibold w-32" data-i18n="ct_th_no">Contract No</th>
+                                    <th class="px-3 py-3 font-semibold w-20" data-i18n="ct_th_brand">Brand</th>
+                                    <th class="px-3 py-3 font-semibold w-40" data-i18n="ct_th_prod">Product</th>
+                                    <th class="px-3 py-3 font-semibold w-24" data-i18n="ct_th_spec">Spec</th>
+                                    <th class="px-3 py-3 font-semibold w-24" data-i18n="ct_th_qty">Qty</th>
+                                    <th class="px-3 py-3 font-semibold w-32" data-i18n="ct_th_status">Status</th>
+
+                                    <!-- Dynamic Columns: Reqs -->
+                                    <th class="col-reqs px-3 py-3 font-semibold bg-blue-50/50 text-blue-800 border-l border-gray-200"
+                                        data-i18n="ct_th_reqs_gacc">GACC</th>
+                                    <th class="col-reqs px-3 py-3 font-semibold bg-blue-50/50 text-blue-800"
+                                        data-i18n="ct_th_reqs_code">Coding</th>
+                                    <th class="col-reqs px-3 py-3 font-semibold bg-blue-50/50 text-blue-800"
+                                        data-i18n="ct_th_reqs_ship">Ship Mode</th>
+                                    <th class="col-reqs px-3 py-3 font-semibold bg-blue-50/50 text-blue-800"
+                                        data-i18n="ct_th_reqs_label">Label</th>
+                                    <th class="col-reqs px-3 py-3 font-semibold bg-blue-50/50 text-blue-800"
+                                        data-i18n="ct_th_reqs_other">Other</th>
+
+                                    <!-- Dynamic Columns: Finance (Hidden by default) -->
+                                    <th class="col-fin hidden px-3 py-3 font-semibold bg-green-50/50 text-green-800 border-l border-gray-200"
+                                        data-i18n="ct_th_fin_inv">Invoice #</th>
+                                    <th class="col-fin hidden px-3 py-3 font-semibold bg-green-50/50 text-green-800"
+                                        data-i18n="ct_th_fin_dep">Deposit</th>
+                                    <th class="col-fin hidden px-3 py-3 font-semibold bg-green-50/50 text-green-800"
+                                        data-i18n="ct_th_fin_pre">Pre-Prod</th>
+                                    <th class="col-fin hidden px-3 py-3 font-semibold bg-green-50/50 text-green-800"
+                                        data-i18n="ct_th_fin_bal">Balance</th>
+
+                                    <!-- Dynamic Columns: Pkg (Hidden by default) -->
+                                    <th class="col-pkg hidden px-3 py-3 font-semibold bg-purple-50/50 text-purple-800 border-l border-gray-200"
+                                        data-i18n="ct_th_pkg_inv">Invoice #</th>
+                                    <th class="col-pkg hidden px-3 py-3 font-semibold bg-purple-50/50 text-purple-800"
+                                        data-i18n="ct_th_pkg_dep">Deposit</th>
+                                    <th class="col-pkg hidden px-3 py-3 font-semibold bg-purple-50/50 text-purple-800"
+                                        data-i18n="ct_th_pkg_pre">Pre-Prod</th>
+                                    <th class="col-pkg hidden px-3 py-3 font-semibold bg-purple-50/50 text-purple-800"
+                                        data-i18n="ct_th_pkg_bal">Balance</th>
+
+                                    <!-- Dynamic Columns: Plan (Hidden by default) -->
+                                    <th class="col-plan hidden px-3 py-3 font-semibold bg-orange-50/50 text-orange-800 border-l border-gray-200"
+                                        data-i18n="ct_th_plan_mat">Material Stock</th>
+                                    <th class="col-plan hidden px-3 py-3 font-semibold bg-orange-50/50 text-orange-800"
+                                        data-i18n="ct_th_plan_sch">Schedule Log</th>
+
+                                    <th
+                                        class="px-3 py-3 font-semibold text-center w-10 sticky right-0 bg-gray-50 shadow-[-5px_0_5px_-5px_0_rgba(0,0,0,0.1)]">
+                                    </th>
                                 </tr>
                             </thead>
-                            <tbody class="text-xs text-gray-700 divide-y divide-gray-100 bg-transparent">
+                            <tbody class="text-xs text-gray-700 divide-y divide-gray-100 bg-white">
                                 <!-- Row 1: New Contract (Red) -->
-                                <tr
-                                    class="hover:bg-gray-50 transition-colors h-[40px] border-b border-gray-100 bg-white">
-                                    <td class="px-6 py-2 text-gray-500">07/01/2025</td>
-                                    <td class="px-6 py-2 font-medium">LTUM-202502001</td>
-                                    <td class="px-6 py-2">Little</td>
-                                    <td class="px-6 py-2">Liquid Calcium (Xylitol verison 2)</td>
-                                    <td class="px-6 py-2">10ml/sachet</td>
-                                    <td class="px-6 py-2">900000 sachets</td>
-                                    <td class="px-6 py-2">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-2 h-2 rounded-full bg-[#EF4444]"></div>
-                                            <span class="font-medium text-gray-800" data-i18n="ct_status_new">New
-                                                Contract</span>
+                                <tr class="hover:bg-gray-50 transition-colors border-b border-gray-100 group">
+                                    <td class="px-3 py-2 text-gray-500 whitespace-nowrap">07/01/2025</td>
+                                    <td class="px-3 py-2 font-medium whitespace-gray-800">LTUM-202502001</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">Little</td>
+                                    <td class="px-3 py-2 max-w-[160px] truncate"
+                                        title="Liquid Calcium (Xylitol verison 2)">Liquid Calcium (Xylitol...</td>
+                                    <td class="px-3 py-2 text-gray-500">10ml/sachet</td>
+                                    <td class="px-3 py-2">900,000</td>
+                                    <td class="px-3 py-2">
+                                        <div class="flex flex-row items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-[#EF4444] flex-shrink-0"></div>
+                                            <div class="flex flex-col leading-tight">
+                                                <span class="font-bold text-gray-800"
+                                                    data-i18n="ct_status_new_1">New</span>
+                                                <span class="text-[10px] text-gray-500"
+                                                    data-i18n="ct_status_new_2">Contract</span>
+                                            </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-2 text-gray-400 text-center cursor-pointer hover:text-gray-600">
-                                        •••</td>
-                                    <td class="px-6 py-2 bg-gray-50/50 border-l border-gray-100"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
+
+                                    <!-- Reqs Cells -->
+                                    <td class="col-reqs px-3 py-2 border-l border-gray-100 text-gray-400">—</td>
+                                    <td class="col-reqs px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-reqs px-3 py-2 font-medium">FOB Shanghai</td>
+                                    <td class="col-reqs px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-reqs px-3 py-2 text-gray-400">—</td>
+
+                                    <!-- Fin Cells -->
+                                    <td class="col-fin hidden px-3 py-2 border-l border-gray-100 font-mono">INV-2024001
+                                    </td>
+                                    <td class="col-fin hidden px-3 py-2 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Paid</td>
+                                    <td class="col-fin hidden px-3 py-2 text-gray-400">Pending</td>
+                                    <td class="col-fin hidden px-3 py-2 text-gray-400">Pending</td>
+
+                                    <!-- Pkg Cells -->
+                                    <td class="col-pkg hidden px-3 py-2 border-l border-gray-100 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+
+                                    <!-- Plan Cells -->
+                                    <td class="col-plan hidden px-3 py-2 border-l border-gray-100"><span
+                                            class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-[10px]">Partial</span>
+                                    </td>
+                                    <td class="col-plan hidden px-3 py-2 text-gray-500">Scheduled: 2025-02-10</td>
+
+                                    <td
+                                        class="px-3 py-2 text-center sticky right-0 bg-white group-hover:bg-gray-50 shadow-[-5px_0_5px_-5px_0_rgba(0,0,0,0.1)]">
+                                        <i class="fa-solid fa-ellipsis hover:text-[#297A88] cursor-pointer p-1"></i>
+                                    </td>
                                 </tr>
-                                <!-- Row 2: Pending Preparation (Gray) -->
-                                <tr
-                                    class="hover:bg-gray-50 transition-colors h-[40px] border-b border-gray-100 bg-white">
-                                    <td class="px-6 py-2 text-gray-500">07/01/2025</td>
-                                    <td class="px-6 py-2 font-medium">LTUM-202502002</td>
-                                    <td class="px-6 py-2">Little</td>
-                                    <td class="px-6 py-2">Liquid Calcium (Xylitol verison 2)</td>
-                                    <td class="px-6 py-2">10ml/sachet</td>
-                                    <td class="px-6 py-2">900000 sachets</td>
-                                    <td class="px-6 py-2">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-2 h-2 rounded-full bg-[#6B7280] hidden"></div> <!-- Backup -->
-                                            <div class="w-2 h-2 rounded-full bg-[#EF4444]"></div>
-                                            <span class="font-medium text-gray-500"
-                                                data-i18n="ct_status_pending">Pending Preparation</span>
+
+                                <!-- Row 2: Pending -->
+                                <tr class="hover:bg-gray-50 transition-colors border-b border-gray-100 group">
+                                    <td class="px-3 py-2 text-gray-500 whitespace-nowrap">07/01/2025</td>
+                                    <td class="px-3 py-2 font-medium whitespace-gray-800">LTUM-202502002</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">Little</td>
+                                    <td class="px-3 py-2 max-w-[160px] truncate"
+                                        title="Liquid Calcium (Xylitol verison 2)">Liquid Calcium (Xylitol...</td>
+                                    <td class="px-3 py-2 text-gray-500">10ml/sachet</td>
+                                    <td class="px-3 py-2">900,000</td>
+                                    <td class="px-3 py-2">
+                                        <div class="flex flex-row items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-[#EF4444] flex-shrink-0"></div>
+                                            <div class="flex flex-col leading-tight">
+                                                <span class="font-bold text-gray-800"
+                                                    data-i18n="ct_status_pending_1">Pending</span>
+                                                <span class="text-[10px] text-gray-500"
+                                                    data-i18n="ct_status_pending_2">Preparation</span>
+                                            </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-2 text-gray-400 text-center cursor-pointer hover:text-gray-600">
-                                        •••</td>
-                                    <td class="px-6 py-2 bg-gray-50/50 border-l border-gray-100"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
+
+                                    <!-- Reqs Cells -->
+                                    <td class="col-reqs px-3 py-2 border-l border-gray-100 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Done</td>
+                                    <td class="col-reqs px-3 py-2">Inkjet</td>
+                                    <td class="col-reqs px-3 py-2 font-medium">CIF Melbourne</td>
+                                    <td class="col-reqs px-3 py-2 text-green-600"><i class="fa-solid fa-check"></i>
+                                        Confirmed</td>
+                                    <td class="col-reqs px-3 py-2 text-gray-400">—</td>
+
+                                    <!-- Fin Cells -->
+                                    <td class="col-fin hidden px-3 py-2 border-l border-gray-100 font-mono">INV-2024002
+                                    </td>
+                                    <td class="col-fin hidden px-3 py-2 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Paid</td>
+                                    <td class="col-fin hidden px-3 py-2 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Paid</td>
+                                    <td class="col-fin hidden px-3 py-2 text-gray-400">Pending</td>
+
+                                    <!-- Pkg Cells -->
+                                    <td class="col-pkg hidden px-3 py-2 border-l border-gray-100 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+
+                                    <!-- Plan Cells -->
+                                    <td class="col-plan hidden px-3 py-2 border-l border-gray-100"><span
+                                            class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-[10px]">Ready</span>
+                                    </td>
+                                    <td class="col-plan hidden px-3 py-2 text-gray-500">Batch-A start 2025/02/15</td>
+
+                                    <td
+                                        class="px-3 py-2 text-center sticky right-0 bg-white group-hover:bg-gray-50 shadow-[-5px_0_5px_-5px_0_rgba(0,0,0,0.1)]">
+                                        <i class="fa-solid fa-ellipsis hover:text-[#297A88] cursor-pointer p-1"></i>
+                                    </td>
                                 </tr>
-                                <!-- Row 3: Production On-Going (Orange) -->
-                                <tr
-                                    class="hover:bg-gray-50 transition-colors h-[40px] border-b border-gray-100 bg-white">
-                                    <td class="px-6 py-2 text-gray-500">07/01/2025</td>
-                                    <td class="px-6 py-2 font-medium">LTUM-202502003</td>
-                                    <td class="px-6 py-2">Little</td>
-                                    <td class="px-6 py-2">Liquid Calcium (Xylitol verison 2)</td>
-                                    <td class="px-6 py-2">10ml/sachet</td>
-                                    <td class="px-6 py-2">900000 sachets</td>
-                                    <td class="px-6 py-2">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-2 h-2 rounded-full bg-[#F59E0B]"></div>
-                                            <span class="font-medium text-gray-800"
-                                                data-i18n="ct_status_ongoing">Production<br>On-Going</span>
+
+                                <!-- Row 3: Ongoing -->
+                                <tr class="hover:bg-gray-50 transition-colors border-b border-gray-100 group">
+                                    <td class="px-3 py-2 text-gray-500 whitespace-nowrap">07/01/2025</td>
+                                    <td class="px-3 py-2 font-medium whitespace-gray-800">LTUM-202502003</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">Little</td>
+                                    <td class="px-3 py-2 max-w-[160px] truncate"
+                                        title="Liquid Calcium (Xylitol verison 2)">Liquid Calcium (Xylitol...</td>
+                                    <td class="px-3 py-2 text-gray-500">10ml/sachet</td>
+                                    <td class="px-3 py-2">900,000</td>
+                                    <td class="px-3 py-2">
+                                        <div class="flex flex-row items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-[#F59E0B] flex-shrink-0"></div>
+                                            <div class="flex flex-col leading-tight">
+                                                <span class="font-bold text-gray-800"
+                                                    data-i18n="ct_status_ongoing_1">Production</span>
+                                                <span class="text-[10px] text-gray-500"
+                                                    data-i18n="ct_status_ongoing_2">On-Going</span>
+                                            </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-2 text-gray-400 text-center cursor-pointer hover:text-gray-600">
-                                        •••</td>
-                                    <td class="px-6 py-2 bg-gray-50/50 border-l border-gray-100"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
+
+                                    <!-- Reqs Cells -->
+                                    <td class="col-reqs px-3 py-2 border-l border-gray-100 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Done</td>
+                                    <td class="col-reqs px-3 py-2">Inkjet</td>
+                                    <td class="col-reqs px-3 py-2 font-medium">CIF Melbourne</td>
+                                    <td class="col-reqs px-3 py-2 text-green-600"><i class="fa-solid fa-check"></i>
+                                        Confirmed</td>
+                                    <td class="col-reqs px-3 py-2 text-gray-400">Palletized</td>
+
+                                    <!-- Fin Cells -->
+                                    <td class="col-fin hidden px-3 py-2 border-l border-gray-100 font-mono">INV-2024003
+                                    </td>
+                                    <td class="col-fin hidden px-3 py-2 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Paid</td>
+                                    <td class="col-fin hidden px-3 py-2 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Paid</td>
+                                    <td class="col-fin hidden px-3 py-2 text-gray-400">Pending</td>
+
+                                    <!-- Pkg Cells -->
+                                    <td class="col-pkg hidden px-3 py-2 border-l border-gray-100 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+
+                                    <!-- Plan Cells -->
+                                    <td class="col-plan hidden px-3 py-2 border-l border-gray-100"><span
+                                            class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-[10px]">Ready</span>
+                                    </td>
+                                    <td class="col-plan hidden px-3 py-2 text-gray-500">In Production (Stage 3)</td>
+
+                                    <td
+                                        class="px-3 py-2 text-center sticky right-0 bg-white group-hover:bg-gray-50 shadow-[-5px_0_5px_-5px_0_rgba(0,0,0,0.1)]">
+                                        <i class="fa-solid fa-ellipsis hover:text-[#297A88] cursor-pointer p-1"></i>
+                                    </td>
                                 </tr>
-                                <!-- Row 4: Done (Green) -->
-                                <tr
-                                    class="hover:bg-gray-50 transition-colors h-[40px] border-b border-gray-100 bg-white">
-                                    <td class="px-6 py-2 text-gray-500">07/01/2025</td>
-                                    <td class="px-6 py-2 font-medium">LTUM-202502004</td>
-                                    <td class="px-6 py-2">Little</td>
-                                    <td class="px-6 py-2">Liquid Calcium (Xylitol verison 3)</td>
-                                    <td class="px-6 py-2">10ml/sachet</td>
-                                    <td class="px-6 py-2">900000 sachets</td>
-                                    <td class="px-6 py-2">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-2 h-2 rounded-full bg-[#10B981]"></div>
-                                            <span class="font-medium text-gray-800"
-                                                data-i18n="ct_status_done">Done</span>
+
+                                <!-- Row 4: Done -->
+                                <tr class="hover:bg-gray-50 transition-colors border-b border-gray-100 group">
+                                    <td class="px-3 py-2 text-gray-500 whitespace-nowrap">07/01/2025</td>
+                                    <td class="px-3 py-2 font-medium whitespace-gray-800">LTUM-202502004</td>
+                                    <td class="px-3 py-2 whitespace-nowrap">Little</td>
+                                    <td class="px-3 py-2 max-w-[160px] truncate"
+                                        title="Liquid Calcium (Xylitol verison 3)">Liquid Calcium (Xylitol...</td>
+                                    <td class="px-3 py-2 text-gray-500">10ml/sachet</td>
+                                    <td class="px-3 py-2">900,000</td>
+                                    <td class="px-3 py-2">
+                                        <div class="flex flex-row items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-[#10B981] flex-shrink-0"></div>
+                                            <div class="flex flex-col leading-tight">
+                                                <span class="font-bold text-gray-800"
+                                                    data-i18n="ct_status_done">Done</span>
+                                            </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-2 text-gray-400 text-center cursor-pointer hover:text-gray-600">
-                                        •••</td>
-                                    <td class="px-6 py-2 bg-gray-50/50 border-l border-gray-100"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
-                                    <td class="px-6 py-2 bg-gray-50/50"></td>
+
+                                    <!-- Reqs Cells -->
+                                    <td class="col-reqs px-3 py-2 border-l border-gray-100 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Done</td>
+                                    <td class="col-reqs px-3 py-2">Inkjet</td>
+                                    <td class="col-reqs px-3 py-2 font-medium">CIF Melbourne</td>
+                                    <td class="col-reqs px-3 py-2 text-green-600"><i class="fa-solid fa-check"></i>
+                                        Confirmed</td>
+                                    <td class="col-reqs px-3 py-2 text-gray-400">—</td>
+
+                                    <!-- Fin Cells -->
+                                    <td class="col-fin hidden px-3 py-2 border-l border-gray-100 font-mono">INV-2024004
+                                    </td>
+                                    <td class="col-fin hidden px-3 py-2 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Paid</td>
+                                    <td class="col-fin hidden px-3 py-2 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Paid</td>
+                                    <td class="col-fin hidden px-3 py-2 text-green-600"><i
+                                            class="fa-solid fa-check"></i> Paid</td>
+
+                                    <!-- Pkg Cells -->
+                                    <td class="col-pkg hidden px-3 py-2 border-l border-gray-100 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+                                    <td class="col-pkg hidden px-3 py-2 text-gray-400">—</td>
+
+                                    <!-- Plan Cells -->
+                                    <td class="col-plan hidden px-3 py-2 border-l border-gray-100"><span
+                                            class="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-[10px]">Ready</span>
+                                    </td>
+                                    <td class="col-plan hidden px-3 py-2 text-gray-500">Shipped 2025-01-20</td>
+
+                                    <td
+                                        class="px-3 py-2 text-center sticky right-0 bg-white group-hover:bg-gray-50 shadow-[-5px_0_5px_-5px_0_rgba(0,0,0,0.1)]">
+                                        <i class="fa-solid fa-ellipsis hover:text-[#297A88] cursor-pointer p-1"></i>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1562,6 +1733,26 @@
                 });
             }
 
+            // --- Contract Table Tab Switching ---
+            function switchContractTab(tab) {
+                // Update Buttons
+                ['reqs', 'fin', 'pkg', 'plan'].forEach(t => {
+                    const btn = document.getElementById(`tab-ct-${t}`);
+                    if (t === tab) {
+                        btn.className = "px-3 py-1 rounded-md bg-white text-[#006064] shadow-sm transition-all font-bold";
+                    } else {
+                        btn.className = "px-3 py-1 rounded-md hover:bg-white/50 text-gray-500 transition-all font-normal";
+                    }
+                });
+
+                // Update Columns (Header & Body)
+                const allDynamicCols = document.querySelectorAll('.col-reqs, .col-fin, .col-pkg, .col-plan');
+                allDynamicCols.forEach(el => el.classList.add('hidden'));
+
+                const activeCols = document.querySelectorAll(`.col-${tab}`);
+                activeCols.forEach(el => el.classList.remove('hidden'));
+            }
+
             // --- Widget P1-C: Zombie View Logic ---
             function toggleZombieView(view) {
                 const btnC = document.getElementById('btn-zombie-contracts');
@@ -1664,6 +1855,40 @@
                         "ct_status_pending": "Pending Preparation",
                         "ct_status_ongoing": "Production<br>On-Going",
                         "ct_status_done": "Done",
+
+                        // Contract Table - Dynamic Headers
+                        "ct_role_reqs": "Reqs",
+                        "ct_role_fin": "Finance",
+                        "ct_role_pkg": "Pkg",
+                        "ct_role_plan": "Plan",
+
+                        "ct_th_reqs_gacc": "GACC",
+                        "ct_th_reqs_code": "Coding",
+                        "ct_th_reqs_ship": "Ship Mode",
+                        "ct_th_reqs_label": "Label",
+                        "ct_th_reqs_other": "Other",
+
+                        "ct_th_fin_inv": "Invoice #",
+                        "ct_th_fin_dep": "Deposit",
+                        "ct_th_fin_pre": "Pre-Prod",
+                        "ct_th_fin_bal": "Balance",
+
+                        "ct_th_pkg_inv": "Invoice #",
+                        "ct_th_pkg_dep": "Deposit",
+                        "ct_th_pkg_dep": "Deposit", // Fix duplicate key in source if any but keeping safe
+                        "ct_th_pkg_pre": "Pre-Prod",
+                        "ct_th_pkg_bal": "Balance",
+
+                        "ct_th_plan_mat": "Material Stock",
+                        "ct_th_plan_sch": "Schedule Log",
+
+                        // Status Status (Split Lines)
+                        "ct_status_new_1": "New",
+                        "ct_status_new_2": "Contract",
+                        "ct_status_pending_1": "Pending",
+                        "ct_status_pending_2": "Preparation",
+                        "ct_status_ongoing_1": "Production",
+                        "ct_status_ongoing_2": "On-Going",
                     }
                 };
 
