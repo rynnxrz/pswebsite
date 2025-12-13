@@ -114,6 +114,7 @@
     margin: 0;
     max-width: 70%;
     /* Allow slightly more space with smaller font */
+    padding-left: 1.25rem;
 }
 
 .dm-scope-tags {
@@ -147,7 +148,7 @@
 /* Row 2: Context */
 .dm-context-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 4fr 6fr;
     gap: 1rem;
 }
 
@@ -198,6 +199,7 @@
     line-height: 1.5;
     color: #d1d5db;
     margin: 0;
+    white-space: pre-line;
 }
 
 /* Row 3: Visual */

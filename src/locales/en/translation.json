@@ -157,21 +157,21 @@
                         "text": "I need to add notes when things change, but I’m afraid to break the Excel formulas if I insert a new row.",
                         "role": "Flora, The Production Supervisor",
                         "tags": [
-                            "plan"
+                            "input"
                         ]
                     },
                     {
                         "text": "It would be a game-changer if the data was linked—so I know instantly when materials or packaging actually arrive.",
                         "role": "Ethan, The Production Planner",
                         "tags": [
-                            "plan"
+                            "view"
                         ]
                     },
                     {
                         "text": "I constantly switch between different sheets just to verify if the information is actually correct.",
                         "role": "Cleo, The Contract Manager",
                         "tags": [
-                            "input"
+                            "view"
                         ]
                     }
                 ]
@@ -182,13 +182,13 @@
             "tabs": [
                 {
                     "id": "link",
-                    "title": "01. Link the Data",
-                    "subtitle": "Structure the Input"
+                    "title": "01. Unify the View",
+                    "subtitle": "Filter the Noise"
                 },
                 {
                     "id": "unify",
-                    "title": "02. Unify the View",
-                    "subtitle": "Filter the Noise"
+                    "title": "02. Guide the Workflow",
+                    "subtitle": "Structure the Input"
                 },
                 {
                     "id": "reveal",
@@ -199,10 +199,10 @@
             "moves": [
                 {
                     "id": "link",
-                    "headline": "From Free-form to Guided Flow",
+                    "headline": "One Master Table, Infinite Contexts",
                     "context": {
-                        "pain": "Operators often added rows randomly in Excel, breaking formulas and creating \"orphan data\" that didn't match the contract.",
-                        "strategy": "I designed a linear flow: Contract → Schedule → Report. Users can now only report production on tasks that actually exist.",
+                        "pain": "Teams worked in silos. A change in Production didn't update Finance, leading to messy \"status drifting\" across Excel files.",
+                        "strategy": "Single Source: Everyone edits the same live data row.\n\nRole-Based Lenses: Finance sees billing columns; Production sees scheduling columns. Same data, focused view.",
                         "scope": [
                             "input",
                             "plan"

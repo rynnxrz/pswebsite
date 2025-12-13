@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ScanEye, CalendarClock, Keyboard, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import './DesignMoves.css';
 
 interface DesignMove {
@@ -10,7 +10,6 @@ interface DesignMove {
     context: {
         pain: string;
         strategy: string;
-        scope: string[];
     };
     image: {
         alt: string;
@@ -33,14 +32,6 @@ export const DesignMoves = () => {
 
     const activeMove = moves.find(m => m.id === activeTabId) || moves[0];
 
-    const getIcon = (tag: string) => {
-        switch (tag.toLowerCase()) {
-            case 'read': return <ScanEye size={16} />;
-            case 'plan': return <CalendarClock size={16} />;
-            case 'input': return <Keyboard size={16} />;
-            default: return null;
-        }
-    };
 
     // Placeholder images map
     const imageMap: Record<string, string> = {
@@ -79,14 +70,6 @@ export const DesignMoves = () => {
                         {/* Row 1: Headline + Scope */}
                         <div className="dm-header-row">
                             <h3 className="dm-headline">{activeMove.headline}</h3>
-                            <div className="dm-scope-tags">
-                                {activeMove.context.scope.map(tag => (
-                                    <div key={tag} className="dm-scope-pill">
-                                        {getIcon(tag)}
-                                        <span>{tag}</span>
-                                    </div>
-                                ))}
-                            </div>
                         </div>
 
                         {/* Row 2: Context (Pain & Strategy) */}
