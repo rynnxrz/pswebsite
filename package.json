@@ -19,6 +19,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^16.4.0",
+    "react-rough-notation": "^1.0.8",
     "react-router-dom": "^7.1.5",
     "react-split-flap": "^0.1.7"
   },
