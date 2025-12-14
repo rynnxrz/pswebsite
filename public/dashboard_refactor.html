@@ -35,64 +35,6 @@
             }
         }
 
-        // PRD 5.1 Configuration Simulation
-        const CONFIG = {
-            slas: { stage1: 3, stage2: 14, stage3: 5 },
-            blockers: { money_grace: 7, mat_buffer: 21, silent: 14 },
-            zombie: { contract: 45, inventory: 7 },
-            cooling: { vol_ratio: 0.6 }
-        };
-
-        // i18n Script
-        const i18nData = {
-            en: {
-                pageTitle: "OraNutrition Process & Client Insight Board",
-                lastUpdate: "Last Update: 2024-11-28 09:00 AM",
-                kpi1Title: "Lead Time Breach",
-                kpi2Title: "Payment Blocked",
-                kpi3Title: "Material Risk",
-                kpi4Title: "Data Issues",
-                part1Title: "Part 1. Internal Exception Radar",
-                part2Title: "Part 2. Process Lead Time"
-            },
-            zh: {
-                pageTitle: "OraNutrition 内部流程与客户洞察总览",
-                lastUpdate: "上次更新: 2024-11-28 09:00 AM",
-                kpi1Title: "整体周期超出内部目标",
-                kpi2Title: "收款环节有阻塞",
-                kpi3Title: "物料准备存在风险",
-                kpi4Title: "数据记录需补充",
-                part1Title: "Part 1. 内部异常雷达 (Internal Exception Radar)",
-                part2Title: "Part 2. 内部流程周期 (Process Lead Time)"
-            }
-        };
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const lang = urlParams.get('lang') || 'en'; // Default to English as per requirements
-
-            const t = i18nData[lang] || i18nData['en'];
-
-            // Helper to safely set text
-            const setText = (id, text) => {
-                const el = document.getElementById(id);
-                if (el) el.innerText = text;
-            };
-
-            setText('header-title', t.pageTitle);
-            setText('header-update', t.lastUpdate);
-            setText('kpi-1-title', t.kpi1Title);
-            setText('kpi-2-title', t.kpi2Title);
-            setText('kpi-3-title', t.kpi3Title);
-            setText('kpi-4-title', t.kpi4Title);
-
-            // For Part Titles which are inside h2
-            const part1 = document.getElementById('part-1-title');
-            if (part1) part1.innerText = t.part1Title;
-
-            const part2 = document.getElementById('part-2-title');
-            if (part2) part2.innerText = t.part2Title;
-        });
     </script>
     </script>
 
@@ -1551,6 +1493,351 @@
 
         <!-- LOGIC -->
         <script>
+            // --- Global State ---
+            let currentFilter = null;
+
+            // --- Internationalization (i18n) Data ---
+            const TRANSLATIONS = {
+                en: {
+                    // Header
+                    "header_title": "OraNutrition Internal Process & Client Insights Overview",
+                    "header_update": "Last Update: 2024-11-28 09:00 AM",
+                    "filter_time_q4": "📅 Range: This Quarter (Q4)",
+                    "filter_brand_all": "Brand: All",
+                    "filter_line_all": "Line: All",
+                    "refresh_data": "Refresh Data",
+
+                    // Part 1
+                    "p1_title": "Part 1. Internal Exception Radar",
+                    "p1_subtitle": "Click cards to filter details",
+                    "kpi_lead_title": "Lead Time Breach",
+                    "kpi_lead_sub": "Overall Cycle > Target",
+                    "kpi_pay_title": "Payment Blocked",
+                    "kpi_pay_sub": "Payment Process Blocked",
+                    "kpi_mat_title": "Material Risk",
+                    "kpi_mat_sub": "Material Prep Risk",
+                    "kpi_data_title": "Data Issues",
+                    "kpi_data_sub": "Data Records Incomplete",
+
+                    // Widget P1-B
+                    "p1b_title": "P1-B. Key Contracts Stage Overview",
+                    "btn_list": "List",
+                    "btn_graph": "Graph",
+                    "Tab_all": "All",
+                    "Tab_blocker": "Blockers",
+                    "Tab_delay": "Severe Delay",
+                    "th_contract": "Contract / Brand",
+                    "th_stage": "Current Stage",
+                    "th_delay": "Max Delay",
+                    "th_status": "Status / Reason",
+                    "th_time": "Time (Sign/Upd)",
+
+                    // Widget P1-C
+                    "p1c_title": "P1-C. Zombie Contracts & Inventory",
+                    "btn_zombie_contracts": "Inactive Contracts",
+                    "btn_zombie_inventory": "Stuck Inventory",
+                    "zombie_c_sub": "Inactive > 45d",
+                    "zombie_i_sub": "Overdue > 7d",
+
+                    // Widget P1-D
+                    "p1d_title": "Data Quality Completeness",
+                    "p1d_update": "Last Update: 10 mins ago",
+                    "p1d_subtitle": "Left: Completeness, Right: Issue Types",
+                    "p1d_list_title": "Issue List",
+                    "p1d_filter_label": "Current Filter:",
+                    "p1d_th_contract": "Contract / Product",
+                    "p1d_th_issue": "Issue",
+                    "p1d_th_update": "Update",
+                    "p1d_empty": "Records Complete · No Issues",
+                    "p1d_footer": "Left shows overall data completeness. Right lists contracts with issues.",
+
+                    "dq_good": "Complete (Good)",
+                    "dq_bad": "Incomplete (Bad)",
+                    "dq_issue_date": "Missing Shipping Date",
+                    "dq_issue_qty": "Quantity Mismatch",
+                    "dq_issue_logic": "Time Logic Error",
+                    "dq_issue_other": "Other Missing Fields",
+                    "dq_filter_all_bad": "All Issues",
+                    "dq_filter_comp": "Complete · No Action",
+
+                    // Part 2
+                    "p2_title": "Part 2. Lead Time Deep Dive",
+                    "p2_subtitle": "Process Cycle vs Target",
+                    "p2_banner_title": "Contract Entry Latency",
+                    "p2_banner_desc": "About 15% contracts entered > 3 days after signing.",
+                    "p2_banner_btn": "View Details",
+
+                    "p3b_title": "3B. Capacity Utilization",
+                    "p3b_sub": "Avg Days",
+                    "p3b_footer_l": "Median Cycle: 42 Days",
+                    "p3b_footer_r": "Based on completed contracts",
+                    "p3b_desc": "Avg 42 days from payment to ship. Production & Shipping are longest stages.",
+
+                    "p2_breach_title": "P2. Stage Breach Rate > Target",
+                    "p2_breach_desc": "Top Bottlenecks:",
+                    "p2_breach_b1": "1. Material Prep",
+                    "p2_breach_b2": "2. Production",
+
+                    "p3_adherence_title": "P3. On-Time Delivery by Line",
+                    "p3_adherence_footer": "Gummies/Capsules stable. Powder often delayed.",
+
+                    "p4_mat_title": "P4. Material Readiness on Start",
+                    "p4_mat_desc": "85% batches have materials ready before start.",
+                    "p4_mat_risk": "Risk Batches (Materials not ready)",
+
+                    "g1_title": "G1. Factory Output & Efficiency",
+                    "g1_sub": "Quarterly Trend",
+                    "g1_desc": "Q4 Est 1.2M units (+15% QoQ). Avg lead time shortened by 3 days.",
+
+                    "g1_kpi_vol": "Total Volume",
+                    "g1_kpi_time": "Avg Lead Time",
+
+                    // Part 3
+                    "p3_title": "Part 3. Client & Capacity Radar",
+                    "p3_sub": "Q3 2024 vs Q4 2024",
+                    "p3a_title": "3A. Client Risk Watch",
+                    "p3a_footer": "Based on quarterly volume comparison",
+                    "p3a_th_brand": "Brand",
+                    "p3a_th_status": "Status",
+                    "p3a_th_vol": "Shipment Vol (Diff)",
+                    "risk_dormant": "This Q No Order",
+                    "risk_cooling": "Order Dropped",
+
+                    "p3c_title": "3C. Brand Capacity Concentration",
+                    "p3c_risk_label": "High Risk:",
+                    "p3c_risk_desc": "Top 3 clients take 72% capacity.",
+                    "p3c_footer": "Based on scheduled units",
+
+                    "p3d_title": "P3-D. White Space Matrix",
+                    "p3d_legend_core": "Core Biz",
+                    "p3d_legend_occasional": "Occasional",
+                    "p3d_legend_never": "Never",
+                    "p3d_th_brand": "Brand / Format",
+                    "ws_core": "Core Biz",
+                    "ws_occa": "Occasional",
+                    "ws_never": "Never",
+                    "ws_gap": "Gap",
+                    "ws_strong": "Strong",
+
+                    // Contract Table
+                    "ct_title": "Contract Table",
+                    "ct_date_range": "2024-06-01 ~ 2024-08-31",
+                    "ct_search": "Search contracts...",
+                    "ct_import": "Import New",
+                    "ct_filter_all": "All",
+                    "ct_filter_pending": "Pending Scheduling",
+                    "ct_filter_more": "More",
+                    "ct_role_reqs": "Reqs",
+                    "ct_role_fin": "Finance",
+                    "ct_role_pkg": "Pkg",
+                    "ct_role_plan": "Plan",
+                    "ct_th_date": "Date",
+                    "ct_th_no": "Contract No",
+                    "ct_th_brand": "Brand",
+                    "ct_th_prod": "Product",
+                    "ct_th_spec": "Spec",
+                    "ct_th_qty": "Qty",
+                    "ct_th_status": "Status",
+
+                    "ct_th_reqs_gacc": "GACC",
+                    "ct_th_reqs_code": "Coding",
+                    "ct_th_reqs_ship": "Ship Mode",
+                    "ct_th_reqs_label": "Label",
+                    "ct_th_reqs_other": "Other",
+
+                    "ct_th_fin_inv": "Invoice #",
+                    "ct_th_fin_dep": "Deposit",
+                    "ct_th_fin_pre": "Pre-Prod",
+                    "ct_th_fin_bal": "Balance",
+
+                    "ct_th_pkg_inv": "Invoice #",
+                    "ct_th_pkg_dep": "Deposit",
+                    "ct_th_pkg_pre": "Pre-Prod",
+                    "ct_th_pkg_bal": "Balance",
+
+                    "ct_th_plan_mat": "Material Stock",
+                    "ct_th_plan_sch": "Schedule Log",
+
+                    "ct_status_new_1": "New",
+                    "ct_status_new_2": "Contract",
+                    "ct_status_pending_1": "Pending",
+                    "ct_status_pending_2": "Preparation",
+                    "ct_status_ongoing_1": "Production",
+                    "ct_status_ongoing_2": "On-Going",
+                    "ct_status_done": "Done"
+                },
+                zh: {
+                    // Header
+                    "header_title": "OraNutrition 内部流程与客户洞察总览",
+                    "header_update": "上次更新: 2024-11-28 09:00 AM",
+                    "filter_time_q4": "📅 时间范围: 本季度 (Q4)",
+                    "filter_brand_all": "品牌: 全部",
+                    "filter_line_all": "产线类型: 全部",
+                    "refresh_data": "刷新数据",
+
+                    // Part 1
+                    "p1_title": "Part 1. 内部异常雷达 (Internal Exception Radar)",
+                    "p1_subtitle": "点击卡片筛选详情",
+                    "kpi_lead_title": "整体周期超出内部目标",
+                    "kpi_lead_sub": "SLA Stage > Target",
+                    "kpi_pay_title": "收款环节有阻塞",
+                    "kpi_pay_sub": "款项待确认 > 3 天",
+                    "kpi_mat_title": "物料准备存在风险",
+                    "kpi_mat_sub": "物料未到+临近排产",
+                    "kpi_data_title": "数据记录需补充",
+                    "kpi_data_sub": "字段缺失/异常",
+
+                    // Widget P1-B
+                    "p1b_title": "P1-B. 关键订单阶段总览 (Key Contracts)",
+                    "btn_list": "列表",
+                    "btn_graph": "图表",
+                    "Tab_all": "全部",
+                    "Tab_blocker": "待解决 (Blocker)",
+                    "Tab_delay": "严重超时",
+                    "th_contract": "合同 / 品牌",
+                    "th_stage": "当前阶段",
+                    "th_delay": "最严重阶段 (Delay)",
+                    "th_status": "状态 / 原因",
+                    "th_time": "时间 (签约/更新)",
+
+                    // Widget P1-C
+                    "p1c_title": "P1-C. 僵尸合同与库存",
+                    "btn_zombie_contracts": "停滞中的合同",
+                    "btn_zombie_inventory": "滞留成品/半成品",
+                    "zombie_c_sub": "超过 45 天无更新 (Inactive > 45d)",
+                    "zombie_i_sub": "发货逾期超过 7 天 (Overdue > 7d)",
+
+                    // Widget P1-D
+                    "p1d_title": "数据记录完整度 (Data Quality)",
+                    "p1d_update": "Last Update: 10 mins ago",
+                    "p1d_subtitle": "左侧展示整体完整度，右侧展示问题分布。一条记录可能包含多种问题。",
+                    "p1d_list_title": "问题合同列表 (Issue List)",
+                    "p1d_filter_label": "当前筛选:",
+                    "p1d_th_contract": "合同/产品 (Contract)",
+                    "p1d_th_issue": "问题 (Issue)",
+                    "p1d_th_update": "更新 (Update)",
+                    "p1d_empty": "记录完整 · 无需补充",
+                    "p1d_footer": "左侧展示整体数据记录的完整度，右侧列出具体有问题的合同与产品，便于快速回溯并补全信息。",
+
+                    "dq_good": "完整 (Good)",
+                    "dq_bad": "缺失 (Bad)",
+                    "dq_issue_date": "缺少发货日期",
+                    "dq_issue_qty": "数量不一致",
+                    "dq_issue_logic": "时间顺序异常",
+                    "dq_issue_other": "其他字段缺失",
+                    "dq_filter_all_bad": "全部问题",
+                    "dq_filter_comp": "记录完整 · 无需补充",
+
+                    // Part 2
+                    "p2_title": "Part 2. 交付周期深度透视 (Lead Time Deep Dive)",
+                    "p2_subtitle": "Process Cycle vs Target",
+                    "p2_banner_title": "合同录入提醒",
+                    "p2_banner_desc": "约 15% 的合同在签约后 3 天才录入系统。",
+                    "p2_banner_btn": "查看明细",
+
+                    "p3b_title": "3B. 产能利用率",
+                    "p3b_sub": "平均天数 (Avg Days)",
+                    "p3b_footer_l": "整体中位周期：42 天",
+                    "p3b_footer_r": "基于已完成的合同",
+                    "p3b_desc": "目前从收齐货款到发货平均约 42 天，其中生产和发货两个阶段耗时最长。",
+
+                    "p2_breach_title": "P2. 各阶段超出内部目标的比例",
+                    "p2_breach_desc": "主要瓶颈 (Top Bottlenecks):",
+                    "p2_breach_b1": "1. 物料准备阶段",
+                    "p2_breach_b2": "2. 生产阶段",
+
+                    "p3_adherence_title": "P3. 各产线按时交付情况",
+                    "p3_adherence_footer": "软糖和胶囊的交付最稳定，粉剂延迟较多。",
+
+                    "p4_mat_title": "P4. 开工前物料准备情况",
+                    "p4_mat_desc": "当前约 85% 的生产批次在开工前物料已准备就绪。",
+                    "p4_mat_risk": "风险批次（开工时物料未完全到位）",
+
+                    "g1_title": "G1. 工厂产出与效率提升",
+                    "g1_sub": "季度出货趋势",
+                    "g1_desc": "Q4 预计出货 120 万件，较上季度增长 15%；平均交付时间比初始阶段缩短约 3 天。",
+
+                    "g1_kpi_vol": "本季度出货总量",
+                    "g1_kpi_time": "平均交付时间",
+
+                    // Part 3
+                    "p3_title": "Part 3. 客户与产能雷达 (Client & Capacity Radar)",
+                    "p3_sub": "Q3 2024 vs Q4 2024",
+                    "p3a_title": "3A. 客户风险预警",
+                    "p3a_footer": "Based on quarterly volume comparison",
+                    "p3a_th_brand": "品牌",
+                    "p3a_th_status": "状态",
+                    "p3a_th_vol": "最近几季出货量 (对比)",
+                    "risk_dormant": "本季未下单",
+                    "risk_cooling": "下单明显变少",
+
+                    "p3c_title": "3C. 品牌产能集中度",
+                    "p3c_risk_label": "High Risk:",
+                    "p3c_risk_desc": "当前前三大客户占用排产产能约 72%，集中度偏高。",
+                    "p3c_footer": "Based on scheduled units",
+
+                    "p3d_title": "P3-D. 剂型白地 (White Space)",
+                    "p3d_legend_core": "核心业务",
+                    "p3d_legend_occasional": "偶尔生产",
+                    "p3d_legend_never": "从未合作",
+                    "p3d_th_brand": "品牌 / 剂型",
+                    "ws_core": "核心业务",
+                    "ws_occa": "偶尔生产",
+                    "ws_never": "从未合作",
+                    "ws_gap": "Gap",
+                    "ws_strong": "Strong",
+
+                    // Contract Table
+                    "ct_title": "Contract Table",
+                    "ct_date_range": "2024-06-01 ~ 2024-08-31",
+                    "ct_search": "Search contracts...",
+                    "ct_import": "Import New",
+                    "ct_filter_all": "All",
+                    "ct_filter_pending": "Pending Scheduling",
+                    "ct_filter_more": "More",
+                    "ct_role_reqs": "Reqs",
+                    "ct_role_fin": "Finance",
+                    "ct_role_pkg": "Pkg",
+                    "ct_role_plan": "Plan",
+                    "ct_th_date": "Date",
+                    "ct_th_no": "Contract No",
+                    "ct_th_brand": "Brand",
+                    "ct_th_prod": "Product",
+                    "ct_th_spec": "Spec",
+                    "ct_th_qty": "Qty",
+                    "ct_th_status": "Status",
+
+                    "ct_th_reqs_gacc": "GACC",
+                    "ct_th_reqs_code": "Coding",
+                    "ct_th_reqs_ship": "Ship Mode",
+                    "ct_th_reqs_label": "Label",
+                    "ct_th_reqs_other": "Other",
+
+                    "ct_th_fin_inv": "Invoice #",
+                    "ct_th_fin_dep": "Deposit",
+                    "ct_th_fin_pre": "Pre-Prod",
+                    "ct_th_fin_bal": "Balance",
+
+                    "ct_th_pkg_inv": "Invoice #",
+                    "ct_th_pkg_dep": "Deposit",
+                    "ct_th_pkg_pre": "Pre-Prod",
+                    "ct_th_pkg_bal": "Balance",
+
+                    "ct_th_plan_mat": "Material Stock",
+                    "ct_th_plan_sch": "Schedule Log",
+
+                    "ct_status_new_1": "New",
+                    "ct_status_new_2": "Contract",
+                    "ct_status_pending_1": "Pending",
+                    "ct_status_pending_2": "Preparation",
+                    "ct_status_ongoing_1": "Production",
+                    "ct_status_ongoing_2": "On-Going",
+                    "ct_status_done": "Done"
+                }
+            };
+
+            // --- Logic ---
+
             // --- Page Switching Logic ---
             function switchPage(pageId) {
                 const dashboard = document.getElementById('page-dashboard');
@@ -1589,9 +1876,6 @@
                     if (btnDash.querySelector('img')) btnDash.querySelector('img').classList.add('group-hover:opacity-100');
                 }
             }
-
-            // --- Global State ---
-            let currentFilter = null;
 
             // --- Widget P1-A: KPI Filter Logic ---
             function toggleKpiFilterP1(cardId, filterType) {
@@ -1687,7 +1971,7 @@
                 }
             }
 
-            // --- Widget P1-D: Data Quality Filter ---
+            // --- Widget P1-D: Data Quality Filter (Refactored for i18n) ---
             function filterDataQuality(type) {
                 const tbody = document.getElementById('p1d-tbody');
                 const rows = tbody.querySelectorAll('tr');
@@ -1695,20 +1979,27 @@
                 const filterLabel = document.getElementById('p1d-current-filter');
                 const tableContainer = tbody.parentElement; // table element
 
+                // Get Current Lang
+                const params = new URLSearchParams(window.location.search);
+                const lang = params.get('lang') || 'en';
+                const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+
                 // Reset View
                 tableContainer.classList.remove('hidden');
                 emptyState.classList.add('hidden');
 
-                // Update Label
+                // Update Label using global TRANSLATIONS
                 const labelMap = {
-                    'good': '记录完整 · 无需补充',
-                    'bad': '所有问题 (All Issues)',
-                    'date': '缺少发货日期',
-                    'qty': '数量不一致',
-                    'logic': '时间顺序异常',
-                    'other': '其他字段缺失'
+                    'good': t['dq_filter_comp'] || 'Complete',
+                    'bad': t['dq_filter_all_bad'] || 'All Issues',
+                    'date': t['dq_issue_date'] || 'Date',
+                    'qty': t['dq_issue_qty'] || 'Qty',
+                    'logic': t['dq_issue_logic'] || 'Logic',
+                    'other': t['dq_issue_other'] || 'Other'
                 };
-                filterLabel.textContent = `当前筛选: ${labelMap[type] || type}`;
+
+                const currentFilterText = t['p1d_filter_label'] || "Current Filter:";
+                filterLabel.textContent = `${currentFilterText} ${labelMap[type] || type}`;
 
                 if (type === 'good') {
                     tableContainer.classList.add('hidden');
@@ -1773,138 +2064,36 @@
                 }
             }
 
-            // --- Charts Initialization ---
+            // --- Charts and Localization Initialization ---
             document.addEventListener('DOMContentLoaded', () => {
 
-
-                // --- Internationalization (i18n) ---
-                const TRANSLATIONS = {
-                    en: {
-                        // Header
-                        "header_title": "OraNutrition Internal Process & Client Insights Overview",
-                        "header_update": "Last Update: 2024-11-28 09:00 AM",
-                        "filter_time_q4": "📅 Range: This Quarter (Q4)",
-                        "filter_brand_all": "Brand: All",
-                        "filter_line_all": "Line: All",
-                        "refresh_data": "Refresh Data",
-
-                        // Part 1
-                        "p1_title": "Part 1. Internal Exception Radar",
-                        "p1_subtitle": "Click cards to filter details",
-                        "kpi_lead_title": "Lead Time Breach",
-                        "kpi_lead_sub": "Overall Cycle > Target",
-                        "kpi_pay_title": "Payment Blocked",
-                        "kpi_pay_sub": "Payment Process Blocked",
-                        "kpi_mat_title": "Material Risk",
-                        "kpi_mat_sub": "Material Prep Risk",
-                        "kpi_data_title": "Data Issues",
-                        "kpi_data_sub": "Data Records Incomplete",
-
-                        // Widget P1-B
-                        "p1b_title": "P1-B. Key Contracts Stage Overview",
-                        "btn_list": "List",
-                        "btn_graph": "Graph",
-                        "Tab_all": "All",
-                        "Tab_blocker": "Blockers",
-                        "Tab_delay": "Severe Delay",
-                        "th_contract": "Contract / Brand",
-                        "th_stage": "Current Stage",
-                        "th_delay": "Max Delay",
-                        "th_status": "Status / Reason",
-                        "th_time": "Time (Sign/Upd)",
-
-                        // Widget P1-C
-                        "p1c_title": "P1-C. Zombie Contracts & Inventory",
-                        "btn_zombie_contracts": "Inactive Contracts",
-                        "btn_zombie_inventory": "Stuck Inventory",
-
-                        // Widget P1-D
-                        "p1d_title": "Data Quality Completeness",
-
-                        // Part 2
-                        "p2_title": "Part 2. Lead Time Deep Dive",
-                        "p2_subtitle": "Process Cycle vs Target",
-
-                        // Part 3
-                        "p3_title": "Part 3. Client & Capacity Radar",
-                        "p3a_title": "3A. Client Risk Watch",
-                        "p3b_title": "3B. Capacity Utilization",
-                        "p3c_title": "3C. Brand Capacity Concentration",
-
-                        // Contract Table
-                        "ct_title": "Contract Table",
-                        "ct_date_range": "2024-06-01 ~ 2024-08-31",
-                        "ct_search": "Search contracts...",
-                        "ct_import": "Import New",
-                        "ct_filter_all": "All",
-                        "ct_filter_pending": "Pending Scheduling",
-                        "ct_filter_more": "More",
-                        "ct_role_reqs": "Reqs",
-                        "ct_role_fin": "Finance",
-                        "ct_role_pkg": "Pkg",
-                        "ct_role_plan": "Plan",
-                        "ct_th_date": "Date",
-                        "ct_th_no": "Contract No",
-                        "ct_th_brand": "Brand",
-                        "ct_th_prod": "Product",
-                        "ct_th_spec": "Spec",
-                        "ct_th_qty": "Qty",
-                        "ct_th_status": "Status",
-                        "ct_th_action": "Action",
-                        "ct_status_new": "New Contract",
-                        "ct_status_pending": "Pending Preparation",
-                        "ct_status_ongoing": "Production<br>On-Going",
-                        "ct_status_done": "Done",
-
-                        // Contract Table - Dynamic Headers
-                        "ct_role_reqs": "Reqs",
-                        "ct_role_fin": "Finance",
-                        "ct_role_pkg": "Pkg",
-                        "ct_role_plan": "Plan",
-
-                        "ct_th_reqs_gacc": "GACC",
-                        "ct_th_reqs_code": "Coding",
-                        "ct_th_reqs_ship": "Ship Mode",
-                        "ct_th_reqs_label": "Label",
-                        "ct_th_reqs_other": "Other",
-
-                        "ct_th_fin_inv": "Invoice #",
-                        "ct_th_fin_dep": "Deposit",
-                        "ct_th_fin_pre": "Pre-Prod",
-                        "ct_th_fin_bal": "Balance",
-
-                        "ct_th_pkg_inv": "Invoice #",
-                        "ct_th_pkg_dep": "Deposit",
-                        "ct_th_pkg_dep": "Deposit", // Fix duplicate key in source if any but keeping safe
-                        "ct_th_pkg_pre": "Pre-Prod",
-                        "ct_th_pkg_bal": "Balance",
-
-                        "ct_th_plan_mat": "Material Stock",
-                        "ct_th_plan_sch": "Schedule Log",
-
-                        // Status Status (Split Lines)
-                        "ct_status_new_1": "New",
-                        "ct_status_new_2": "Contract",
-                        "ct_status_pending_1": "Pending",
-                        "ct_status_pending_2": "Preparation",
-                        "ct_status_ongoing_1": "Production",
-                        "ct_status_ongoing_2": "On-Going",
-                    }
-                };
+                // Current Lang
+                const params = new URLSearchParams(window.location.search);
+                const lang = params.get('lang') || 'en';
+                const t = TRANSLATIONS[lang] || TRANSLATIONS['en'];
 
                 function applyLocalization() {
                     const params = new URLSearchParams(window.location.search);
-                    const lang = params.get('lang');
+                    const lang = params.get('lang') || 'en';
+                    const tMap = TRANSLATIONS[lang] || TRANSLATIONS.en;
 
-                    if (lang === 'en' && TRANSLATIONS.en) {
+                    if (tMap) {
                         document.querySelectorAll('[data-i18n]').forEach(el => {
                             const key = el.getAttribute('data-i18n');
-                            if (TRANSLATIONS.en[key]) {
+                            if (tMap[key]) {
                                 // Check if it's an input/placeholder or text
                                 if (el.tagName === 'INPUT' && el.getAttribute('placeholder')) {
-                                    el.setAttribute('placeholder', TRANSLATIONS.en[key]);
+                                    el.setAttribute('placeholder', tMap[key]);
+                                } else if (el.tagName === 'INPUT' && el.type === 'button') {
+                                    el.value = tMap[key];
                                 } else {
-                                    el.textContent = TRANSLATIONS.en[key];
+                                    // Handle HTML content for line breaks if needed, though textContent is safer. 
+                                    // Given some keys have <br>, use innerHTML for specific status keys
+                                    if (key.includes('status') || key === 'p2_banner_desc') {
+                                        el.innerHTML = tMap[key];
+                                    } else {
+                                        el.textContent = tMap[key];
+                                    }
                                 }
                             }
                         });
@@ -1925,7 +2114,7 @@
                     new Chart(document.getElementById('dataQualityGoodBad'), {
                         type: 'doughnut',
                         data: {
-                            labels: ['完整 (Good)', '缺失 (Bad)'],
+                            labels: [t['dq_good'], t['dq_bad']],
                             datasets: [{
                                 data: [185, 15],
                                 backgroundColor: ['#2A9D8F', '#E76F51'],
@@ -1952,11 +2141,10 @@
                     });
 
                     // 1E: Data Quality Donut (Issue Type)
-                    // 1E: Data Quality Donut (Issue Type)
                     new Chart(document.getElementById('dataQualityChart'), {
                         type: 'doughnut',
                         data: {
-                            labels: ['缺少发货日期', '数量不一致', '时间顺序异常', '其他字段缺失'],
+                            labels: [t['dq_issue_date'], t['dq_issue_qty'], t['dq_issue_logic'], t['dq_issue_other']],
                             datasets: [{
                                 data: [12, 3, 1, 1],
                                 backgroundColor: ['#E76F51', '#F4A261', '#E9C46A', '#264653'],
@@ -2001,23 +2189,14 @@
                                 chart.data.datasets.forEach((dataset, i) => {
                                     const meta = chart.getDatasetMeta(i);
                                     meta.data.forEach((element, index) => {
-                                        // Only draw if visible
                                         if (!element.hidden) {
                                             const { x, y } = element.tooltipPosition();
                                             const center = element.getCenterPoint();
-
-                                            // Calculate outer point (approximate based on radius)
-                                            // We can use the tooltip position as a start, and draw to the label position
-                                            // But we don't know exact label position easily.
-                                            // Let's draw a line from the outer arc to a fixed offset.
-
                                             const angle = element.startAngle + (element.endAngle - element.startAngle) / 2;
                                             const outerRadius = element.outerRadius;
                                             const lineLength = 10;
-
                                             const startX = center.x + Math.cos(angle) * outerRadius;
                                             const startY = center.y + Math.sin(angle) * outerRadius;
-
                                             const endX = center.x + Math.cos(angle) * (outerRadius + lineLength);
                                             const endY = center.y + Math.sin(angle) * (outerRadius + lineLength);
 
@@ -2041,8 +2220,8 @@
                         data: {
                             labels: ['Vitality', 'Muscle'],
                             datasets: [
-                                { label: '上季度 (Prev Q)', data: [60, 60], backgroundColor: '#E5E7EB', barPercentage: 0.6, datalabels: { color: '#666', anchor: 'end', align: 'top' } },
-                                { label: '本季度 (Curr Q)', data: [5, 25], backgroundColor: ['#E76F51', '#F4A261'], barPercentage: 0.6, datalabels: { color: '#666', anchor: 'end', align: 'top' } }
+                                { label: 'Prev Q', data: [60, 60], backgroundColor: '#E5E7EB', barPercentage: 0.6, datalabels: { color: '#666', anchor: 'end', align: 'top' } },
+                                { label: 'Curr Q', data: [5, 25], backgroundColor: ['#E76F51', '#F4A261'], barPercentage: 0.6, datalabels: { color: '#666', anchor: 'end', align: 'top' } }
                             ]
                         },
                         options: {
@@ -2054,8 +2233,8 @@
                                     callbacks: {
                                         afterBody: function (context) {
                                             const idx = context[0].dataIndex;
-                                            const risk = idx === 0 ? 'Dormant (休眠)' : 'Cooling (降温)';
-                                            return `Risk: ${risk}\nPrev: 60k / 3 Contracts\nCurr: ${context[0].raw}k / 1 Contract`;
+                                            const risk = idx === 0 ? (t['risk_dormant'] || 'Dormant') : (t['risk_cooling'] || 'Cooling');
+                                            return `Risk: ${risk}\nPrev: 60k\nCurr: ${context[0].raw}k`;
                                         }
                                     }
                                 },
@@ -2069,7 +2248,7 @@
                     new Chart(document.getElementById('concentrationChart'), {
                         type: 'bar',
                         data: {
-                            labels: ['Little Umbrella', 'PowerGums', '其他 (Others)'],
+                            labels: ['Little Umbrella', 'PowerGums', 'Others'],
                             datasets: [{
                                 data: [42, 30, 28],
                                 backgroundColor: ['#2A9D8F', '#264653', '#E5E7EB'],
@@ -2093,7 +2272,7 @@
                                 tooltip: {
                                     callbacks: {
                                         label: function (context) {
-                                            return `${context.raw}% 份额 (${context.raw * 1000} Units)`;
+                                            return `${context.raw}% Share`;
                                         }
                                     }
                                 }
@@ -2101,19 +2280,19 @@
                         }
                     });
 
-                    // P1: Waterfall (Simulated with Floating Bars)
+                    // P1: Waterfall 
                     new Chart(document.getElementById('p1WaterfallChart'), {
                         type: 'bar',
                         data: {
-                            labels: ['款项到位', '物料就绪', '等待排产', '生产制造', '发货'],
+                            labels: ['S1', 'S2', 'S3', 'S4', 'S5'], // Simplified for brevity in demo, ideally translated S1..S5
                             datasets: [{
-                                label: '阶段耗时',
+                                label: 'Days',
                                 data: [
-                                    [0, 5],    // Stage 1: 0-5
-                                    [5, 15],   // Stage 2: 5-15 (10d)
-                                    [15, 20],  // Stage 3: 15-20 (5d)
-                                    [20, 35],  // Stage 4: 20-35 (15d)
-                                    [35, 42]   // Stage 5: 35-42 (7d)
+                                    [0, 5],
+                                    [5, 15],
+                                    [15, 20],
+                                    [20, 35],
+                                    [35, 42]
                                 ],
                                 backgroundColor: [
                                     '#2A9D8F', '#2A9D8F', '#E9C46A', '#264653', '#2A9D8F'
@@ -2128,21 +2307,13 @@
                             plugins: {
                                 legend: { display: false },
                                 datalabels: {
-                                    formatter: (value) => (value[1] - value[0]) + '天',
+                                    formatter: (value) => (value[1] - value[0]) + 'd',
                                     color: '#fff',
                                     font: { weight: 'bold' }
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        label: function (context) {
-                                            const v = context.raw;
-                                            return `耗时: ${v[1] - v[0]} 天`;
-                                        }
-                                    }
                                 }
                             },
                             scales: {
-                                y: { beginAtZero: true, title: { display: true, text: '累计天数 (Cumulative Days)' } }
+                                y: { beginAtZero: true, title: { display: true, text: 'Cumulative Days' } }
                             }
                         }
                     });
@@ -2151,16 +2322,12 @@
                     new Chart(document.getElementById('p2BreachChart'), {
                         type: 'bar',
                         data: {
-                            labels: ['S1 款项', 'S2 物料', 'S3 等待', 'S4 生产', 'S5 发货'],
+                            labels: ['S1', 'S2', 'S3', 'S4', 'S5'],
                             datasets: [{
-                                label: '超时比例 (Breach %)',
+                                label: 'Breach %',
                                 data: [10, 68, 20, 45, 5],
                                 backgroundColor: [
-                                    '#2A9D8F', // <20%
-                                    '#E76F51', // >50% (Red)
-                                    '#E9C46A', // 20-50% (Orange)
-                                    '#E9C46A',
-                                    '#2A9D8F'
+                                    '#2A9D8F', '#E76F51', '#E9C46A', '#E9C46A', '#2A9D8F'
                                 ],
                                 borderRadius: 4,
                                 barPercentage: 0.6
@@ -2182,14 +2349,14 @@
                         }
                     });
 
-                    // P3: Plan Adherence (Mixed)
+                    // P3: Plan Adherence
                     new Chart(document.getElementById('p3AdherenceChart'), {
                         data: {
-                            labels: ['软糖 (Gummies)', '粉剂 (Powder)', '液体 (Liquids)', '胶囊 (Capsules)'],
+                            labels: ['Gummies', 'Powder', 'Liquids', 'Capsules'],
                             datasets: [
                                 {
                                     type: 'bar',
-                                    label: '按时交付率 (Adherence %)',
+                                    label: 'Adherence %',
                                     data: [95, 82, 60, 88],
                                     backgroundColor: '#264653',
                                     yAxisID: 'y',
@@ -2202,7 +2369,7 @@
                                 },
                                 {
                                     type: 'line',
-                                    label: '平均延迟 (Avg Delay Days)',
+                                    label: 'Avg Delay',
                                     data: [1, 4, 12, 2],
                                     borderColor: '#E76F51',
                                     borderWidth: 2,
@@ -2223,8 +2390,8 @@
                                 legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
                             },
                             scales: {
-                                y: { beginAtZero: true, max: 100, position: 'left', title: { display: true, text: '交付率 (%)' } },
-                                y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: '延迟天数 (Days)' } }
+                                y: { beginAtZero: true, max: 100, position: 'left' },
+                                y1: { beginAtZero: true, position: 'right', grid: { drawOnChartArea: false } }
                             }
                         }
                     });
@@ -2233,7 +2400,7 @@
                     new Chart(document.getElementById('p4MaterialChart'), {
                         type: 'doughnut',
                         data: {
-                            labels: ['就绪/安全', '等待中', '高风险'],
+                            labels: ['Ready', 'Waiting', 'High Risk'],
                             datasets: [{
                                 data: [85, 10, 5],
                                 backgroundColor: ['#2A9D8F', '#E9C46A', '#E76F51'],
@@ -2251,14 +2418,14 @@
                         }
                     });
 
-                    // G1: Factory Growth (Mixed: Bar + Line)
+                    // G1: Factory Growth
                     new Chart(document.getElementById('g1GrowthChart'), {
                         data: {
-                            labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024 (Est)'],
+                            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
                             datasets: [
                                 {
                                     type: 'bar',
-                                    label: '季度出货量 (Units)',
+                                    label: 'Units',
                                     data: [800000, 950000, 1050000, 1200000],
                                     backgroundColor: 'rgba(42, 157, 143, 0.6)',
                                     yAxisID: 'y',
@@ -2266,12 +2433,12 @@
                                     borderRadius: 4,
                                     datalabels: {
                                         color: '#fff',
-                                        formatter: (value) => (value / 10000) + '万'
+                                        formatter: (value) => (value / 1000) + 'k'
                                     }
                                 },
                                 {
                                     type: 'line',
-                                    label: '平均交付周期 (Days)',
+                                    label: 'Lead Time',
                                     data: [48, 46, 45, 42],
                                     borderColor: '#264653',
                                     borderWidth: 2,
@@ -2292,16 +2459,16 @@
                                 legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
                             },
                             scales: {
-                                y: { beginAtZero: true, position: 'left', title: { display: true, text: '出货量 (Units)' } },
-                                y1: { beginAtZero: false, min: 30, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: '周期 (Days)' } }
+                                y: { beginAtZero: true, position: 'left' },
+                                y1: { beginAtZero: false, min: 30, position: 'right', grid: { drawOnChartArea: false } }
                             }
                         }
-                    }); // Close G1
+                    });
 
                 } // Close initCharts
 
-                initCharts();
                 applyLocalization();
+                initCharts(); // Charts init after loc checks? Or use loc inside.
             });
         </script>
 </body>
