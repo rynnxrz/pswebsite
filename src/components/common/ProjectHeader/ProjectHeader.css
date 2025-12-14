@@ -15,16 +15,42 @@
 }
 
 .project-header.sticky-active {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: url(#liquid-glass-filter);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    /* Default to dark frosted glass to match the dark page theme */
+    background-color: rgba(22, 22, 23, 0.7);
+    /* Higher opacity for light mode */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: saturate(180%) blur(20px);
+    /* Apple-style frost */
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    /* Softer shadow */
     margin-bottom: 3rem;
     margin-left: -1rem;
     margin-right: -1rem;
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: 0 0 24px 24px;
+    /* Square top, rounded bottom -> Tab/Tongue look */
+    /* Full width feel, no rounded bottoms unlike nav */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* If we ever have a strictly light mode page, we can override or use media query,
+   but ProjectP is dark-themed so this default is safer. */
+@media (prefers-color-scheme: light) {
+    /* Optional: keep light version if system is light AND page respects it,
+       but currently ProjectP forces dark text colors? No, it forces white text.
+       So header must be dark to provide contrast for white text.
+       Removing the light-mode override for now to ensure consistency. */
+}
+
+@media (prefers-color-scheme: dark) {
+    .project-header.sticky-active {
+        background-color: rgba(22, 22, 23, 0.8);
+        /* Apple dark mode base */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
 }
 
 @supports not (backdrop-filter: url(#liquid-glass-filter)) {

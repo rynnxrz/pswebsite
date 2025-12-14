@@ -93,14 +93,37 @@ export const BottomNav = () => {
   const activeIndex = navItems.findIndex(item => item.to === currentPath);
 
   // --- Change 2: Correct the navigation bar width to fit 4 items ---
-  const navWidth = 320; // 4 items * 80px width each
-  const navHeight = 64;
-  const navBorderRadius = 24; // Use a squircle-style radius
+  // Default State
+  const defaultWidth = 320;
+  const defaultHeight = 64;
+
+  // Shrunk State (Apple-style shrink on scroll)
+  const shrunkWidth = 220; // Tighter
+  const shrunkHeight = 48; // Slimmer
+
+  const [isShrunk, setIsShrunk] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Shrink immediately upon scrolling down
+      const shouldShrink = window.scrollY > 50;
+      setIsShrunk(shouldShrink);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Dynamic dimensions based on scroll state
+  const navWidth = isShrunk ? shrunkWidth : defaultWidth;
+  const navHeight = isShrunk ? shrunkHeight : defaultHeight;
+  const navBorderRadius = isShrunk ? 24 : 24; // Keep uniform radius
 
   const [displacementMap, setDisplacementMap] = useState('');
   useEffect(() => {
-    generateDisplacementMap(navWidth, navHeight, navBorderRadius, 16).then(setDisplacementMap);
-  }, [navWidth, navHeight, navBorderRadius]);
+    // Regenerate displacement map when dimensions change for smooth liquid effect
+    generateDisplacementMap(navWidth, navHeight, navBorderRadius, isShrunk ? 12 : 16).then(setDisplacementMap);
+  }, [navWidth, navHeight, navBorderRadius, isShrunk]);
 
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [targetLang, setTargetLang] = useState('');
@@ -135,28 +158,44 @@ export const BottomNav = () => {
       <svg width="0" height="0">
         <filter id="liquid-glass-filter">
           <feImage href={displacementMap} x="0" y="0" width={navWidth} height={navHeight} result="displacement_map" />
-          <feDisplacementMap in="SourceGraphic" in2="displacement_map" scale="15" xChannelSelector="R" yChannelSelector="G" />
+          <feDisplacementMap in="SourceGraphic" in2="displacement_map" scale={isShrunk ? "10" : "15"} xChannelSelector="R" yChannelSelector="G" />
         </filter>
       </svg>
-      <nav className="bottom-nav-container">
-        <div className="bottom-nav">
+      <nav className={`bottom-nav-container ${isShrunk ? 'shrunk' : ''}`}>
+        <motion.div
+          className="bottom-nav"
+          animate={{
+            width: navWidth,
+            height: navHeight,
+            // y: isShrunk ? 20 : 0 // Optional: move down further if needed
+          }}
+          transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+        >
           {activeIndex !== -1 && (
             <motion.div
               className="active-indicator"
-              animate={{ x: `${activeIndex * 80 + 16}px` }}
+              animate={{
+                x: `${activeIndex * (isShrunk ? 55 : 80) + (isShrunk ? 6 : 16)}px`,
+                width: isShrunk ? 40 : 48,
+                height: isShrunk ? 40 : 48,
+                top: isShrunk ? 4 : 8
+              }}
               transition={{ type: 'spring', stiffness: 350, damping: 30 }}
             />
           )}
-          {navItems.map((item, index) => (
-            <NavItem
-              key={item.id}
-              item={item}
-              isActive={activeIndex === index}
-              onClick={item.id === 'language' ? toggleLanguage : undefined}
-              currentLang={item.id === 'language' ? i18n.language : undefined}
-            />
-          ))}
-        </div>
+
+          <div className="nav-items-wrapper" style={{ display: 'flex', width: '100%', justifyContent: 'space-evenly', alignItems: 'center' }}>
+            {navItems.map((item, index) => (
+              <NavItem
+                key={item.id}
+                item={item}
+                isActive={activeIndex === index}
+                onClick={item.id === 'language' ? toggleLanguage : undefined}
+                currentLang={item.id === 'language' ? i18n.language : undefined}
+              />
+            ))}
+          </div>
+        </motion.div>
       </nav>
     </>
   );

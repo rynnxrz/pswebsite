@@ -8,7 +8,8 @@
   color: #fff;
   min-height: 100vh;
   /* FORCE LOWERCASE EVERYWHERE per user request */
-  text-transform: lowercase;
+  /* text-transform: lowercase; REMOVED per user request */
+
 }
 
 .project-content-wrapper {
