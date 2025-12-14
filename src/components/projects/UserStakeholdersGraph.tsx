@@ -3,13 +3,20 @@ import { useTranslation } from 'react-i18next';
 import { ChevronDown, ChevronUp, ArrowDown } from 'lucide-react';
 import './UserStakeholdersGraph.css';
 
-// Tag mapping for dot colors
-const getDotClass = (tag: string) => {
+// Semantic Role Colors (Matching graph-theme.css logic)
+const ROLE_COLORS = {
+    DECISION: '#00B3C7',   // Teal - Directors
+    MANAGEMENT: '#F7941D', // Orange - Managers
+    OPERATION: '#27AE60',  // Green - Operators
+};
+
+// Tag mapping for dot colors using the semantic constants
+const getDotStyle = (tag: string) => {
     switch (tag.toLowerCase()) {
-        case 'input': return 'dot-input';
-        case 'plan': return 'dot-plan';
-        case 'read': return 'dot-read';
-        default: return '';
+        case 'input': return { backgroundColor: ROLE_COLORS.OPERATION };     // Operator
+        case 'plan': return { backgroundColor: ROLE_COLORS.MANAGEMENT };   // Manager
+        case 'read': return { backgroundColor: ROLE_COLORS.DECISION };     // Director
+        default: return {};
     }
 };
 
@@ -64,12 +71,11 @@ export const UserStakeholdersGraph = ({ onFilterChange }: Props) => {
                 <h3>{t('project_p.research.stakeholders.title')}</h3>
                 <p>
                     {t('project_p.research.stakeholders.description')}
-                    &nbsp;
-                    <span className="interaction-hint">
-                        <span>Tap a group to reveal their pain points below.</span>
-                        <ArrowDown size={18} />
-                    </span>
                 </p>
+                <div className="interaction-hint">
+                    <ArrowDown size={18} />
+                    <span>Tap a group to reveal their pain points below.</span>
+                </div>
             </div>
 
             <div className="stakeholders-accordion-wrapper">
@@ -85,7 +91,10 @@ export const UserStakeholdersGraph = ({ onFilterChange }: Props) => {
                                 onClick={() => toggleAccordion(index)}
                             >
                                 <div className="header-left">
-                                    <span className={`status-dot ${getDotClass(primaryTag)}`}></span>
+                                    <span
+                                        className="status-dot"
+                                        style={getDotStyle(primaryTag)}
+                                    ></span>
 
                                     <span className="header-title">{group.name}</span>
                                 </div>

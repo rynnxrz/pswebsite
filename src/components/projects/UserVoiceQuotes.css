@@ -85,10 +85,18 @@
 .quote-role {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #a0a0a0;
+    color: var(--text-primary);
+    /* Neutral color */
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
+}
+
+.role-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 .quote-tags {

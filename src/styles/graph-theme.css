@@ -43,6 +43,18 @@
     /* 7. Spacing Standards */
     --graph-card-padding-y: 1.25rem;
     --graph-card-padding-x: 1.5rem;
+
+    /* 8. Apple Style Role Colors */
+    --color-role-decision: #00B3C7;
+    /* Teal - Decision Makers */
+    --color-role-management: #F7941D;
+    /* Orange - Management */
+    --color-role-operation: #27AE60;
+    /* Green - Operation/Solution */
+    --color-semantic-alert: #D5483A;
+    /* Red - Pain Points */
+    --color-semantic-link: #2997ff;
+    /* Blue - Links/Interaction */
 }
 
 /* Typography Utility Classes */

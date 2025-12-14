@@ -91,8 +91,9 @@ export const ProjectP = () => {
 
         {/* 2. Intro Section */}
         <section id="intro" className="project-section compact-section">
-          <h2>{t('project_p.intro.title')}</h2>
-          <p className="intro-text">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.project_info')}</div>
+
+          <p className="project-description">
             {t('project_p.intro.content')}
           </p>
           <StackedGallery
@@ -163,10 +164,10 @@ export const ProjectP = () => {
         <section id="rationale" className="project-section compact-section">
           <h2>{t('project_p.rationale.title')}</h2>
           <div className="rationale-block">
-            <h3>{t('project_p.rationale.subtitle')}</h3>
-            <blockquote className="project-quote">
-              {t('project_p.rationale.quote')}
-            </blockquote>
+            <blockquote
+              className="project-quote"
+              dangerouslySetInnerHTML={{ __html: t('project_p.rationale.quote') }}
+            />
           </div>
 
         </section>
@@ -175,10 +176,10 @@ export const ProjectP = () => {
 
         {/* 6. Research Findings */}
         <section id="research" className="project-section">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.research_findings')}</div>
           <h2>{t('project_p.research.title')}</h2>
 
           <div className="research-subsection">
-            <h3>{t('project_p.research.subtitle1')}</h3>
             <p dangerouslySetInnerHTML={{ __html: t('project_p.research.content1') }} />
 
 
@@ -196,6 +197,7 @@ export const ProjectP = () => {
 
         {/* 7. Key Design Choices */}
         <section id="choices" className="project-section">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.key_design_choices')}</div>
           <h2>{t('project_p.choices.title')}</h2>
 
           <DesignMoves />
@@ -206,6 +208,7 @@ export const ProjectP = () => {
 
         {/* 9. Reflection */}
         <section id="reflection" className="project-section">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.reflection')}</div>
           <h2>{t('project_p.reflection.title')}</h2>
           <h3>{t('project_p.reflection.subtitle')}</h3>
           <p dangerouslySetInnerHTML={{ __html: t('project_p.reflection.content') }} />

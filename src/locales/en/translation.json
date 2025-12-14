@@ -22,11 +22,11 @@
             "copied": "Successfully copied to clipboard"
         },
         "intro": {
-            "title": "INTRO",
+            "title": "Intro",
             "content": "The project is defined as ORA Web, a small-scale software system for a contract manufacturing company, focusing on integrating contract production data management and efficiency."
         },
         "team": {
-            "title": "TEAM & MY ROLE",
+            "title": "Team & My Role",
             "client": "Client",
             "clientDesc": "Ora Nutrition Ltd (contract-manufacturing factory).",
             "clientPoints": [
@@ -60,10 +60,16 @@
             "input": "Input: Heavy data entry & initial validation.",
             "inputDesc": "Heavy data entry & initial validation."
         },
+        "section": {
+            "project_info": "OVERVIEW",
+            "research_findings": "DISCOVERY",
+            "key_design_choices": "SOLUTION",
+            "reflection": "RETROSPECTIVE"
+        },
         "rationale": {
             "title": "Project Rationale",
             "subtitle": "Enhancing Efficiency",
-            "quote": "We connect contract-to-shipment data.\nSo managers stop wasting time on Excel checks."
+            "quote": "<strong>Connecting contract-to-shipment data.</strong><br/>So managers stop wasting time on Excel checks and start making decisions."
         },
         "research": {
             "title": "Research Findings",
@@ -78,7 +84,6 @@
                     {
                         "layer_name": "Read Layer",
                         "name": "Decision Makers",
-                        "role_title": "Directors & Procurement",
                         "subgroups": [
                             {
                                 "names": "Wang",
@@ -98,12 +103,7 @@
                     {
                         "layer_name": "Plan Layer",
                         "name": "Shift Managers",
-                        "role_title": "Production & Reporting",
                         "subgroups": [
-                            {
-                                "names": "Flora",
-                                "title": "The Production Supervisor"
-                            },
                             {
                                 "names": "Ethan",
                                 "title": "The Production Planner"
@@ -117,7 +117,6 @@
                     {
                         "layer_name": "Input Layer",
                         "name": "Operators",
-                        "role_title": "Admins & Receivers",
                         "subgroups": [
                             {
                                 "names": "Nancy",
@@ -126,6 +125,10 @@
                             {
                                 "names": "Cleo",
                                 "title": "The Contract Manager"
+                            },
+                            {
+                                "names": "Flora",
+                                "title": "The Production Supervisor"
                             }
                         ],
                         "tags": [
@@ -164,14 +167,14 @@
                         "text": "It would be a game-changer if the data was linked—so I know instantly when materials or packaging actually arrive.",
                         "role": "Ethan, The Production Planner",
                         "tags": [
-                            "view"
+                            "plan"
                         ]
                     },
                     {
                         "text": "I constantly switch between different sheets just to verify if the information is actually correct.",
                         "role": "Cleo, The Contract Manager",
                         "tags": [
-                            "view"
+                            "input"
                         ]
                     }
                 ]

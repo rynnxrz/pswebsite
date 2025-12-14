@@ -4,12 +4,9 @@
   box-sizing: border-box;
   width: 100%;
   padding: 4rem 32px;
-  font-family: 'Soehne', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  color: #fff;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
   min-height: 100vh;
-  /* FORCE LOWERCASE EVERYWHERE per user request */
-  /* text-transform: lowercase; REMOVED per user request */
-
 }
 
 .project-content-wrapper {
@@ -19,8 +16,6 @@
 }
 
 /* Header styles moved to ProjectHeader.css */
-
-
 
 .project-section {
   margin-bottom: 3rem;
@@ -39,7 +34,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .project-section h3 {
@@ -47,42 +42,44 @@
   font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #e0e0e0;
+  color: var(--text-primary);
 }
 
 .stage-title {
   margin-top: 4rem !important;
   font-size: 1.5rem !important;
   /* Make it slightly bigger as per user hint styling */
-  color: #fff !important;
+  color: var(--text-primary) !important;
 }
 
 .project-section p {
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 1rem;
-  color: #ccc;
+  color: var(--text-secondary);
 }
 
 .project-section ul,
 .project-section ol {
   margin-bottom: 1rem;
   padding-left: 1.5rem;
-  color: #ccc;
+  color: var(--text-secondary);
 }
 
 .project-section li {
   margin-bottom: 0.5rem;
   line-height: 1.6;
+  color: var(--text-secondary);
 }
 
 .project-quote {
   border-left: none;
   margin: 1.5rem 0;
   padding-left: 0;
-  font-style: italic;
-  color: #b0b0b0;
-  font-size: 1.05rem;
+  font-style: normal;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
   line-height: 1.6;
 }
 
@@ -90,14 +87,19 @@
   margin: 2rem 0;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: #1a1a1a;
+
+  /* Glassmorphism */
+  background: var(--graph-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: var(--graph-border);
 
   /* Match Portfolio PDF Viewer size */
   height: 378px;
   width: 100%;
 
   position: relative;
+  transition: background 0.2s ease;
 }
 
 .section-image img {
@@ -109,7 +111,11 @@
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Hover Effect: REMOVED - no longer scale up on hover */
+/* Hover Effect: Subtle background change */
+.section-image:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
 .section-image:hover img {
   cursor: default;
 }
@@ -199,8 +205,13 @@
   flex: 0 0 450px;
   /* Desktop width */
   min-width: 450px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  /* Glassmorphism */
+  background: var(--graph-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: var(--graph-border);
+
   border-radius: 12px;
   padding: 1.5rem;
   scroll-snap-align: center;
@@ -212,13 +223,14 @@
 }
 
 .role-card:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
+  /* Subtle hover effect */
 }
 
 .role-card h3 {
   margin-top: 0;
   font-size: 1.1rem;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
