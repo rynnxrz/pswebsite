@@ -1,49 +1,98 @@
 :root {
-    /* 1. Standardized Text Colors */
-    /* Using Tailwind-like gray scale for consistency */
-    --graph-text-primary: #e5e7eb;
-    /* Gray-200: Readable text on dark bg */
-    --graph-text-secondary: #a0a0a0;
-    /* Subtitles, labels */
-    --graph-text-muted: #4b5563;
-    /* De-emphasized text */
+    /* 1. Standardized Text Colors (Apple Dark Mode Adapted) */
+    --text-primary: #F5F5F7;
+    /* Off-white for H1, H2, Body */
+    --text-secondary: #86868b;
+    /* Light gray for subtitles/descriptions */
+    --text-tertiary: #6e6e73;
+    /* Darker gray for less important info */
+    --accent-blue: #2997ff;
+    /* Apple Dark Mode Blue */
 
-    /* 2. Standardized Sizes */
+    /* Legacy graph colors mapped to new system for compatibility */
+    --graph-text-primary: var(--text-primary);
+    --graph-text-secondary: var(--text-secondary);
+    --graph-text-muted: var(--text-tertiary);
+
+    /* 2. Standardized Fonts */
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    --font-serif: "New York", "Times New Roman", Times, serif;
+
+    /* 3. Standardized Sizes */
     --dot-size-m: 12px;
-    /* Workload graph standard */
     --dot-size-s: 8px;
-    /* Journey map / tighter lists */
 
-    /* 3. Container Visuals (Glassmorphism) */
+    /* 4. Container Visuals (Glassmorphism) */
     --graph-bg: rgba(26, 26, 26, 0.6);
     --graph-border: 1px solid rgba(255, 255, 255, 0.1);
     --graph-radius: 12px;
     --graph-padding: 1.5rem;
 
-    /* 4. Animation Speeds & Easing */
+    /* 5. Animation Speeds & Easing */
     --anim-speed-normal: 0.6s;
     --anim-speed-fast: 0.4s;
-    /* Snappier, more organic feel */
     --anim-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-    /* Organic bounce */
     --anim-ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
-    /* Authentic motion */
 
-    /* 5. Typography Standards */
+    /* 6. Typography Standards */
     --graph-font-title-size: 0.85rem;
-    /* Unified title size */
     --graph-font-title-weight: 600;
-    /* Unified weight */
     --graph-font-title-spacing: 0.05em;
-    /* Unified letter spacing */
     --graph-text-body-size: 0.95rem;
-    /* Unified body text size */
 
-    /* 6. Spacing Standards */
+    /* 7. Spacing Standards */
     --graph-card-padding-y: 1.25rem;
-    /* Vertical padding */
     --graph-card-padding-x: 1.5rem;
-    /* Horizontal padding */
+}
+
+/* Typography Utility Classes */
+
+/* Rule A: Headings & Body -> Sentence Case (Natural) */
+.typo-h1 {
+    font-size: 56px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    text-transform: none;
+    font-family: var(--font-sans);
+}
+
+.typo-h2 {
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    text-transform: none;
+    font-family: var(--font-sans);
+}
+
+.typo-body {
+    font-size: 17px;
+    /* The Golden Size */
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    text-transform: none;
+    font-family: var(--font-sans);
+}
+
+/* Rule B: Eyebrows / Labels -> ALL CAPS */
+.typo-eyebrow,
+.typo-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    /* Crucial for all-caps legibility */
+    color: var(--text-tertiary);
+    font-family: var(--font-sans);
+}
+
+/* Rule C: Quotes -> Serif Font */
+.typo-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--text-primary);
 }
 
 /* Utility class for graph body text */
