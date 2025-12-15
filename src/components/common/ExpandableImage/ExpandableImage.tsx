@@ -14,6 +14,8 @@ interface ExpandableImageProps {
     loading?: 'lazy' | 'eager';
     width?: string | number;
     height?: string | number;
+    srcSet?: string;
+    sizes?: string;
 }
 
 export const ExpandableImage: React.FC<ExpandableImageProps> = ({
@@ -26,7 +28,9 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
     fetchPriority = 'auto',
     loading,
     width,
-    height
+    height,
+    srcSet,
+    sizes
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isFullscreen, setIsFullscreen] = useState(false);
@@ -120,6 +124,8 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
                         loading={loading}
                         width={width}
                         height={height}
+                        srcSet={srcSet}
+                        sizes={sizes}
                     />
                 )}
             </div>

@@ -101,6 +101,8 @@ export const ProjectP = () => {
               {
                 id: 'dashboard-mockup',
                 src: '/assets/images/ora-web/Mockup.webp',
+                srcSet: '/assets/images/ora-web/Mockup-mobile.webp 800w, /assets/images/ora-web/Mockup.webp 1920w',
+                sizes: '(max-width: 768px) 100vw, 80vw',
                 alt: 'Dashboard Mockup'
               },
               {
@@ -114,7 +116,9 @@ export const ProjectP = () => {
                 id: 'factory-photo',
                 src: '/assets/images/ora-web/intro-placeholder.webp',
                 alt: 'Factory Context',
-                thumbnailSrc: '/assets/images/ora-web/intro-placeholder-thumb.webp'
+                thumbnailSrc: '/assets/images/ora-web/intro-placeholder-thumb.webp',
+                srcSet: '/assets/images/ora-web/intro-placeholder-mobile.webp 800w, /assets/images/ora-web/intro-placeholder.webp 1200w',
+                sizes: '(max-width: 768px) 100vw, 50vw'
               }
             ]}
           />

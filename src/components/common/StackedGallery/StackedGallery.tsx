@@ -8,6 +8,8 @@ interface GalleryImage {
     alt: string;
     interactiveSrc?: string; // Optional interactive content
     thumbnailSrc?: string; // Optional optimized thumbnail
+    srcSet?: string;
+    sizes?: string;
 }
 
 interface StackedGalleryProps {
@@ -39,6 +41,8 @@ export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultI
                 // @ts-expect-error - React 18 doesn't support fetchpriority type yet
                 fetchpriority={priority ? 'high' : 'auto'}
                 loading={priority ? 'eager' : 'lazy'}
+                srcSet={activeImage.srcSet}
+                sizes={activeImage.sizes}
             />
 
             {/* Stacked Cards Widget - Only show if more than 1 image */}
