@@ -23,7 +23,7 @@
         },
         "intro": {
             "title": "Intro",
-            "content": "The project is defined as ORA Web, a small-scale software system for a contract manufacturing company, focusing on integrating contract production data management and efficiency."
+            "content": "The project is defined as ORA Web, a small-scale software system for a contract manufacturing company, focusing on integrating contract production data management and efficiency. <strong>Case study scope:</strong> (Jul 2023 – Aug 2024 · Ongoing)"
         },
         "team": {
             "title": "Team & My Role",
@@ -31,9 +31,9 @@
             "clientDesc": "Ora Nutrition Ltd (contract-manufacturing factory).",
             "clientPoints": [
                 "Founded in 2019, scaled into one of the leading nutrition contract manufacturers in Auckland.",
-                "Acquired in 2025 by a China-listed company."
+                "Acquired in 2025 by a China-listed company.",
+                "No in-house design team; I operated as the <strong>sole designer</strong> in cross-functional delivery."
             ],
-            "context": "The factory has no in-house design team, so I operated as the <strong>sole designer</strong> in cross-functional delivery.",
             "role": "My Role",
             "roleDesc": "UX Designer (Solo)",
             "rolePoints": [
@@ -43,7 +43,7 @@
                 "Worked closely with engineering to ensure feasibility and consistent status logic across views."
             ],
             "duration": "Project Duration",
-            "durationDesc": "Case study scope: Jul 2023 – Aug 2024 · Ongoing"
+            "durationDesc": "<strong>Case study scope:</strong><br/>(Jul 2023 – Aug 2024 · Ongoing)"
         },
         "scope": {
             "title": "System Scope",
@@ -69,12 +69,12 @@
         "rationale": {
             "title": "Project Rationale",
             "subtitle": "Enhancing Efficiency",
-            "quote": "<strong>Connecting contract-to-shipment data.</strong><br/>So managers stop wasting time on Excel checks and start making decisions."
+            "quote": "Connecting contract-to-shipment data.<br/>So managers stop wasting time on Excel checks and start making decisions."
         },
         "research": {
             "title": "Research Findings",
             "subtitle1": "Research Approach and Key Findings",
-            "content1": "Instead of jumping straight into generic interviews, I started with quantitative analysis of how the shared Excel file was actually used. By logging user operations, I found that around <strong>54%</strong> of actions were pure data input and <strong>37%</strong> were just formatting changes—often used as reminders or unit conversions.",
+            "content1": "Analyzing their daily manual workflow, I found that around <span style=\"color: #27AE60; font-weight: bold;\">54%</span> of actions were pure data input and <span style=\"color: #eab308; font-weight: bold;\">37%</span> were just formatting changes—often used as reminders or unit conversions.",
             "stakeholders": {
                 "title": "Who are the Users Behind the Data?",
                 "description": "To understand the \"why\" behind the manual formatting behaviors, I mapped the stakeholders into three engagement layers. This helped me identify exactly who was struggling with what.",
@@ -317,9 +317,9 @@
         },
         "projects": {
             "heading": "projects",
-            "p": {
-                "title": "Ora Web",
-                "description": "We increased factory management efficiency by integrating contract and production data into a simple ERP tool."
+            "oraweb": {
+                "title": "ORA Web",
+                "description": "Integrated Data Management System"
             },
             "one": {
                 "title": "Innerpeace",

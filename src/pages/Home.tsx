@@ -13,7 +13,7 @@ import './Home.css';
 
 const projectsData = [
   {
-    id: "p",
+    id: "oraweb",
     image: "/assets/images/ora-web/Mockup.png",
     tags: ["UX Design", "End-to-end", "Data Integration"],
   },

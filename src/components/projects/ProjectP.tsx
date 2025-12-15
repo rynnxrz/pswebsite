@@ -93,9 +93,7 @@ export const ProjectP = () => {
         <section id="intro" className="project-section compact-section">
           <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.project_info')}</div>
 
-          <p className="project-description">
-            {t('project_p.intro.content')}
-          </p>
+          <p className="project-description" dangerouslySetInnerHTML={{ __html: t('project_p.intro.content') }} />
           <StackedGallery
             defaultImage="/assets/images/ora-web/Mockup.png"
             images={[
@@ -126,10 +124,9 @@ export const ProjectP = () => {
               <p><strong>{t('project_p.team.clientDesc')}</strong></p>
               <ul>
                 {(t('project_p.team.clientPoints', { returnObjects: true }) as string[]).map((point, i) => (
-                  <li key={i}>{point}</li>
+                  <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
                 ))}
               </ul>
-              <p className="context-note" dangerouslySetInnerHTML={{ __html: t('project_p.team.context') }} />
             </div>
             <div className="role-card">
               <h3>{t('project_p.team.role')}</h3>
@@ -139,10 +136,6 @@ export const ProjectP = () => {
                   <li key={i}>{point}</li>
                 ))}
               </ul>
-            </div>
-            <div className="role-card highlight">
-              <h3>{t('project_p.team.duration')}</h3>
-              <p>{t('project_p.team.durationDesc')}</p>
             </div>
           </HorizontalScrollContainer>
 

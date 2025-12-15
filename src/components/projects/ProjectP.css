@@ -184,9 +184,11 @@
 
 /* Horizontal Scroll Styles for Role Section */
 .role-grid {
-  display: flex !important;
+  display: flex;
   /* Force flex layout */
   gap: 1rem;
+  /* Match other grids like UserScopeList which are tighter */
+  margin-top: 1rem;
   padding-bottom: 1rem;
   /* Reuse clean scrollbar styles if needed, or rely on wrapper */
   overflow-x: auto;
@@ -231,7 +233,13 @@
   margin-top: 0;
   font-size: 1.1rem;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.role-card p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
 }
 
 .role-card ul {

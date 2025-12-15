@@ -7,7 +7,7 @@ export const ProjectDetail = () => {
   const { id } = useParams();
 
   switch (id) {
-    case 'p':
+    case 'oraweb':
       return <ProjectP />;
     case 'one':
       return <ProjectOne />;
