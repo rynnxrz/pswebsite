@@ -7,6 +7,8 @@
   font-family: var(--font-sans);
   color: var(--text-primary);
   min-height: 100vh;
+  overflow-x: hidden;
+  /* Prevent negative margins from causing page scroll */
 }
 
 .project-content-wrapper {
@@ -240,7 +242,8 @@
   border: var(--graph-border);
 
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.5rem 3rem 1.5rem 1.5rem;
+  /* Safe area for fade on right */
   scroll-snap-align: center;
   transition: background 0.2s ease;
   height: auto;

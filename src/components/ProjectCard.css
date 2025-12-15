@@ -106,18 +106,21 @@
   flex-grow: 1;
 }
 
-.project-tags {
+.overlay-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.project-tag {
-  background-color: rgba(255, 255, 255, 0.1);
+.tag {
+  background-color: rgba(255, 255, 255, 0.2);
+  /* Slightly more visible */
   padding: 0.25rem 0.75rem;
   border-radius: 100px;
   font-size: 0.8rem;
-  color: var(--text-tertiary);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* Add border for better visibility */
 }
 
 @media (max-width: 768px) {

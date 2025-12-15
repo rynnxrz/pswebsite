@@ -41,19 +41,15 @@
     right: 0;
 }
 
-/* Gradient overlay - Visible by default */
+/* Gradient overlay - Using mask-image for cleaner fade */
+.horizontal-scroll-wrapper.has-gradient {
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 40px), transparent 100%);
+    mask-image: linear-gradient(to right, black calc(100% - 40px), transparent 100%);
+}
+
+/* Remove old overlay approach */
 .horizontal-scroll-wrapper.has-gradient::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 60px;
-    background: linear-gradient(to right, transparent, #000);
-    pointer-events: none;
-    z-index: 10;
-    border-radius: 0 12px 12px 0;
-    /* Optional radius matching */
+    display: none;
 }
 
 @media (max-width: 768px) {
