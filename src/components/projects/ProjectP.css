@@ -3,7 +3,7 @@
 .project-detail-container {
   box-sizing: border-box;
   width: 100%;
-  padding: 4rem 32px;
+  padding: 4rem max(20px, 5vw);
   font-family: var(--font-sans);
   color: var(--text-primary);
   min-height: 100vh;
@@ -172,31 +172,34 @@
 @media (max-width: 768px) {
   .project-title {
     font-size: 1.15rem;
-    /* Slightly adjust for mobile */
   }
 
   .role-card {
-    flex: 0 0 85% !important;
-    /* Force mobile width */
-    min-width: 85% !important;
+    /* Fluid mobile width: 85% of viewport width */
+    flex: 0 0 85vw !important;
+    min-width: 85vw !important;
   }
 }
 
 /* Horizontal Scroll Styles for Role Section */
 .role-grid {
   display: flex;
-  /* Force flex layout */
   gap: 1rem;
-  /* Match other grids like UserScopeList which are tighter */
   margin-top: 1rem;
   padding-bottom: 1rem;
-  /* Reuse clean scrollbar styles if needed, or rely on wrapper */
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
+
+  /* Ensure the first item aligns with the container's left padding */
+  scroll-padding-left: max(20px, 5vw);
+
+  /* Negative margin hack to allow scroll to bleed to edge while keeping alignment */
+  margin-left: calc(-1 * max(20px, 5vw));
+  margin-right: calc(-1 * max(20px, 5vw));
+  padding-left: max(20px, 5vw);
+  padding-right: max(20px, 5vw);
 }
 
 /* Dark Mode Optimization for Bright Images */
