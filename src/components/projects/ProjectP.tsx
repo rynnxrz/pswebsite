@@ -107,9 +107,15 @@ export const ProjectP = () => {
                 id: 'dashboard-interactive',
                 src: '/assets/images/ora-web/dashboard-mockup.webp',
                 alt: 'Interactive Dashboard Preview',
-                interactiveSrc: `/dashboard_refactor.html?lang=${i18n.language}`
+                interactiveSrc: `/dashboard_refactor.html?lang=${i18n.language}`,
+                thumbnailSrc: '/assets/images/ora-web/dashboard-mockup-thumb.webp'
               },
-              { id: 'factory-photo', src: '/assets/images/ora-web/intro-placeholder.webp', alt: 'Factory Context' }
+              {
+                id: 'factory-photo',
+                src: '/assets/images/ora-web/intro-placeholder.webp',
+                alt: 'Factory Context',
+                thumbnailSrc: '/assets/images/ora-web/intro-placeholder-thumb.webp'
+              }
             ]}
           />
         </section>

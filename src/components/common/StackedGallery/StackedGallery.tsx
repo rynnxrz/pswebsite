@@ -7,6 +7,7 @@ interface GalleryImage {
     src: string;
     alt: string;
     interactiveSrc?: string; // Optional interactive content
+    thumbnailSrc?: string; // Optional optimized thumbnail
 }
 
 interface StackedGalleryProps {
@@ -35,7 +36,8 @@ export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultI
                 containerClassName="gallery-main-image-wrapper"
                 className="gallery-main-image"
                 isNested={true}
-                fetchPriority={priority ? 'high' : 'auto'}
+                // @ts-expect-error - React 18 doesn't support fetchpriority type yet
+                fetchpriority={priority ? 'high' : 'auto'}
                 loading={priority ? 'eager' : 'lazy'}
             />
 
@@ -53,7 +55,7 @@ export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultI
                             }}
                             onClick={() => setActiveImage(image)}
                         >
-                            <img src={image.src} alt={image.alt} />
+                            <img src={image.thumbnailSrc || image.src} alt={image.alt} />
                         </div>
                     ))}
                 </div>

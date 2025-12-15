@@ -115,7 +115,8 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
                         src={src}
                         alt={alt}
                         className={className}
-                        fetchPriority={fetchPriority}
+                        // @ts-expect-error - React 18 doesn't support fetchpriority type yet
+                        fetchpriority={fetchPriority}
                         loading={loading}
                         width={width}
                         height={height}
