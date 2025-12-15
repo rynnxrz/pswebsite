@@ -95,20 +95,21 @@ export const ProjectP = () => {
 
           <p className="project-description" dangerouslySetInnerHTML={{ __html: t('project_p.intro.content') }} />
           <StackedGallery
-            defaultImage="/assets/images/ora-web/Mockup.png"
+            priority={true}
+            defaultImage="/assets/images/ora-web/Mockup.webp"
             images={[
               {
                 id: 'dashboard-mockup',
-                src: '/assets/images/ora-web/Mockup.png',
+                src: '/assets/images/ora-web/Mockup.webp',
                 alt: 'Dashboard Mockup'
               },
               {
                 id: 'dashboard-interactive',
-                src: '/assets/images/ora-web/dashboard-mockup.png',
+                src: '/assets/images/ora-web/dashboard-mockup.webp',
                 alt: 'Interactive Dashboard Preview',
                 interactiveSrc: `/dashboard_refactor.html?lang=${i18n.language}`
               },
-              { id: 'factory-photo', src: '/assets/images/ora-web/intro-placeholder.png', alt: 'Factory Context' }
+              { id: 'factory-photo', src: '/assets/images/ora-web/intro-placeholder.webp', alt: 'Factory Context' }
             ]}
           />
         </section>
@@ -210,7 +211,7 @@ export const ProjectP = () => {
               <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
             ))}
           </ul>
-          <StackedGallery images={[{ id: 'reflection-kano', src: '/assets/images/ora-web/reflection-placeholder.png', alt: 'Kano Model Reflection' }]} />
+          <StackedGallery images={[{ id: 'reflection-kano', src: '/assets/images/ora-web/reflection-placeholder.webp', alt: 'Kano Model Reflection' }]} />
           <p>{t('project_p.reflection.content2')}</p>
           <ul>
             {(t('project_p.reflection.points', { returnObjects: true }) as string[]).map((point, i) => (

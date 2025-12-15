@@ -1,11 +1,8 @@
 // src/App.tsx
 
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { Home } from './pages/Home';
-import { About } from './pages/About'; // Import the new About component
-import { Portfolio } from './pages/Portfolio';
-import { ProjectDetail } from './pages/ProjectDetail';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { RetroToggle } from './components/RetroToggle';
 import { BottomNav } from './layouts/BottomNav';
@@ -13,6 +10,25 @@ import { NotificationProvider } from './components/NotificationContext';
 import { DynamicIsland } from './layouts/DynamicIsland';
 import './App.css';
 import './components/Tooltip.css';
+
+// Lazy load pages
+const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
+const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
+const Portfolio = lazy(() => import('./pages/Portfolio').then(module => ({ default: module.Portfolio })));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail').then(module => ({ default: module.ProjectDetail })));
+
+const PageLoader = () => (
+  <div style={{
+    height: '100vh',
+    width: '100vw',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: 'var(--bg-color, #0a0a0a)'
+  }}>
+    <div style={{ opacity: 0.6 }}>Loading...</div>
+  </div>
+);
 
 const AppContent = () => {
   const location = useLocation();
@@ -25,14 +41,37 @@ const AppContent = () => {
       <main className="main-content">
         <AnimatePresence mode="wait">
           <Routes>
-            <Route path="/" element={<Home />} />
-            {/* --- Change: Route now renders the About component --- */}
-            <Route path="/about" element={<About />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/project/:id" element={<ProjectDetail />} />
-            {/* Add fallbacks for old paths if desired */}
-            <Route path="/profile" element={<Home />} />
-            <Route path="/settings" element={<Portfolio />} />
+            <Route path="/" element={
+              <Suspense fallback={<PageLoader />}>
+                <Home />
+              </Suspense>
+            } />
+            <Route path="/about" element={
+              <Suspense fallback={<PageLoader />}>
+                <About />
+              </Suspense>
+            } />
+            <Route path="/portfolio" element={
+              <Suspense fallback={<PageLoader />}>
+                <Portfolio />
+              </Suspense>
+            } />
+            <Route path="/project/:id" element={
+              <Suspense fallback={<PageLoader />}>
+                <ProjectDetail />
+              </Suspense>
+            } />
+            {/* Fallbacks */}
+            <Route path="/profile" element={
+              <Suspense fallback={<PageLoader />}>
+                <Home />
+              </Suspense>
+            } />
+            <Route path="/settings" element={
+              <Suspense fallback={<PageLoader />}>
+                <Portfolio />
+              </Suspense>
+            } />
           </Routes>
         </AnimatePresence>
       </main>

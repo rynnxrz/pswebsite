@@ -12,9 +12,10 @@ interface GalleryImage {
 interface StackedGalleryProps {
     images: GalleryImage[];
     defaultImage?: string;
+    priority?: boolean; // New prop to indicate critical path
 }
 
-export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultImage }) => {
+export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultImage, priority = false }) => {
     // Determine initial active image object
     const initialImage = defaultImage
         ? images.find(img => img.src === defaultImage) || images[0]
@@ -34,6 +35,8 @@ export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultI
                 containerClassName="gallery-main-image-wrapper"
                 className="gallery-main-image"
                 isNested={true}
+                fetchPriority={priority ? 'high' : 'auto'}
+                loading={priority ? 'eager' : 'lazy'}
             />
 
             {/* Stacked Cards Widget - Only show if more than 1 image */}

@@ -10,6 +10,10 @@ interface ExpandableImageProps {
     containerClassName?: string;
     interactiveSrc?: string; // Optional URL for interactive content (iframe)
     isNested?: boolean;
+    fetchPriority?: 'high' | 'low' | 'auto';
+    loading?: 'lazy' | 'eager';
+    width?: string | number;
+    height?: string | number;
 }
 
 export const ExpandableImage: React.FC<ExpandableImageProps> = ({
@@ -18,7 +22,11 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
     className = '',
     containerClassName = '',
     interactiveSrc,
-    isNested = false // New prop to disable outer frame
+    isNested = false, // New prop to disable outer frame
+    fetchPriority = 'auto',
+    loading,
+    width,
+    height
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isFullscreen, setIsFullscreen] = useState(false);
@@ -103,7 +111,15 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
                         style={{ width: '100%', height: '100%', border: 'none' }}
                     />
                 ) : (
-                    <img src={src} alt={alt} className={className} />
+                    <img
+                        src={src}
+                        alt={alt}
+                        className={className}
+                        fetchPriority={fetchPriority}
+                        loading={loading}
+                        width={width}
+                        height={height}
+                    />
                 )}
             </div>
 

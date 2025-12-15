@@ -14,12 +14,12 @@ import './Home.css';
 const projectsData = [
   {
     id: "oraweb",
-    image: "/assets/images/ora-web/Mockup.png",
+    image: "/assets/images/ora-web/Mockup.webp",
     tags: ["UX Design", "End-to-end", "Data Integration"],
   },
   {
     id: "one",
-    image: "/assets/images/innerpeace-cover.png",
+    image: "/assets/images/innerpeace-cover.webp",
     tags: ["UX Research", "Android App", "Scalable"],
   },
 ];
