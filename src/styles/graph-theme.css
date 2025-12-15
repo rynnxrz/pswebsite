@@ -55,6 +55,24 @@
     /* Red - Pain Points */
     --color-semantic-link: #2997ff;
     /* Blue - Links/Interaction */
+
+    /* 9. Data Visualization (Apple System Colors - Dark Mode) */
+    --color-chart-1: #0A84FF;
+    /* System Blue */
+    --color-chart-2: #30D158;
+    /* System Green */
+    --color-chart-3: #FF9F0A;
+    /* System Orange */
+    --color-chart-4: #FF375F;
+    /* System Pink */
+    --color-chart-5: #BF5AF2;
+    /* System Purple */
+    --color-chart-6: #64D2FF;
+    /* System Cyan */
+    --color-chart-7: #FFD60A;
+    /* System Yellow */
+    --color-chart-8: #AC8E68;
+    /* System Brown */
 }
 
 /* Typography Utility Classes */

@@ -1,12 +1,41 @@
+/* Semantic Design System (Pro Dark Mode) */
+:root {
+  /* --- 1. System Backgrounds --- */
+  /* Level 0: Pure Black for OLED power saving and borderless feel */
+  --bg-system: #000000;
+
+  /* Level 1: Dark Gray for primary cards (ProjectCard) */
+  --bg-secondary: #1C1C1E;
+
+  /* Level 2: Lighter Gray for overlays, buttons, inputs */
+  --bg-tertiary: #2C2C2E;
+
+  /* --- 2. Typography (Opacity-based) --- */
+  /* Primary: Titles, Body. Avoid #FFF, use 92% White to prevent halation */
+  --text-primary: rgba(255, 255, 255, 0.92);
+
+  /* Secondary: Subtitles, Dates, Auxiliary Info */
+  --text-secondary: rgba(235, 235, 245, 0.60);
+
+  /* Tertiary: Placeholders, Disabled States */
+  --text-tertiary: rgba(235, 235, 245, 0.30);
+
+  /* --- 3. Separators --- */
+  /* Subtle border for card edges */
+  --separator: rgba(84, 84, 88, 0.45);
+
+  /* --- 4. OraWeb Optimization --- */
+  /* Dim bright images by default, restore on hover */
+  --img-brightness-dim: 0.85;
+  --img-brightness-active: 1.0;
+}
+
 /* Base styles */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background-color: var(--bg-system);
+  color: var(--text-primary);
+  /* Optimize font rendering */
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 code {

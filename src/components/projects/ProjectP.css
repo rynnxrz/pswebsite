@@ -199,6 +199,28 @@
   /* Firefox */
 }
 
+/* Dark Mode Optimization for Bright Images */
+.project-section img,
+.gallery-image,
+.stacked-card {
+  /* Dim by default to prevent glare in dark mode */
+  filter: brightness(var(--img-brightness-dim));
+  transition: filter 0.3s ease, transform 0.3s ease;
+
+  /* Semantic border to separate from black background */
+  border: 1px solid var(--separator);
+  border-radius: 8px;
+  /* Ensure radius matches logic */
+}
+
+/* Restore brightness on hover */
+.project-section img:hover,
+.gallery-image:hover,
+.stacked-card:hover {
+  filter: brightness(var(--img-brightness-active));
+  transform: scale(1.01);
+}
+
 .role-grid::-webkit-scrollbar {
   display: none;
 }

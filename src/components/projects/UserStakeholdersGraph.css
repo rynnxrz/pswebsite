@@ -166,7 +166,7 @@
     padding: 0 1.2rem 1.2rem 3rem;
     /* Indented to align with text */
     /* border-top: 1px solid rgba(255, 255, 255, 0.05); */
-    padding-top: 0.5rem;
+    padding-top: 0;
 }
 
 .group-role-title {
@@ -175,7 +175,8 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #6b7280;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    margin-top: 0;
 }
 
 .people-list {
