@@ -34,4 +34,15 @@
   transform: translateX(-50%) translateY(0);
 }
 
+/* Bottom Variation */
+.tooltip-container.tooltip-bottom .tooltip-text {
+  bottom: auto;
+  top: 110%;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.tooltip-container.tooltip-bottom:hover .tooltip-text {
+  transform: translateX(-50%) translateY(0);
+}
+
 /* The :active rule is no longer needed */

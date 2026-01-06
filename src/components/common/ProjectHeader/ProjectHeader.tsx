@@ -25,13 +25,37 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
 }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [copied, setCopied] = useState(false);
+    const [scrollProgress, setScrollProgress] = useState(0);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 100);
+        let isTicking = false;
+
+        const updateScrollState = () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight;
+            const winHeight = window.innerHeight;
+            const totalScroll = Math.max(docHeight - winHeight, 1);
+            const progress = Math.min(100, Math.max(0, Math.round((scrollTop / totalScroll) * 100)));
+
+            setIsScrolled(scrollTop > 100);
+            setScrollProgress(progress);
+            isTicking = false;
         };
+
+        const handleScroll = () => {
+            if (!isTicking) {
+                window.requestAnimationFrame(updateScrollState);
+                isTicking = true;
+            }
+        };
+
+        updateScrollState();
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+        };
     }, []);
 
     const handleCopyLink = () => {
@@ -80,19 +104,23 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
             </div>
 
             <div className="action-buttons-container">
-                <div className="tooltip-container">
+                <div className="tooltip-container tooltip-bottom">
                     <button onClick={handlePrint} className="action-btn" aria-label="Print/Download PDF">
                         <Download size={16} />
                     </button>
                     <span className="tooltip-text">{downloadTooltip}</span>
                 </div>
 
-                <div className="tooltip-container">
+                <div className="tooltip-container tooltip-bottom">
                     <button onClick={handleCopyLink} className="action-btn" aria-label="Copy Link">
                         {copied ? <Check size={16} /> : <LinkIcon size={16} />}
                     </button>
                     <span className="tooltip-text">{copied ? copiedTooltip : copyTooltip}</span>
                 </div>
+            </div>
+
+            <div className={`header-progress-track ${isScrolled ? 'visible' : ''}`}>
+                <div className="header-progress-fill" style={{ width: `${scrollProgress}%` }}></div>
             </div>
         </header>
     );

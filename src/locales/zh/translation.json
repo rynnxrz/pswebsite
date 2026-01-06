@@ -189,6 +189,33 @@
             "content3": "包含这个反思是我展示成长思维的方式：我愿意学习，从产品/战略中借用工具（如 Kano），并利用它们做出更扎实的设计选择。"
         }
     },
+    "ivy": {
+        "header": {
+            "title": "Ivy J Studio",
+            "date": "12天 (MVP) · 产品合伙人",
+            "download": "下载案例研究",
+            "copy": "复制链接",
+            "copied": "已复制！"
+        },
+        "section": {
+            "overview": "01. 概览",
+            "context": "02. 背景",
+            "cost": "03. 真实成本",
+            "target": "04. 设计目标",
+            "decisions": "05. 关键决策",
+            "system": "06. 系统设计",
+            "ai": "07. AI 能力",
+            "outcome": "08. 成果",
+            "reflection": "09. 反思"
+        },
+        "intro": {
+            "title": "该项目被定义为一家高端珠宝品牌的内部租赁和库存管理系统。它用支持<strong>日期感知</strong>的<strong>数字目录</strong>和<strong>自动凭证追踪</strong>，取代了手动的<strong>PDF 索引</strong>和基于<strong>邮件的协调过程</strong>。",
+            "role_title": "角色",
+            "role_desc": "产品合伙人 (战略 · UX · 工程)",
+            "timeline_title": "时间线",
+            "timeline_desc": "12天 (MVP)"
+        }
+    },
     "home": {
         "intro": {
             "name": "徐溶泽",

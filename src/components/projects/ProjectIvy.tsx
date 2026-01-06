@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import './ProjectP.css'; // Reusing base styles
 import './ProjectIvy.css'; // Custom styles
 import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
+import { StackedGallery } from '../common/StackedGallery/StackedGallery';
 
 export const ProjectIvy = () => {
     const { t } = useTranslation();
@@ -71,30 +72,36 @@ export const ProjectIvy = () => {
 
                 {/* Hero Section */}
                 <section id="intro" className="project-section compact-section">
-                    <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('ivy.intro.role_title')}: {t('ivy.intro.role_desc')}</div>
-                    <h1 className="project-description">
-                        {t('ivy.intro.title')}
-                        <br />
-                        <span style={{ fontSize: '0.6em', opacity: 0.8 }}>{t('ivy.intro.subtitle')}</span>
-                    </h1>
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.overview')}</div>
 
-                    <div style={{ position: 'relative', marginTop: '2rem' }}>
-                        <img
-                            src="/assets/images/ivy-j/hero-placeholder.webp"
-                            alt="System Interface"
-                            style={{ width: '100%', borderRadius: '12px', filter: 'blur(2px) opacity(0.8)' }}
-                        />
-                        <div className="ivy-hero-overlay">
-                            “Reducing how often the founder needs to re-check, re-explain, or re-prove.”
-                        </div>
-                    </div>
+                    <p className="project-description" dangerouslySetInnerHTML={{ __html: t('ivy.intro.title') }} />
+
+                    <StackedGallery
+                        priority={true}
+                        defaultImage="/assets/images/ivy-j/hero-main.webp"
+                        images={[
+                            {
+                                id: 'hero-main',
+                                src: '/assets/images/ivy-j/hero-main.webp',
+                                srcSet: '/assets/images/ivy-j/hero-main-mobile.webp 800w, /assets/images/ivy-j/hero-main.webp 2560w',
+                                sizes: '(max-width: 768px) 100vw, 80vw',
+                                thumbnailSrc: '/assets/images/ivy-j/hero-main-thumb.webp',
+                                alt: 'Ivy J Studio System Interface'
+                            },
+                            {
+                                id: 'hero-chart',
+                                src: '/assets/images/ivy-j/chart-placeholder.webp',
+                                alt: 'Data Visualization'
+                            }
+                        ]}
+                    />
                 </section>
 
                 <hr className="section-divider compact-divider" />
 
                 {/* 01. Context */}
                 <section id="context" className="project-section compact-section">
-                    <h2>{t('ivy.section.context')}</h2>
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.context')}</div>
                     <h3>{t('ivy.context.title')}</h3>
                     <p>{t('ivy.context.content')}</p>
                     <p><strong>{t('ivy.context.problem')}</strong></p>
@@ -116,7 +123,7 @@ export const ProjectIvy = () => {
 
                 {/* 02. The Real Cost */}
                 <section id="cost" className="project-section">
-                    <h2>{t('ivy.section.cost')}</h2>
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.cost')}</div>
                     <h3>{t('ivy.cost.title')}</h3>
 
                     <div className="ivy-comparison-grid">
@@ -150,7 +157,7 @@ export const ProjectIvy = () => {
 
                 {/* 03. Design Target */}
                 <section id="target" className="project-section">
-                    <h2>{t('ivy.section.target')}</h2>
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.target')}</div>
                     <div className="ivy-statement-card">
                         <div className="ivy-statement-text">{t('ivy.target.statement')}</div>
                         <div style={{ color: '#666' }}>
@@ -165,7 +172,7 @@ export const ProjectIvy = () => {
 
                 {/* 04. Key Decisions */}
                 <section id="decisions" className="project-section">
-                    <h2>{t('ivy.section.decisions')}</h2>
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.decisions')}</div>
 
                     <div style={{ marginBottom: '4rem' }}>
                         <h3>{t('ivy.decisions.d1.title')}</h3>
@@ -223,7 +230,7 @@ export const ProjectIvy = () => {
 
                 {/* 05. The System */}
                 <section id="system" className="project-section">
-                    <h2>{t('ivy.section.system')}</h2>
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.system')}</div>
 
                     <div style={{ marginBottom: '4rem' }}>
                         <h3>1. {t('ivy.system.p1.title')}</h3>
@@ -262,7 +269,7 @@ export const ProjectIvy = () => {
 
                 {/* 06. AI Capability */}
                 <section id="ai" className="project-section">
-                    <h2>{t('ivy.section.ai')}</h2>
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.ai')}</div>
                     <h3>{t('ivy.ai.title')}</h3>
 
                     <div className="ivy-statement-card">
@@ -282,7 +289,7 @@ export const ProjectIvy = () => {
 
                 {/* 07. Outcome */}
                 <section id="outcome" className="project-section">
-                    <h2>{t('ivy.section.outcome')}</h2>
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.outcome')}</div>
                     <h3>{t('ivy.outcome.title')}</h3>
                     <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '600px', margin: '3rem auto', alignItems: 'center' }}>
                         <div style={{ textAlign: 'right', color: '#888' }}>
@@ -306,7 +313,7 @@ export const ProjectIvy = () => {
 
                 {/* 08. Reflection */}
                 <section id="reflection" className="project-section">
-                    <h2>{t('ivy.section.reflection')}</h2>
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.reflection')}</div>
                     <div className="ivy-statement-card" style={{ background: 'transparent', textAlign: 'left', padding: '0' }}>
                         <h3>{t('ivy.reflection.title')}</h3>
                         <p>{t('ivy.reflection.content')}</p>

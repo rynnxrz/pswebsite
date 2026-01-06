@@ -321,24 +321,22 @@
             "copied": "Copied!"
         },
         "section": {
-            "context": "01. CONTEXT",
-            "cost": "02. THE REAL COST",
-            "target": "03. DESIGN TARGET",
-            "decisions": "04. KEY DECISIONS",
-            "system": "05. THE SYSTEM",
-            "ai": "06. AI CAPABILITY",
-            "outcome": "07. OUTCOME",
-            "reflection": "08. REFLECTION"
+            "overview": "01. OVERVIEW",
+            "context": "02. CONTEXT",
+            "cost": "03. THE REAL COST",
+            "target": "04. DESIGN TARGET",
+            "decisions": "05. KEY DECISIONS",
+            "system": "06. THE SYSTEM",
+            "ai": "07. AI CAPABILITY",
+            "outcome": "08. OUTCOME",
+            "reflection": "09. REFLECTION"
         },
         "intro": {
-            "title": "Restoring Creative Focus",
-            "subtitle": "An Operating System for Trust",
+            "title": "The project is defined as an internal rental and inventory management system for a high-end jewelry brand. It replaces manual <strong>PDF lookbooks</strong> and <strong>email-based coordination</strong> with a <strong>date-aware digital catalog</strong> and <strong>automated evidence tracking</strong>.",
             "role_title": "Role",
-            "role_desc": "Product Partner (Product Strategy · UX · Full-stack Engineering)",
+            "role_desc": "Product Partner (Strategy · UX · Engineering)",
             "timeline_title": "Timeline",
-            "timeline_desc": "12 Days (MVP)",
-            "deliverables_title": "Deliverables",
-            "deliverables_desc": "Internal Rental & Wholesale Operating System"
+            "timeline_desc": "12 Days (MVP)"
         },
         "context": {
             "title": "Why This Project Existed",
@@ -429,7 +427,7 @@
             },
             "ivy-j-studio": {
                 "title": "Ivy J Studio",
-                "description": "An internal operating system for a high-end jewelry brand, replacing manual PDF workflows with a live inventory & evidence-based rental system."
+                "description": "Internal operating system for a high-end jewelry brand, replacing manual PDF workflows with live inventory and evidence-based rentals."
             },
             "notification": {
                 "title": "Vibe Coding in Progress 🚧",

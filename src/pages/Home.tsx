@@ -24,7 +24,7 @@ const projectsData = [
   },
   {
     id: "ivy-j-studio",
-    image: "/assets/images/ivy-j/hero-placeholder.webp",
+    image: "/assets/images/ivy-j/hero-main-mobile.webp",
     tags: ["Product Strategy", "Full-stack", "Internal Tool"],
   },
 ];

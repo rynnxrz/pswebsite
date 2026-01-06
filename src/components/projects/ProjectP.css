@@ -39,6 +39,10 @@
   color: var(--text-primary);
 }
 
+.section-eyebrow {
+  margin-bottom: 0.5rem;
+}
+
 .project-section h3 {
   font-size: 1.25rem;
   font-weight: 600;
