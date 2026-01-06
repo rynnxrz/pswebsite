@@ -5,6 +5,10 @@
         "portfolio": "作品集",
         "language": "语言"
     },
+    "theme": {
+        "switchToLight": "切换到浅色模式",
+        "switchToDark": "切换到深色模式"
+    },
     "about": {
         "role": "产品设计师 & 开发者",
         "bio": "目前居于伦敦的创新产品设计师和开发者。",
@@ -201,6 +205,10 @@
             "one": {
                 "title": "Innerpeace",
                 "description": "我们为学生创建了一款低成本的心理健康应用，针对经济型 Android 设备进行了优化，通过研究数据库实现了大规模测试，并大规模提供可及的减压服务。"
+            },
+            "ivy-j-studio": {
+                "title": "Ivy J Studio",
+                "description": "高端珠宝品牌的内部操作系统，用实时库存和基于证据的租赁系统取代了手动 PDF 工作流程。"
             },
             "notification": {
                 "title": "Vibe Coding 进行中 🚧",

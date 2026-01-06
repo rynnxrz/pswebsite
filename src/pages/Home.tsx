@@ -22,6 +22,11 @@ const projectsData = [
     image: "/assets/images/innerpeace-cover.webp",
     tags: ["UX Research", "Android App", "Scalable"],
   },
+  {
+    id: "ivy-j-studio",
+    image: "/assets/images/ivy-j/hero-placeholder.webp",
+    tags: ["Product Strategy", "Full-stack", "Internal Tool"],
+  },
 ];
 
 

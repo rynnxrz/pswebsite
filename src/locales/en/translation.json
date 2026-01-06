@@ -5,6 +5,10 @@
         "portfolio": "Portfolio",
         "language": "Language"
     },
+    "theme": {
+        "switchToLight": "Switch to light mode",
+        "switchToDark": "Switch to dark mode"
+    },
     "about": {
         "role": "product designer & developer",
         "bio": "an innovative product designer and developer based in london.",
@@ -308,6 +312,104 @@
             "content3": "Including this reflection is my way of demonstrating a growth mindset: I’m willing to learn, borrow tools from product/strategy (like Kano), and use them to make more grounded design choices."
         }
     },
+    "ivy": {
+        "header": {
+            "title": "Ivy J Studio",
+            "date": "12 Days (MVP) · Product Partner",
+            "download": "Download Case Study",
+            "copy": "Copy URL",
+            "copied": "Copied!"
+        },
+        "section": {
+            "context": "01. CONTEXT",
+            "cost": "02. THE REAL COST",
+            "target": "03. DESIGN TARGET",
+            "decisions": "04. KEY DECISIONS",
+            "system": "05. THE SYSTEM",
+            "ai": "06. AI CAPABILITY",
+            "outcome": "07. OUTCOME",
+            "reflection": "08. REFLECTION"
+        },
+        "intro": {
+            "title": "Restoring Creative Focus",
+            "subtitle": "An Operating System for Trust",
+            "role_title": "Role",
+            "role_desc": "Product Partner (Product Strategy · UX · Full-stack Engineering)",
+            "timeline_title": "Timeline",
+            "timeline_desc": "12 Days (MVP)",
+            "deliverables_title": "Deliverables",
+            "deliverables_desc": "Internal Rental & Wholesale Operating System"
+        },
+        "context": {
+            "title": "Why This Project Existed",
+            "content": "Ivy J Studio is a high-end jewelry brand founded by an architect-turned-designer in London. Each piece is one-of-a-kind, high value, and frequently loaned to stylists, magazines, and buyers.",
+            "problem": "As demand increased, Ivy’s daily work quietly shifted: less time designing, more time checking, updating, proving, and defending. The business didn’t fail because it lacked digital tools. It struggled because too much of Ivy’s attention was spent on work that didn’t require her judgment."
+        },
+        "cost": {
+            "title": "Repeating the Same Mental Work",
+            "situation_a": {
+                "title": "Situation A: Every request required rebuilding reality",
+                "desc": "When someone asked, “What’s available next Tuesday?” Ivy had to check inventory manually, open her Illustrator lookbook, remove unavailable items, export a new PDF, and email it back. Even with templates, each request became a small design project."
+            },
+            "situation_b": {
+                "title": "Situation B: Trust was maintained through anxiety",
+                "desc": "When a dispute happened, Ivy had to search her personal iPhone photo library, find timestamped packing photos, screenshot them, and send them as proof. This wasn’t admin work. It was self-defense."
+            }
+        },
+        "target": {
+            "title": "What I Was Actually Optimizing For",
+            "statement": "Reduce how often Ivy needs to re-check, re-explain, or re-prove the state of her business.",
+            "sub": "If a task didn’t require her taste, judgment, or relationships, the system should take responsibility for it."
+        },
+        "decisions": {
+            "title": "What I Chose Not to Build",
+            "d1": {
+                "title": "Decision 1: No Checkout",
+                "why": "In this business, rentals run on invoices, deposits, and long-term relationships — not impulse checkout. Adding Stripe would have looked “complete,” but it would not have removed any real work from Ivy’s day.",
+                "decision": "No online payment flow. Instead, automated invoices and documents that match existing B2B behavior."
+            },
+            "d2": {
+                "title": "Decision 2: Prioritize System Logic Over Custom UI",
+                "why": "With a 12-day MVP and a solo founder, every hour spent polishing UI was an hour not spent stabilizing the system.",
+                "decision": "Use reliable base UI components and invest time in data logic, availability rules, and evidence flows. At this stage, being correct and reliable mattered more than being visually unique."
+            }
+        },
+        "system": {
+            "title": "How the Insight Was Translated into Structure",
+            "p1": {
+                "title": "Replacing PDFs with a Live Catalog",
+                "before": "Manual, Static, Rebuilt every time",
+                "after": "Date-aware, Shareable link, Always current",
+                "result": "Ivy no longer “checks” inventory. She trusts the system’s answer."
+            },
+            "p2": {
+                "title": "Making Evidence Part of the Workflow",
+                "content": "Proof is no longer collected only when something goes wrong. Before an item can be marked as “Shipped,” the system requires a photo. That photo is timestamped and attached to the client notification automatically.",
+                "result": "Disputes are prevented, not argued. Trust is established before the item leaves the studio."
+            }
+        },
+        "ai": {
+            "title": "AI as a Capability Layer, Not a Feature",
+            "content": "The AI workflow was not added just to make data entry faster. I treated it as a foundational capability: teaching the system how to translate messy, human-made files into structured data.",
+            "design": "AI prepares structured drafts → Ivy reviews and confirms → No one-click automation.",
+            "reasoning": "Accuracy matters more than speed. The system should assist judgment, not replace it."
+        },
+        "outcome": {
+            "title": "What Actually Changed",
+            "content": "Success was not measured by usage or engagement. It was measured by who needed to think about what.",
+            "list": [
+                "No more manual PDF updates",
+                "No more searching personal photo albums for proof",
+                "Fewer back-and-forth emails before replying"
+            ],
+            "result": "Ivy’s attention shifted back to the work only she can do: designing."
+        },
+        "reflection": {
+            "title": "Reflection",
+            "content": "In the AI era, speed and implementation are no longer differentiators. What matters is where you place the system’s responsibility.",
+            "closing": "This project was about identifying the exact points where attention was being wasted — and designing a system that absorbs that cost instead of the human. I didn’t optimize for productivity metrics. I optimized for focus."
+        }
+    },
     "home": {
         "intro": {
             "name": "rongze xu",
@@ -324,6 +426,10 @@
             "one": {
                 "title": "Innerpeace",
                 "description": "We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale."
+            },
+            "ivy-j-studio": {
+                "title": "Ivy J Studio",
+                "description": "An internal operating system for a high-end jewelry brand, replacing manual PDF workflows with a live inventory & evidence-based rental system."
             },
             "notification": {
                 "title": "Vibe Coding in Progress 🚧",

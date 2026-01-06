@@ -1,18 +1,9 @@
 :root {
-    /* 1. Standardized Text Colors (Apple Dark Mode Adapted) */
-    --text-primary: #F5F5F7;
-    /* Off-white for H1, H2, Body */
-    --text-secondary: #86868b;
-    /* Light gray for subtitles/descriptions */
-    --text-tertiary: #6e6e73;
-    /* Darker gray for less important info */
-    --accent-blue: #2997ff;
-    /* Apple Dark Mode Blue */
-
     /* Legacy graph colors mapped to new system for compatibility */
     --graph-text-primary: var(--text-primary);
     --graph-text-secondary: var(--text-secondary);
     --graph-text-muted: var(--text-tertiary);
+    --accent-blue: var(--accent-primary);
 
     /* 2. Standardized Fonts */
     --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
@@ -23,8 +14,8 @@
     --dot-size-s: 8px;
 
     /* 4. Container Visuals (Glassmorphism) */
-    --graph-bg: rgba(26, 26, 26, 0.6);
-    --graph-border: 1px solid rgba(255, 255, 255, 0.1);
+    --graph-bg: var(--bg-glass);
+    --graph-border: 1px solid var(--border-subtle);
     --graph-radius: 12px;
     --graph-padding: 1.5rem;
 

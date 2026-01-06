@@ -23,7 +23,7 @@
     width: 100%;
     gap: 0.5rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--surface-card-border-strong);
 }
 
 .dm-tab {
@@ -48,16 +48,16 @@
 }
 
 .dm-tab:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--surface-card);
     opacity: 0.8;
 }
 
 .dm-tab.active {
     flex: 1.5;
     /* Grow to reveal more text */
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--surface-card-strong);
     opacity: 1;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--surface-card-border-strong);
 }
 
 .dm-tab-title {
@@ -75,13 +75,13 @@
 }
 
 .dm-tab.active .dm-tab-title {
-    color: #fff;
+    color: var(--text-primary);
 }
 
 .dm-tab-subtitle {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--text-primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -107,7 +107,7 @@
 .dm-header-row .dm-headline {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--text-primary);
     font-family: 'Soehne', sans-serif;
     margin: 0;
     max-width: 70%;
@@ -127,15 +127,15 @@
     align-items: center;
     gap: 0.4rem;
     padding: 0.35rem 0.8rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--pill-border);
     /* Subtle border like tabs */
     border-radius: 8px;
     /* Match tab radius */
-    color: var(--graph-text-primary);
+    color: var(--text-primary);
     font-size: 0.8rem;
     font-weight: 500;
     text-transform: uppercase;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--pill-bg);
     /* Slight gray background */
 }
 
@@ -151,8 +151,8 @@
 }
 
 .dm-context-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--surface-card);
+    border: 1px solid var(--surface-card-border);
     border-radius: 8px;
     padding: 1.25rem;
     display: flex;
@@ -195,7 +195,7 @@
 .dm-context-card p {
     font-size: 0.95rem;
     line-height: 1.5;
-    color: #d1d5db;
+    color: var(--text-secondary);
     margin: 0;
     white-space: pre-line;
 }
@@ -210,8 +210,8 @@
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: #111;
+    border: 1px solid var(--surface-card-border-strong);
+    background: var(--bg-elevated);
     width: 100%;
 }
 
@@ -225,18 +225,18 @@
     position: absolute;
     bottom: 16px;
     right: 16px;
-    background: rgba(0, 0, 0, 0.85);
+    background: var(--annotation-bg);
     backdrop-filter: blur(8px);
     padding: 8px 12px;
     border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--annotation-border);
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #fff;
+    color: var(--text-on-image);
     font-size: 0.85rem;
     max-width: 90%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--annotation-shadow);
 }
 
 .dm-arrow {

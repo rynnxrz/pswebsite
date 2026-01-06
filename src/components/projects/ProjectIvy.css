@@ -1,0 +1,130 @@
+/* src/components/projects/ProjectIvy.css */
+
+.ivy-hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  width: 90%;
+}
+
+.ivy-context-diagram {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Prevent overflow */
+}
+
+.ivy-annotation {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+.ivy-flow-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.ivy-flow-step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  border-left: 2px solid var(--border-color);
+  background: var(--bg-secondary);
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+  /* Allow wrapping */
+}
+
+.ivy-flow-arrow {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.ivy-statement-card {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  margin: 2rem 0;
+}
+
+.ivy-statement-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+.ivy-decision-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.9rem;
+  table-layout: fixed;
+  /* Enforce width */
+}
+
+.ivy-decision-table th,
+.ivy-decision-table td {
+  padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+  word-wrap: break-word;
+  /* Prevent overflow */
+}
+
+/* Force stack on the main column width (576px) for better readability */
+.ivy-comparison-grid,
+.ivy-before-after {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* Default to stack for narrow column */
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.ivy-chart-placeholder {
+  height: 200px;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+}
+
+/* Only use columns if we have enough space (unlikely in 576px container but good practice) */
+@media (min-width: 768px) {
+  /* .ivy-comparison-grid, .ivy-before-after {
+     grid-template-columns: 1fr 1fr;
+  } */
+  /* User requested strictly matching Oraweb width behavior, 
+     which stacks most things in the narrow column. 
+     Use 1fr 1fr only if it fits well. 
+     For 576px, 2 columns is very tight (approx 260px each). 
+     Let's keep it stacked or used flex with wrap. */
+}
+
+/* Specific adjustment for side-by-side charts if needed */
+.ivy-side-by-side {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

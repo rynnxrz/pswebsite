@@ -11,7 +11,7 @@
     font-size: 1.1rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
-    color: #fff;
+    color: var(--text-primary);
     font-family: 'Soehne', sans-serif;
 }
 
@@ -28,7 +28,7 @@
     align-items: center;
     gap: 4px;
     /* Space from previous sentence */
-    color: #fff;
+    color: var(--text-primary);
     /* or match the link style e.g. white */
     cursor: default;
     /* Not a real link but a hint, or make it clickable? User said "Click on EACH ROLE" so this hint is just text instructions */
@@ -37,7 +37,7 @@
 }
 
 .interaction-hint>span {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid var(--link-underline);
     transition: border-color 0.2s ease;
 }
 
@@ -59,21 +59,21 @@
 }
 
 .accordion-item {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--surface-card);
+    border: 1px solid var(--surface-card-border);
     border-radius: 12px;
     overflow: hidden;
     transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .accordion-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: var(--surface-card-hover);
+    border-color: var(--surface-card-border-strong);
 }
 
 .accordion-item.open {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: var(--surface-card-strong);
+    border-color: var(--surface-card-border-strong);
 }
 
 .accordion-header {
@@ -97,7 +97,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #e5e7eb;
+    color: var(--text-primary);
 }
 
 .header-left {
@@ -136,18 +136,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #a0a0a0;
+    color: var(--text-secondary);
     /* Neutral icon color */
 }
 
 .header-title {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #e5e7eb;
+    color: var(--text-primary);
 }
 
 .header-right {
-    color: #6b7280;
+    color: var(--text-tertiary);
     display: flex;
     align-items: center;
 }
@@ -174,7 +174,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #6b7280;
+    color: var(--text-tertiary);
     margin-bottom: 0.8rem;
     margin-top: 0;
 }
@@ -194,19 +194,19 @@
 
 .people-names {
     font-size: 0.95rem;
-    color: #fff;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
 .people-title {
     font-size: 0.85rem;
-    color: #a0a0a0;
+    color: var(--text-secondary);
 }
 
 .group-context {
     font-size: 0.9rem;
     line-height: 1.5;
-    color: #9ca3af;
+    color: var(--text-secondary);
     padding-top: 0.8rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid var(--surface-card-border);
 }

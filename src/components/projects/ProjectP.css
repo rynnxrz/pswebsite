@@ -7,7 +7,7 @@
   font-family: var(--font-sans);
   color: var(--text-primary);
   min-height: 100vh;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   /* Prevent negative margins from causing page scroll */
 }
 
@@ -115,7 +115,7 @@
 
 /* Hover Effect: Subtle background change */
 .section-image:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--surface-card-hover);
 }
 
 .section-image:hover img {
@@ -132,7 +132,7 @@
 .section-divider {
   border: 0;
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--surface-divider);
   margin: 3rem 0;
 }
 
@@ -226,6 +226,19 @@
   transform: scale(1.01);
 }
 
+:root[data-theme="light"] .project-section img,
+:root[data-theme="light"] .gallery-image,
+:root[data-theme="light"] .stacked-card {
+  filter: none;
+}
+
+:root[data-theme="light"] .project-section img:hover,
+:root[data-theme="light"] .gallery-image:hover,
+:root[data-theme="light"] .stacked-card:hover {
+  filter: none;
+  transform: scale(1.01);
+}
+
 .role-grid::-webkit-scrollbar {
   display: none;
 }
@@ -253,7 +266,7 @@
 }
 
 .role-card:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--surface-card-hover);
   /* Subtle hover effect */
 }
 

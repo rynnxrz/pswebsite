@@ -25,25 +25,15 @@
   align-items: center;
   position: relative;
 
-  /* Match ProjectHeader's dark frosted look */
-  background-color: rgba(22, 22, 23, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Match ProjectHeader's frosted look */
+  background-color: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-soft);
   /* Deep shadow */
 
   overflow: hidden;
-}
-
-/* We want this dark look by default now, so we can likely remove or simplify the dark mode query. 
-   But keeping it just in case we want slight nuances later, though for now let's ensure it matches the header. */
-@media (prefers-color-scheme: dark) {
-  .bottom-nav {
-    /* Already set to dark aesthetic above */
-    background-color: rgba(22, 22, 23, 0.8);
-    /* Slightly darker if needed */
-  }
 }
 
 .nav-tooltip-wrapper {
@@ -65,15 +55,15 @@
   left: 50%;
   transform: translateX(-50%) translateY(5px);
   /* Initial state: slightly down */
-  background-color: #18181b;
-  color: #fff;
+  background-color: var(--bg-tooltip);
+  color: var(--text-primary);
   white-space: nowrap;
   padding: 6px 12px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-subtle);
   font-size: 0.875rem;
   font-weight: 500;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-medium);
   pointer-events: none;
   z-index: 1000;
   opacity: 0;
@@ -107,7 +97,7 @@
   z-index: 2;
   transition: color 0.3s ease;
   /* Removed transform transition from parent */
-  color: #888;
+  color: var(--text-tertiary);
   position: relative;
 }
 
@@ -131,7 +121,7 @@
 }
 
 .nav-item.active {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 /* Only scale the SVG on hover */
@@ -140,11 +130,11 @@
 }
 
 .nav-tooltip-wrapper:hover .nav-item {
-  color: #ddd;
+  color: var(--text-secondary);
 }
 
 .nav-tooltip-wrapper:hover .nav-item.active {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .active-indicator {
@@ -154,6 +144,6 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--bg-indicator);
   z-index: 1;
 }

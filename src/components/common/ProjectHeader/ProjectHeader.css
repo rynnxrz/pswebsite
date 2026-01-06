@@ -15,14 +15,12 @@
 }
 
 .project-header.sticky-active {
-    /* Default to dark frosted glass to match the dark page theme */
-    background-color: rgba(22, 22, 23, 0.7);
-    /* Higher opacity for light mode */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: var(--bg-glass);
+    border-bottom: 1px solid var(--border-subtle);
     backdrop-filter: saturate(180%) blur(20px);
     /* Apple-style frost */
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-soft);
     /* Softer shadow */
     margin-bottom: 3rem;
     margin-left: -1rem;
@@ -35,27 +33,9 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* If we ever have a strictly light mode page, we can override or use media query,
-   but ProjectP is dark-themed so this default is safer. */
-@media (prefers-color-scheme: light) {
-    /* Optional: keep light version if system is light AND page respects it,
-       but currently ProjectP forces dark text colors? No, it forces white text.
-       So header must be dark to provide contrast for white text.
-       Removing the light-mode override for now to ensure consistency. */
-}
-
-@media (prefers-color-scheme: dark) {
-    .project-header.sticky-active {
-        background-color: rgba(22, 22, 23, 0.8);
-        /* Apple dark mode base */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    }
-}
-
 @supports not (backdrop-filter: url(#liquid-glass-filter)) {
     .project-header.sticky-active {
-        background-color: rgba(20, 20, 20, 0.85);
+        background-color: var(--bg-glass-strong);
         backdrop-filter: blur(16px);
     }
 }
@@ -104,20 +84,20 @@
 }
 
 .divider {
-    color: #555;
+    color: var(--text-tertiary);
     font-weight: 300;
 }
 
 .active-section-name {
     font-size: 1rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-primary);
     cursor: pointer;
     padding: 2px 0;
 }
 
 .section-navigator:hover .active-section-name {
-    color: #4b9fff;
+    color: var(--accent-primary);
 }
 
 .section-dropdown {
@@ -125,15 +105,15 @@
     top: 100%;
     left: 0;
     margin-top: 8px;
-    background-color: #1f1f1f;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
     border-radius: 8px;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
     width: max-content;
     min-width: 180px;
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-soft);
     opacity: 0;
     transform: translateY(-5px);
     pointer-events: none;
@@ -160,7 +140,7 @@
 
 .dropdown-item {
     font-size: 0.9rem;
-    color: #a0a0a0;
+    color: var(--text-secondary);
     padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
@@ -168,13 +148,13 @@
 }
 
 .dropdown-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background: var(--bg-hover);
+    color: var(--text-primary);
 }
 
 .dropdown-item.active {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    background: var(--bg-hover-subtle);
     font-weight: 500;
 }
 
@@ -182,13 +162,13 @@
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0;
-    color: #fff;
+    color: var(--text-primary);
 }
 
 .project-date {
     font-size: 0.9rem;
     font-weight: 400;
-    color: #a0a0a0;
+    color: var(--text-secondary);
     margin-top: 4px;
 }
 
@@ -204,18 +184,18 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    background-color: #1a1a1a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
     border-radius: 999px;
-    color: #a0a0a0;
+    color: var(--text-secondary);
     cursor: pointer;
     padding: 0;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .action-btn:hover {
-    background-color: #2a2a2a;
-    color: #fff;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
 }
 
 @media print {

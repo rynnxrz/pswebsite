@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { AnimatePresence } from 'framer-motion';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { RetroToggle } from './components/RetroToggle';
+import { ThemeToggle } from './components/ThemeToggle';
 import { BottomNav } from './layouts/BottomNav';
 import { NotificationProvider } from './components/NotificationContext';
 import { DynamicIsland } from './layouts/DynamicIsland';
@@ -24,7 +25,7 @@ const PageLoader = () => (
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: 'var(--bg-color, #0a0a0a)'
+    background: 'var(--bg-system)'
   }}>
     <div style={{ opacity: 0.6 }}>Loading...</div>
   </div>
@@ -36,6 +37,7 @@ const AppContent = () => {
   return (
     <>
       <ScrollToTop />
+      <ThemeToggle />
       {location.pathname === '/' && <RetroToggle />}
       <DynamicIsland />
       <main className="main-content">

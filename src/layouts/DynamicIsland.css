@@ -19,11 +19,11 @@
     justify-content: center;
     min-height: 52px;
     padding: 12px 20px;
-    background-color: #000;
-    color: #fff;
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-medium);
   }
   
   .island-content {
@@ -35,7 +35,7 @@
   
   .island-content .icon {
     flex-shrink: 0;
-    color: #4ade80;
+    color: var(--accent-success);
   }
   
   .message-wrapper {
@@ -64,5 +64,5 @@
   .message-wrapper .sub-message {
     font-size: 0.85rem;
     font-weight: 400;
-    color: #a0a0a0;
+    color: var(--text-secondary);
   }
