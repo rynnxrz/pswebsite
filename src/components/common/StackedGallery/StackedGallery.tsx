@@ -7,6 +7,7 @@ interface GalleryImage {
     src: string;
     alt: string;
     interactiveSrc?: string; // Optional interactive content
+    deferInteraction?: boolean; // Optional deferred interaction
     thumbnailSrc?: string; // Optional optimized thumbnail
     srcSet?: string;
     sizes?: string;
@@ -35,6 +36,7 @@ export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultI
                 src={activeImage.src}
                 alt={activeImage.alt}
                 interactiveSrc={activeImage.interactiveSrc}
+                deferInteraction={activeImage.deferInteraction}
                 containerClassName="gallery-main-image-wrapper"
                 className="gallery-main-image"
                 isNested={true}

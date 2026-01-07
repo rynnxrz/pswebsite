@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Expand, Minimize2 } from 'lucide-react';
+import { Expand, Minimize2, Play } from 'lucide-react';
 import './ExpandableImage.css';
 import '../../Tooltip.css';
 
@@ -9,6 +9,7 @@ interface ExpandableImageProps {
     className?: string;
     containerClassName?: string;
     interactiveSrc?: string; // Optional URL for interactive content (iframe)
+    deferInteraction?: boolean; // If true, requires user action to load iframe
     isNested?: boolean;
     fetchPriority?: 'high' | 'low' | 'auto';
     loading?: 'lazy' | 'eager';
@@ -24,6 +25,7 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
     className = '',
     containerClassName = '',
     interactiveSrc,
+    deferInteraction = false,
     isNested = false, // New prop to disable outer frame
     fetchPriority = 'auto',
     loading,
@@ -34,6 +36,7 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isInteractionStarted, setIsInteractionStarted] = useState(false);
 
     const toggleFullscreen = async () => {
         const element = containerRef.current;
@@ -100,6 +103,13 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
         };
     }, []);
 
+    // Reset interaction state if interactiveSrc changes (e.g. in a gallery)
+    useEffect(() => {
+        setIsInteractionStarted(false);
+    }, [interactiveSrc]);
+
+    const showIframe = interactiveSrc && (!deferInteraction || isInteractionStarted);
+
     return (
         <div
             ref={containerRef}
@@ -107,26 +117,42 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
         >
             {/* Main Content Area */}
             <div className="content-wrapper">
-                {interactiveSrc ? (
+                {showIframe ? (
                     <iframe
                         src={interactiveSrc}
                         className={`interactive-frame ${className}`}
                         title={alt}
                         style={{ width: '100%', height: '100%', border: 'none' }}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
                     />
                 ) : (
-                    <img
-                        src={src}
-                        alt={alt}
-                        className={className}
-                        // @ts-expect-error - React 18 doesn't support fetchpriority type yet
-                        fetchpriority={fetchPriority}
-                        loading={loading}
-                        width={width}
-                        height={height}
-                        srcSet={srcSet}
-                        sizes={sizes}
-                    />
+                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                        <img
+                            src={src}
+                            alt={alt}
+                            className={className}
+                            // @ts-expect-error - React 18 doesn't support fetchpriority type yet
+                            fetchpriority={fetchPriority}
+                            loading={loading}
+                            width={width}
+                            height={height}
+                            srcSet={srcSet}
+                            sizes={sizes}
+                        />
+                        {interactiveSrc && deferInteraction && (
+                            <button
+                                className="interaction-trigger-overlay"
+                                onClick={() => setIsInteractionStarted(true)}
+                                aria-label="Start Interaction"
+                            >
+                                <div className="interaction-play-button">
+                                    <Play size={32} fill="currentColor" />
+                                </div>
+                                <span className="interaction-label">Click to Interact</span>
+                            </button>
+                        )}
+                    </div>
                 )}
             </div>
 
@@ -148,3 +174,4 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
         </div>
     );
 };
+

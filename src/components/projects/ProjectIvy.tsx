@@ -9,7 +9,7 @@ import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
 
 export const ProjectIvy = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [activeSection, setActiveSection] = useState('');
 
     const navSections = [
@@ -86,12 +86,9 @@ export const ProjectIvy = () => {
                                 srcSet: '/assets/images/ivy-j/hero-main-mobile.webp 800w, /assets/images/ivy-j/hero-main.webp 2560w',
                                 sizes: '(max-width: 768px) 100vw, 80vw',
                                 thumbnailSrc: '/assets/images/ivy-j/hero-main-thumb.webp',
-                                alt: 'Ivy J Studio System Interface'
-                            },
-                            {
-                                id: 'hero-chart',
-                                src: '/assets/images/ivy-j/chart-placeholder.webp',
-                                alt: 'Data Visualization'
+                                alt: 'Ivy J Studio System Interface',
+                                interactiveSrc: `https://ivyjstudio.shipbyx.com/?lang=${i18n.language}`,
+                                deferInteraction: true
                             }
                         ]}
                     />

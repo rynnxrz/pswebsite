@@ -159,3 +159,61 @@
 .expanded-image-container.is-fullscreen .interactive-iframe {
     height: 100vh;
 }
+/* Interaction Trigger Overlay */
+.interaction-trigger-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    z-index: 10;
+}
+
+.interaction-trigger-overlay:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.interaction-play-button {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.interaction-trigger-overlay:hover .interaction-play-button {
+    transform: scale(1.1);
+    background: #fff;
+}
+
+.interaction-label {
+    margin-top: 1rem;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.interaction-trigger-overlay:hover .interaction-label {
+    opacity: 1;
+    transform: translateY(0);
+}
