@@ -1,0 +1,211 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    margin: 2rem 0 1rem 0;
+    /* Reduced margins for tighter integration */
+    font-family: var(--font-body, sans-serif);
+}
+
+/* Row Layout: Stacked (Headers Above) */
+.chartRow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    /* Gap between Header and Bar */
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Legend Removed */
+
+/* Row Header */
+.rowHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    /* Full width */
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+.stateLabel {
+    color: var(--text-primary);
+    /* Darker/Bold per request */
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1;
+    margin-left: 0;
+    /* Align with bar start */
+    text-transform: lowercase;
+}
+
+/* Bar Area */
+.barArea {
+    width: 100%;
+    flex-grow: 1;
+    /* Space for Bottom Labels */
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.barTrack {
+    display: flex;
+    height: 8px;
+    width: 100%;
+    border-radius: 4px;
+    overflow: visible;
+    /* Allow labels to overflow */
+    position: relative;
+}
+
+.segment {
+    height: 100%;
+    position: relative;
+    /* Anchor for labels */
+}
+
+/* Direct Labels - Below */
+.labelBelow {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    /* Reduced from 6px */
+    font-size: 0.85rem;
+    white-space: nowrap;
+    color: var(--text-secondary);
+    /* Uniform mid-gray */
+    font-weight: 400;
+    /* Regular weight */
+}
+
+/* --- COLORS --- */
+
+/* DARK MODE (Default) */
+.design {
+    background-color: var(--text-primary);
+    /* White/Off-white */
+}
+
+.craft {
+    background-color: #888;
+    /* Darker Grey base */
+}
+
+.admin {
+    background-color: #4A6982;
+    /* Steel Blue */
+}
+
+/* LIGHT MODE OVERRIDES */
+:global([data-theme="light"]) .design {
+    background-color: #000000;
+    /* Pure Black */
+}
+
+:global([data-theme="light"]) .craft {
+    background-color: #666666;
+    /* Targeted Darker Gray for White Background */
+}
+
+:global([data-theme="light"]) .admin {
+    background-color: #3A7191;
+    /* Strong Blue */
+}
+
+/* --- CONNECTOR LINE --- */
+.connectorContainer {
+    width: 100%;
+    height: 2.25rem;
+    /* Reduced from 3rem to tighten gap */
+    position: relative;
+    z-index: 0;
+    /* Changed from -1 to 0 to avoid being hidden behind heavy layers if any */
+    pointer-events: none;
+    margin: 0;
+    /* Removed negative margin to prevent overlap */
+    padding-left: 0;
+    /* Reset offset */
+}
+
+/* Light mode connector color */
+:global([data-theme="light"]) {
+    --connector-line: #000000;
+}
+
+/* Dark mode connector color */
+:root {
+    --connector-line: rgba(255, 255, 255, 0.3);
+}
+
+/* --- TOOLTIP --- */
+.interactiveSegment {
+    cursor: pointer;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    background: var(--bg-glass-strong);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-primary);
+    padding: 20px 30px 0px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    font-size: 0.8rem;
+    font-weight: 500;
+    min-width: 180px;
+    max-width: 260px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    white-space: normal;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Transformation handled by Framer Motion now */
+}
+
+/* Light mode shadow adjustment */
+:global([data-theme="light"]) .tooltip {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tooltipArrow {
+    position: absolute;
+    bottom: -5px;
+    right: 18px;
+    width: 10px;
+    height: 10px;
+    background: var(--bg-glass-strong);
+    border-right: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    transform: rotate(45deg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.tooltipList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.tooltipItem {
+    padding: 0;
+    white-space: normal;
+    line-height: 1.5;
+    color: var(--text-primary);
+}

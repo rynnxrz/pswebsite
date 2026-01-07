@@ -251,5 +251,20 @@
         "formattingDesc": "用户利用\"黑客手段\"（颜色/边框）作为临时的提醒标记",
         "clearDelete": "清除 / 删除",
         "clearDeleteDesc": "纠正错误或重置单元格"
+    },
+    "ivy_j": {
+        "context": {
+            "chart": {
+                "initial_label": "初始",
+                "current_label": "现状",
+                "design": "design",
+                "craft": "craft",
+                "admin": "admin",
+                "admin_tasks": [
+                    "Manual Catalog Updates",
+                    "Email-Based Coordination"
+                ]
+            }
+        }
     }
 }

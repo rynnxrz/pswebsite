@@ -8,6 +8,8 @@ import './ProjectIvy.css'; // Custom styles
 import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
 
+import { AttentionChart } from './AttentionChart/AttentionChart';
+
 export const ProjectIvy = () => {
     const { t, i18n } = useTranslation();
     const [activeSection, setActiveSection] = useState('');
@@ -103,17 +105,7 @@ export const ProjectIvy = () => {
                     <p>{t('ivy.context.content')}</p>
                     <p><strong>{t('ivy.context.problem')}</strong></p>
 
-                    <div className="ivy-context-diagram" style={{ marginTop: '2rem', background: '#f5f5f5', padding: '2rem', borderRadius: '8px', position: 'relative', height: '300px' }}>
-                        {/* Visual Placeholder for Context Diagram */}
-                        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center' }}>
-                            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👩‍💻</div>
-                            <div>Solo Founder (Ivy)</div>
-                        </div>
-                        <div className="ivy-annotation" style={{ top: '10%', left: '10%' }}>Emails ✉️</div>
-                        <div className="ivy-annotation" style={{ top: '20%', right: '15%' }}>PDFs 📄</div>
-                        <div className="ivy-annotation" style={{ bottom: '15%', left: '20%' }}>Photos 📸</div>
-                    </div>
-                    <p style={{ textAlign: 'center', fontSize: '0.9rem', color: '#666', marginTop: '1rem' }}>Creation space surrounded by admin tasks</p>
+                    <AttentionChart />
                 </section>
 
                 <hr className="section-divider" />

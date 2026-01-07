@@ -443,5 +443,20 @@
         "formattingDesc": "Users used colors/borders to mark progress, flag blockers, and create reminders",
         "clearDelete": "Clear / Delete",
         "clearDeleteDesc": "Correcting errors or resetting cells"
+    },
+    "ivy_j": {
+        "context": {
+            "chart": {
+                "initial_label": "before",
+                "current_label": "current",
+                "design": "design",
+                "craft": "craft",
+                "admin": "admin",
+                "admin_tasks": [
+                    "Manual Catalog Updates",
+                    "Email-Based Coordination"
+                ]
+            }
+        }
     }
 }
