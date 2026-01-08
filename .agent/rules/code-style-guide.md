@@ -29,6 +29,10 @@ You are building a **personal portfolio website** with a strong visual identity,
 - **Accessibility is mandatory.** All images need `alt`, buttons need `aria-label` where labels are not visible.
 - **Fullscreen UX:** Use `ExpandableImage` for any media that supports fullscreen.
 
+## C. Spacing & Layout Hierarchy
+- **Strict Vertical Rhythm.** Maintain consistent gaps: `H3` → `H4` (`1rem`), `H4` → `P` (`0.5rem`).
+- **No Negative Margins.** Never use negative margins to fix spacing; adjust the container's `gap` or the preceding element's `margin-bottom` instead.
+- **Top-Align in Grids.** Inside columns or grids, always set `margin-top: 0` for the first text element (e.g., `p`, `h4`) to ensure strict alignment.
 ---
 
 # 2. i18n & Content
@@ -65,6 +69,10 @@ You are building a **personal portfolio website** with a strong visual identity,
 - **Side effects must clean up.** Always remove event listeners and clear timers in `useEffect` cleanups.
 - **TypeScript strictness matters.** Avoid `any` and keep props typed.
 - **Keep imports clean.** All imports at the top of the file.
+D. Data Visualization Typography
+Font Family: Strictly use var(--font-sans) for all chart text (labels, values, legends) to match body paragraphs. Never use --font-body as it is not the primary system token.
+Case & Tracking: Do NOT use text-transform: uppercase or letter-spacing for chart labels. Keep the text style identical to normal paragraph text (Sentence case) to ensure visual integration.
+Font Size: Standardize chart labels to 0.85rem.
 
 ---
 

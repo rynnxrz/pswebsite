@@ -1,14 +1,15 @@
-
 import { motion } from 'framer-motion';
 import { pageTransition } from '../../utils/animations';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import './ProjectP.css'; // Reusing base styles
-import './ProjectIvy.css'; // Custom styles
+import './ProjectP.css';
+import './ProjectIvy.css';
 import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
 
 import { AttentionChart } from './AttentionChart/AttentionChart';
+import { LinearTaskFlow } from './LinearTaskFlow/LinearTaskFlow';
+import { DecisionCard } from './DecisionCard/DecisionCard';
 
 export const ProjectIvy = () => {
     const { t, i18n } = useTranslation();
@@ -105,7 +106,7 @@ export const ProjectIvy = () => {
                     <p>{t('ivy.context.content')}</p>
                     <p><strong>{t('ivy.context.problem')}</strong></p>
 
-                    <AttentionChart />
+                    <AttentionChart variant="context" />
                 </section>
 
                 <hr className="section-divider" />
@@ -114,32 +115,9 @@ export const ProjectIvy = () => {
                 <section id="cost" className="project-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.cost')}</div>
                     <h3>{t('ivy.cost.title')}</h3>
+                    <p>{t('ivy.cost.desc')}</p>
 
-                    <div className="ivy-comparison-grid">
-                        <div>
-                            <h4>{t('ivy.cost.situation_a.title')}</h4>
-                            <p>{t('ivy.cost.situation_a.desc')}</p>
-                            <div className="ivy-flow-container">
-                                <div className="ivy-flow-step">1. Request Received</div>
-                                <div className="ivy-flow-step">2. Manual Stock Check</div>
-                                <div className="ivy-flow-step">3. Edit Illustrator File</div>
-                                <div className="ivy-flow-step">4. Export PDF</div>
-                                <div className="ivy-flow-step">5. Email Reply</div>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>{t('ivy.cost.situation_b.title')}</h4>
-                            <p>{t('ivy.cost.situation_b.desc')}</p>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
-                                <div style={{ padding: '1rem', border: '1px solid #ffcccc', background: '#fffafa', borderRadius: '6px' }}>🚨 Shipping Dispute</div>
-                                <div style={{ marginLeft: '1rem', borderLeft: '2px dashed #ccc', paddingLeft: '1rem' }}>
-                                    <div>🔍 Search iPhone Photos</div>
-                                    <div>📸 Find Timestamp</div>
-                                    <div>📧 Send Proof</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <LinearTaskFlow />
                 </section>
 
                 <hr className="section-divider" />
@@ -147,14 +125,15 @@ export const ProjectIvy = () => {
                 {/* 03. Design Target */}
                 <section id="target" className="project-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.target')}</div>
-                    <div className="ivy-statement-card">
-                        <div className="ivy-statement-text">{t('ivy.target.statement')}</div>
-                        <div style={{ color: '#666' }}>
-                            <div>❌ Not just features</div>
-                            <div>❌ Not just speed</div>
-                            <div>✅ Attention & Judgment</div>
-                        </div>
-                    </div>
+                    <h3>{t('ivy.target.title')}</h3>
+                    <p>{t('ivy.target.statement')}</p>
+
+                    <AttentionChart variant="target" />
+
+                    <DecisionCard
+                        insightKey="ivy.decision.insight"
+                        decisionKey="ivy.decision.decision"
+                    />
                 </section>
 
                 <hr className="section-divider" />

@@ -344,7 +344,8 @@
             "problem": "As demand increased, Ivy’s daily work quietly shifted: less time designing, more time checking, updating, proving, and defending. The business didn’t fail because it lacked digital tools. It struggled because too much of Ivy’s attention was spent on work that didn’t require her judgment."
         },
         "cost": {
-            "title": "Repeating the Same Mental Work",
+            "title": "The Shift from Design to Administration",
+            "desc": "A single customer inquiry triggers 5 manual steps: inventory cross-check, catalog update, content removal, PDF export, and email reply.",
             "situation_a": {
                 "title": "Situation A: Every request required rebuilding reality",
                 "desc": "When someone asked, “What’s available next Tuesday?” Ivy had to check inventory manually, open her Illustrator lookbook, remove unavailable items, export a new PDF, and email it back. Even with templates, each request became a small design project."
@@ -405,7 +406,28 @@
         "reflection": {
             "title": "Reflection",
             "content": "In the AI era, speed and implementation are no longer differentiators. What matters is where you place the system’s responsibility.",
-            "closing": "This project was about identifying the exact points where attention was being wasted — and designing a system that absorbs that cost instead of the human. I didn’t optimize for productivity metrics. I optimized for focus."
+            "closing": "This project was about identifying the exact points where attention was being wasted — and designing a system that absorbs that cost instead of the human. I didn't optimize for productivity metrics. I optimized for focus."
+        },
+        "chart": {
+            "before": "Before",
+            "current": "Current",
+            "target": "Target",
+            "design": "Design",
+            "craft": "Craft",
+            "admin": "Admin"
+        },
+        "taskflow": {
+            "step1": "Inventory check",
+            "step2": "Catalog update",
+            "step3": "Content removal",
+            "step4": "PDF export",
+            "step5": "Email reply"
+        },
+        "decision": {
+            "insight_label": "Insight",
+            "decision_label": "Decision",
+            "insight": "5 recurring low-value tasks consume 70% of daily output, interrupting design work with each customer inquiry.",
+            "decision": "Sacrifice manual layout flexibility for database-driven auto-sync, targeting 80% reduction in administrative overhead."
         }
     },
     "home": {

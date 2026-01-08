@@ -4,54 +4,48 @@
     gap: 0;
     width: 100%;
     margin: 2rem 0 1rem 0;
-    /* Reduced margins for tighter integration */
-    font-family: var(--font-body, sans-serif);
+    font-family: var(--font-sans);
 }
 
-/* Row Layout: Stacked (Headers Above) */
 .chartRow {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
-    /* Gap between Header and Bar */
     width: 100%;
     position: relative;
     z-index: 2;
 }
 
-/* Legend Removed */
-
-/* Row Header */
 .rowHeader {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-    /* Full width */
     flex-shrink: 0;
     margin-bottom: 0;
 }
 
 .stateLabel {
-    color: var(--text-primary);
-    /* Darker/Bold per request */
-    font-weight: 700;
-    font-size: 1rem;
-    line-height: 1;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    line-height: 1.2;
     margin-left: 0;
-    /* Align with bar start */
-    text-transform: lowercase;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    margin-left: 0;
 }
 
-/* Bar Area */
 .barArea {
     width: 100%;
     flex-grow: 1;
-    /* Space for Bottom Labels */
     position: relative;
     margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .barTrack {
@@ -60,96 +54,73 @@
     width: 100%;
     border-radius: 4px;
     overflow: visible;
-    /* Allow labels to overflow */
     position: relative;
+    background: var(--chart-track);
+}
+
+.barTrack> :first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.barTrack> :last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 .segment {
     height: 100%;
     position: relative;
-    /* Anchor for labels */
 }
 
-/* Direct Labels - Below */
-.labelBelow {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 4px;
-    /* Reduced from 6px */
+.labelsBelow {
+    display: flex;
+    width: 100%;
     font-size: 0.85rem;
-    white-space: nowrap;
+    line-height: 1.4;
     color: var(--text-secondary);
-    /* Uniform mid-gray */
-    font-weight: 400;
-    /* Regular weight */
 }
 
-/* --- COLORS --- */
+.labelsBelow span {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
 
-/* DARK MODE (Default) */
 .design {
     background-color: var(--text-primary);
-    /* White/Off-white */
 }
 
 .craft {
-    background-color: #888;
-    /* Darker Grey base */
+    background-color: var(--text-tertiary);
 }
 
 .admin {
-    background-color: #4A6982;
-    /* Steel Blue */
+    background-color: var(--admin-accent);
 }
 
-/* LIGHT MODE OVERRIDES */
-:global([data-theme="light"]) .design {
-    background-color: #000000;
-    /* Pure Black */
-}
-
-:global([data-theme="light"]) .craft {
-    background-color: #666666;
-    /* Targeted Darker Gray for White Background */
-}
-
-:global([data-theme="light"]) .admin {
-    background-color: #3A7191;
-    /* Strong Blue */
-}
-
-/* --- CONNECTOR LINE --- */
 .connectorContainer {
     width: 100%;
     height: 2.25rem;
-    /* Reduced from 3rem to tighten gap */
     position: relative;
     z-index: 0;
-    /* Changed from -1 to 0 to avoid being hidden behind heavy layers if any */
     pointer-events: none;
     margin: 0;
-    /* Removed negative margin to prevent overlap */
-    padding-left: 0;
-    /* Reset offset */
 }
 
-/* Light mode connector color */
-:global([data-theme="light"]) {
-    --connector-line: #000000;
+.flowPath {
+    fill: none;
+    stroke: var(--admin-accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 4;
+    stroke-linecap: round;
 }
 
-/* Dark mode connector color */
-:root {
-    --connector-line: rgba(255, 255, 255, 0.3);
-}
-
-/* --- TOOLTIP --- */
 .interactiveSegment {
     cursor: pointer;
 }
 
-/* Tooltip styles */
 .tooltip {
     position: absolute;
     bottom: calc(100% + 10px);
@@ -161,7 +132,7 @@
     padding: 20px 30px 0px 16px;
     border-radius: 8px;
     border: 1px solid var(--border-subtle);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
     min-width: 180px;
     max-width: 260px;
@@ -173,10 +144,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Transformation handled by Framer Motion now */
 }
 
-/* Light mode shadow adjustment */
 :global([data-theme="light"]) .tooltip {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -206,6 +175,39 @@
 .tooltipItem {
     padding: 0;
     white-space: normal;
-    line-height: 1.5;
+    line-height: 1.4;
     color: var(--text-primary);
+}
+
+.legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legendDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.legendDot.design {
+    background-color: var(--text-primary);
+}
+
+.legendDot.craft {
+    background-color: var(--text-tertiary);
+}
+
+.legendDot.admin {
+    background-color: var(--admin-accent);
 }

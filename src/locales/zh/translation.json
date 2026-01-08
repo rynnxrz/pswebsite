@@ -214,6 +214,57 @@
             "role_desc": "产品合伙人 (战略 · UX · 工程)",
             "timeline_title": "时间线",
             "timeline_desc": "12天 (MVP)"
+        },
+        "cost": {
+            "title": "从设计到行政的转移",
+            "current": {
+                "title": "当前工作量分配",
+                "label": "现状"
+            },
+            "situation_a": {
+                "title": "案例研究：单次询价的成本",
+                "desc": "目前，日常产出的 70% 被 5 个重复的低价值任务消耗。每一次客户询问都会触发一次产品目录的手动重建。",
+                "steps": [
+                    "<strong>手动库存核对</strong>：将实物库存与销售记录进行交叉核对。",
+                    "<strong>Lookbook 编辑</strong>：打开 Adobe Illustrator 手动更新目录。",
+                    "<strong>内容删除</strong>：手动移除在特定日期不可用的款式。",
+                    "<strong>PDF 导出</strong>：重新导出并压缩文件以便邮件发送。",
+                    "<strong>手动回复</strong>：通过邮件发送更新后的文件。"
+                ],
+                "conclusion": "每一次询问都迫使完整的手动重建，把一个简单问题变成耗时的行政任务。",
+                "summary": {
+                    "problem_title": "问题",
+                    "strategy_title": "策略",
+                    "goal_label": "目标",
+                    "issue_label": "问题所在",
+                    "impact_label": "商业影响",
+                    "decision_label": "设计决策",
+                    "tradeoffs_label": "权衡",
+                    "issue_body": "5 个重复的行政任务占据了 70% 的日常产出。",
+                    "impact_body": "每次询问都需要完整重建目录，挤压设计时间。",
+                    "decision_body": "自动化库存同步与 PDF 生成。",
+                    "tradeoffs_body": "牺牲部分手动排版灵活性，换取始终最新的目录。",
+                    "goal_body": "将行政时间减少 80%，把精力还给设计与工艺。"
+                }
+            },
+            "situation_b": {
+                "title": "情况 B：争议需要出示发货证明",
+                "desc": "当发货出现偏差（任一方向）时，Ivy 需要找到原始打包照片来确认数量或状态。如果没有照片或无法找到，解决只能通过多轮往返沟通。",
+                "step1": "打包",
+                "risk_label": "风险：记忆失效",
+                "step2": "记忆照片",
+                "step3": "发货",
+                "dispute": "争议"
+            }
+        },
+        "target": {
+            "title": "设计目标：恢复工作量平衡",
+            "statement": "通过自动化库存同步和 PDF 生成，目标是将行政时间减少 80%，让创始人把时间重新投入到设计与工艺。",
+            "sub": "如果任务不需要品味、判断或关系维护，就由系统承担。",
+            "chart": {
+                "before": "现状",
+                "target": "目标"
+            }
         }
     },
     "home": {
@@ -261,9 +312,54 @@
                 "craft": "craft",
                 "admin": "admin",
                 "admin_tasks": [
-                    "Manual Catalog Updates",
-                    "Email-Based Coordination"
-                ]
+                    "手动库存核对",
+                    "Lookbook 编辑",
+                    "内容删除",
+                    "PDF 导出",
+                    "手动回复"
+                ],
+                "title": "情况 B：信任是通过焦虑维持的",
+                "desc": "当发生争议时，Ivy 必须搜索她的个人 iPhone 照片库，找到带有时间戳的打包照片，截图并发送作为证明。这不仅仅是行政工作，而是自我防御。",
+                "step1": "打包",
+                "risk_label": "风险：记忆失效",
+                "step2": "记忆照片",
+                "step3": "发货",
+                "dispute": "争议"
+            }
+        },
+        "real_cost": {
+            "situation_a": {
+                "lane": {
+                    "inbox": "收件箱",
+                    "system": "系统",
+                    "tools": "设计工具"
+                },
+                "step1": {
+                    "label": "手动库存核对",
+                    "cost": "低价值任务"
+                },
+                "step2": {
+                    "label": "Lookbook 编辑",
+                    "cost": "低价值任务"
+                },
+                "step3": {
+                    "label": "内容删除",
+                    "cost": "低价值任务"
+                },
+                "step4": {
+                    "label": "PDF 导出",
+                    "cost": "低价值任务"
+                },
+                "step5": {
+                    "label": "手动回复",
+                    "cost": "低价值任务"
+                },
+                "switch1": "上下文重建",
+                "switch2": "工具重新进入",
+                "switch3": "上下文重建",
+                "total_load": "每日产出的 70% 被消耗",
+                "loop": "来自 5 个重复的低价值任务",
+                "legend": "所有步骤都是低价值行政任务。"
             }
         }
     }

@@ -6,8 +6,8 @@
   <link rel="icon" type="image/png" href="/weblogo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rz</title>
-  <!-- Preload LCP Image -->
-  <link rel="preload" as="image" href="/assets/images/ora-web/Mockup.webp" type="image/webp" fetchpriority="high">
+  <!-- Prefetch non-critical image to avoid unused-preload warnings -->
+  <link rel="prefetch" as="image" href="/assets/images/ora-web/Mockup.webp" type="image/webp">
   <!-- Preconnect for Third-Party Scripts -->
   <link rel="preconnect" href="https://scripts.clarity.ms" crossorigin>
   <!-- Microsoft Clarity -->

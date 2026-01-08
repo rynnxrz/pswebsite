@@ -63,6 +63,7 @@
   /* --- 5. Accents --- */
   --accent-primary: #4b9fff;
   --accent-success: #4ade80;
+  --admin-accent: #007aff;
 
   /* --- 6. Component Tokens --- */
   --overlay-card-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
@@ -77,6 +78,9 @@
   /* Dim bright images by default, restore on hover */
   --img-brightness-dim: 0.85;
   --img-brightness-active: 1.0;
+
+  /* Global Fallback for Components using --font-body */
+  --font-body: var(--font-sans);
 }
 
 :root[data-theme="light"] {
@@ -131,6 +135,7 @@
 
   --accent-primary: #0a84ff;
   --accent-success: #34c759;
+  --admin-accent: #007aff;
 
   --overlay-card-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
   --tag-bg: rgba(255, 255, 255, 0.2);
@@ -142,6 +147,10 @@
 }
 
 /* Base styles */
+html {
+  position: relative;
+}
+
 body {
   background-color: var(--bg-system);
   color: var(--text-primary);

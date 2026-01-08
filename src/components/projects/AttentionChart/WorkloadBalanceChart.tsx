@@ -2,31 +2,24 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import styles from './AttentionChart.module.css';
 
-type ChartRow = {
+type WorkloadBalanceChartProps = {
+    className?: string;
+};
+
+type WorkloadRow = {
     labelKey: string;
     design: number;
     craft: number;
     admin: number;
 };
 
-type AttentionChartProps = {
-    variant?: 'context' | 'target';
-};
-
-export const AttentionChart = ({ variant = 'context' }: AttentionChartProps) => {
+export const WorkloadBalanceChart = ({ className = '' }: WorkloadBalanceChartProps) => {
     const { t } = useTranslation();
 
-    const contextRows: ChartRow[] = [
-        { labelKey: 'ivy.chart.before', design: 70, craft: 20, admin: 10 },
-        { labelKey: 'ivy.chart.current', design: 15, craft: 15, admin: 70 },
+    const rows: WorkloadRow[] = [
+        { labelKey: 'ivy.target.chart.before', design: 15, craft: 15, admin: 70 },
+        { labelKey: 'ivy.target.chart.target', design: 50, craft: 36, admin: 14 },
     ];
-
-    const targetRows: ChartRow[] = [
-        { labelKey: 'ivy.chart.current', design: 15, craft: 15, admin: 70 },
-        { labelKey: 'ivy.chart.target', design: 50, craft: 36, admin: 14 },
-    ];
-
-    const rows = variant === 'target' ? targetRows : contextRows;
 
     const barVariants = {
         hidden: { width: 0, opacity: 0 },
@@ -37,8 +30,10 @@ export const AttentionChart = ({ variant = 'context' }: AttentionChartProps) => 
         })
     };
 
+    const containerClass = [styles.container, className].filter(Boolean).join(' ');
+
     return (
-        <div className={styles.container}>
+        <div className={containerClass}>
             {rows.map((row) => (
                 <div key={row.labelKey} className={styles.chartRow}>
                     <div className={styles.rowHeader}>
@@ -73,29 +68,13 @@ export const AttentionChart = ({ variant = 'context' }: AttentionChartProps) => 
                             />
                         </div>
                         <div className={styles.labelsBelow}>
-                            <span style={{ width: `${row.design}%` }}>{t('ivy.chart.design')}</span>
-                            <span style={{ width: `${row.craft}%` }}>{t('ivy.chart.craft')}</span>
-                            <span>{t('ivy.chart.admin')}</span>
+                            <span style={{ width: `${row.design}%` }}>{t('ivy_j.context.chart.design')}</span>
+                            <span style={{ width: `${row.craft}%` }}>{t('ivy_j.context.chart.craft')}</span>
+                            <span>{t('ivy_j.context.chart.admin')}</span>
                         </div>
                     </div>
                 </div>
             ))}
-
-            {/* Legend */}
-            <div className={styles.legend}>
-                <div className={styles.legendItem}>
-                    <span className={`${styles.legendDot} ${styles.design}`} />
-                    <span>{t('ivy.chart.design')}</span>
-                </div>
-                <div className={styles.legendItem}>
-                    <span className={`${styles.legendDot} ${styles.craft}`} />
-                    <span>{t('ivy.chart.craft')}</span>
-                </div>
-                <div className={styles.legendItem}>
-                    <span className={`${styles.legendDot} ${styles.admin}`} />
-                    <span>{t('ivy.chart.admin')}</span>
-                </div>
-            </div>
         </div>
     );
 };

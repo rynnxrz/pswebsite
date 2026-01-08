@@ -1,0 +1,523 @@
+.wrapper {
+    --top-pad: 2.4rem;
+    --bottom-pad: 2.2rem;
+    --side-pad: 1rem;
+    --lane-gutter: 120px;
+    --node-scale: 1;
+    --fatigue-level: 0;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    height: 500px;
+    overflow: hidden;
+    font-family: var(--font-sans) !important;
+    letter-spacing: 0 !important;
+}
+
+.wrapper * {
+    font-family: var(--font-sans) !important;
+    letter-spacing: 0 !important;
+}
+
+.frame {
+    position: absolute;
+    inset: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.summaryHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+}
+
+.summaryColumns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.summaryColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.summaryHeading {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.summaryItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.summaryLabel {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.summaryBody {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.summaryGoal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--bg-elevated) 85%, transparent);
+    border: 1px solid var(--border-subtle);
+}
+
+.summaryGoalLabel {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.summaryGoalBody {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.legendDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--admin-accent);
+    opacity: 0.7;
+}
+
+.legendText {
+    color: var(--text-secondary);
+}
+
+.graphArea {
+    display: grid;
+    grid-template-columns: var(--lane-gutter) minmax(0, 1fr);
+    column-gap: 1rem;
+    position: relative;
+    flex: 1;
+    min-height: 0;
+}
+
+.canvas {
+    position: relative;
+    height: 100%;
+}
+
+/* Horizontal lanes */
+.lanes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.laneRow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.laneLabels {
+    position: relative;
+    height: 100%;
+    pointer-events: none;
+}
+
+.laneLabelRow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.laneLabel {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    width: 100%;
+    text-align: right;
+    padding-right: 0.5rem;
+    transform: translate(calc(var(--fatigue-level) * 0.2px), calc(var(--fatigue-level) * -0.2px));
+    text-shadow: calc(var(--fatigue-level) * 0.2px) calc(var(--fatigue-level) * 0.2px) rgba(0, 0, 0, 0.2);
+}
+
+.laneLine {
+    flex: 1;
+    height: 1px;
+    background: var(--border-subtle);
+    opacity: 0.1;
+}
+
+/* Shared inner canvas */
+.graphInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.path {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    overflow: visible;
+}
+
+/* Flow lines */
+.mainPath,
+.loopPath {
+    fill: none;
+    stroke-width: 1px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.mainPath {
+    stroke: var(--admin-accent);
+    opacity: 0.4;
+    stroke-width: 1px;
+}
+
+.loopPath {
+    stroke: var(--admin-accent);
+    opacity: 0.6;
+}
+
+/* Nodes */
+.nodes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.step {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: var(--step-index, 1);
+}
+
+.nodeInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: auto;
+    transition: transform 0.2s ease;
+    width: 120px;
+    text-align: center;
+    transform: scale(var(--node-scale));
+    transform-origin: center;
+    box-sizing: border-box;
+    padding: 0.45rem 0.5rem 0.6rem;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--bg-elevated) 75%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 80%, transparent);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+.iconWrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: color-mix(in srgb, var(--admin-accent) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--admin-accent) 45%, var(--border-subtle));
+    color: var(--admin-accent);
+    transition: all 0.2s ease;
+}
+
+/* Color System Semantic Alignment */
+.step:nth-child(2) .iconWrapper,
+.step:nth-child(3) .iconWrapper {
+    /* System & Tools steps can have slight emphasis if needed, 
+        but request said standardize blue usage. 
+        Let's keep icons neutral unless active. */
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.1rem;
+    min-width: 120px;
+}
+
+.label,
+.switchText {
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.label {
+    /* Strict Typography */
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-align: left;
+    width: 100%;
+    transform: translate(calc(var(--fatigue-level) * 0.3px), calc(var(--fatigue-level) * -0.3px));
+    text-shadow: calc(var(--fatigue-level) * 0.3px) calc(var(--fatigue-level) * 0.3px) rgba(0, 0, 0, 0.2);
+}
+
+/* Switch labels */
+.switchLayer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: calc(1 - var(--fatigue-level) * 0.7);
+    transition: opacity 0.15s linear;
+}
+
+.switchLabel {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.switchLine {
+    width: 1px;
+    height: 10px;
+    background: var(--admin-accent);
+    opacity: 0.35;
+}
+
+.switchText {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    opacity: 0.9;
+    white-space: nowrap;
+    padding: 0.14rem 0.35rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, transparent);
+    background: color-mix(in srgb, var(--bg-elevated) 60%, transparent);
+    font-weight: 500;
+    transform: translate(calc(var(--fatigue-level) * 0.35px), calc(var(--fatigue-level) * -0.35px));
+    text-shadow: calc(var(--fatigue-level) * 0.35px) calc(var(--fatigue-level) * 0.35px) rgba(0, 0, 0, 0.25);
+}
+
+.loopCallout {
+    position: absolute;
+    right: var(--side-pad);
+    bottom: calc(var(--bottom-pad) - 0.2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.2rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--bg-elevated) 75%, transparent);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28);
+    text-align: right;
+    z-index: 3;
+}
+
+.loopCallout::before {
+    content: "";
+    position: absolute;
+    right: 0.8rem;
+    top: -0.65rem;
+    width: 1px;
+    height: 0.6rem;
+    background: var(--border-subtle);
+    opacity: 0.6;
+}
+
+.loopTitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0;
+    text-transform: none;
+    transform: translate(calc(var(--fatigue-level) * 0.25px), calc(var(--fatigue-level) * -0.25px));
+    text-shadow: calc(var(--fatigue-level) * 0.25px) calc(var(--fatigue-level) * 0.25px) rgba(0, 0, 0, 0.2);
+}
+
+.loopDesc {
+    font-size: 0.85rem;
+    letter-spacing: 0;
+    color: var(--text-primary);
+    transform: translate(calc(var(--fatigue-level) * 0.25px), calc(var(--fatigue-level) * -0.25px));
+    text-shadow: calc(var(--fatigue-level) * 0.25px) calc(var(--fatigue-level) * 0.25px) rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 900px) {
+    .wrapper {
+        --node-scale: 0.92;
+    }
+
+    .frame {
+        transform: none;
+    }
+
+    .label {
+        max-width: 110px;
+        font-size: 0.82rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        --side-pad: 0.75rem;
+        --node-scale: 0.85;
+        height: 420px;
+    }
+
+    .frame {
+        transform: none;
+    }
+
+    .summaryColumns {
+        grid-template-columns: 1fr;
+    }
+
+    .summaryGoal {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .iconWrapper {
+        width: 30px;
+        height: 30px;
+    }
+
+    .label {
+        font-size: 0.78rem;
+        max-width: 100px;
+    }
+
+    .switchText {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .wrapper {
+        --node-scale: 0.78;
+        height: 400px;
+    }
+
+    .frame {
+        transform: none;
+    }
+
+    .label {
+        font-size: 0.72rem;
+        max-width: 86px;
+    }
+
+}
+
+@media (max-width: 420px) {
+    .wrapper {
+        --node-scale: 1;
+    }
+
+    .graphArea {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+    }
+
+    .lanes,
+    .laneLabels,
+    .path,
+    .switchLayer {
+        display: none;
+    }
+
+    .graphInner {
+        position: relative;
+        inset: auto;
+        height: 100%;
+    }
+
+    .nodes {
+        position: relative;
+        inset: auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.9rem;
+        padding: 0 0.5rem;
+    }
+
+    .step {
+        position: relative;
+        left: auto !important;
+        top: auto !important;
+        transform: none;
+        animation: none;
+    }
+
+    .nodeInner {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.6rem;
+        width: 100%;
+        text-align: left;
+        padding: 0.5rem 0.6rem;
+    }
+
+    .content {
+        align-items: flex-start;
+    }
+
+    .loopCallout {
+        display: none;
+    }
+}

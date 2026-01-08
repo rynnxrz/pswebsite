@@ -58,6 +58,98 @@
   line-height: 1.4;
 }
 
+.ivy-cost-current {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.ivy-cost-current-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.ivy-cost-chart.ivy-cost-chart,
+.ivy-target-chart.ivy-target-chart {
+  margin: 0;
+}
+
+.ivy-case-study {
+  margin-top: 2rem;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ivy-case-label {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.ivy-case-desc {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.ivy-case-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.6rem;
+  color: var(--text-secondary);
+}
+
+.ivy-case-list li {
+  line-height: 1.5;
+}
+
+.ivy-case-list strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.ivy-case-conclusion {
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.ivy-case-visual {
+  margin-top: 1rem;
+}
+
+.ivy-target-block {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ivy-target-desc {
+  margin: 0;
+  max-width: 640px;
+  color: var(--text-secondary);
+}
+
+.ivy-target-chart-card {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
 .ivy-decision-table {
   width: 100%;
   border-collapse: collapse;
@@ -83,8 +175,22 @@
   grid-template-columns: 1fr;
   /* Default to stack for narrow column */
   gap: 2rem;
-  margin: 2rem 0;
+  /* Removed negative margin to restore natural flow (1rem gap from H3) */
+  margin: 0 0 2rem 0;
 }
+
+.ivy-comparison-grid h4,
+.ivy-before-after h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.ivy-comparison-grid p,
+.ivy-before-after p {
+  margin-top: 0;
+  /* Strict spacing: rely on H4 bottom margin */
+}
+
 
 .ivy-chart-placeholder {
   height: 200px;
