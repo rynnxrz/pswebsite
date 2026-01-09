@@ -221,3 +221,116 @@
   flex-wrap: wrap;
   gap: 1rem;
 }
+
+/* Cost section headline */
+.ivy-cost-headline {
+  margin-bottom: 0.25rem;
+}
+
+.ivy-cost-headline strong {
+  color: var(--text-primary);
+}
+
+.ivy-cost-detail {
+  margin-top: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.ivy-cost-case {
+  margin-top: 2rem;
+}
+
+.ivy-cost-case-header {
+  margin-bottom: 1rem;
+}
+
+.ivy-cost-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.ivy-cost-title {
+  margin: 0.35rem 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.ivy-cost-desc {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.ivy-cost-summary {
+  margin: 1rem 0 0;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+@media print {
+  .ivy-flow-container {
+    margin: 1rem 0;
+    gap: 0.75rem;
+  }
+
+  .ivy-flow-step {
+    padding: 0.5rem;
+  }
+
+  .ivy-statement-card {
+    padding: 1.25rem;
+    margin: 1rem 0;
+  }
+
+  .ivy-cost-current {
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+
+  .ivy-case-study {
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+
+  .ivy-target-block {
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+
+  .ivy-target-chart-card {
+    padding: 1rem;
+  }
+
+  .ivy-decision-table {
+    margin: 1rem 0;
+  }
+
+  .ivy-decision-table th,
+  .ivy-decision-table td {
+    padding: 0.5rem 0.4rem;
+  }
+
+  .ivy-comparison-grid,
+  .ivy-before-after {
+    gap: 1rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .ivy-chart-placeholder {
+    height: 160px;
+    margin-bottom: 0.75rem;
+  }
+
+  .ivy-cost-case {
+    margin-top: 1rem;
+  }
+
+  .ivy-cost-case-header {
+    margin-bottom: 0.5rem;
+  }
+}

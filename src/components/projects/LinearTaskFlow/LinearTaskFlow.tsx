@@ -1,13 +1,14 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Mail, Database, PenTool, FileOutput, Send } from 'lucide-react';
+import { Database, PenTool, FileOutput, type LucideIcon } from 'lucide-react';
 import styles from './LinearTaskFlow.module.css';
 import { useOnScreen } from '../../../hooks/useOnScreen';
 
 type TaskStep = {
-    icon: typeof Mail;
+    icon: LucideIcon;
     labelKey: string;
+    descKey: string;
 };
 
 export const LinearTaskFlow = () => {
@@ -16,11 +17,9 @@ export const LinearTaskFlow = () => {
     const isVisible = useOnScreen(ref, '0px', 0.2, false);
 
     const steps: TaskStep[] = [
-        { icon: Mail, labelKey: 'ivy.taskflow.step1' },
-        { icon: Database, labelKey: 'ivy.taskflow.step2' },
-        { icon: PenTool, labelKey: 'ivy.taskflow.step3' },
-        { icon: FileOutput, labelKey: 'ivy.taskflow.step4' },
-        { icon: Send, labelKey: 'ivy.taskflow.step5' },
+        { icon: Database, labelKey: 'ivy.real_cost.case1.steps.step1', descKey: 'ivy.real_cost.case1.steps.step1_desc' },
+        { icon: PenTool, labelKey: 'ivy.real_cost.case1.steps.step2', descKey: 'ivy.real_cost.case1.steps.step2_desc' },
+        { icon: FileOutput, labelKey: 'ivy.real_cost.case1.steps.step3', descKey: 'ivy.real_cost.case1.steps.step3_desc' },
     ];
 
     const containerVariants = {
@@ -62,6 +61,7 @@ export const LinearTaskFlow = () => {
                                 <Icon size={20} strokeWidth={1.5} />
                             </div>
                             <div className={styles.label}>{t(step.labelKey)}</div>
+                            <div className={styles.desc}>{t(step.descKey)}</div>
                             {index < steps.length - 1 && (
                                 <div className={styles.connector} aria-hidden="true" />
                             )}

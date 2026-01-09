@@ -147,3 +147,9 @@
   background-color: var(--bg-indicator);
   z-index: 1;
 }
+
+@media print {
+  .bottom-nav-container {
+    display: none !important;
+  }
+}

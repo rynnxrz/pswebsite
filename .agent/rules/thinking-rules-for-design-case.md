@@ -5,6 +5,19 @@ trigger: always_on
 Design Case 思路指南：
 写作手法（无论中文英文，在输出内容时，必须遵循以下逻辑：提出问题时直接说明问题出现的环节及具体内容，严禁使用比喻进行总结或概括。在总结输出内容时，直接呈现事实与结论，不得为了规避重复而使用比喻进行改写。
 ）
+0. 作品集整体策略与主页导航：从展示逻辑转向决策逻辑
+问题所在： 作品集定位偏差与信息过载。候选人常将作品集视为展示自我的仓库，误以为面试官会通读所有案例。现实中，面试官在处理上百封申请时，作品集主页本质上是“快速信息核对页”。若信息模糊（如使用“User-friendly”、“Design Thinking”等空泛描述）或需要面试官猜测，将导致候选人直接进入 Backlog。
+必须涵盖的内容：
+确立决策工具思维： 作品集的设计目标是“帮面试官做决策”。必须在主页通过项目核对（Cross-check）向面试官提供：产品类型、项目规模（Scope，如 Feature/Redesign/0-1）、从业年限（YOE）、所属领域（Domain，如 B2B/Healthcare/Fintech）以及个人核心擅长点。
+标准化个人 Landing Page 简介： 必须使用具体事实取代抽象表达。
+推荐公式： [职位＋YOE] + [擅长的方向/能力] + [目标岗位/行业]。
+正确示例 1： "AI Product Designer with 5 years of experience | Specialized in 3D interaction & B2B systems | Designing end-to-end AI workflows and tools for complex, data-driven products"
+正确示例 2： "Senior Product Designer owning complex B2B workflows | Led end-to-end design for internal tools and platform systems | Shipped and scaled data-heavy products from 0→1→N"
+项目卡片（Case Study Card）的事实引导： 决定面试官是否点击进入案例的关键在于卡片简介。
+推荐公式： [做了什么产品]＋[给谁]＋[解决什么问题]＋（可选）[Impact] + 时间 + Tags。
+示例 1： Duolingo - New User Lesson Path (2022). Optimized the first-lesson experience for new learners, increasing day-1 retention by 12%. #Growth #Onboarding #B2C
+示例 2： Healthcare AI Platform — Clinical Summary Tool (2024). Designed an AI-assisted summary feature for clinicians to review patient records more efficiently while maintaining accuracy. #AI #Healthcare #SaaS #0-1
+严禁内容： 严禁使用“creating user friendly and aesthetic experience”或“passionate about user-centered design”等无法帮助判断候选人分类的空泛表述。必须具体说明产品复杂度、个人贡献范围（Full scope）以及实际影响力（Impact）。
 1. 项目起始阶段：定义商业动机与背景
 问题所在： 项目开头缺乏具体触发点。案例往往直接展示最终设计截图，没有交代项目启动的真实原因，导致设计看起来是缺乏商业支撑的“自嗨”。
 必须涵盖的内容：

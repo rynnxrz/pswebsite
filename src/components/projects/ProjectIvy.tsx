@@ -8,7 +8,9 @@ import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
 
 import { AttentionChart } from './AttentionChart/AttentionChart';
+import { MiniAdminBar } from './AttentionChart/MiniAdminBar';
 import { LinearTaskFlow } from './LinearTaskFlow/LinearTaskFlow';
+import { DisputeFlow } from './DisputeFlow/DisputeFlow';
 import { DecisionCard } from './DecisionCard/DecisionCard';
 
 export const ProjectIvy = () => {
@@ -114,10 +116,22 @@ export const ProjectIvy = () => {
                 {/* 02. The Real Cost */}
                 <section id="cost" className="project-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.cost')}</div>
-                    <h3>{t('ivy.cost.title')}</h3>
-                    <p>{t('ivy.cost.desc')}</p>
+                    <MiniAdminBar />
+                    <h3>{t('ivy.real_cost.title')}</h3>
+                    <p className="ivy-cost-headline"><strong>{t('ivy.real_cost.anchor_label')}</strong></p>
+                    <p className="ivy-cost-detail">{t('ivy.real_cost.subtitle')}</p>
 
-                    <LinearTaskFlow />
+                    <div className="ivy-cost-case">
+                        <div className="ivy-cost-case-header">
+                            <div className="ivy-cost-label">{t('ivy.real_cost.case1.label')}</div>
+                            <h4 className="ivy-cost-title">{t('ivy.real_cost.case1.title')}</h4>
+                            <p className="ivy-cost-desc">{t('ivy.real_cost.case1.description')}</p>
+                        </div>
+                        <LinearTaskFlow />
+                        <p className="ivy-cost-summary">{t('ivy.real_cost.case1.summary_cost')}</p>
+                    </div>
+
+                    <DisputeFlow />
                 </section>
 
                 <hr className="section-divider" />

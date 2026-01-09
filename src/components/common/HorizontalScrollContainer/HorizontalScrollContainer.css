@@ -70,3 +70,14 @@
     display: none;
     /* Chrome/Safari */
 }
+
+@media print {
+    .scroll-nav-btn {
+        display: none !important;
+    }
+
+    .horizontal-scroll-wrapper.has-gradient {
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+}

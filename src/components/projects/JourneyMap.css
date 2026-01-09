@@ -27,6 +27,21 @@
     }
 }
 
+@media print {
+    .journey-map-container {
+        overflow: visible;
+        flex-wrap: wrap;
+        scroll-snap-type: none;
+        margin: 1rem 0;
+        padding-bottom: 0;
+    }
+
+    .journey-stage {
+        flex: 1 1 280px;
+        min-width: 0;
+    }
+}
+
 .journey-stage {
     display: flex;
     flex-direction: column;

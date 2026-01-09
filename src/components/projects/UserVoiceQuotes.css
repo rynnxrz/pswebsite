@@ -130,3 +130,29 @@
 .tag-input {
     color: var(--text-primary);
 }
+
+@media print {
+    .user-voice-container {
+        margin: 0 0 1.5rem 0;
+        gap: 1rem;
+    }
+
+    .quotes-scroll-container {
+        overflow: visible;
+        flex-wrap: wrap;
+        scroll-snap-type: none;
+    }
+
+    .quote-card {
+        flex: 1 1 280px;
+        min-width: 0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .quote-footer {
+        padding-top: 0.75rem;
+    }
+}

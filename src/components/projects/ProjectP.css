@@ -145,8 +145,25 @@
   .project-detail-container {
     background-color: #fff;
     color: #000;
-    padding: 20px;
+    padding: 12px;
     height: auto;
+    min-height: auto;
+  }
+
+  .project-content-wrapper {
+    max-width: none;
+  }
+
+  .project-section {
+    margin-bottom: 1.25rem;
+  }
+
+  .compact-section {
+    margin-bottom: 0.75rem;
+  }
+
+  .compact-divider {
+    margin: 0.75rem 0;
   }
 
   .project-title,
@@ -158,6 +175,33 @@
     color: #000;
   }
 
+  .project-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-section h3 {
+    font-size: 1.05rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-section p {
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+
+  .project-section ul,
+  .project-section ol {
+    margin-bottom: 0.6rem;
+    padding-left: 1.2rem;
+  }
+
+  .project-section li {
+    margin-bottom: 0.35rem;
+    line-height: 1.4;
+  }
+
   .action-buttons-container {
     display: none;
   }
@@ -167,11 +211,38 @@
     background-color: transparent;
     break-inside: avoid;
     height: auto;
-    max-height: 400px;
+    max-height: 300px;
+    margin: 1rem 0;
   }
 
   .section-image img {
     object-fit: contain;
+  }
+
+  .section-divider {
+    margin: 1rem 0;
+  }
+
+  .project-section img,
+  .gallery-image,
+  .stacked-card {
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .role-grid {
+    overflow: visible;
+    flex-wrap: wrap;
+    scroll-snap-type: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .role-card {
+    flex: 1 1 100%;
+    min-width: 0;
   }
 }
 

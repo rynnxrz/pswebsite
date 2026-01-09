@@ -61,8 +61,14 @@
     font-weight: 600;
   }
   
-  .message-wrapper .sub-message {
+.message-wrapper .sub-message {
     font-size: 0.85rem;
     font-weight: 400;
     color: var(--text-secondary);
   }
+
+@media print {
+  .dynamic-island-wrapper {
+    display: none !important;
+  }
+}

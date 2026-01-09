@@ -15,6 +15,12 @@
     /* Match dashboard bg */
 }
 
+.gallery-container.interactive-active {
+    height: auto !important;
+    min-height: 500px;
+    overflow: visible;
+}
+
 .gallery-main-image-wrapper {
     height: 100%;
     width: 100%;
@@ -26,6 +32,7 @@
     height: 100%;
     display: block;
     object-fit: cover;
+    background-color: #f9fafb;
     /* Smooth fade transition for main image swap */
     animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     /* Ensure cursor is default unless interacting with widget/button */
@@ -159,4 +166,24 @@
     background: transparent;
     border-radius: 12px;
     height: 100%;
+}
+
+@media print {
+    .gallery-container {
+        height: auto;
+        min-height: 260px;
+        background-color: #ffffff;
+        border-color: #d0d0d0;
+    }
+
+    .gallery-container img.gallery-main-image,
+    .gallery-container iframe.gallery-main-image {
+        object-fit: contain;
+        animation: none;
+    }
+
+    .stacked-gallery-widget,
+    .expand-image-button {
+        display: none !important;
+    }
 }

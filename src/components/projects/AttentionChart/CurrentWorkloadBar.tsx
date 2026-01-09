@@ -13,6 +13,7 @@ export const CurrentWorkloadBar = ({ className = '' }: CurrentWorkloadBarProps) 
     const currentDesignVal = 15;
     const currentCraftVal = 15;
     const currentAdminVal = 70;
+    const segmentStyle = (value: number) => ({ ['--segment-width' as any]: `${value}%` });
 
     const barVariants = {
         hidden: { width: 0, opacity: 0 },
@@ -41,6 +42,7 @@ export const CurrentWorkloadBar = ({ className = '' }: CurrentWorkloadBarProps) 
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: false }}
+                            style={segmentStyle(currentDesignVal)}
                         />
                         <motion.div
                             className={`${styles.segment} ${styles.craft}`}
@@ -49,6 +51,7 @@ export const CurrentWorkloadBar = ({ className = '' }: CurrentWorkloadBarProps) 
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: false }}
+                            style={segmentStyle(currentCraftVal)}
                         />
                         <InteractiveAdminSegment
                             value={currentAdminVal}

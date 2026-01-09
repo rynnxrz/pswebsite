@@ -113,14 +113,14 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
     return (
         <div
             ref={containerRef}
-            className={`expanded-image-container ${!isNested ? 'section-image' : ''} ${containerClassName} ${isFullscreen ? 'fullscreen-mode' : ''}`}
+            className={`expanded-image-container ${!isNested ? 'section-image' : ''} ${containerClassName} ${isFullscreen ? 'fullscreen-mode' : ''} ${showIframe ? 'interactive-active' : ''}`}
         >
             {/* Main Content Area */}
             <div className="content-wrapper">
                 {showIframe ? (
                     <iframe
                         src={interactiveSrc}
-                        className={`interactive-frame ${className}`}
+                        className={`interactive-iframe ${className}`}
                         title={alt}
                         style={{ width: '100%', height: '100%', border: 'none' }}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

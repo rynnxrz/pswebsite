@@ -13,6 +13,7 @@ export const InteractiveAdminSegment = ({ value, variants, tooltipId }: Interact
     const { t } = useTranslation();
     const [isHovered, setIsHovered] = useState(false);
     const adminTasks = t('ivy_j.context.chart.admin_tasks', { returnObjects: true }) as string[];
+    const segmentStyle = { ['--segment-width' as any]: `${value}%` };
 
     const tooltipVariants = {
         hidden: { opacity: 0, scale: 0.95, y: 4 },
@@ -39,6 +40,7 @@ export const InteractiveAdminSegment = ({ value, variants, tooltipId }: Interact
             whileInView="visible"
             whileHover={{ scale: 1.02, zIndex: 10 }}
             viewport={{ once: false }}
+            style={segmentStyle}
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={() => setIsHovered(false)}
             tabIndex={0}

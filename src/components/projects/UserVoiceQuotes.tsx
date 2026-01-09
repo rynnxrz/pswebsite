@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScanEye, CalendarClock, Keyboard } from 'lucide-react';
+import { usePrintMode } from '../../hooks/usePrintMode';
 import './UserVoiceQuotes.css';
 
 interface Quote {
@@ -34,12 +35,15 @@ const getTagColor = (tag: string) => {
 export const UserVoiceQuotes = ({ filterTag }: Props) => {
     const { t } = useTranslation();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const isPrintMode = usePrintMode();
 
     const allQuotes = t('project_p.research.user_voice.quotes', { returnObjects: true }) as Quote[];
 
-    const quotes = filterTag
-        ? allQuotes.filter(q => q.tags.includes(filterTag))
-        : allQuotes;
+    const quotes = isPrintMode
+        ? allQuotes
+        : filterTag
+            ? allQuotes.filter(q => q.tags.includes(filterTag))
+            : allQuotes;
 
     useEffect(() => {
         if (scrollContainerRef.current) {

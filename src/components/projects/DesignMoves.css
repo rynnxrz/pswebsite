@@ -17,6 +17,10 @@
     gap: 1rem;
 }
 
+.dm-print-block {
+    margin-bottom: 2rem;
+}
+
 /* Tabs */
 .dm-tabs {
     display: flex;
@@ -280,5 +284,25 @@
 
     .dm-content-container {
         padding: 0 1rem;
+    }
+}
+
+@media print {
+    .design-moves-container {
+        margin: 1rem 0;
+        gap: 0.75rem;
+    }
+
+    .dm-context-row {
+        gap: 0.75rem;
+    }
+
+    .dm-visual-row {
+        margin-top: 0;
+    }
+
+    .dm-print-block {
+        break-inside: avoid;
+        page-break-inside: avoid;
     }
 }

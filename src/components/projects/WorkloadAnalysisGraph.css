@@ -171,3 +171,23 @@
 .text-gray-400 {
     color: #9ca3af;
 }
+
+@media print {
+    .bar-container {
+        clip-path: none !important;
+        animation: none !important;
+        background-color: #e6e6e6 !important;
+        border-color: #c8c8c8 !important;
+    }
+
+    .bar-segment {
+        outline: 1px solid rgba(0, 0, 0, 0.2);
+        outline-offset: -1px;
+    }
+
+    .legend-item {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+    }
+}

@@ -210,3 +210,25 @@
     padding-top: 0.8rem;
     border-top: 1px solid var(--surface-card-border);
 }
+
+@media print {
+    .stakeholders-container {
+        margin: 1.5rem 0 0.5rem 0;
+        gap: 1rem;
+    }
+
+    .stakeholders-accordion-wrapper {
+        gap: 0.5rem;
+    }
+
+    .accordion-content {
+        max-height: none !important;
+        overflow: visible !important;
+        transition: none !important;
+    }
+
+    .accordion-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}

@@ -211,3 +211,60 @@
 .legendDot.admin {
     background-color: var(--admin-accent);
 }
+
+.miniWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 0 0 1rem 0;
+    width: 100%;
+}
+
+.miniTrack {
+    display: flex;
+    height: 6px;
+    width: min(320px, 100%);
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--chart-track);
+}
+
+.miniSegment {
+    height: 100%;
+}
+
+.miniSegment.design,
+.miniSegment.craft {
+    opacity: 0.35;
+}
+
+.miniSegment.admin {
+    opacity: 1;
+}
+
+.miniLabel {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+@media print {
+    .segment {
+        width: var(--segment-width) !important;
+        opacity: 1 !important;
+        transform: none !important;
+        outline: 1px solid rgba(0, 0, 0, 0.25);
+        outline-offset: -1px;
+    }
+
+    .miniSegment {
+        opacity: 1 !important;
+    }
+
+    .tooltip {
+        display: none !important;
+    }
+}

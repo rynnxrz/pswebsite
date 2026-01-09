@@ -41,3 +41,9 @@
     left: 16px;
   }
 }
+
+@media print {
+  .theme-toggle {
+    display: none !important;
+  }
+}

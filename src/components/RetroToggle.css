@@ -65,3 +65,12 @@
   pointer-events: none;
   opacity: 0.5;
 }
+
+@media print {
+  .pull-chain-switch,
+  .crt-screen,
+  .crt-screen::after,
+  .content-iframe {
+    display: none !important;
+  }
+}

@@ -1,0 +1,147 @@
+.wrapper {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.alertIcon {
+    color: var(--admin-accent);
+    flex-shrink: 0;
+}
+
+.trigger {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.title {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.desc {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0 0 1.5rem 0;
+}
+
+.flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.iconBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+}
+
+.label {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.sourceText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.subLabel {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    white-space: normal;
+}
+
+.arrow {
+    margin: 0 0.75rem;
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+}
+
+.factBox {
+    padding: 1rem;
+    background: rgba(0, 122, 255, 0.08);
+    border-left: 3px solid var(--admin-accent);
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 1rem;
+}
+
+.fact {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin: 0;
+    font-style: italic;
+}
+
+.summary {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    .flow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .step {
+        width: 100%;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
+
+@media print {
+    .wrapper {
+        margin-top: 1rem;
+        padding: 0.75rem;
+    }
+
+    .step {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

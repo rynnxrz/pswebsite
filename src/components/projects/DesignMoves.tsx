@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { usePrintMode } from '../../hooks/usePrintMode';
 import './DesignMoves.css';
 
 interface DesignMove {
@@ -26,6 +27,7 @@ interface Tab {
 export const DesignMoves = () => {
     const { t } = useTranslation();
     const [activeTabId, setActiveTabId] = useState('link');
+    const isPrintMode = usePrintMode();
 
     const tabs = t('project_p.design_moves.tabs', { returnObjects: true }) as Tab[];
     const moves = t('project_p.design_moves.moves', { returnObjects: true }) as DesignMove[];
@@ -39,6 +41,71 @@ export const DesignMoves = () => {
         unify: '/assets/images/ora-web/move-unify-placeholder.png', // Replace later
         reveal: '/assets/images/ora-web/move-reveal-placeholder.png'  // Replace later
     };
+
+    const renderMoveContent = (move: DesignMove) => {
+        const imageSrc = imageMap[move.id];
+        const isVideo = imageSrc?.endsWith('.mp4');
+
+        return (
+            <>
+                <div className="dm-header-row">
+                    <h3 className="dm-headline">{move.headline}</h3>
+                </div>
+
+                <div className="dm-context-row">
+                    <div className="dm-context-card pain">
+                        <h4>The Pain</h4>
+                        <p>{move.context.pain}</p>
+                    </div>
+                    <div className="dm-context-card move">
+                        <h4>The Move</h4>
+                        <p>{move.context.strategy}</p>
+                    </div>
+                </div>
+
+                <div className="dm-visual-row">
+                    <div className="dm-image-wrapper">
+                        {imageSrc ? (
+                            isVideo ? (
+                                <video
+                                    src={imageSrc}
+                                    className="dm-main-image"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                />
+                            ) : (
+                                <img
+                                    src={imageSrc}
+                                    alt={move.image.alt}
+                                    className="dm-main-image"
+                                />
+                            )
+                        ) : null}
+                        <div className="dm-annotation">
+                            <ArrowUpRight size={16} className="dm-arrow" />
+                            <span>{move.image.annotation}</span>
+                        </div>
+                    </div>
+                </div>
+            </>
+        );
+    };
+
+    if (isPrintMode) {
+        return (
+            <div className="design-moves-container">
+                {moves.map((move) => (
+                    <div key={move.id} className="dm-print-block">
+                        <div className="dm-content-container">
+                            {renderMoveContent(move)}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
 
     return (
         <div className="design-moves-container">
@@ -67,48 +134,7 @@ export const DesignMoves = () => {
                         transition={{ duration: 0.3 }}
                         className="dm-content-container"
                     >
-                        {/* Row 1: Headline + Scope */}
-                        <div className="dm-header-row">
-                            <h3 className="dm-headline">{activeMove.headline}</h3>
-                        </div>
-
-                        {/* Row 2: Context (Pain & Strategy) */}
-                        <div className="dm-context-row">
-                            <div className="dm-context-card pain">
-                                <h4>The Pain</h4>
-                                <p>{activeMove.context.pain}</p>
-                            </div>
-                            <div className="dm-context-card move">
-                                <h4>The Move</h4>
-                                <p>{activeMove.context.strategy}</p>
-                            </div>
-                        </div>
-
-                        {/* Row 3: Visual */}
-                        <div className="dm-visual-row">
-                            <div className="dm-image-wrapper">
-                                {imageMap[activeTabId].endsWith('.mp4') ? (
-                                    <video
-                                        src={imageMap[activeTabId]}
-                                        className="dm-main-image"
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
-                                    />
-                                ) : (
-                                    <img
-                                        src={imageMap[activeTabId]}
-                                        alt={activeMove.image.alt}
-                                        className="dm-main-image"
-                                    />
-                                )}
-                                <div className="dm-annotation">
-                                    <ArrowUpRight size={16} className="dm-arrow" />
-                                    <span>{activeMove.image.annotation}</span>
-                                </div>
-                            </div>
-                        </div>
+                        {renderMoveContent(activeMove)}
                     </motion.div>
                 </AnimatePresence>
             </div>

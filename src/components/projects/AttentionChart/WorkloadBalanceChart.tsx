@@ -15,6 +15,7 @@ type WorkloadRow = {
 
 export const WorkloadBalanceChart = ({ className = '' }: WorkloadBalanceChartProps) => {
     const { t } = useTranslation();
+    const segmentStyle = (value: number) => ({ ['--segment-width' as any]: `${value}%` });
 
     const rows: WorkloadRow[] = [
         { labelKey: 'ivy.target.chart.before', design: 15, craft: 15, admin: 70 },
@@ -49,6 +50,7 @@ export const WorkloadBalanceChart = ({ className = '' }: WorkloadBalanceChartPro
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: false }}
+                                style={segmentStyle(row.design)}
                             />
                             <motion.div
                                 className={`${styles.segment} ${styles.craft}`}
@@ -57,6 +59,7 @@ export const WorkloadBalanceChart = ({ className = '' }: WorkloadBalanceChartPro
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: false }}
+                                style={segmentStyle(row.craft)}
                             />
                             <motion.div
                                 className={`${styles.segment} ${styles.admin}`}
@@ -65,6 +68,7 @@ export const WorkloadBalanceChart = ({ className = '' }: WorkloadBalanceChartPro
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: false }}
+                                style={segmentStyle(row.admin)}
                             />
                         </div>
                         <div className={styles.labelsBelow}>

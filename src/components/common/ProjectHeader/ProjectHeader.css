@@ -222,11 +222,30 @@
 @media print {
     .project-header {
         position: static;
-        margin-bottom: 20px;
+        margin-bottom: 12px;
+        padding: 0;
     }
 
     .action-buttons-container {
         display: none;
+    }
+
+    .section-navigator,
+    .section-dropdown {
+        display: none;
+    }
+
+    .header-progress-track {
+        display: none;
+    }
+
+    .header-main-info.scrolled-mode .project-title {
+        opacity: 1;
+        font-size: 1.1rem;
+    }
+
+    .header-main-info.scrolled-mode .project-date {
+        display: inline;
     }
 
     .project-header.sticky-active {

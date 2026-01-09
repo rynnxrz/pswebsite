@@ -15,6 +15,7 @@ type AttentionChartProps = {
 
 export const AttentionChart = ({ variant = 'context' }: AttentionChartProps) => {
     const { t } = useTranslation();
+    const segmentStyle = (value: number) => ({ ['--segment-width' as any]: `${value}%` });
 
     const contextRows: ChartRow[] = [
         { labelKey: 'ivy.chart.before', design: 70, craft: 20, admin: 10 },
@@ -54,6 +55,7 @@ export const AttentionChart = ({ variant = 'context' }: AttentionChartProps) => 
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: false }}
+                                style={segmentStyle(row.design)}
                             />
                             <motion.div
                                 className={`${styles.segment} ${styles.craft}`}
@@ -62,6 +64,7 @@ export const AttentionChart = ({ variant = 'context' }: AttentionChartProps) => 
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: false }}
+                                style={segmentStyle(row.craft)}
                             />
                             <motion.div
                                 className={`${styles.segment} ${styles.admin}`}
@@ -70,6 +73,7 @@ export const AttentionChart = ({ variant = 'context' }: AttentionChartProps) => 
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: false }}
+                                style={segmentStyle(row.admin)}
                             />
                         </div>
                         <div className={styles.labelsBelow}>
