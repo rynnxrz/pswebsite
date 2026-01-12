@@ -147,21 +147,21 @@
     opacity: 0.8;
 }
 
-/* Row 2: Context */
+/* Row 2: Context (Restored Pain/Move Layout) */
 .dm-context-row {
     display: grid;
-    grid-template-columns: 4fr 6fr;
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
 }
 
 .dm-context-card {
     background: var(--surface-card);
     border: 1px solid var(--surface-card-border);
     border-radius: 8px;
-    padding: 1.25rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
 }
 
 .dm-context-card h4 {
@@ -179,35 +179,33 @@
 .dm-context-card h4::before {
     content: '';
     display: block;
-    width: var(--dot-size-s, 8px);
-    height: var(--dot-size-s, 8px);
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
 }
 
 .dm-context-card.pain h4::before {
     background-color: #ef4444;
-    /* Red for Pain */
     box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
 }
 
 .dm-context-card.move h4::before {
     background-color: #4ade80;
-    /* Green for Move */
     box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
 }
 
 .dm-context-card p {
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--text-secondary);
     margin: 0;
-    white-space: pre-line;
 }
 
-/* Row 3: Visual */
-.dm-visual-row {
-    width: 100%;
-    margin-top: 0.5rem;
+/* Row 3: Visual & How it Works */
+.dm-visual-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .dm-image-wrapper {
@@ -248,8 +246,42 @@
     flex-shrink: 0;
 }
 
+.dm-how-it-works {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding: 0 0.5rem;
+}
+
+/* Rationale Block at bottom */
+.dm-rationale {
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--surface-divider);
+}
+
+.dm-rationale h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: 0.5rem;
+}
+
+
 /* Mobile */
 @media (max-width: 768px) {
+    .dm-grid-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .dm-bottom-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
     .dm-tabs {
         flex-direction: column;
         gap: 0.5rem;
@@ -260,49 +292,24 @@
         flex: none;
     }
 
-    /* Stack context cards on mobile */
-    .dm-context-row {
-        grid-template-columns: 1fr;
-    }
-
-    .dm-header-row {
-        flex-direction: column;
-        gap: 1rem;
+    .design-moves-container {
+        padding: 0;
+        /* Remove padding on mobile to align with page */
     }
 
     .dm-headline {
-        max-width: 100%;
-    }
-
-    .dm-scope-tags {
-        justify-content: flex-start;
-    }
-
-    .design-moves-container {
-        padding: 1rem;
-    }
-
-    .dm-content-container {
-        padding: 0 1rem;
+        padding-left: 0;
     }
 }
 
 @media print {
-    .design-moves-container {
-        margin: 1rem 0;
-        gap: 0.75rem;
+
+    .dm-grid-layout,
+    .dm-bottom-row {
+        display: block;
     }
 
-    .dm-context-row {
-        gap: 0.75rem;
-    }
-
-    .dm-visual-row {
-        margin-top: 0;
-    }
-
-    .dm-print-block {
-        break-inside: avoid;
-        page-break-inside: avoid;
+    .dm-block {
+        margin-bottom: 1.5rem;
     }
 }

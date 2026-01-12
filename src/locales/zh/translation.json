@@ -20,54 +20,99 @@
     "project_p": {
         "header": {
             "title": "ORA Web",
-            "date": "2025年12月6日",
-            "download": "下载 PDF",
-            "copy": "复制链接",
-            "copied": "已成功复制到剪贴板"
+            "date": "December 6th, 2025",
+            "download": "Download PDF",
+            "copy": "Copy URL",
+            "copied": "Successfully copied to clipboard"
         },
         "intro": {
-            "title": "简介",
-            "content": "该项目名为 ORA Web，是一个为合同制造公司开发的小型软件系统，专注于整合合同生产数据管理并提高效率。"
+            "title": "Intro",
+            "content": "The project is defined as ORA Web, a small-scale software system for a contract manufacturing company, focusing on integrating contract production data management and efficiency. <strong>Case study scope:</strong> (Jul 2023 – Aug 2024 · Ongoing)"
         },
         "team": {
-            "title": "团队与我的角色",
-            "client": "客户",
-            "clientDesc": "Ora Nutrition Ltd (代工制造工厂)。",
+            "title": "Team & My Role",
+            "client": "Client",
+            "clientDesc": "Ora Nutrition Ltd (contract-manufacturing factory).",
             "clientPoints": [
-                "成立于2019年，已发展成为奥克兰领先的营养品代工制造商之一。",
-                "于2025年被一家中国上市公司收购。"
+                "Founded in 2019, scaled into one of the leading nutrition contract manufacturers in Auckland.",
+                "Acquired in 2025 by a China-listed company.",
+                "No in-house design team; I operated as the <strong>sole designer</strong> in cross-functional delivery."
             ],
-            "context": "工厂没有内部设计团队，因此我作为唯一的嵌入式设计师，参与跨职能交付。",
-            "role": "我的角色",
-            "roleDesc": "UX 设计师 (独立)",
+            "role": "My Role",
+            "roleDesc": "UX Designer (Solo)",
             "rolePoints": [
-                "主导 ORA Web 的端到端用户体验，从问题定义到工作流设计和系统架构。",
-                "梳理从合同到发货的流程，并将运营逻辑转化为可扩展的数据和 UI 模型。",
-                "促进财务、生产计划、仓库/采购和管理层之间的协作对齐。",
-                "与工程团队紧密合作，确保可行性及各视图间状态逻辑的一致性。"
+                "Led end-to-end UX for ORA Web, from problem framing to workflow design and system structure.",
+                "Mapped contract-to-shipment processes and translated operational logic into scalable data and UI models.",
+                "Facilitated alignment across Finance, Production Planning, Warehouse/Procurement, and Management.",
+                "Worked closely with engineering to ensure feasibility and consistent status logic across views."
             ],
-            "duration": "项目周期",
-            "durationDesc": "案例研究范围：2023年7月 – 2024年8月 · 进行中"
+            "duration": "Project Duration",
+            "durationDesc": "<strong>Case study scope:</strong><br/>(Jul 2023 – Aug 2024 · Ongoing)"
         },
         "scope": {
-            "title": "用户范围",
-            "content": "该系统跨越合同到生产生命周期中的三个运营层级：",
+            "title": "System Scope",
+            "content": "This system spans three operational layers across the contract-to-production lifecycle:",
             "points": [
-                "<strong>决策者：</strong> 阅读并整合数据，用于时间安排、风险评估和客户决策。",
-                "<strong>班次/计划经理：</strong> 需要准确的状态和产能信号来分配工作。",
-                "<strong>操作员/执行者：</strong> 需要结构化的输入和清晰的下一步提示，以保持数据可靠。"
+                "<strong>Decision Makers:</strong> They read and consolidated data for timing, risk, and client decisions.",
+                "<strong>Shift/Planning Managers:</strong> They need accurate status and capacity signals to allocate work.",
+                "<strong>Operators/Executors:</strong> They need structured input and clear next-step prompts to keep data reliable."
             ],
-            "read": "阅读",
-            "readDesc": "决定时间安排和客户优先级。",
-            "plan": "计划",
-            "planDesc": "根据实时状态分配产能。",
-            "input": "输入",
-            "inputDesc": "保持结构化数据的准确性。"
+            "read": "Read: Decide timing and client priorities.",
+            "readDesc": "Decide timing and client priorities.",
+            "plan": "Plan: Connect orders to capacity.",
+            "planDesc": "Connect orders to capacity.",
+            "input": "Input: Heavy data entry & initial validation.",
+            "inputDesc": "Heavy data entry & initial validation."
         },
-        "rationale": {
-            "title": "项目立意",
-            "subtitle": "提升效率",
-            "quote": "“该项目旨在通过减少合同到发货生命周期中因数据碎片化和人工核对造成的时间浪费来提高效率。这直接转化为成本节约，通过将高价值管理人员从重复的‘核对Excel’任务中解放出来，以应对新西兰语境下高昂的劳动力成本。”"
+        "section": {
+            "summary": "SUMMARY",
+            "problem": "CONTEXT & PROBLEM",
+            "decisions": "DECISIONS",
+            "delivery": "DELIVERY & SCOPE"
+        },
+        "summary": {
+            "title": "Phase 1 (contracted): Decision dashboard integrating D365 + legacy spreadsheets",
+            "engagement_body": "This engagement is a signed Phase 1 delivery for Ora Nutrition: a decision dashboard built on top of production data currently spread across shared spreadsheets.",
+            "d365_body": "After the client adopted Microsoft Dynamics 365 (D365), Phase 1 scope was defined as a dashboard and decision layer, prioritising D365 as the source of truth instead of rebuilding overlapping data-entry features.",
+            "input_gap_body": "We are currently confirming whether all required fields can be sourced from D365, or whether ORA Web needs a small input module to capture only the confirmed gaps.",
+            "facts": {
+                "engagement": {
+                    "title": "Engagement facts",
+                    "vendor": "Vendor: Khaki Koala Limited (2-person team)",
+                    "role_split": "Role split: UI/UX (me) · Backend/Engineering (co-founder)",
+                    "contract": "Contract: Phase 1 dashboard (five-figure + monthly retainer)"
+                },
+                "client": {
+                    "title": "Client facts",
+                    "name": "Ora Nutrition Ltd · Contract manufacturer · Auckland",
+                    "acquisition": "Acquired in 2025 · Migrating to D365",
+                    "design_team": "No in-house design team"
+                },
+                "role": {
+                    "title": "My role",
+                    "job": "Product/UX Designer (contracted)",
+                    "ownership": "Owned end-to-end UX: workflow mapping → status taxonomy → information architecture → interaction design",
+                    "demo": "Produced clickable UI demo to align stakeholders and engineering feasibility"
+                }
+            }
+        },
+        "problem": {
+            "title": "Decisions were slowed by cross-sheet verification and status drift across teams.",
+            "context": {
+                "title": "Context",
+                "body": "Operational data was maintained in four shared spreadsheets: orders, scheduling, packaging/materials, and finance. The factory has adopted Microsoft Dynamics 365 (D365), but coverage is still incomplete: required fields and status ownership are not yet consistently maintained in one system, so critical updates continue to happen in spreadsheets."
+            },
+            "broken_decision": {
+                "title": "What broke decision-making",
+                "body": "Spreadsheets were used for two purposes at the same time: record-keeping and progress signalling. Teams relied on formatting (colours, borders, notes) to indicate blockers and next actions, but these signals were not standardised across departments. As a result, the same order could show different statuses in different sheets. Before making capacity or priority decisions, managers had to verify what was current by cross-checking multiple spreadsheets."
+            },
+            "constraint": {
+                "title": "A structural constraint",
+                "body": "Users avoided inserting rows or restructuring tables because of formula break risk. This reinforced workarounds (manual notes and formatting) and made consistent status updates difficult to enforce."
+            },
+            "observations": {
+                "title": "What we observed"
+            }
         },
         "research": {
             "title": "研究发现",
@@ -86,107 +131,201 @@
                 "重复输入相似信息带来的精神负担和错误风险。"
             ],
             "subtitle3": "设计机会",
-            "content3": "真正的问题不是“Excel 很乱”，而是 Excel 被迫充当工作流和提醒系统，却没有任何真正的状态跟踪或关联数据支持。"
+            "content3": "真正的问题不是“Excel 很乱”，而是 Excel 被迫充当工作流和提醒系统，却没有任何真正的状态跟踪或关联数据支持。",
+            "stakeholders": {
+                "title": "Who are the Users Behind the Data?",
+                "description": "To understand the \"why\" behind the manual formatting behaviors, I mapped the stakeholders into three engagement layers. This helped me identify exactly who was struggling with what.",
+                "graph_title": "Mapping the Humans Behind the Data",
+                "graph_subtitle": "Categorizing stakeholders by their primary interaction with the system.",
+                "groups": [
+                    {
+                        "layer_name": "Read Layer",
+                        "name": "Decision Makers",
+                        "subgroups": [
+                            {
+                                "names": "Wang",
+                                "title": "The Factory Manager"
+                            },
+                            {
+                                "names": "Lilian",
+                                "title": "The Packaging Coordinator"
+                            }
+                        ],
+                        "tags": [
+                            "read",
+                            "plan"
+                        ],
+                        "context": "High-level oversight & pattern recognition."
+                    },
+                    {
+                        "layer_name": "Plan Layer",
+                        "name": "Shift Managers",
+                        "subgroups": [
+                            {
+                                "names": "Ethan",
+                                "title": "The Production Planner"
+                            }
+                        ],
+                        "tags": [
+                            "plan"
+                        ],
+                        "context": "Connecting dots between orders and capacity."
+                    },
+                    {
+                        "layer_name": "Input Layer",
+                        "name": "Operators",
+                        "subgroups": [
+                            {
+                                "names": "Nancy",
+                                "title": "The Contract Receiver"
+                            },
+                            {
+                                "names": "Cleo",
+                                "title": "The Contract Manager"
+                            },
+                            {
+                                "names": "Flora",
+                                "title": "The Production Supervisor"
+                            }
+                        ],
+                        "tags": [
+                            "input"
+                        ],
+                        "context": "Heavy data entry & initial validation."
+                    }
+                ]
+            },
+            "user_voice": {
+                "title": "From Data to User Voice",
+                "description": "While the quantitative data revealed what was happening (heavy manual entry), I needed to understand the why. I traced these patterns back to the specific users to uncover the root friction behind the numbers.",
+                "quotes": [
+                    {
+                        "text": "We spend hours analyzing rows just to get a 'vague feeling' of whether we have the capacity to negotiate more orders.",
+                        "role": "Wang, The Factory Manager",
+                        "tags": [
+                            "read"
+                        ]
+                    },
+                    {
+                        "text": "I’m juggling design, ordering, and clients every day. I simply don't have time to manually fix spreadsheet formatting.",
+                        "role": "Lilian, The Packaging Coordinator",
+                        "tags": [
+                            "read"
+                        ]
+                    },
+                    {
+                        "text": "I need to add notes when things change, but I’m afraid to break the Excel formulas if I insert a new row.",
+                        "role": "Flora, The Production Supervisor",
+                        "tags": [
+                            "input"
+                        ]
+                    },
+                    {
+                        "text": "It would be a game-changer if the data was linked—so I know instantly when materials or packaging actually arrive.",
+                        "role": "Ethan, The Production Planner",
+                        "tags": [
+                            "plan"
+                        ]
+                    },
+                    {
+                        "text": "I constantly switch between different sheets just to verify if the information is actually correct.",
+                        "role": "Cleo, The Contract Manager",
+                        "tags": [
+                            "input"
+                        ]
+                    }
+                ]
+            }
+        },
+        "design_moves": {
+            "title": "Turning these pain points into three core design moves.",
+            "tabs": [
+                {
+                    "id": "link",
+                    "title": "01. Unify the View",
+                    "subtitle": "Filter the Noise"
+                },
+                {
+                    "id": "unify",
+                    "title": "02. Guide the Workflow",
+                    "subtitle": "Structure the Input"
+                },
+                {
+                    "id": "reveal",
+                    "title": "03. Reveal Capacity",
+                    "subtitle": "Support Decisions"
+                }
+            ],
+            "moves": [
+                {
+                    "id": "link",
+                    "headline": "One Master Table, Infinite Contexts",
+                    "context": {
+                        "pain": "Teams worked in silos. A change in Production didn't update Finance, leading to messy \"status drifting\" across Excel files.",
+                        "strategy": "Single Source: Everyone edits the same live data row.\n\nRole-Based Lenses: Finance sees billing columns; Production sees scheduling columns. Same data, focused view.",
+                        "scope": [
+                            "input",
+                            "plan"
+                        ]
+                    },
+                    "image": {
+                        "alt": "Production Table",
+                        "annotation": "Switching perspectives without leaving the master data."
+                    }
+                },
+                {
+                    "id": "unify",
+                    "headline": "One Master Table, Four Lenses",
+                    "context": {
+                        "pain": "Teams (Finance, Packing, Planning) wasted time switching between different spreadsheets just to find \"their\" columns.",
+                        "strategy": "A Single Source of Truth with role-based tabs. Everyone works on the same live data, but sees a filtered view tailored to their job (e.g., Finance only sees payment status).",
+                        "scope": [
+                            "plan",
+                            "read"
+                        ]
+                    },
+                    "image": {
+                        "alt": "Contract Table",
+                        "annotation": "One click to filter irrelevant data."
+                    }
+                },
+                {
+                    "id": "reveal",
+                    "headline": "Answers, Not Just Rows",
+                    "context": {
+                        "pain": "Managers relied on \"gut feelings\" to accept new orders because calculating actual capacity from raw rows took too long.",
+                        "strategy": "Transformed the dashboard from a data list into a Decision Tool. It visualizes future capacity and bottlenecks, giving an instant \"Yes/No\" on whether to take new orders.",
+                        "scope": [
+                            "read"
+                        ]
+                    },
+                    "image": {
+                        "alt": "Dashboard Demo",
+                        "annotation": "Visualizing free slots to help negotiate new orders."
+                    }
+                }
+            ]
         },
         "choices": {
-            "title": "关键设计决策",
-            "subtitle": "工作流与交互",
-            "section1": {
-                "title": "将分散的文件转化为单一的可导航工作流",
-                "content": "在之前的设置中，员工必须在多个 Excel 文件和标签页之间跳转，以找到正确的合同或了解其最新状态。基于这些访谈，我围绕单一合同工作区重新构建了 UI：",
-                "list": [
-                    "侧边栏列出合同作为主要入口。",
-                    "状态过滤器（例如：待录入、已录入、待付款）快速筛选需要关注的内容。"
-                ],
-                "content2": "这直接解决了一个核心痛点：太多的时间花在寻找文件上。通过将导航和状态过滤集成在一处，系统将碎片化的体验转化为清晰的线性工作流，用户可以：",
-                "steps": [
-                    "定位合同。",
-                    "查看当前阶段。",
-                    "采取下一步行动，无需切换文档。"
-                ]
-            },
-            "section2": {
-                "title": "为当下设计导入与手动输入，同时为未来做准备",
-                "content": "当前运营中的许多关键字段——如签署日期、定金日期、包材存储和生产相关数据——仍然依赖手动输入。我没有忽视这一现实，而是设计了一套结构化的对话框来输入合同、产品和财务详情。",
-                "content2": "在此基础上，我引入了 <strong>自动合同导入</strong> 流程，允许用户从现有合同文件中提取基础信息，然后在对话框中补充或更正细节。这达成了一种平衡：",
-                "list": [
-                    "<strong>即时价值：</strong> 减少了重复打字，降低了已有合同文件的复制粘贴错误。",
-                    "<strong>面向未来：</strong> 对话框结构经过精心设计，以便后续我们可以接入 Excel/PDF 解析，并在同一 UI 中对比“手动 vs 自动”数据，而无需重新设计整个流程。"
-                ],
-                "content3": "换句话说，设计接受了当前仍是部分手动的现实，但工作流和信息架构已经为更自动化的未来做好了准备。"
-            },
-            "section3": {
-                "title": "统一状态更新 & `updateContractStatus` (设计 #4 & 开发)",
-                "content": "一个主要的运营痛点是合同状态分散在多处。当合同阶段变更时，不同的表格和视图必须手动更新，往往导致不同步。",
-                "content2": "在新设计中，我将其简化为单一的状态真实来源：",
-                "list": [
-                    "<strong>在 UI 侧：</strong> 用户只需更新一次合同状态，通过一个在合同出现处均可见的统一控件。",
-                    "<strong>在工程侧：</strong> 我与开发者合作实现了一个共享的 `updateContractStatus` 函数，该函数将更改传播到所有相关视图和数据表中。"
-                ],
-                "content3": "通过明确连接交互模式与底层函数，我想表明我不仅理解 UI 该做什么，还理解它需要在技术上如何表现，以保持整个系统的状态一致性。"
-            },
-            "summary": {
-                "title": "简而言之：这些设计决策关注三件事：",
-                "steps": [
-                    "通过整合导航和状态减少文档切换。",
-                    "尊重当前的手动操作现实，同时为自动化铺平道路。",
-                    "确保单一状态更新能可靠地反映在系统的各处——既展示了工作流思维，也展示了与工程紧密协作的能力。"
-                ]
-            }
-        },
-        "excellence": {
-            "title": "统一体验",
-            "subtitle": "仪表盘与商业影响力",
-            "section1": {
-                "title": "从数据到决策：内部异常雷达 & 流程交付周期",
-                "content": "为了让该项目的设计方案融入用户的日常工作流，我将解决方案扩展为一个内部决策支持仪表盘。仪表盘不再重复原始表格，而是聚焦于时间损失点和流程断点。",
-                "list": [
-                    "<strong>内部异常雷达 (P1-A)</strong> 汇总合同数据并标记三种关键风险类型：交付逾期、付款受阻和物料风险。",
-                    "<strong>关键合同阶段概览 (P1-B)</strong> 随后显示哪些具体合同受到影响以及它们卡在哪个内部阶段。例如，在我们的分析中，约 68% 的延误与物料就绪度相关，45% 与生产超出内部目标相关，这让管理层无需翻阅电子表格就能清晰看到主要瓶颈。",
-                    "<strong>流程交付周期视图 (P2)</strong> 可视化合同在每个阶段停留的时间，以及我们是否达到或超出了自己的 SLA 目标。"
-                ],
-                "content2": "这个仪表盘的不同之处在于它并不试图展示所有内容。它刻意避开原始、密集的数据，而专注于：",
-                "points": [
-                    "我们在哪里损失时间",
-                    "哪些流程正在失效",
-                    "哪些合同受到影响并需要关注"
-                ],
-                "content3": "这使得它对需要即时、可执行信号的决策者非常有用，而不仅仅是一份静态报告。"
-            },
-            "section2": {
-                "title": "应对利益相关者反馈的“混乱现实”",
-                "content": "也就是当我第一次分享仪表盘原型时，它刻意保持简单：几个聚焦的小部件和一个关于瓶颈的清晰故事。那个早期版本迅速引发了一波利益相关者的回应，例如：",
-                "list": [
-                    "要求提供计划与实际时间表之间差异的警报。",
-                    "对随时间变化的趋势分析感兴趣，而不仅仅是快照。",
-                    "诸如：“这些数据在我与客户交谈时会很有帮助”的评论。"
-                ],
-                "content2": "我选择在案例研究中包含这个“混乱的中间过程”，因为它展示了第一次设计上线后实际发生的情况：优先级转移，新期望浮现，范围扩大。",
-                "content3": "我没有将其视为计划的失败，而是利用它作为机会：",
-                "points": [
-                    "与利益相关者重新确定功能的优先级。",
-                    "澄清哪些洞察是“必须现在有” vs “以后有也不错”。",
-                    "完善仪表盘，使其能同时支持内部运营和面向客户的对话。"
-                ],
-                "content4": "故事的这一部分展示了我处理模棱两可情况、响应不断变化的需求以及保持设计以此为基础的能力。"
-            }
+            "title": "Key Design Choices",
+            "subtitle": ""
         },
         "reflection": {
-            "title": "反思",
-            "subtitle": "使用 Kano 模型",
-            "content": "在我的反思中，我使用 <strong>Kano 模型</strong> 来理清不同类型的仪表盘功能：",
+            "title": "Reflection",
+            "subtitle": "Using the Kano Model",
+            "content": "In my reflection, I used the <strong>Kano model</strong> to make sense of the different types of dashboard features:",
             "list": [
-                "<strong>基本期望：</strong> 例如，无需翻阅电子表格即可查看合同状态和交付周期。",
-                "<strong>绩效功能：</strong> 更清晰的瓶颈可视化，直接改善计划和内部协调。",
-                "<strong>兴奋型功能（Delighters）：</strong> 例如，异常警报和叙述性视图，帮助管理者向客户解释问题。"
+                "<strong>Basic expectations:</strong> E.g. being able to see contract status and lead time without digging through spreadsheets.",
+                "<strong>Performance features:</strong> Clearer bottleneck visualization that directly improves planning and internal coordination.",
+                "<strong>Delighters:</strong> For example, exception alerts and narrative views that help managers explain issues to clients."
             ],
-            "content2": "通过将利益相关者的请求和现有小部件映射到 Kano 模型上，我可以：",
+            "content2": "By mapping stakeholder requests and existing widgets onto the Kano model, I could:",
             "points": [
-                "区分“绝不能失败”的基础功能和“高影响力”的改进。",
-                "避免在仪表盘上堆砌那些不会改变决策的“锦上添花”图表。",
-                "表明我不仅是在设计 UI，还在系统地确定功能的优先级。"
+                "Distinguish between \"must not fail\" basics and \"high-impact\" improvements.",
+                "Avoid overloading the dashboard with nice-to-have charts that don’t change decisions.",
+                "Show that I’m not only designing UI, but also prioritizing features systematically."
             ],
-            "content3": "包含这个反思是我展示成长思维的方式：我愿意学习，从产品/战略中借用工具（如 Kano），并利用它们做出更扎实的设计选择。"
+            "content3": "Including this reflection is my way of demonstrating a growth mindset: I’m willing to learn, borrow tools from product/strategy (like Kano), and use them to make more grounded design choices."
         }
     },
     "ivy": {

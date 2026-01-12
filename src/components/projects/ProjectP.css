@@ -7,8 +7,6 @@
   font-family: var(--font-sans);
   color: var(--text-primary);
   min-height: 100vh;
-  /* overflow-x: hidden; */
-  /* Prevent negative margins from causing page scroll */
 }
 
 .project-content-wrapper {
@@ -361,4 +359,90 @@
 .role-card ul {
   padding-left: 1.2rem;
   margin-bottom: 0;
+}
+
+/* CSS for the static facts grid (reverted from sticky) */
+.project-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.fact-column h3 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.fact-column p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .project-facts-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Summary List */
+.project-description-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 2rem;
+}
+
+.project-description-item {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.project-description-item::before {
+  content: "•";
+  position: absolute;
+  left: 0.25rem;
+  color: var(--accent-primary);
+  font-weight: bold;
+}
+
+/* Decision Section */
+.decisions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.decision-item h3 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  border-left: 2px solid var(--accent-primary);
+  padding-left: 1rem;
+}
+
+.decision-block {
+  margin-bottom: 2rem;
+}
+
+.decision-block h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.decision-block p {
+  margin-bottom: 0;
+  color: var(--text-secondary);
 }

@@ -8,11 +8,11 @@ import './DesignMoves.css';
 interface DesignMove {
     id: string;
     headline: string;
-    context: {
-        pain: string;
-        strategy: string;
-    };
-    image: {
+    problem: { title: string; body: string };
+    solution: { title: string; body: string };
+    how_it_works: { title: string; body: string };
+    rationale: { title: string; body: string };
+    image?: {
         alt: string;
         annotation: string;
     };
@@ -26,7 +26,7 @@ interface Tab {
 
 export const DesignMoves = () => {
     const { t } = useTranslation();
-    const [activeTabId, setActiveTabId] = useState('link');
+    const [activeTabId, setActiveTabId] = useState('unify'); // Default to first new id
     const isPrintMode = usePrintMode();
 
     const tabs = t('project_p.design_moves.tabs', { returnObjects: true }) as Tab[];
@@ -37,9 +37,9 @@ export const DesignMoves = () => {
 
     // Placeholder images map
     const imageMap: Record<string, string> = {
-        link: '/assets/images/ora-web/Unify.mp4', // Replaced with video
-        unify: '/assets/images/ora-web/move-unify-placeholder.png', // Replace later
-        reveal: '/assets/images/ora-web/move-reveal-placeholder.png'  // Replace later
+        unify: '/assets/images/ora-web/Unify.mp4',
+        guide: '/assets/images/ora-web/move-guide-placeholder.png',
+        reveal: '/assets/images/ora-web/move-reveal-placeholder.png'
     };
 
     const renderMoveContent = (move: DesignMove) => {
@@ -47,25 +47,23 @@ export const DesignMoves = () => {
         const isVideo = imageSrc?.endsWith('.mp4');
 
         return (
-            <>
-                <div className="dm-header-row">
-                    <h3 className="dm-headline">{move.headline}</h3>
-                </div>
-
+            <div className="dm-detailed-content">
+                {/* 1. Context Row (Side by Side: Problem & Solution) */}
                 <div className="dm-context-row">
                     <div className="dm-context-card pain">
-                        <h4>The Pain</h4>
-                        <p>{move.context.pain}</p>
+                        <h4>{move.problem.title}</h4>
+                        <p>{move.problem.body}</p>
                     </div>
                     <div className="dm-context-card move">
-                        <h4>The Move</h4>
-                        <p>{move.context.strategy}</p>
+                        <h4>{move.solution.title}</h4>
+                        <p>{move.solution.body}</p>
                     </div>
                 </div>
 
-                <div className="dm-visual-row">
+                {/* 2. Visual & How it Works */}
+                <div className="dm-visual-section">
                     <div className="dm-image-wrapper">
-                        {imageSrc ? (
+                        {imageSrc && (
                             isVideo ? (
                                 <video
                                     src={imageSrc}
@@ -78,18 +76,32 @@ export const DesignMoves = () => {
                             ) : (
                                 <img
                                     src={imageSrc}
-                                    alt={move.image.alt}
+                                    alt={move.image?.alt || ''}
                                     className="dm-main-image"
                                 />
                             )
-                        ) : null}
-                        <div className="dm-annotation">
-                            <ArrowUpRight size={16} className="dm-arrow" />
-                            <span>{move.image.annotation}</span>
-                        </div>
+                        )}
+                        {move.image?.annotation && (
+                            <div className="dm-annotation">
+                                <ArrowUpRight size={16} className="dm-arrow" />
+                                <span>{move.image.annotation}</span>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* How It Works (Below visual, smaller font) */}
+                    <div className="dm-how-it-works">
+                        <strong>{move.how_it_works.title}: </strong>
+                        {move.how_it_works.body}
                     </div>
                 </div>
-            </>
+
+                {/* 3. Rationale */}
+                <div className="dm-rationale">
+                    <h4>{move.rationale.title}</h4>
+                    <p>{move.rationale.body}</p>
+                </div>
+            </div>
         );
     };
 

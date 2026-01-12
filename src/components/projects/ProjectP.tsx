@@ -5,14 +5,12 @@ import { useTranslation } from 'react-i18next';
 // import { useNotification } from '../NotificationContext';
 
 import './ProjectP.css';
-import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
 import { StackedGallery } from '../common/StackedGallery/StackedGallery';
-import { HorizontalScrollContainer } from '../common/HorizontalScrollContainer/HorizontalScrollContainer';
 import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
-import { DesignMoves } from './DesignMoves';
-import { UserScopeList } from './UserScopeList';
 import { UserStakeholdersGraph } from './UserStakeholdersGraph';
+import { DesignMoves } from './DesignMoves';
 import { UserVoiceQuotes } from './UserVoiceQuotes';
+
 import '../Tooltip.css';
 
 export const ProjectP = () => {
@@ -24,16 +22,16 @@ export const ProjectP = () => {
   const [activeSection, setActiveSection] = useState('');
 
   // Section definitions for Navigation
-  // Grouping intro, team, scope, rationale under "Project Info"
+  // Adjusted to match new content hierarchy
   const navSections = [
-    { id: 'intro', title: 'Project Info' },
-    { id: 'research', title: 'Research Findings' },
-    { id: 'choices', title: 'Key Design Choices' },
-    { id: 'reflection', title: 'Reflection' },
+    { id: 'summary', title: 'Summary' },
+    { id: 'problem', title: 'Context & Problem' },
+    { id: 'decisions', title: 'Decisions' },
+    { id: 'delivery', title: 'Delivery & Scope' },
   ];
 
-  // IDs that belong to "Project Info"
-  const projectInfoIds = ['intro', 'team', 'scope', 'rationale'];
+  // IDs that belong to the summary/problem area if we want to group them, but they are distinct now.
+  // For scrolling logic, we can keep it simple.
 
   useEffect(() => {
     // Intersection Observer for active section
@@ -45,11 +43,10 @@ export const ProjectP = () => {
           }
         });
       },
-      { threshold: 0, rootMargin: '-20% 0px -60% 0px' }
+      { threshold: 0.2, rootMargin: '-10% 0px -50% 0px' }
     );
 
-    // Observe all sections including the ones grouped under Project Info
-    const observableIds = [...projectInfoIds, 'research', 'choices', 'reflection'];
+    const observableIds = ['summary', 'problem', 'decisions', 'delivery'];
     observableIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
@@ -71,9 +68,6 @@ export const ProjectP = () => {
     }
   };
 
-  // Determine which nav ID should be active based on the currently intersecting section
-  const headerActiveSection = projectInfoIds.includes(activeSection) ? 'intro' : activeSection;
-
   return (
     <motion.div {...pageTransition} className="project-detail-container">
       <div className="project-content-wrapper">
@@ -82,18 +76,19 @@ export const ProjectP = () => {
           title={t('project_p.header.title')}
           date={t('project_p.header.date')}
           sections={navSections}
-          activeSection={headerActiveSection}
+          activeSection={activeSection}
           onSectionClick={scrollToSection}
           downloadTooltip={t('project_p.header.download')}
           copyTooltip={t('project_p.header.copy')}
           copiedTooltip={t('project_p.header.copied')}
         />
 
-        {/* 2. Intro Section */}
-        <section id="intro" className="project-section compact-section">
-          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.project_info')}</div>
+        {/* 1. Summary Section */}
+        <section id="summary" className="project-section">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.summary')}</div>
+          <h2>{t('project_p.summary.title')}</h2>
+          <p className="summary-subtitle" style={{ fontSize: '1.2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>{t('project_p.summary.subtitle')}</p>
 
-          <p className="project-description" dangerouslySetInnerHTML={{ __html: t('project_p.intro.content') }} />
           <StackedGallery
             priority={true}
             defaultImage="/assets/images/ora-web/Mockup.webp"
@@ -109,100 +104,75 @@ export const ProjectP = () => {
                 id: 'dashboard-interactive',
                 src: '/assets/images/ora-web/dashboard-mockup.webp',
                 alt: 'Interactive Dashboard Preview',
-                interactiveSrc: `/dashboard_refactor.html?lang=${i18n.language}`,
-                thumbnailSrc: '/assets/images/ora-web/dashboard-mockup-thumb.webp'
+                interactiveSrc: `https://ora.shipbyx.com/?lang=${i18n.language}`,
+                deferInteraction: true,
+                thumbnailSrc: '/assets/images/ora-web/dashboard-mockup-thumb.webp',
+                className: 'force-desktop-iframe'
               },
               {
-                id: 'factory-photo',
+                id: 'intro-placeholder',
                 src: '/assets/images/ora-web/intro-placeholder.webp',
-                alt: 'Factory Context',
-                thumbnailSrc: '/assets/images/ora-web/intro-placeholder-thumb.webp',
-                srcSet: '/assets/images/ora-web/intro-placeholder-mobile.webp 800w, /assets/images/ora-web/intro-placeholder.webp 1200w',
-                sizes: '(max-width: 768px) 100vw, 50vw'
+                alt: 'Project Introduction Context'
               }
             ]}
           />
-        </section>
 
-        <hr className="section-divider compact-divider" />
-
-        {/* 3. Team & My Role */}
-        <section id="team" className="project-section compact-section">
-          <h2>{t('project_p.team.title')}</h2>
-          <HorizontalScrollContainer className="role-grid">
-            <div className="role-card">
-              <h3>{t('project_p.team.client')}</h3>
-              <p><strong>{t('project_p.team.clientDesc')}</strong></p>
-              <ul>
-                {(t('project_p.team.clientPoints', { returnObjects: true }) as string[]).map((point, i) => (
-                  <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
-                ))}
-              </ul>
-            </div>
-            <div className="role-card">
-              <h3>{t('project_p.team.role')}</h3>
-              <p><strong>{t('project_p.team.roleDesc')}</strong></p>
-              <ul>
-                {(t('project_p.team.rolePoints', { returnObjects: true }) as string[]).map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          </HorizontalScrollContainer>
-
-        </section>
-
-        <hr className="section-divider compact-divider" />
-
-        {/* 4. User Scope */}
-        <section id="scope" className="project-section compact-section">
-          <h2>{t('project_p.scope.title')}</h2>
-          <p className="intro-text">{t('project_p.scope.content')}</p>
-          {/* New User Journey Graph replaces the old list and image */}
-          <UserScopeList />
-        </section>
-
-        <hr className="section-divider compact-divider" />
-
-        {/* 5. Project Rationale */}
-        <section id="rationale" className="project-section compact-section">
-          <h2>{t('project_p.rationale.title')}</h2>
-          <div className="rationale-block">
-            <blockquote
-              className="project-quote"
-              dangerouslySetInnerHTML={{ __html: t('project_p.rationale.quote') }}
-            />
+          <div className="summary-body">
+            <ul className="project-description-list">
+              {(t('project_p.summary.points', { returnObjects: true }) as string[]).map((point, index) => (
+                <li key={index} className="project-description-item">{point}</li>
+              ))}
+            </ul>
           </div>
+
+
 
         </section>
 
         <hr className="section-divider" />
 
-        {/* 6. Research Findings */}
-        <section id="research" className="project-section">
-          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.research_findings')}</div>
-          <h2>{t('project_p.research.title')}</h2>
+        {/* 2. Context & Problem */}
+        <section id="problem" className="project-section">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.problem')}</div>
+          <h2>{t('project_p.problem.title')}</h2>
+
+          <div className="problem-grid">
+            <div className="problem-item">
+              <h3>{t('project_p.problem.context.title')}</h3>
+              <p>{t('project_p.problem.context.body')}</p>
+            </div>
+            <div className="problem-item">
+              <h3>{t('project_p.problem.broken_decision.title')}</h3>
+              <p>{t('project_p.problem.broken_decision.body')}</p>
+            </div>
+          </div>
+
+          <div style={{ marginTop: '2rem' }}>
+            <h3>{t('project_p.problem.impact.title')}</h3>
+            <p>{t('project_p.problem.impact.body')}</p>
+          </div>
 
           <div className="research-subsection">
-            <p dangerouslySetInnerHTML={{ __html: t('project_p.research.content1') }} />
-
-
-          </div>
-
-          <WorkloadAnalysisGraph />
-
-          <div className="research-interactive-wrapper">
-            <UserStakeholdersGraph onFilterChange={setActiveQuoteFilter} />
-            <UserVoiceQuotes filterTag={activeQuoteFilter} />
+            {/* Reusing existing Evidence components here */}
+            {/* The WorkloadAnalysisGraph was part of the research findings, keeping it if relevant, or maybe remove if not mentioned in new copy? 
+                The user specifically asked for 'Who are the Users Behind the Data', which is UserStakeholdersGraph.
+                I will comment out WorkloadAnalysisGraph for now as it's not explicitly requested in the new flow "How This Affected Different Teams" -> "Below place the Who are the Users...".
+             */}
+            {/* <WorkloadAnalysisGraph /> */}
+            <div className="research-interactive-wrapper">
+              <UserStakeholdersGraph onFilterChange={setActiveQuoteFilter} />
+              <UserVoiceQuotes filterTag={activeQuoteFilter} />
+            </div>
           </div>
         </section>
 
         <hr className="section-divider" />
 
-        {/* 7. Key Design Choices */}
-        <section id="choices" className="project-section">
-          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.key_design_choices')}</div>
-          <h2>{t('project_p.choices.title')}</h2>
+
+        {/* 3. Decisions */}
+        <section id="decisions" className="project-section">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.decisions')}</div>
+          <h2>{t('project_p.decisions.title')}</h2>
 
           <DesignMoves />
 
@@ -210,27 +180,11 @@ export const ProjectP = () => {
 
         <hr className="section-divider" />
 
-        {/* 9. Reflection */}
-        <section id="reflection" className="project-section">
-          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.reflection')}</div>
-          <h2>{t('project_p.reflection.title')}</h2>
-          <h3>{t('project_p.reflection.subtitle')}</h3>
-          <p dangerouslySetInnerHTML={{ __html: t('project_p.reflection.content') }} />
-          <ul>
-            {(t('project_p.reflection.list', { returnObjects: true }) as string[]).map((point, i) => (
-              <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
-            ))}
-          </ul>
-          <StackedGallery images={[{ id: 'reflection-kano', src: '/assets/images/ora-web/reflection-placeholder.webp', alt: 'Kano Model Reflection' }]} />
-          <p>{t('project_p.reflection.content2')}</p>
-          <ul>
-            {(t('project_p.reflection.points', { returnObjects: true }) as string[]).map((point, i) => (
-              <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
-            ))}
-          </ul>
-          <p className="reflection-footer">
-            {t('project_p.reflection.content3')}
-          </p>
+        {/* 4. Delivery & Scope */}
+        <section id="delivery" className="project-section">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.delivery')}</div>
+          <h2>{t('project_p.delivery.title')}</h2>
+          <p>{t('project_p.delivery.content')}</p>
         </section>
 
       </div>

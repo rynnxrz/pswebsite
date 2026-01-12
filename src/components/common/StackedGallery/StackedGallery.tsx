@@ -11,6 +11,7 @@ interface GalleryImage {
     thumbnailSrc?: string; // Optional optimized thumbnail
     srcSet?: string;
     sizes?: string;
+    className?: string; // Optional custom class for specific styling (e.g. iframe width)
 }
 
 interface StackedGalleryProps {
@@ -38,7 +39,7 @@ export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultI
                 interactiveSrc={activeImage.interactiveSrc}
                 deferInteraction={activeImage.deferInteraction}
                 containerClassName="gallery-main-image-wrapper"
-                className="gallery-main-image"
+                className={`gallery-main-image ${activeImage.className || ''}`}
                 isNested={true}
                 // @ts-expect-error - React 18 doesn't support fetchpriority type yet
                 fetchpriority={priority ? 'high' : 'auto'}

@@ -68,10 +68,7 @@ export const UserStakeholdersGraph = ({ onFilterChange }: Props) => {
     return (
         <div className="stakeholders-container">
             <div className="stakeholders-header">
-                <h3>{t('project_p.research.stakeholders.title')}</h3>
-                <p>
-                    {t('project_p.research.stakeholders.description')}
-                </p>
+
                 <div className="interaction-hint">
                     <ArrowDown size={18} />
                     <span>Tap a group to reveal their pain points below.</span>

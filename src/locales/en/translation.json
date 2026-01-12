@@ -25,63 +25,117 @@
             "copy": "Copy URL",
             "copied": "Successfully copied to clipboard"
         },
-        "intro": {
-            "title": "Intro",
-            "content": "The project is defined as ORA Web, a small-scale software system for a contract manufacturing company, focusing on integrating contract production data management and efficiency. <strong>Case study scope:</strong> (Jul 2023 – Aug 2024 · Ongoing)"
-        },
-        "team": {
-            "title": "Team & My Role",
-            "client": "Client",
-            "clientDesc": "Ora Nutrition Ltd (contract-manufacturing factory).",
-            "clientPoints": [
-                "Founded in 2019, scaled into one of the leading nutrition contract manufacturers in Auckland.",
-                "Acquired in 2025 by a China-listed company.",
-                "No in-house design team; I operated as the <strong>sole designer</strong> in cross-functional delivery."
-            ],
-            "role": "My Role",
-            "roleDesc": "UX Designer (Solo)",
-            "rolePoints": [
-                "Led end-to-end UX for ORA Web, from problem framing to workflow design and system structure.",
-                "Mapped contract-to-shipment processes and translated operational logic into scalable data and UI models.",
-                "Facilitated alignment across Finance, Production Planning, Warehouse/Procurement, and Management.",
-                "Worked closely with engineering to ensure feasibility and consistent status logic across views."
-            ],
-            "duration": "Project Duration",
-            "durationDesc": "<strong>Case study scope:</strong><br/>(Jul 2023 – Aug 2024 · Ongoing)"
-        },
-        "scope": {
-            "title": "System Scope",
-            "content": "This system spans three operational layers across the contract-to-production lifecycle:",
-            "points": [
-                "<strong>Decision Makers:</strong> They read and consolidated data for timing, risk, and client decisions.",
-                "<strong>Shift/Planning Managers:</strong> They need accurate status and capacity signals to allocate work.",
-                "<strong>Operators/Executors:</strong> They need structured input and clear next-step prompts to keep data reliable."
-            ],
-            "read": "Read: Decide timing and client priorities.",
-            "readDesc": "Decide timing and client priorities.",
-            "plan": "Plan: Connect orders to capacity.",
-            "planDesc": "Connect orders to capacity.",
-            "input": "Input: Heavy data entry & initial validation.",
-            "inputDesc": "Heavy data entry & initial validation."
-        },
         "section": {
-            "project_info": "OVERVIEW",
-            "research_findings": "DISCOVERY",
-            "key_design_choices": "SOLUTION",
-            "reflection": "RETROSPECTIVE"
+            "summary": "SUMMARY",
+            "problem": "CONTEXT & PROBLEM",
+            "decisions": "DECISIONS",
+            "delivery": "DELIVERY & SCOPE"
         },
-        "rationale": {
-            "title": "Project Rationale",
-            "subtitle": "Enhancing Efficiency",
-            "quote": "Connecting contract-to-shipment data.<br/>So managers stop wasting time on Excel checks and start making decisions."
+        "summary": {
+            "title": "Intern -> Partner",
+            "subtitle": "Turned operational pain points uncovered during my internship into a startup- and secured a contract to solve them.",
+            "points": [
+                "As Co-Founder, led end-to-end UX design (plus partial coding) and team coordination to secure the contract and kick off Dashboard development.",
+                "Translated internship observations into actionable solutions: mapped client workflows, defined contract statuses, and designed information architecture to address their visibility gaps.",
+                "Currently developing the first-phase Dashboard (to replace messy spreadsheets), with plans to expand to auto-scheduling features post-launch."
+            ],
+            "engagement_body": "DEPRECATED",
+            "d365_body": "DEPRECATED",
+            "input_gap_body": "DEPRECATED"
+        },
+        "problem": {
+            "title": "Slow Decision-Making Due to Disconnected Spreadsheets.",
+            "context": {
+                "title": "Context",
+                "body": "After being acquired, the factory was required to align with the parent company’s focus on shipment-production quantity tracking and material auditing. While they adopted Microsoft 365 Dynamic for material management and shipment tracking (replacing some Excel workflows), not all operational data could be migrated to the new system—leaving critical data (contracts, product info, production numbers, scheduling) scattered across 3 remaining Excel spreadsheets. This created a dual workflow: teams had to check both Dynamic 365 and disconnected spreadsheets to get a full view of operations, increasing complexity instead of simplifying it."
+            },
+            "broken_decision": {
+                "title": "What broke decision-making",
+                "body": "The spreadsheets’ dual role (record-keeping + progress tracking) created ambiguity. Teams used unstandardized visual cues—like formatting, colors, or notes—to mark blockers and next steps, but these signals varied across departments. As a result, the same order might show different statuses in different sheets. Before deciding on capacity or priorities, managers had to cross-check multiple spreadsheets to verify the latest data, which slowed down the entire decision-making process"
+            },
+            "impact": {
+                "title": "How This Affected Different Teams",
+                "body": "To understand the real impact of these spreadsheet issues, we gathered feedback from three key teams."
+            },
+            "constraint": {
+                "title": "DEPRECATED",
+                "body": "DEPRECATED"
+            },
+            "observations": {
+                "title": "DEPRECATED"
+            }
+        },
+        "decisions": {
+            "title": "Phase 1: Core Design Decisions",
+            "items": [
+                {
+                    "title": "01. Unify the View Filter the Noise",
+                    "problem": {
+                        "title": "Problem",
+                        "body": "Previously, core contract data was scattered across multiple unsynchronized Excel files. Teams faced frequent cross-table verification, which was time-consuming and prone to errors. Additionally, shared Excel sheets had critical flaws—accidental edits were hard to trace, and lack of double-check mechanisms often led to inaccurate data."
+                    },
+                    "solution": {
+                        "title": "Solution",
+                        "body": "We integrated all core business data into a single master table to ensure data consistency. Role-specific views were designed: fixed columns (contract number, product name) stay visible on the left, while dynamic columns (billing for finance, scheduling for production) are switchable on the right. To address Excel’s edit flaws, all modifications require opening an edit popup via the '···' menu, with mandatory confirmation, auto-generated change history, and double-check triggers."
+                    },
+                    "how_it_works": {
+                        "title": "How it Works",
+                        "body": "A short loop video here would show: Switching between finance/production views with one click (no horizontal scrolling). Clicking '···' → 'Edit' to open the popup, filling in role-specific fields, and saving with confirmation. Small-screen adaptation: Popup automatically fits mobile/tablet screens, avoiding messy table scrolling."
+                    },
+                    "rationale": {
+                        "title": "Design Rational",
+                        "body": "We prioritized pre-set role views over full customizability to reduce onboarding time for new users, while reserving a 'Add Custom Columns' option for power users. For editing, we traded direct table edits for a popup workflow—this extra step ensures data security (traceable history, double-checks) which is far more critical for enterprise use than minor convenience. The popup also solves small-screen usability issues, making the dashboard accessible across devices."
+                    }
+                },
+                {
+                    "title": "02. Guide the Workflow Structure the Input",
+                    "problem": {
+                        "title": "Problem",
+                        "body": "The original contract and production data were managed in Excel, leading to scattered information (e.g., finance details, product specs, packaging info were stored separately). This caused frequent data entry errors, manual tracking of payment/production statuses, and made it impossible to directly reuse data for future production scheduling"
+                    },
+                    "solution": {
+                        "title": "Solution",
+                        "body": "Designed a structured, step-by-step data entry system: first collect core contract info (basic details, finance terms like deposit/pre-production/final payment with auto-status switching), then add product specs and packaging materials (supporting one-to-many relationships). Also integrated a production plan module that links machine capacity, production dates (including/excluding weekends), and compares planned vs. actual output."
+                    },
+                    "how_it_works": {
+                        "title": "How it Works",
+                        "body": "When creating a new contract, users first fill a popup for basic & finance info (statuses like 'pending'/'in transit' auto-switch to 'overdue' if not marked as 'received' by the due date). Then they can add multiple products via another popup, define packaging materials with delivery statuses, and finally input production plans with auto-generated date tables. All data is centralized and standardized for future use."
+                    },
+                    "rationale": {
+                        "title": "Design Rational",
+                        "body": "Step-by-step entry reduces cognitive load by letting users focus on critical info first; Auto-status switching eliminates manual tracking errors and ensures timely follow-ups; Standardized product/packaging data structure lays the foundation for automated production scheduling, avoiding rework when integrating with D365 later"
+                    }
+                },
+                {
+                    "title": "03. Reveal Capacity, Mitigate Risks & Uncover Growth Opportunties",
+                    "problem": {
+                        "title": "Problem",
+                        "body": "Factory managers relied on rough estimates to assess capacity and client risks—they couldn’t track if top clients accounted for too much production (leaving the factory vulnerable if a big client left)， nor could they identify which production lines had unused capacity to invite existing big clients to place more orders. This led to either over-reliance on a few clients (high risk) or missed opportunities to grow revenue from existing clients."
+                    },
+                    "solution": {
+                        "title": "Solution",
+                        "body": "Designed a 3-section Client Capacity Radar: 3A (Client Capacity Trend) shows year-over-year changes in each client’s production volume (increase/decrease) and their percentage of total capacity， highlighting sudden drops or spikes; 3B (Top Client Concentration) calculates the combined capacity share of the top 3 clients， making it easy to spot over-dependence risks; 3C (Client-Production Line Distribution) maps big clients’ orders to specific production lines， revealing underutilized lines where these clients could be encouraged to place additional orders."
+                    },
+                    "how_it_works": {
+                        "title": "How it Works",
+                        "body": "3A uses line charts + percentage labels to visualize client capacity trends—managers can hover over data points to see exact volume and change rate. 3B displays a donut chart for top 3 clients’ total share， with a red alert if the share exceeds 60% (a risky threshold for factories). 3C uses a matrix table: rows are big clients， columns are production lines， and color intensity shows order volume—managers can quickly see which lines a client hasn’t used yet."
+                    },
+                    "rationale": {
+                        "title": "Design Rational",
+                        "body": "Visualizing client concentration helps managers proactively mitigate risks (e.g.， diversify clients if top 3 account for over 60%)， avoiding sudden production downtime; Mapping client-line distribution turns “unused capacity” into actionable growth opportunities—instead of chasing new clients， factories can upsell to existing trusted clients (lower acquisition cost); Combining trend data and threshold alerts makes complex capacity/risk analysis intuitive， so managers don’t need to be data experts to make decisions."
+                    }
+                }
+            ]
+        },
+        "delivery": {
+            "title": "DELIVERY & SCOPE",
+            "content": "Content coming soon..."
         },
         "research": {
-            "title": "Research Findings",
+            "title": "DEPRECATED Research Findings",
             "subtitle1": "Research Approach and Key Findings",
             "content1": "Analyzing their daily manual workflow, I found that around <span style=\"color: #27AE60; font-weight: bold;\">54%</span> of actions were pure data input and <span style=\"color: #eab308; font-weight: bold;\">37%</span> were just formatting changes—often used as reminders or unit conversions.",
             "stakeholders": {
-                "title": "Who are the Users Behind the Data?",
-                "description": "To understand the \"why\" behind the manual formatting behaviors, I mapped the stakeholders into three engagement layers. This helped me identify exactly who was struggling with what.",
                 "graph_title": "Mapping the Humans Behind the Data",
                 "graph_subtitle": "Categorizing stakeholders by their primary interaction with the system.",
                 "groups": [
@@ -185,15 +239,15 @@
             }
         },
         "design_moves": {
-            "title": "Turning these pain points into three core design moves.",
+            "title": "SOLUTION",
             "tabs": [
                 {
-                    "id": "link",
+                    "id": "unify",
                     "title": "01. Unify the View",
                     "subtitle": "Filter the Noise"
                 },
                 {
-                    "id": "unify",
+                    "id": "guide",
                     "title": "02. Guide the Workflow",
                     "subtitle": "Structure the Input"
                 },
@@ -205,111 +259,91 @@
             ],
             "moves": [
                 {
-                    "id": "link",
-                    "headline": "One Master Table, Infinite Contexts",
-                    "context": {
-                        "pain": "Teams worked in silos. A change in Production didn't update Finance, leading to messy \"status drifting\" across Excel files.",
-                        "strategy": "Single Source: Everyone edits the same live data row.\n\nRole-Based Lenses: Finance sees billing columns; Production sees scheduling columns. Same data, focused view.",
-                        "scope": [
-                            "input",
-                            "plan"
-                        ]
+                    "id": "unify",
+                    "headline": "Unify the View, Filter the Noise",
+                    "problem": {
+                        "title": "Problem",
+                        "body": "Previously, core contract data was scattered across multiple unsynchronized Excel files. Teams faced frequent cross-table verification, which was time-consuming and prone to errors. Additionally, shared Excel sheets had critical flaws—accidental edits were hard to trace, and lack of double-check mechanisms often led to inaccurate data."
+                    },
+                    "solution": {
+                        "title": "Solution",
+                        "body": "We integrated all core business data into a single master table to ensure data consistency. Role-specific views were designed: fixed columns (contract number, product name) stay visible on the left, while dynamic columns (billing for finance, scheduling for production) are switchable on the right. To address Excel’s edit flaws, all modifications require opening an edit popup via the '···' menu, with mandatory confirmation, auto-generated change history, and double-check triggers."
+                    },
+                    "how_it_works": {
+                        "title": "How it Works",
+                        "body": "A short loop video here would show: Switching between finance/production views with one click (no horizontal scrolling). Clicking '···' → 'Edit' to open the popup, filling in role-specific fields, and saving with confirmation. Small-screen adaptation: Popup automatically fits mobile/tablet screens, avoiding messy table scrolling."
+                    },
+                    "rationale": {
+                        "title": "Design Rational",
+                        "body": "We prioritized pre-set role views over full customizability to reduce onboarding time for new users, while reserving a 'Add Custom Columns' option for power users. For editing, we traded direct table edits for a popup workflow—this extra step ensures data security (traceable history, double-checks) which is far more critical for enterprise use than minor convenience. The popup also solves small-screen usability issues, making the dashboard accessible across devices."
                     },
                     "image": {
-                        "alt": "Production Table",
-                        "annotation": "Switching perspectives without leaving the master data."
+                        "alt": "Unified Dashboard View",
+                        "annotation": "Consolidated Master Table"
                     }
                 },
                 {
-                    "id": "unify",
-                    "headline": "One Master Table, Four Lenses",
-                    "context": {
-                        "pain": "Teams (Finance, Packing, Planning) wasted time switching between different spreadsheets just to find \"their\" columns.",
-                        "strategy": "A Single Source of Truth with role-based tabs. Everyone works on the same live data, but sees a filtered view tailored to their job (e.g., Finance only sees payment status).",
-                        "scope": [
-                            "plan",
-                            "read"
-                        ]
+                    "id": "guide",
+                    "headline": "Guide the Workflow, Structure the Input",
+                    "problem": {
+                        "title": "Problem",
+                        "body": "The original contract and production data were managed in Excel, leading to scattered information (e.g., finance details, product specs, packaging info were stored separately). This caused frequent data entry errors, manual tracking of payment/production statuses, and made it impossible to directly reuse data for future production scheduling"
+                    },
+                    "solution": {
+                        "title": "Solution",
+                        "body": "Designed a structured, step-by-step data entry system: first collect core contract info (basic details, finance terms like deposit/pre-production/final payment with auto-status switching), then add product specs and packaging materials (supporting one-to-many relationships). Also integrated a production plan module that links machine capacity, production dates (including/excluding weekends), and compares planned vs. actual output."
+                    },
+                    "how_it_works": {
+                        "title": "How it Works",
+                        "body": "When creating a new contract, users first fill a popup for basic & finance info (statuses like 'pending'/'in transit' auto-switch to 'overdue' if not marked as 'received' by the due date). Then they can add multiple products via another popup, define packaging materials with delivery statuses, and finally input production plans with auto-generated date tables. All data is centralized and standardized for future use."
+                    },
+                    "rationale": {
+                        "title": "Design Rational",
+                        "body": "Step-by-step entry reduces cognitive load by letting users focus on critical info first; Auto-status switching eliminates manual tracking errors and ensures timely follow-ups; Standardized product/packaging data structure lays the foundation for automated production scheduling, avoiding rework when integrating with D365 later"
                     },
                     "image": {
-                        "alt": "Contract Table",
-                        "annotation": "One click to filter irrelevant data."
+                        "alt": "Structured Input Workflow",
+                        "annotation": "Step-by-step Data Entry"
                     }
                 },
                 {
                     "id": "reveal",
-                    "headline": "Answers, Not Just Rows",
-                    "context": {
-                        "pain": "Managers relied on \"gut feelings\" to accept new orders because calculating actual capacity from raw rows took too long.",
-                        "strategy": "Transformed the dashboard from a data list into a Decision Tool. It visualizes future capacity and bottlenecks, giving an instant \"Yes/No\" on whether to take new orders.",
-                        "scope": [
-                            "read"
-                        ]
+                    "headline": "Reveal Capacity, Support Decisions",
+                    "problem": {
+                        "title": "Problem",
+                        "body": "Factory managers relied on rough estimates to assess capacity and client risks—they couldn’t track if top clients accounted for too much production (leaving the factory vulnerable if a big client left)， nor could they identify which production lines had unused capacity to invite existing big clients to place more orders. This led to either over-reliance on a few clients (high risk) or missed opportunities to grow revenue from existing clients."
+                    },
+                    "solution": {
+                        "title": "Solution",
+                        "body": "Designed a 3-section Client Capacity Radar: 3A (Client Capacity Trend) shows year-over-year changes in each client’s production volume (increase/decrease) and their percentage of total capacity， highlighting sudden drops or spikes; 3B (Top Client Concentration) calculates the combined capacity share of the top 3 clients， making it easy to spot over-dependence risks; 3C (Client-Production Line Distribution) maps big clients’ orders to specific production lines， revealing underutilized lines where these clients could be encouraged to place additional orders."
+                    },
+                    "how_it_works": {
+                        "title": "How it Works",
+                        "body": "3A uses line charts + percentage labels to visualize client capacity trends—managers can hover over data points to see exact volume and change rate. 3B displays a donut chart for top 3 clients’ total share， with a red alert if the share exceeds 60% (a risky threshold for factories). 3C uses a matrix table: rows are big clients， columns are production lines， and color intensity shows order volume—managers can quickly see which lines a client hasn’t used yet."
+                    },
+                    "rationale": {
+                        "title": "Design Rational",
+                        "body": "Visualizing client concentration helps managers proactively mitigate risks (e.g.， diversify clients if top 3 account for over 60%)， avoiding sudden production downtime; Mapping client-line distribution turns “unused capacity” into actionable growth opportunities—instead of chasing new clients， factories can upsell to existing trusted clients (lower acquisition cost); Combining trend data and threshold alerts makes complex capacity/risk analysis intuitive， so managers don’t need to be data experts to make decisions."
                     },
                     "image": {
-                        "alt": "Dashboard Demo",
-                        "annotation": "Visualizing free slots to help negotiate new orders."
+                        "alt": "Capacity Radar",
+                        "annotation": "Client Capacity Analytics"
                     }
                 }
             ]
         },
         "choices": {
-            "title": "Key Design Choices",
+            "title": "DEPRECATED",
             "subtitle": ""
         },
-        "excellence": {
-            "title": "Unified Experience",
-            "subtitle": "Dashboard and Business Impact",
-            "section1": {
-                "title": "From data to decisions: Internal Exception Radar & Process Lead Time",
-                "content": "To take this project’s design solution integrate in user’s daily workflow, I extended the solution into an internal decision-support dashboard. Instead of repeating raw tables, the dashboard focuses on where time is lost and where processes break.",
-                "list": [
-                    "<strong>The Internal Exception Radar (P1-A)</strong> aggregates contract data and flags three key risk types: lead-time breach, payment blocked and material risk.",
-                    "<strong>The Key Contracts Stage Overview (P1-B)</strong> then shows which specific contracts are affected and at which internal stage they are stuck. In our analysis, for example, around 68% of delays were linked to material readiness and 45% to production exceeding internal targets, giving management a clear view of the main bottlenecks without digging through spreadsheets.",
-                    "<strong>The Process Lead Time view (P2)</strong> visualises how long contracts spend in each stage, and whether we are meeting or exceeding our own SLA targets."
-                ],
-                "content2": "What differentiates this dashboard is that it does not try to show everything. It deliberately moves away from raw, dense data and focuses on:",
-                "points": [
-                    "Where we are losing time",
-                    "Which processes are failing",
-                    "Which contracts are impacted and need attention"
-                ],
-                "content3": "This makes it useful for decision-makers who need immediate, actionable signals, not just a static report."
-            },
-            "section2": {
-                "title": "Working with the “messy reality” of stakeholder feedback",
-                "content": "When I first shared the dashboard prototype, it was intentionally simple: a few focused widgets and a clear story about bottlenecks. That early version quickly triggered a wave of stakeholder responses, such as:",
-                "list": [
-                    "Requests for discrepancy alerts between planned vs. actual timelines.",
-                    "Interest in trend analysis over time, not just a snapshot.",
-                    "Comments like: “This data would help me a lot when I talk to our clients.”"
-                ],
-                "content2": "I chose to include this “messy middle” in my case study because it shows what actually happens after a first design goes live: priorities shift, new expectations surface, and the scope grows.",
-                "content3": "Instead of treating this as a failure of planning, I used it as a chance to:",
-                "points": [
-                    "Re-prioritize features with stakeholders.",
-                    "Clarify which insights are “must-have now” vs. “good to have later”.",
-                    "Refine the dashboard so it could support both internal operations and client-facing conversations."
-                ],
-                "content4": "This part of the story demonstrates my ability to work through ambiguity, respond to evolving needs, and keep the design grounded in what the business really cares about."
-            }
-        },
         "reflection": {
-            "title": "Reflection",
-            "subtitle": "Using the Kano Model",
-            "content": "In my reflection, I used the <strong>Kano model</strong> to make sense of the different types of dashboard features:",
-            "list": [
-                "<strong>Basic expectations:</strong> E.g. being able to see contract status and lead time without digging through spreadsheets.",
-                "<strong>Performance features:</strong> Clearer bottleneck visualization that directly improves planning and internal coordination.",
-                "<strong>Delighters:</strong> For example, exception alerts and narrative views that help managers explain issues to clients."
-            ],
-            "content2": "By mapping stakeholder requests and existing widgets onto the Kano model, I could:",
-            "points": [
-                "Distinguish between \"must not fail\" basics and \"high-impact\" improvements.",
-                "Avoid overloading the dashboard with nice-to-have charts that don’t change decisions.",
-                "Show that I’m not only designing UI, but also prioritizing features systematically."
-            ],
-            "content3": "Including this reflection is my way of demonstrating a growth mindset: I’m willing to learn, borrow tools from product/strategy (like Kano), and use them to make more grounded design choices."
+            "title": "DEPRECATED",
+            "subtitle": "",
+            "content": "",
+            "list": [],
+            "content2": "",
+            "points": [],
+            "content3": ""
         }
     },
     "ivy": {
