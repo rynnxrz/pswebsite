@@ -52,6 +52,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
         updateScrollState();
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', handleScroll);
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', handleScroll);

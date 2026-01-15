@@ -301,7 +301,7 @@
 
 :root[data-theme="light"] .project-section img,
 :root[data-theme="light"] .gallery-image,
-:root[data-theme="light"] .stacked-card {
+.stacked-card {
   filter: none;
 }
 

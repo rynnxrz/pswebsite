@@ -27,7 +27,7 @@ export const ProjectP = () => {
     { id: 'summary', title: 'Summary' },
     { id: 'problem', title: 'Context & Problem' },
     { id: 'decisions', title: 'Decisions' },
-    { id: 'delivery', title: 'Delivery & Scope' },
+    { id: 'reflection', title: 'Reflection' },
   ];
 
   // IDs that belong to the summary/problem area if we want to group them, but they are distinct now.
@@ -46,7 +46,7 @@ export const ProjectP = () => {
       { threshold: 0.2, rootMargin: '-10% 0px -50% 0px' }
     );
 
-    const observableIds = ['summary', 'problem', 'decisions', 'delivery'];
+    const observableIds = ['summary', 'problem', 'decisions', 'reflection'];
     observableIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
@@ -180,11 +180,11 @@ export const ProjectP = () => {
 
         <hr className="section-divider" />
 
-        {/* 4. Delivery & Scope */}
-        <section id="delivery" className="project-section">
-          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.delivery')}</div>
-          <h2>{t('project_p.delivery.title')}</h2>
-          <p>{t('project_p.delivery.content')}</p>
+        {/* 4. Reflection */}
+        <section id="reflection" className="project-section">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.reflection')}</div>
+          <h2>{t('project_p.reflection.title')}</h2>
+          <p>{t('project_p.reflection.body')}</p>
         </section>
 
       </div>

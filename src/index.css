@@ -107,7 +107,7 @@
   --pill-border: rgba(60, 60, 67, 0.2);
   --chart-track: #e5e5ea;
   --chart-track-border: rgba(60, 60, 67, 0.2);
-  --chart-label: rgba(0, 0, 0, 0.5);
+  --chart-label: rgba(0, 0, 0, 0.75);
   --scroll-btn-bg: rgba(255, 255, 255, 0.85);
   --scroll-btn-bg-hover: rgba(255, 255, 255, 0.95);
   --scroll-btn-border: rgba(60, 60, 67, 0.2);
@@ -116,7 +116,7 @@
   --annotation-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   --text-primary: rgba(0, 0, 0, 0.9);
-  --text-secondary: rgba(60, 60, 67, 0.6);
+  --text-secondary: rgba(60, 60, 67, 0.75);
   --text-tertiary: rgba(60, 60, 67, 0.3);
   --text-inverse: rgba(255, 255, 255, 0.92);
   --text-on-image: rgba(255, 255, 255, 0.95);

@@ -29,7 +29,7 @@
             "summary": "SUMMARY",
             "problem": "CONTEXT & PROBLEM",
             "decisions": "DECISIONS",
-            "delivery": "DELIVERY & SCOPE"
+            "reflection": "REFLECTION"
         },
         "summary": {
             "title": "Intern -> Partner",
@@ -127,9 +127,9 @@
                 }
             ]
         },
-        "delivery": {
-            "title": "DELIVERY & SCOPE",
-            "content": "Content coming soon..."
+        "reflection": {
+            "title": "Adapting to Evolving Client Needs & Balancing Compatibility",
+            "body": "A key takeaway from this project is that client requirements can evolve over time. Initially, we aimed to build a fully-fledged contract management system. However, as the project progressed, the client already had D365 in place and wanted a more streamlined solution. We then collaborated closely to find a middle ground, focusing on delivering a customized dashboard that integrated seamlessly with their existing D365 system instead of building redundant features. This experience taught me to stay flexible in project scoping and always anticipate potential changes in client needs. It also highlighted the importance of designing with compatibility in mind, ensuring our solutions can adapt to the client's existing tech stack rather than forcing them to overhaul their workflow."
         },
         "research": {
             "title": "DEPRECATED Research Findings",
@@ -254,7 +254,7 @@
                 {
                     "id": "reveal",
                     "title": "03. Reveal Capacity",
-                    "subtitle": "Support Decisions"
+                    "subtitle": "Mitigate Risks & Opportunities"
                 }
             ],
             "moves": [
@@ -263,7 +263,7 @@
                     "headline": "Unify the View, Filter the Noise",
                     "problem": {
                         "title": "Problem",
-                        "body": "Previously, core contract data was scattered across multiple unsynchronized Excel files. Teams faced frequent cross-table verification, which was time-consuming and prone to errors. Additionally, shared Excel sheets had critical flaws—accidental edits were hard to trace, and lack of double-check mechanisms often led to inaccurate data."
+                        "body": "Previously, users had to scroll horizontally repeatedly in Excel to view different sections of information, leading to inefficient operations, easy misclicks, and a steep learning curve for less tech-savvy users."
                     },
                     "solution": {
                         "title": "Solution",
@@ -271,11 +271,11 @@
                     },
                     "how_it_works": {
                         "title": "How it Works",
-                        "body": "A short loop video here would show: Switching between finance/production views with one click (no horizontal scrolling). Clicking '···' → 'Edit' to open the popup, filling in role-specific fields, and saving with confirmation. Small-screen adaptation: Popup automatically fits mobile/tablet screens, avoiding messy table scrolling."
+                        "body": "We designed a role-based tab view that allows users to switch directly to their responsible sections with one click. The left side retains fixed common information, while the right side only displays content related to the current tab, eliminating the need for horizontal scrolling."
                     },
                     "rationale": {
                         "title": "Design Rational",
-                        "body": "We prioritized pre-set role views over full customizability to reduce onboarding time for new users, while reserving a 'Add Custom Columns' option for power users. For editing, we traded direct table edits for a popup workflow—this extra step ensures data security (traceable history, double-checks) which is far more critical for enterprise use than minor convenience. The popup also solves small-screen usability issues, making the dashboard accessible across devices."
+                        "body": "Since each user's workflow and responsible sections are fixed, the tab view aligns perfectly with their daily operations. This design minimizes the onboarding cost, allowing users to understand and use the system without additional training, while also reducing the risk of misclicks caused by horizontal scrolling."
                     },
                     "image": {
                         "alt": "Unified Dashboard View",
@@ -291,7 +291,7 @@
                     },
                     "solution": {
                         "title": "Solution",
-                        "body": "Designed a structured, step-by-step data entry system: first collect core contract info (basic details, finance terms like deposit/pre-production/final payment with auto-status switching), then add product specs and packaging materials (supporting one-to-many relationships). Also integrated a production plan module that links machine capacity, production dates (including/excluding weekends), and compares planned vs. actual output."
+                        "body": "A structured step-by-step data entry system was designed to first collect core contract info: first collect core contract info (basic details, finance terms like deposit/pre-production/final payment with auto-status switching), then add product specs and packaging materials (supporting one-to-many relationships). Also integrated a production plan module that links machine capacity, production dates (including/excluding weekends), and compares planned vs. actual output."
                     },
                     "how_it_works": {
                         "title": "How it Works",
@@ -299,7 +299,7 @@
                     },
                     "rationale": {
                         "title": "Design Rational",
-                        "body": "Step-by-step entry reduces cognitive load by letting users focus on critical info first; Auto-status switching eliminates manual tracking errors and ensures timely follow-ups; Standardized product/packaging data structure lays the foundation for automated production scheduling, avoiding rework when integrating with D365 later"
+                        "body": "Step-by-step entry reduces cognitive load by letting users focus on critical info first; \nAuto-status switching eliminates manual tracking errors and ensures timely follow-ups; \nStandardized product/packaging data structure lays the foundation for automated production scheduling, avoiding rework when integrating with D365 later"
                     },
                     "image": {
                         "alt": "Structured Input Workflow",
@@ -308,22 +308,22 @@
                 },
                 {
                     "id": "reveal",
-                    "headline": "Reveal Capacity, Support Decisions",
+                    "headline": "Reveal Capacity, Mitigate Risks & Uncover Growth Opportunities",
                     "problem": {
                         "title": "Problem",
-                        "body": "Factory managers relied on rough estimates to assess capacity and client risks—they couldn’t track if top clients accounted for too much production (leaving the factory vulnerable if a big client left)， nor could they identify which production lines had unused capacity to invite existing big clients to place more orders. This led to either over-reliance on a few clients (high risk) or missed opportunities to grow revenue from existing clients."
+                        "body": "The client’s factory management relied on disconnected spreadsheets, leading to slow decision-making and difficulty in tracking operational performance, internal process efficiency, and customer order trends."
                     },
                     "solution": {
                         "title": "Solution",
-                        "body": "Designed a 3-section Client Capacity Radar: 3A (Client Capacity Trend) shows year-over-year changes in each client’s production volume (increase/decrease) and their percentage of total capacity， highlighting sudden drops or spikes; 3B (Top Client Concentration) calculates the combined capacity share of the top 3 clients， making it easy to spot over-dependence risks; 3C (Client-Production Line Distribution) maps big clients’ orders to specific production lines， revealing underutilized lines where these clients could be encouraged to place additional orders."
+                        "body": "To address the disconnected spreadsheet issue, we designed a unified dashboard with three core modules: \nDaily Operational Overview: A real-time summary of factory status, highlighting any deviations from target metrics with color-coded alerts (e.g., red for delays, green for on-time). \nInternal Process Optimization: Interactive charts comparing actual process times against target times, with filters to view trends by production line or order type. \nCustomer Order Analytics: A section ranking top customers by order volume, showing month-over-month changes, and identifying untapped production line opportunities for key clients."
                     },
                     "how_it_works": {
                         "title": "How it Works",
-                        "body": "3A uses line charts + percentage labels to visualize client capacity trends—managers can hover over data points to see exact volume and change rate. 3B displays a donut chart for top 3 clients’ total share， with a red alert if the share exceeds 60% (a risky threshold for factories). 3C uses a matrix table: rows are big clients， columns are production lines， and color intensity shows order volume—managers can quickly see which lines a client hasn’t used yet."
+                        "body": "Upon logging in, administrators are greeted with the daily focus dashboard by default. Red indicators highlight any issues, and clicking on these indicators will bring up detailed information. To switch between different views, simply click on the tabs at the top. Some modules allow users to toggle between list view and graph view, while others support filtering by time or production line."
                     },
                     "rationale": {
                         "title": "Design Rational",
-                        "body": "Visualizing client concentration helps managers proactively mitigate risks (e.g.， diversify clients if top 3 account for over 60%)， avoiding sudden production downtime; Mapping client-line distribution turns “unused capacity” into actionable growth opportunities—instead of chasing new clients， factories can upsell to existing trusted clients (lower acquisition cost); Combining trend data and threshold alerts makes complex capacity/risk analysis intuitive， so managers don’t need to be data experts to make decisions."
+                        "body": "To ensure a consistent user experience, we reused the role-based tab switcher design from previous modules, placing three clear tabs (Overview, Process Analysis, Client Radar) at the top of the dashboard. This way, users familiar with other parts of the system can immediately navigate between the three views without learning new interactions. For individual widgets, we also maintained consistent toggle options (List View/Graph View), reinforcing a unified visual language and reducing cognitive load for frequent users."
                     },
                     "image": {
                         "alt": "Capacity Radar",
@@ -335,15 +335,6 @@
         "choices": {
             "title": "DEPRECATED",
             "subtitle": ""
-        },
-        "reflection": {
-            "title": "DEPRECATED",
-            "subtitle": "",
-            "content": "",
-            "list": [],
-            "content2": "",
-            "points": [],
-            "content3": ""
         }
     },
     "ivy": {

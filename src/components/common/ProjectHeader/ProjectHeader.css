@@ -73,6 +73,10 @@
     display: none;
 }
 
+.header-main-info.scrolled-mode .project-date-container {
+    display: none;
+}
+
 /* Navigator Dropdown */
 .section-navigator {
     display: flex;
