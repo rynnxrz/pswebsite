@@ -10,6 +10,7 @@ import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
 import { UserStakeholdersGraph } from './UserStakeholdersGraph';
 import { DesignMoves } from './DesignMoves';
 import { UserVoiceQuotes } from './UserVoiceQuotes';
+import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
 
 import '../Tooltip.css';
 
@@ -118,11 +119,7 @@ export const ProjectP = () => {
           />
 
           <div className="summary-body">
-            <ul className="project-description-list">
-              {(t('project_p.summary.points', { returnObjects: true }) as string[]).map((point, index) => (
-                <li key={index} className="project-description-item">{point}</li>
-              ))}
-            </ul>
+            {/* Points moved to subtitle */}
           </div>
 
 
@@ -144,6 +141,7 @@ export const ProjectP = () => {
             <div className="problem-item">
               <h3>{t('project_p.problem.broken_decision.title')}</h3>
               <p>{t('project_p.problem.broken_decision.body')}</p>
+              <WorkloadAnalysisGraph />
             </div>
           </div>
 

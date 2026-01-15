@@ -32,30 +32,26 @@
             "reflection": "REFLECTION"
         },
         "summary": {
-            "title": "Intern -> Partner",
-            "subtitle": "Turned operational pain points uncovered during my internship into a startup- and secured a contract to solve them.",
-            "points": [
-                "As Co-Founder, led end-to-end UX design (plus partial coding) and team coordination to secure the contract and kick off Dashboard development.",
-                "Translated internship observations into actionable solutions: mapped client workflows, defined contract statuses, and designed information architecture to address their visibility gaps.",
-                "Currently developing the first-phase Dashboard (to replace messy spreadsheets), with plans to expand to auto-scheduling features post-launch."
-            ],
+            "title": "Intern to Co-founder: Turning Workflow Pain Points into a Startup Contract & UX-Driven Dashboard",
+            "subtitle": "When I started as an intern, I noticed the team’s messy workflows. That observation turned into a startup opportunity where I led end-to-end UX design, built a functional demo, and aligned with clients to deliver a dashboard that streamlined chaotic spreadsheets, integrated with Dynamics 365, secured a client contract, and laid the groundwork for future auto-scheduling features.",
+            "points": [],
             "engagement_body": "DEPRECATED",
             "d365_body": "DEPRECATED",
             "input_gap_body": "DEPRECATED"
         },
         "problem": {
-            "title": "Slow Decision-Making Due to Disconnected Spreadsheets.",
+            "title": "Disconnected Spreadsheets = Delayed Decisions",
             "context": {
                 "title": "Context",
-                "body": "After being acquired, the factory was required to align with the parent company’s focus on shipment-production quantity tracking and material auditing. While they adopted Microsoft 365 Dynamic for material management and shipment tracking (replacing some Excel workflows), not all operational data could be migrated to the new system—leaving critical data (contracts, product info, production numbers, scheduling) scattered across 3 remaining Excel spreadsheets. This created a dual workflow: teams had to check both Dynamic 365 and disconnected spreadsheets to get a full view of operations, increasing complexity instead of simplifying it."
+                "body": "40-person office team relied on Fragmented across 4 Google Sheets + Dynamics 365 for order tracking—no standard status markers, so data clashed across sheets, making it impossible to get a single source of truth."
             },
             "broken_decision": {
-                "title": "What broke decision-making",
-                "body": "The spreadsheets’ dual role (record-keeping + progress tracking) created ambiguity. Teams used unstandardized visual cues—like formatting, colors, or notes—to mark blockers and next steps, but these signals varied across departments. As a result, the same order might show different statuses in different sheets. Before deciding on capacity or priorities, managers had to cross-check multiple spreadsheets to verify the latest data, which slowed down the entire decision-making process"
+                "title": "Why Decisions Lagged",
+                "body": "Managers couldn’t get the newest data at a glance—our workflow analysis showed 54% of spreadsheet time went to data entry, 37% to formatting changes (to flag updates), and only 9% to deleting outdated info. With no standard way to mark statuses, these formatting cues varied by department, forcing managers to cross-check multiple spreadsheets to verify data—bringing decision-making to a standstill."
             },
             "impact": {
-                "title": "How This Affected Different Teams",
-                "body": "To understand the real impact of these spreadsheet issues, we gathered feedback from three key teams."
+                "title": "Impact by User Type",
+                "body": "To understand why manual formatting was so common, I mapped stakeholders into 3 engagement layers—this helped me pinpoint exactly who struggled with what."
             },
             "constraint": {
                 "title": "DEPRECATED",
@@ -129,7 +125,7 @@
         },
         "reflection": {
             "title": "Adapting to Evolving Client Needs & Balancing Compatibility",
-            "body": "A key takeaway from this project is that client requirements can evolve over time. Initially, we aimed to build a fully-fledged contract management system. However, as the project progressed, the client already had D365 in place and wanted a more streamlined solution. We then collaborated closely to find a middle ground, focusing on delivering a customized dashboard that integrated seamlessly with their existing D365 system instead of building redundant features. This experience taught me to stay flexible in project scoping and always anticipate potential changes in client needs. It also highlighted the importance of designing with compatibility in mind, ensuring our solutions can adapt to the client's existing tech stack rather than forcing them to overhaul their workflow."
+            "body": "A key takeaway is that client requirements can shift unexpectedly—even with thorough upfront research. Initially aiming for a full contract management system, we pivoted when the client adopted Dynamics 365. Leveraging our early understanding of their core needs, we collaborated with engineering to focus solely on a customized dashboard that integrated with D365, cutting redundant features. This showed that flexible scoping, paired with foundational user research, keeps solutions aligned with clients’ evolving tech stacks. It also reinforced designing for compatibility first, to avoid disrupting their new workflow."
         },
         "research": {
             "title": "DEPRECATED Research Findings",
@@ -239,43 +235,43 @@
             }
         },
         "design_moves": {
-            "title": "SOLUTION",
+            "title": "Phase 1: Core Design Decisions",
             "tabs": [
                 {
                     "id": "unify",
-                    "title": "01. Unify the View",
-                    "subtitle": "Filter the Noise"
+                    "title": "01. Unify Views",
+                    "subtitle": "& Filter Noise"
                 },
                 {
                     "id": "guide",
-                    "title": "02. Guide the Workflow",
-                    "subtitle": "Structure the Input"
+                    "title": "02. Guide Workflows",
+                    "subtitle": "& Structure Inputs"
                 },
                 {
                     "id": "reveal",
                     "title": "03. Reveal Capacity",
-                    "subtitle": "Mitigate Risks & Opportunities"
+                    "subtitle": "Mitigate Risks & Uncover Growth"
                 }
             ],
             "moves": [
                 {
                     "id": "unify",
-                    "headline": "Unify the View, Filter the Noise",
+                    "headline": "Unify Views & Filter Noise",
                     "problem": {
                         "title": "Problem",
-                        "body": "Previously, users had to scroll horizontally repeatedly in Excel to view different sections of information, leading to inefficient operations, easy misclicks, and a steep learning curve for less tech-savvy users."
+                        "body": "Users had to scroll horizontally repeatedly in Excel to view different data sections , causing inefficiencies, frequent misclicks, and a steep learning curve for less tech-savvy users."
                     },
                     "solution": {
                         "title": "Solution",
-                        "body": "We integrated all core business data into a single master table to ensure data consistency. Role-specific views were designed: fixed columns (contract number, product name) stay visible on the left, while dynamic columns (billing for finance, scheduling for production) are switchable on the right. To address Excel’s edit flaws, all modifications require opening an edit popup via the '···' menu, with mandatory confirmation, auto-generated change history, and double-check triggers."
+                        "body": "We unified all core business data into a single master table to ensure consistency. Role-specific views keep fixed columns visible on the left, while dynamic columns are switchable on the right. To prevent accidental edits from horizontal scrolling, we removed direct in-line editing on the main view—modifications now require a dedicated action (covered in 'Guide Workflow & Structure Inputs')."
                     },
                     "how_it_works": {
                         "title": "How it Works",
-                        "body": "We designed a role-based tab view that allows users to switch directly to their responsible sections with one click. The left side retains fixed common information, while the right side only displays content related to the current tab, eliminating the need for horizontal scrolling."
+                        "body": "A role-tab view lets users switch to their responsible section in one click. The left side keeps fixed common info; the right side only shows current tab-related content. This eliminates horizontal scrolling entirely."
                     },
                     "rationale": {
                         "title": "Design Rational",
-                        "body": "Since each user's workflow and responsible sections are fixed, the tab view aligns perfectly with their daily operations. This design minimizes the onboarding cost, allowing users to understand and use the system without additional training, while also reducing the risk of misclicks caused by horizontal scrolling."
+                        "body": "Each user's workflow and responsibilities are fixed—they already rely on left-fixed columns in Excel to track core info, but still face horizontal scrolling headaches with dynamic content. Our role-based tab view builds on this habit: left columns stay fixed to match their existing practice, while tab switches replace scrolling for dynamic content. This aligns seamlessly with daily operations, cuts onboarding costs by requiring no extra training, and eliminates misclick risks from scrolling."
                     },
                     "image": {
                         "alt": "Unified Dashboard View",
@@ -284,22 +280,22 @@
                 },
                 {
                     "id": "guide",
-                    "headline": "Guide the Workflow, Structure the Input",
+                    "headline": "Guide Workflows & Structure Inputs",
                     "problem": {
                         "title": "Problem",
-                        "body": "The original contract and production data were managed in Excel, leading to scattered information (e.g., finance details, product specs, packaging info were stored separately). This caused frequent data entry errors, manual tracking of payment/production statuses, and made it impossible to directly reuse data for future production scheduling"
+                        "body": "Users had to manually cross-check contract changes, as single columns in Excel made it impossible to track updates for specific contracts. Also, Excel’s fixed structure meant they had to put unrelated info in random cells when dealing with temporary or new data. For users with more responsibilities, this meant going through more unrelated data to identify what was relevant."
                     },
                     "solution": {
                         "title": "Solution",
-                        "body": "A structured step-by-step data entry system was designed to first collect core contract info: first collect core contract info (basic details, finance terms like deposit/pre-production/final payment with auto-status switching), then add product specs and packaging materials (supporting one-to-many relationships). Also integrated a production plan module that links machine capacity, production dates (including/excluding weekends), and compares planned vs. actual output."
+                        "body": "A tab-based, role-specific entry system balancing mandatory core data (proactive payment status/timeline tracking, seamless state transition) and flexible notes, with built-in support for 1-to-many contract-product-material relationships."
                     },
                     "how_it_works": {
                         "title": "How it Works",
-                        "body": "When creating a new contract, users first fill a popup for basic & finance info (statuses like 'pending'/'in transit' auto-switch to 'overdue' if not marked as 'received' by the due date). Then they can add multiple products via another popup, define packaging materials with delivery statuses, and finally input production plans with auto-generated date tables. All data is centralized and standardized for future use."
+                        "body": "Users follow categorized sections, with clear labels guiding step-by-step data entry (e.g., time, status labels like \"In Transit\"). The system auto-determines contract status: future dates map to \"Awaiting Delivery\"; if a date passes and the status label remains unchanged, it auto-updates to \"Overdue\". This lets the system handle oversight—only one entry is needed, and auto-reminders ensure no task is missed."
                     },
                     "rationale": {
                         "title": "Design Rational",
-                        "body": "Step-by-step entry reduces cognitive load by letting users focus on critical info first; \nAuto-status switching eliminates manual tracking errors and ensures timely follow-ups; \nStandardized product/packaging data structure lays the foundation for automated production scheduling, avoiding rework when integrating with D365 later"
+                        "body": "This design continues our role-based tab approach—once users understand this pattern, they can apply it consistently across all workflows, reducing learning curve. By aligning with their existing habit of categorizing data by role, tabbed pop-up windows let them select input sections without changing entry logic. The core rationale is to solve two key gaps without extra burden: supporting one-to-many relationships (e.g., multiple packages per product) Excel couldn’t handle, and enabling auto-consistent status switches—all while keeping the interface familiar and cohesive."
                     },
                     "image": {
                         "alt": "Structured Input Workflow",
@@ -308,22 +304,22 @@
                 },
                 {
                     "id": "reveal",
-                    "headline": "Reveal Capacity, Mitigate Risks & Uncover Growth Opportunities",
+                    "headline": "Reveal Capacity, Mitigate Risks and Uncover Growth",
                     "problem": {
                         "title": "Problem",
                         "body": "The client’s factory management relied on disconnected spreadsheets, leading to slow decision-making and difficulty in tracking operational performance, internal process efficiency, and customer order trends."
                     },
                     "solution": {
                         "title": "Solution",
-                        "body": "To address the disconnected spreadsheet issue, we designed a unified dashboard with three core modules: \nDaily Operational Overview: A real-time summary of factory status, highlighting any deviations from target metrics with color-coded alerts (e.g., red for delays, green for on-time). \nInternal Process Optimization: Interactive charts comparing actual process times against target times, with filters to view trends by production line or order type. \nCustomer Order Analytics: A section ranking top customers by order volume, showing month-over-month changes, and identifying untapped production line opportunities for key clients."
+                        "body": "A daily operational overview module showing real-time factory status and color-coded alerts for metric differences\nAn internal process optimization module with interactive charts that compare actual and target process time, filterable by production line or order type\nA customer order analysis module ranking top clients by volume, plus month-over-month changes and production opportunities for key clients"
                     },
                     "how_it_works": {
                         "title": "How it Works",
-                        "body": "Upon logging in, administrators are greeted with the daily focus dashboard by default. Red indicators highlight any issues, and clicking on these indicators will bring up detailed information. To switch between different views, simply click on the tabs at the top. Some modules allow users to toggle between list view and graph view, while others support filtering by time or production line."
+                        "body": "Upon login, the client’s factory management team is greeted with the daily focus dashboard by default. Red indicators highlight any issues, and clicking these indicators pulls up detailed information. To switch between different views, simply click the role-tabs at the top. Some modules let users toggle between list view and graph view, while others support filtering by time and production line"
                     },
                     "rationale": {
                         "title": "Design Rational",
-                        "body": "To ensure a consistent user experience, we reused the role-based tab switcher design from previous modules, placing three clear tabs (Overview, Process Analysis, Client Radar) at the top of the dashboard. This way, users familiar with other parts of the system can immediately navigate between the three views without learning new interactions. For individual widgets, we also maintained consistent toggle options (List View/Graph View), reinforcing a unified visual language and reducing cognitive load for frequent users."
+                        "body": "To ensure a consistent user experience, we reused the role-tab switcher from previous modules—placing clear “Overview,” “Process,” and “Client Data” tabs at the dashboard’s top. Users familiar with the system can instantly navigate between views without learning new interactions. For individual widgets, consistent toggle options (list view/graph view) reinforce a unified visual language and cut cognitive load for frequent users"
                     },
                     "image": {
                         "alt": "Capacity Radar",
