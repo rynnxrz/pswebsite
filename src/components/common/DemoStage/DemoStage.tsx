@@ -120,14 +120,26 @@ export const DemoStage = ({
                     </div>
                 </header>
 
-                {/* Poster with clickable overlay */}
+                {/* Poster/Preview with clickable overlay */}
                 <div className="demoViewport">
+                    {poster ? (
+                        <img className="demoPoster" src={poster} alt="" />
+                    ) : (
+                        <iframe
+                            className="demoIframe"
+                            src={src}
+                            title={title}
+                            loading="lazy"
+                            style={{ pointerEvents: 'none' }} // Ensure clicks go to the cover button
+                            tabIndex={-1}
+                        />
+                    )}
+
                     <button
                         className="demoCover"
                         onClick={openDemo}
                         aria-label="Try live demo"
                     >
-                        {poster && <img className="demoPoster" src={poster} alt="" />}
                         <div className="demoCoverHint">
                             Click to interact · Scroll continues to article
                         </div>

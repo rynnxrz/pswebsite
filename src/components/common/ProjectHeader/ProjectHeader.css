@@ -103,6 +103,9 @@
     color: var(--text-primary);
     cursor: pointer;
     padding: 2px 0;
+    background: transparent;
+    border: none;
+    font: inherit;
 }
 
 .section-navigator:hover .active-section-name {
@@ -126,6 +129,7 @@
     opacity: 0;
     transform: translateY(-5px);
     pointer-events: none;
+    visibility: hidden;
     transition: all 0.2s ease;
     transition-delay: 0.1s;
 }
@@ -144,6 +148,15 @@
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.section-dropdown.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
     transition-delay: 0s;
 }
 
@@ -154,6 +167,11 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
+    background: transparent;
+    border: none;
+    text-align: left;
+    width: 100%;
+    font: inherit;
 }
 
 .dropdown-item:hover {
@@ -172,6 +190,16 @@
     font-weight: 600;
     margin: 0;
     color: var(--text-primary);
+}
+
+.project-title-button {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
 }
 
 .project-date {

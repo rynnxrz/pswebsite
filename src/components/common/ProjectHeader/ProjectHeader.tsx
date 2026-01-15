@@ -26,6 +26,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
     const [isScrolled, setIsScrolled] = useState(false);
     const [copied, setCopied] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const sentinelRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -87,6 +88,14 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
         window.print();
     };
 
+    const toggleMenu = () => {
+        setIsMenuOpen((prev) => !prev);
+    };
+
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
+
     const activeSectionTitle = sections.find((s) => s.id === activeSection)?.title;
 
     return (
@@ -95,8 +104,14 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
             <header className={`project-header ${isScrolled ? 'sticky-active' : ''}`}>
             <div className="project-header-text-container">
                 <div className={`header-main-info ${isScrolled && activeSection ? 'scrolled-mode' : ''}`}>
-                    <h1 className="project-title" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                        {title}
+                    <h1 className="project-title">
+                        <button
+                            className="project-title-button"
+                            type="button"
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        >
+                            {title}
+                        </button>
                     </h1>
 
                     {!isScrolled ? (
@@ -104,18 +119,49 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
                     ) : (
                         <div className="section-navigator">
                             <span className="divider">/</span>
-                            <span className="active-section-name">{activeSectionTitle || 'Intro'}</span>
+                            <button
+                                type="button"
+                                className="active-section-name"
+                                aria-haspopup="menu"
+                                aria-expanded={isMenuOpen}
+                                onClick={toggleMenu}
+                                onBlur={(e) => {
+                                    if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
+                                        closeMenu();
+                                    }
+                                }}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Escape') {
+                                        closeMenu();
+                                    }
+                                }}
+                            >
+                                {activeSectionTitle || 'Intro'}
+                            </button>
 
                             {/* Dropdown Menu */}
-                            <div className="section-dropdown">
+                            <div
+                                className={`section-dropdown ${isMenuOpen ? 'open' : ''}`}
+                                role="menu"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Escape') {
+                                        closeMenu();
+                                    }
+                                }}
+                            >
                                 {sections.map((section) => (
-                                    <div
+                                    <button
+                                        type="button"
                                         key={section.id}
                                         className={`dropdown-item ${activeSection === section.id ? 'active' : ''}`}
-                                        onClick={(e) => onSectionClick(section.id, e)}
+                                        onClick={(e) => {
+                                            onSectionClick(section.id, e);
+                                            closeMenu();
+                                        }}
+                                        role="menuitem"
                                     >
                                         {section.title}
-                                    </div>
+                                    </button>
                                 ))}
                             </div>
                         </div>

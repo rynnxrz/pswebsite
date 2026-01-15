@@ -213,7 +213,7 @@ body.demo-stage-open {
     touch-action: pan-y;
 }
 
-.demoCover:hover .demoPoster {
+.demoViewport:hover .demoPoster {
     transform: scale(1.02);
     filter: brightness(0.85);
 }

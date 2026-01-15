@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import './ProjectP.css';
 import './ProjectIvy.css';
 import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
-import { StackedGallery } from '../common/StackedGallery/StackedGallery';
+import { DemoStage } from '../common/DemoStage/DemoStage';
 
 import { AttentionChart } from './AttentionChart/AttentionChart';
 import { MiniAdminBar } from './AttentionChart/MiniAdminBar';
@@ -62,6 +62,16 @@ export const ProjectIvy = () => {
 
     return (
         <motion.div {...pageTransition} className="project-detail-container">
+            {/* Hero Demo Stage - Breakout Layout */}
+            <div className="bleed">
+                <div className="bleedInner">
+                    <DemoStage
+                        title="Live Prototype"
+                        src={`https://ivyjstudio.shipbyx.com/?lang=${i18n.language}`}
+                    />
+                </div>
+            </div>
+
             <div className="project-content-wrapper">
 
                 <ProjectHeader
@@ -80,23 +90,6 @@ export const ProjectIvy = () => {
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.overview')}</div>
 
                     <p className="project-description" dangerouslySetInnerHTML={{ __html: t('ivy.intro.title') }} />
-
-                    <StackedGallery
-                        priority={true}
-                        defaultImage="/assets/images/ivy-j/hero-main.webp"
-                        images={[
-                            {
-                                id: 'hero-main',
-                                src: '/assets/images/ivy-j/hero-main.webp',
-                                srcSet: '/assets/images/ivy-j/hero-main-mobile.webp 800w, /assets/images/ivy-j/hero-main.webp 2560w',
-                                sizes: '(max-width: 768px) 100vw, 80vw',
-                                thumbnailSrc: '/assets/images/ivy-j/hero-main-thumb.webp',
-                                alt: 'Ivy J Studio System Interface',
-                                interactiveSrc: `https://ivyjstudio.shipbyx.com/?lang=${i18n.language}`,
-                                deferInteraction: true
-                            }
-                        ]}
-                    />
                 </section>
 
                 <hr className="section-divider compact-divider" />

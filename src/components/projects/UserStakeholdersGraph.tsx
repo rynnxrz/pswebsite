@@ -80,12 +80,18 @@ export const UserStakeholdersGraph = ({ onFilterChange }: Props) => {
                     const isOpen = openIndex === index;
                     // Tag for header icon is usually the first one (primary interaction)
                     const primaryTag = group.tags[0];
+                    const buttonId = `stakeholder-header-${index}`;
+                    const panelId = `stakeholder-panel-${index}`;
 
                     return (
                         <div key={index} className={`accordion-item ${isOpen ? 'open' : ''}`}>
                             <button
                                 className="accordion-header"
+                                type="button"
                                 onClick={() => toggleAccordion(index)}
+                                id={buttonId}
+                                aria-expanded={isOpen}
+                                aria-controls={panelId}
                             >
                                 <div className="header-left">
                                     <span
@@ -100,7 +106,14 @@ export const UserStakeholdersGraph = ({ onFilterChange }: Props) => {
                                 </div>
                             </button>
 
-                            <div className="accordion-content">
+                            <div
+                                className="accordion-content"
+                                id={panelId}
+                                role="region"
+                                aria-labelledby={buttonId}
+                                aria-hidden={!isOpen}
+                                hidden={!isOpen}
+                            >
                                 <div className="content-inner">
                                     <div className="group-role-title">{group.role_title}</div>
 
