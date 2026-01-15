@@ -446,3 +446,16 @@
   margin-bottom: 0;
   color: var(--text-secondary);
 }
+
+/* --- Hero Stage Spacing --- */
+/* DemoStage handles visuals; this just adds vertical spacing */
+.bleed+.project-content-wrapper {
+  margin-top: 3rem;
+}
+
+/* Mobile adjustments for bleed */
+@media (max-width: 768px) {
+  .bleed {
+    margin-top: 1rem;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Download, Check, Link as LinkIcon } from 'lucide-react';
 import './ProjectHeader.css';
 
@@ -26,6 +26,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
     const [isScrolled, setIsScrolled] = useState(false);
     const [copied, setCopied] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
+    const sentinelRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         let isTicking = false;
@@ -37,7 +38,6 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
             const totalScroll = Math.max(docHeight - winHeight, 1);
             const progress = Math.min(100, Math.max(0, Math.round((scrollTop / totalScroll) * 100)));
 
-            setIsScrolled(scrollTop > 100);
             setScrollProgress(progress);
             isTicking = false;
         };
@@ -59,6 +59,23 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
         };
     }, []);
 
+    useEffect(() => {
+        if (!sentinelRef.current) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsScrolled(!entry.isIntersecting);
+            },
+            { threshold: 0 }
+        );
+
+        observer.observe(sentinelRef.current);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
     const handleCopyLink = () => {
         navigator.clipboard.writeText(window.location.href);
         setCopied(true);
@@ -73,7 +90,9 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
     const activeSectionTitle = sections.find((s) => s.id === activeSection)?.title;
 
     return (
-        <header className={`project-header ${isScrolled ? 'sticky-active' : ''}`}>
+        <>
+            <div ref={sentinelRef} className="project-header-sentinel" aria-hidden="true" />
+            <header className={`project-header ${isScrolled ? 'sticky-active' : ''}`}>
             <div className="project-header-text-container">
                 <div className={`header-main-info ${isScrolled && activeSection ? 'scrolled-mode' : ''}`}>
                     <h1 className="project-title" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
@@ -123,6 +142,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
             <div className={`header-progress-track ${isScrolled ? 'visible' : ''}`}>
                 <div className="header-progress-fill" style={{ width: `${scrollProgress}%` }}></div>
             </div>
-        </header>
+            </header>
+        </>
     );
 };

@@ -238,70 +238,95 @@
             }
         },
         "design_moves": {
-            "title": "Turning these pain points into three core design moves.",
+            "title": "Phase 1: Core Design Decisions",
             "tabs": [
                 {
-                    "id": "link",
-                    "title": "01. Unify the View",
-                    "subtitle": "Filter the Noise"
+                    "id": "unify",
+                    "title": "01. Unify Views",
+                    "subtitle": "& Filter Noise"
                 },
                 {
-                    "id": "unify",
-                    "title": "02. Guide the Workflow",
-                    "subtitle": "Structure the Input"
+                    "id": "guide",
+                    "title": "02. Guide Workflows",
+                    "subtitle": "& Structure Inputs"
                 },
                 {
                     "id": "reveal",
                     "title": "03. Reveal Capacity",
-                    "subtitle": "Support Decisions"
+                    "subtitle": "Mitigate Risks & Uncover Growth"
                 }
             ],
             "moves": [
                 {
-                    "id": "link",
-                    "headline": "One Master Table, Infinite Contexts",
-                    "context": {
-                        "pain": "Teams worked in silos. A change in Production didn't update Finance, leading to messy \"status drifting\" across Excel files.",
-                        "strategy": "Single Source: Everyone edits the same live data row.\n\nRole-Based Lenses: Finance sees billing columns; Production sees scheduling columns. Same data, focused view.",
-                        "scope": [
-                            "input",
-                            "plan"
-                        ]
+                    "id": "unify",
+                    "headline": "Unify Views & Filter Noise",
+                    "problem": {
+                        "title": "Problem",
+                        "body": "Users had to scroll horizontally repeatedly in Excel to view different data sections , causing inefficiencies, frequent misclicks, and a steep learning curve for less tech-savvy users."
+                    },
+                    "solution": {
+                        "title": "Solution",
+                        "body": "We unified all core business data into a single master table to ensure consistency. Role-specific views keep fixed columns visible on the left, while dynamic columns are switchable on the right. To prevent accidental edits from horizontal scrolling, we removed direct in-line editing on the main view—modifications now require a dedicated action (covered in 'Guide Workflow & Structure Inputs')."
+                    },
+                    "how_it_works": {
+                        "title": "How it Works",
+                        "body": "A role-tab view lets users switch to their responsible section in one click. The left side keeps fixed common info; the right side only shows current tab-related content. This eliminates horizontal scrolling entirely."
+                    },
+                    "rationale": {
+                        "title": "Design Rational",
+                        "body": "Each user's workflow and responsibilities are fixed—they already rely on left-fixed columns in Excel to track core info, but still face horizontal scrolling headaches with dynamic content. Our role-based tab view builds on this habit: left columns stay fixed to match their existing practice, while tab switches replace scrolling for dynamic content. This aligns seamlessly with daily operations, cuts onboarding costs by requiring no extra training, and eliminates misclick risks from scrolling."
                     },
                     "image": {
-                        "alt": "Production Table",
-                        "annotation": "Switching perspectives without leaving the master data."
+                        "alt": "Unified Dashboard View",
+                        "annotation": "Consolidated Master Table"
                     }
                 },
                 {
-                    "id": "unify",
-                    "headline": "One Master Table, Four Lenses",
-                    "context": {
-                        "pain": "Teams (Finance, Packing, Planning) wasted time switching between different spreadsheets just to find \"their\" columns.",
-                        "strategy": "A Single Source of Truth with role-based tabs. Everyone works on the same live data, but sees a filtered view tailored to their job (e.g., Finance only sees payment status).",
-                        "scope": [
-                            "plan",
-                            "read"
-                        ]
+                    "id": "guide",
+                    "headline": "Guide Workflows & Structure Inputs",
+                    "problem": {
+                        "title": "Problem",
+                        "body": "Users had to manually cross-check contract changes, as single columns in Excel made it impossible to track updates for specific contracts. Also, Excel’s fixed structure meant they had to put unrelated info in random cells when dealing with temporary or new data. For users with more responsibilities, this meant going through more unrelated data to identify what was relevant."
+                    },
+                    "solution": {
+                        "title": "Solution",
+                        "body": "A tab-based, role-specific entry system balancing mandatory core data (proactive payment status/timeline tracking, seamless state transition) and flexible notes, with built-in support for 1-to-many contract-product-material relationships."
+                    },
+                    "how_it_works": {
+                        "title": "How it Works",
+                        "body": "Users follow categorized sections, with clear labels guiding step-by-step data entry (e.g., time, status labels like \"In Transit\"). The system auto-determines contract status: future dates map to \"Awaiting Delivery\"; if a date passes and the status label remains unchanged, it auto-updates to \"Overdue\". This lets the system handle oversight—only one entry is needed, and auto-reminders ensure no task is missed."
+                    },
+                    "rationale": {
+                        "title": "Design Rational",
+                        "body": "This design continues our role-based tab approach—once users understand this pattern, they can apply it consistently across all workflows, reducing learning curve. By aligning with their existing habit of categorizing data by role, tabbed pop-up windows let them select input sections without changing entry logic. The core rationale is to solve two key gaps without extra burden: supporting one-to-many relationships (e.g., multiple packages per product) Excel couldn’t handle, and enabling auto-consistent status switches—all while keeping the interface familiar and cohesive."
                     },
                     "image": {
-                        "alt": "Contract Table",
-                        "annotation": "One click to filter irrelevant data."
+                        "alt": "Structured Input Workflow",
+                        "annotation": "Step-by-step Data Entry"
                     }
                 },
                 {
                     "id": "reveal",
-                    "headline": "Answers, Not Just Rows",
-                    "context": {
-                        "pain": "Managers relied on \"gut feelings\" to accept new orders because calculating actual capacity from raw rows took too long.",
-                        "strategy": "Transformed the dashboard from a data list into a Decision Tool. It visualizes future capacity and bottlenecks, giving an instant \"Yes/No\" on whether to take new orders.",
-                        "scope": [
-                            "read"
-                        ]
+                    "headline": "Reveal Capacity, Mitigate Risks and Uncover Growth",
+                    "problem": {
+                        "title": "Problem",
+                        "body": "The client’s factory management relied on disconnected spreadsheets, leading to slow decision-making and difficulty in tracking operational performance, internal process efficiency, and customer order trends."
+                    },
+                    "solution": {
+                        "title": "Solution",
+                        "body": "A daily operational overview module showing real-time factory status and color-coded alerts for metric differences\nAn internal process optimization module with interactive charts that compare actual and target process time, filterable by production line or order type\nA customer order analysis module ranking top clients by volume, plus month-over-month changes and production opportunities for key clients"
+                    },
+                    "how_it_works": {
+                        "title": "How it Works",
+                        "body": "Upon login, the client’s factory management team is greeted with the daily focus dashboard by default. Red indicators highlight any issues, and clicking these indicators pulls up detailed information. To switch between different views, simply click the role-tabs at the top. Some modules let users toggle between list view and graph view, while others support filtering by time and production line"
+                    },
+                    "rationale": {
+                        "title": "Design Rational",
+                        "body": "To ensure a consistent user experience, we reused the role-tab switcher from previous modules—placing clear “Overview,” “Process,” and “Client Data” tabs at the dashboard’s top. Users familiar with the system can instantly navigate between views without learning new interactions. For individual widgets, consistent toggle options (list view/graph view) reinforce a unified visual language and cut cognitive load for frequent users"
                     },
                     "image": {
-                        "alt": "Dashboard Demo",
-                        "annotation": "Visualizing free slots to help negotiate new orders."
+                        "alt": "Capacity Radar",
+                        "annotation": "Client Capacity Analytics"
                     }
                 }
             ]

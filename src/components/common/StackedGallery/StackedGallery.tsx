@@ -12,6 +12,14 @@ interface GalleryImage {
     srcSet?: string;
     sizes?: string;
     className?: string; // Optional custom class for specific styling (e.g. iframe width)
+    // New optional props
+    customTrigger?: {
+        label: string;
+        icon?: React.ReactNode;
+        className?: string;
+    };
+    badgeText?: string;
+    enableTheaterMode?: boolean;
 }
 
 interface StackedGalleryProps {
@@ -46,6 +54,9 @@ export const StackedGallery: React.FC<StackedGalleryProps> = ({ images, defaultI
                 loading={priority ? 'eager' : 'lazy'}
                 srcSet={activeImage.srcSet}
                 sizes={activeImage.sizes}
+                customTrigger={activeImage.customTrigger}
+                badgeText={activeImage.badgeText}
+                enableTheaterMode={activeImage.enableTheaterMode}
             />
 
             {/* Stacked Cards Widget - Only show if more than 1 image */}

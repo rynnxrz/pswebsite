@@ -1,0 +1,308 @@
+/* src/components/common/DemoStage/DemoStage.css */
+
+/* --- Body Lock when theater open --- */
+body.demo-stage-open {
+    overflow: hidden;
+}
+
+/* --- Preview Stage (inline, in document flow) --- */
+.demoStage {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+}
+
+/* --- Theater Mode (fullscreen overlay, edge-to-edge) --- */
+.demoTheater {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    /* Ensure it covers everything including sticky headers */
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Theater header floats over content */
+/* Theater header floats over content (Minimalist) */
+/* Theater header floats over content (Minimalist) */
+/* Theater header floats over content (Minimalist) */
+/* Theater header floats over content (Minimalist) */
+.demoTheater .demoHeader {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    /* Center in the viewport */
+
+    /* Constrain to the same max-width as the page content */
+    width: 100%;
+    max-width: var(--stage-max);
+    z-index: 20;
+    /* Ensure it stays above the viewport/iframe */
+
+    /* 
+       Match the preview button's effective position:
+       16px (page gutter) + 28px (container padding) = 44px
+    */
+    padding-right: calc(var(--page-gutter) + 28px);
+
+    /* Remove full width bar styling */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
+
+    /* Allow clicks to pass through empty areas */
+    pointer-events: none;
+
+    /* Align buttons to the right */
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* Hide title in theater mode to unblock top-left logo */
+.demoTheater .demoTitle {
+    display: none;
+}
+
+/* Style the buttons group as a floating pill */
+.demoTheater .demoActions {
+    pointer-events: auto;
+}
+
+/* Force light text color for buttons in theater mode */
+.demoTheater .demoBtn {
+    color: #e5e5e5;
+    background: rgba(20, 20, 22, 0.9);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.demoTheater .demoBtn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.demoTheaterViewport {
+    flex: 1;
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+}
+
+.demoTheaterViewport .demoIframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Header (preview only) --- */
+.demoStage .demoHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 28px;
+    /* Standardize horizontal padding to match theater button offset (28px) */
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.demoTitle {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.demoTitleDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-success);
+    box-shadow: 0 0 8px var(--accent-success);
+    animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(0.9);
+    }
+}
+
+.demoActions {
+    display: flex;
+    gap: 8px;
+}
+
+/* --- Buttons --- */
+.demoBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.demoBtn:hover {
+    background: var(--bg-hover-subtle);
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+}
+
+.demoBtnPrimary {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--text-inverse);
+}
+
+.demoBtnPrimary:hover {
+    filter: brightness(1.1);
+    color: var(--text-inverse);
+}
+
+/* --- Preview Viewport --- */
+.demoViewport {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    background: #0f0f10;
+    overflow: hidden;
+}
+
+/* --- Cover Overlay (Preview State) --- */
+.demoCover {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 5;
+
+    /* Allow page scroll when pointer is on cover */
+    touch-action: pan-y;
+}
+
+.demoCover:hover .demoPoster {
+    transform: scale(1.02);
+    filter: brightness(0.85);
+}
+
+.demoPoster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.demoCoverHint {
+    position: relative;
+    margin: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.demoCover:hover .demoCoverHint {
+    background: rgba(0, 0, 0, 0.75);
+    transform: translateY(-4px);
+}
+
+/* --- Iframe --- */
+.demoIframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+}
+
+/* --- Caption --- */
+.demoCaption {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    text-align: center;
+    opacity: 0.8;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+/* --- Mobile Adjustments --- */
+@media (max-width: 768px) {
+    .demoViewport {
+        height: 300px;
+    }
+
+    .demoTheater {
+        inset: 0;
+        border-radius: 0;
+    }
+
+    .demoBtn {
+        padding: 8px;
+    }
+
+
+    .demoCoverHint {
+        font-size: 0.8rem;
+        padding: 10px 14px;
+    }
+}
+
+/* --- Print --- */
+@media print {
+    .demoStage {
+        border: 1px solid #ccc;
+        box-shadow: none;
+    }
+
+    .demoHeader,
+    .demoScrim,
+    .demoTheater {
+        display: none !important;
+    }
+
+    .demoPoster {
+        display: block;
+    }
+}

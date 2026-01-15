@@ -2,6 +2,10 @@
 :root {
   color-scheme: dark;
 
+  /* --- 0. Layout & Stage --- */
+  --page-gutter: 16px;
+  --stage-max: 1120px;
+
   /* --- 1. System Backgrounds --- */
   /* Level 0: Pure Black for OLED power saving and borderless feel */
   --bg-system: #000000;
@@ -231,4 +235,17 @@ code {
     box-shadow: none !important;
     text-shadow: none !important;
   }
+}
+
+/* --- Breakout Layout Utilities --- */
+/* Allow content to escape the content column and center within viewport */
+.bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.bleedInner {
+  max-width: var(--stage-max);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
 }

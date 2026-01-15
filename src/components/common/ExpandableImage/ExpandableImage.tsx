@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Expand, Minimize2, Play } from 'lucide-react';
+import { Expand, Minimize2, Play, MousePointerClick, Loader2 } from 'lucide-react';
 import './ExpandableImage.css';
 import '../../Tooltip.css';
 
@@ -17,6 +17,14 @@ interface ExpandableImageProps {
     height?: string | number;
     srcSet?: string;
     sizes?: string;
+    // New Props for customization
+    customTrigger?: {
+        label: string;
+        icon?: React.ReactNode;
+        className?: string;
+    };
+    badgeText?: string;
+    enableTheaterMode?: boolean; // New prop: forces CSS modal instead of Native Fullscreen
 }
 
 export const ExpandableImage: React.FC<ExpandableImageProps> = ({
@@ -32,15 +40,29 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
     width,
     height,
     srcSet,
-    sizes
+    sizes,
+    customTrigger,
+    badgeText,
+    enableTheaterMode = false
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isInteractionStarted, setIsInteractionStarted] = useState(false);
+    const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
     const toggleFullscreen = async () => {
         const element = containerRef.current;
         if (!element) return;
+
+        // If Theater Mode is enabled, strictly use CSS Overlay (no Native API)
+        if (enableTheaterMode) {
+            setIsFullscreen(prev => !prev);
+            // If entering theater mode, also start interaction if not already
+            if (!isFullscreen && interactiveSrc) {
+                setIsInteractionStarted(true);
+            }
+            return;
+        }
 
         try {
             if (!isFullscreen) {
@@ -70,17 +92,21 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
     };
 
     useEffect(() => {
+        // ... (Keyboard/Event handlers) generally same, but 'fullscreenchange' won't fire for CSS mode.
+        // We still keep them for fallback native usage.
         const handleFullscreenChange = () => {
-            // Sync state with native fullscreen changes (e.g. user pressed Esc)
-            const isNativeFullscreen = document.fullscreenElement !== null || (document as any).webkitFullscreenElement !== null;
-            if (isNativeFullscreen) {
-                setIsFullscreen(true);
-            } else {
-                // Only reset if we were strictly in native mode? 
-                // Issue: if we are in CSS mode, this event won't fire.
-                // If we were in native mode and exited, this fires.
-                // We should accept the source of truth if native API is involved.
-                if (document.fullscreenElement === null) setIsFullscreen(false);
+            if (!enableTheaterMode) {
+                // Sync state with native fullscreen changes (e.g. user pressed Esc)
+                const isNativeFullscreen = document.fullscreenElement !== null || (document as any).webkitFullscreenElement !== null;
+                if (isNativeFullscreen) {
+                    setIsFullscreen(true);
+                } else {
+                    // Only reset if we were strictly in native mode? 
+                    // Issue: if we are in CSS mode, this event won't fire.
+                    // If we were in native mode and exited, this fires.
+                    // We should accept the source of truth if native API is involved.
+                    if (document.fullscreenElement === null) setIsFullscreen(false);
+                }
             }
         };
 
@@ -101,31 +127,63 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
             window.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [enableTheaterMode]);
 
     // Reset interaction state if interactiveSrc changes (e.g. in a gallery)
     useEffect(() => {
         setIsInteractionStarted(false);
+        setIsIframeLoaded(false);
     }, [interactiveSrc]);
 
     const showIframe = interactiveSrc && (!deferInteraction || isInteractionStarted);
 
+    // If Theater Mode is enabled and user clicks trigger, we might want to enter theater mode directly?
+    // Current behavior: Trigger sets isInteractionStarted.
+    // Enhanced behavior: If enableTheaterMode, Trigger calls toggleFullscreen instead of just local interaction?
+    // User Request: "Click demo to enter theater mode".
+    const handleTriggerClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (enableTheaterMode) {
+            toggleFullscreen(); // This will also set isInteractionStarted(true) inside toggle
+        } else {
+            setIsInteractionStarted(true);
+        }
+    };
+
     return (
         <div
             ref={containerRef}
-            className={`expanded-image-container ${!isNested ? 'section-image' : ''} ${containerClassName} ${isFullscreen ? 'fullscreen-mode' : ''} ${showIframe ? 'interactive-active' : ''}`}
+            className={`expanded-image-container ${!isNested ? 'section-image' : ''} ${containerClassName} ${isFullscreen ? 'fullscreen-mode' : ''} 
+                ${enableTheaterMode && isFullscreen ? 'is-theater-mode' : ''}
+                ${showIframe ? 'interactive-active' : ''}`}
         >
+            {/* Status Badge */}
+            {badgeText && !isFullscreen && (
+                <div className="status-badge">
+                    <span className="status-dot"></span>
+                    {badgeText}
+                </div>
+            )}
+
             {/* Main Content Area */}
             <div className="content-wrapper">
                 {showIframe ? (
-                    <iframe
-                        src={interactiveSrc}
-                        className={`interactive-iframe ${className}`}
-                        title={alt}
-                        style={{ width: '100%', height: '100%', border: 'none' }}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    />
+                    <>
+                        {!isIframeLoaded && (
+                            <div className="iframe-loader">
+                                <Loader2 className="animate-spin" size={32} />
+                            </div>
+                        )}
+                        <iframe
+                            src={interactiveSrc}
+                            className={`interactive-iframe ${className}`}
+                            title={alt}
+                            style={{ width: '100%', height: '100%', border: 'none', opacity: isIframeLoaded ? 1 : 0 }}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            onLoad={() => setIsIframeLoaded(true)}
+                        />
+                    </>
                 ) : (
                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                         <img
@@ -142,14 +200,23 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
                         />
                         {interactiveSrc && deferInteraction && (
                             <button
-                                className="interaction-trigger-overlay"
-                                onClick={() => setIsInteractionStarted(true)}
-                                aria-label="Start Interaction"
+                                className={`interaction-trigger-overlay ${customTrigger ? 'is-custom' : ''}`}
+                                onClick={handleTriggerClick}
+                                aria-label={customTrigger?.label || "Start Interaction"}
                             >
-                                <div className="interaction-play-button">
-                                    <Play size={32} fill="currentColor" />
-                                </div>
-                                <span className="interaction-label">Click to Interact</span>
+                                {customTrigger ? (
+                                    <div className={`interaction-pill-button ${customTrigger.className || ''}`}>
+                                        {customTrigger.icon || <MousePointerClick size={20} />}
+                                        <span>{customTrigger.label}</span>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div className="interaction-play-button">
+                                            <Play size={32} fill="currentColor" />
+                                        </div>
+                                        <span className="interaction-label">Click to Interact</span>
+                                    </>
+                                )}
                             </button>
                         )}
                     </div>
@@ -161,17 +228,16 @@ export const ExpandableImage: React.FC<ExpandableImageProps> = ({
                     <button
                         className="action-btn"
                         onClick={toggleFullscreen}
-                        aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                        aria-label={isFullscreen ? "Exit Fullscreen" : (enableTheaterMode ? "Enter Theater Mode" : "Enter Fullscreen")}
                         style={{ width: '40px', height: '40px', borderRadius: '50%' }}
                     >
                         {isFullscreen ? <Minimize2 size={20} /> : <Expand size={20} />}
                     </button>
                     <span className="tooltip-text">
-                        {isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                        {isFullscreen ? "Exit Fullscreen" : (enableTheaterMode ? "Enter Theater Mode" : "Enter Fullscreen")}
                     </span>
                 </div>
             </div>
         </div>
     );
 };
-

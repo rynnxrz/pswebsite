@@ -14,6 +14,11 @@
     background-color: transparent;
 }
 
+.project-header-sentinel {
+    height: 1px;
+    margin-bottom: -1px;
+}
+
 .project-header.sticky-active {
     background-color: var(--bg-glass);
     border-bottom: 1px solid var(--border-subtle);

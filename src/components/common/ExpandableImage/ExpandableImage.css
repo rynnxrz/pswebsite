@@ -134,95 +134,245 @@
 }
 
 .expanded-image-container:hover .hint-pill {
-    transform: translateY(0);
-}
+
+    /* --- Custom Pill Button --- */
+    .interaction-trigger-overlay.is-custom {
+        background: transparent;
+    }
+
+    .interaction-trigger-overlay.is-custom:hover {
+        background: transparent;
+    }
+
+    .interaction-pill-button {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 24px;
+        background: rgba(15, 17, 21, 0.85);
+        /* distinct dark background */
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        font-weight: 500;
+        font-size: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        transform: scale(0.98);
+    }
+
+    .interaction-trigger-overlay:hover .interaction-pill-button {
+        background: rgba(15, 17, 21, 0.95);
+        border-color: rgba(255, 255, 255, 0.4);
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* --- Status Badge --- */
+    .status-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        background: rgba(15, 17, 21, 0.6);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--accent-success, #10b981);
+        /* Use success green or accent */
+        box-shadow: 0 0 8px var(--accent-success, #10b981);
+        animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+        0% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: 0.6;
+            transform: scale(0.9);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* --- Iframe Loader --- */
+    .iframe-loader {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--surface-secondary);
+        z-index: 5;
+        color: var(--text-secondary);
+    }
+
+    .animate-spin {
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
 
 
-/* --- Fullscreen Styles --- */
-.expanded-image-container.is-fullscreen {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    z-index: 9999;
-    background-color: #0f1115;
-    /* Dark background for focus */
-    border-radius: 0;
-    padding: 0;
-    margin: 0;
-}
+    /* --- Fullscreen Styles --- */
+    .expanded-image-container.is-fullscreen {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 9999;
+        background-color: #0f1115;
+        /* Dark background for focus */
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+    }
 
-.expanded-image-container.is-fullscreen .content-wrapper {
-    height: 100vh;
-    width: 100vw;
-}
+    .expanded-image-container.is-fullscreen .content-wrapper {
+        height: 100vh;
+        width: 100vw;
+    }
 
-.expanded-image-container.is-fullscreen img {
-    max-width: 100%;
-    max-height: 100%;
-    height: auto;
-}
+    .expanded-image-container.is-fullscreen img {
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+    }
 
-.expanded-image-container.is-fullscreen .interactive-iframe {
-    height: 100vh;
-}
+    .expanded-image-container.is-fullscreen .interactive-iframe {
+        height: 100vh;
+    }
 
-/* Interaction Trigger Overlay */
-.interaction-trigger-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease;
-    z-index: 10;
-}
+    /* Interaction Trigger Overlay */
+    .interaction-trigger-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s ease;
+        z-index: 10;
+    }
 
-.interaction-trigger-overlay:hover {
-    background: rgba(0, 0, 0, 0.4);
-}
+    .interaction-trigger-overlay:hover {
+        background: rgba(0, 0, 0, 0.4);
+    }
 
-.interaction-play-button {
-    width: 80px;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, background 0.2s ease;
-}
+    .interaction-play-button {
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease, background 0.2s ease;
+    }
 
-.interaction-trigger-overlay:hover .interaction-play-button {
-    transform: scale(1.1);
-    background: #fff;
-}
+    .interaction-trigger-overlay:hover .interaction-play-button {
+        transform: scale(1.1);
+        background: #fff;
+    }
 
-.interaction-label {
-    margin-top: 1rem;
-    color: #fff;
-    font-weight: 500;
-    font-size: 1rem;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-}
+    .interaction-label {
+        margin-top: 1rem;
+        color: #fff;
+        font-weight: 500;
+        font-size: 1rem;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+    }
 
-.interaction-trigger-overlay:hover .interaction-label {
-    opacity: 1;
-    transform: translateY(0);
-}
+    .interaction-trigger-overlay:hover .interaction-label {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* --- Theater Mode (Focus Mode) --- */
+    /* Overrides standard fullscreen-mode when strictly using CSS Modal */
+    .expanded-image-container.is-theater-mode {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 9999;
+
+        /* Backdrop */
+        background: rgba(10, 10, 12, 0.96) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+
+        padding: 3rem;
+        /* Padding for "Breakout" feel inside modal */
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .expanded-image-container.is-theater-mode .content-wrapper {
+        width: 100%;
+        height: 100%;
+        max-width: 1600px;
+        /* Limit max width for ultra-wide screens */
+        max-height: 94vh;
+        border-radius: 12px;
+        /* Maintain rounded aesthetic */
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+        /* Deep shadow */
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        position: relative;
+        background: #000;
+    }
+
+    /* Ensure iframe matches content wrapper in theater mode */
+    .expanded-image-container.is-theater-mode .interactive-iframe {
+        height: 100% !important;
+        border-radius: 12px;
+    }

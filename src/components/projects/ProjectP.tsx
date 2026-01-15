@@ -2,10 +2,9 @@ import { motion } from 'framer-motion';
 import { pageTransition } from '../../utils/animations';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-// import { useNotification } from '../NotificationContext';
 
 import './ProjectP.css';
-import { StackedGallery } from '../common/StackedGallery/StackedGallery';
+import { DemoStage } from '../common/DemoStage/DemoStage';
 import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
 import { UserStakeholdersGraph } from './UserStakeholdersGraph';
 import { DesignMoves } from './DesignMoves';
@@ -71,6 +70,17 @@ export const ProjectP = () => {
 
   return (
     <motion.div {...pageTransition} className="project-detail-container">
+      {/* Hero Demo Stage - Breakout Layout */}
+      <div className="bleed">
+        <div className="bleedInner">
+          <DemoStage
+            title="Live Prototype"
+            src={`https://ora.shipbyx.com/?lang=${i18n.language}`}
+            poster="/assets/images/ora-web/dashboard-mockup.webp"
+          />
+        </div>
+      </div>
+
       <div className="project-content-wrapper">
 
         <ProjectHeader
@@ -90,33 +100,6 @@ export const ProjectP = () => {
           <h2>{t('project_p.summary.title')}</h2>
           <p className="summary-subtitle" style={{ fontSize: '1.2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>{t('project_p.summary.subtitle')}</p>
 
-          <StackedGallery
-            priority={true}
-            defaultImage="/assets/images/ora-web/Mockup.webp"
-            images={[
-              {
-                id: 'dashboard-mockup',
-                src: '/assets/images/ora-web/Mockup.webp',
-                srcSet: '/assets/images/ora-web/Mockup-mobile.webp 800w, /assets/images/ora-web/Mockup.webp 1920w',
-                sizes: '(max-width: 768px) 100vw, 80vw',
-                alt: 'Dashboard Mockup'
-              },
-              {
-                id: 'dashboard-interactive',
-                src: '/assets/images/ora-web/dashboard-mockup.webp',
-                alt: 'Interactive Dashboard Preview',
-                interactiveSrc: `https://ora.shipbyx.com/?lang=${i18n.language}`,
-                deferInteraction: true,
-                thumbnailSrc: '/assets/images/ora-web/dashboard-mockup-thumb.webp',
-                className: 'force-desktop-iframe'
-              },
-              {
-                id: 'intro-placeholder',
-                src: '/assets/images/ora-web/intro-placeholder.webp',
-                alt: 'Project Introduction Context'
-              }
-            ]}
-          />
 
           <div className="summary-body">
             {/* Points moved to subtitle */}
