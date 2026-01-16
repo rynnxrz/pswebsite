@@ -1,5 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Expand, Minimize2, Play, MousePointerClick, Loader2 } from 'lucide-react';
+import Expand from 'lucide-react/dist/esm/icons/expand';
+import Minimize2 from 'lucide-react/dist/esm/icons/minimize-2';
+import Play from 'lucide-react/dist/esm/icons/play';
+import MousePointerClick from 'lucide-react/dist/esm/icons/mouse-pointer-click';
+import Loader2 from 'lucide-react/dist/esm/icons/loader-2';
 import './ExpandableImage.css';
 import '../../Tooltip.css';
 

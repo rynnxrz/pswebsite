@@ -3,7 +3,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, User, Briefcase, Globe } from 'lucide-react';
+import Home from 'lucide-react/dist/esm/icons/home';
+import User from 'lucide-react/dist/esm/icons/user';
+import Briefcase from 'lucide-react/dist/esm/icons/briefcase';
+import Globe from 'lucide-react/dist/esm/icons/globe';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence } from 'framer-motion';
 import { generateDisplacementMap } from '../utils/displacementUtils';

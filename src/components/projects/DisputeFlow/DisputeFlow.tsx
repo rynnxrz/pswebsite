@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Image, MessageCircle, FileText, AlertTriangle } from 'lucide-react';
+import Image from 'lucide-react/dist/esm/icons/image';
+import MessageCircle from 'lucide-react/dist/esm/icons/message-circle';
+import FileText from 'lucide-react/dist/esm/icons/file-text';
+import AlertTriangle from 'lucide-react/dist/esm/icons/alert-triangle';
 import styles from './DisputeFlow.module.css';
 
 const sources = [

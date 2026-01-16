@@ -3,7 +3,9 @@
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { pageTransition } from '../utils/animations';
-import { Expand, Download, Copy } from 'lucide-react';
+import Expand from 'lucide-react/dist/esm/icons/expand';
+import Download from 'lucide-react/dist/esm/icons/download';
+import Copy from 'lucide-react/dist/esm/icons/copy';
 import { useNotification } from '../components/NotificationContext';
 import './Portfolio.css';
 

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ChevronDown, ChevronUp, ArrowDown } from 'lucide-react';
+import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down';
+import ChevronUp from 'lucide-react/dist/esm/icons/chevron-up';
+import ArrowDown from 'lucide-react/dist/esm/icons/arrow-down';
 import './UserStakeholdersGraph.css';
 
 // Semantic Role Colors (Matching graph-theme.css logic)

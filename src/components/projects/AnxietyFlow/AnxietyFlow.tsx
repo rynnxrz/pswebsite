@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-import { Package, CameraOff, Truck } from 'lucide-react';
+import Package from 'lucide-react/dist/esm/icons/package';
+import CameraOff from 'lucide-react/dist/esm/icons/camera-off';
+import Truck from 'lucide-react/dist/esm/icons/truck';
 import { useTranslation } from 'react-i18next';
 import styles from './AnxietyFlow.module.css';
 

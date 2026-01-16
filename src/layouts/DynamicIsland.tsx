@@ -1,7 +1,7 @@
 // src/components/DynamicIsland.tsx
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react'; // A more appropriate icon for success
+import CheckCircle2 from 'lucide-react/dist/esm/icons/check-circle-2';
 import { useNotification } from '../components/NotificationContext';
 import './DynamicIsland.css';
 

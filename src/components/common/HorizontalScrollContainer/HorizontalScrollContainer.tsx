@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import ChevronLeft from 'lucide-react/dist/esm/icons/chevron-left';
+import ChevronRight from 'lucide-react/dist/esm/icons/chevron-right';
 import './HorizontalScrollContainer.css';
 
 interface HorizontalScrollContainerProps {
@@ -29,7 +30,7 @@ export const HorizontalScrollContainer: React.FC<HorizontalScrollContainerProps>
     useEffect(() => {
         const container = containerRef.current;
         if (container) {
-            container.addEventListener('scroll', checkScroll);
+            container.addEventListener('scroll', checkScroll, { passive: true });
             checkScroll(); // Initial check
             window.addEventListener('resize', checkScroll);
         }

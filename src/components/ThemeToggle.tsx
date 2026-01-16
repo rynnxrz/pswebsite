@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import Moon from 'lucide-react/dist/esm/icons/moon';
+import Sun from 'lucide-react/dist/esm/icons/sun';
 import { useTranslation } from 'react-i18next';
 import { setTheme } from '../utils/theme';
 import './ThemeToggle.css';

@@ -1,7 +1,10 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Database, PenTool, FileOutput, type LucideIcon } from 'lucide-react';
+import Database from 'lucide-react/dist/esm/icons/database';
+import PenTool from 'lucide-react/dist/esm/icons/pen-tool';
+import FileOutput from 'lucide-react/dist/esm/icons/file-output';
+import { type LucideIcon } from 'lucide-react'; // Keep type import from main package
 import styles from './LinearTaskFlow.module.css';
 import { useOnScreen } from '../../../hooks/useOnScreen';
 

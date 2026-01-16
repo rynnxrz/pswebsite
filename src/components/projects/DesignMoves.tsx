@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, ChevronDown } from 'lucide-react';
+import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right';
+import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down';
 import { usePrintMode } from '../../hooks/usePrintMode';
 import './DesignMoves.css';
 

@@ -1,6 +1,8 @@
 import { useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScanEye, CalendarClock, Keyboard } from 'lucide-react';
+import ScanEye from 'lucide-react/dist/esm/icons/scan-eye';
+import CalendarClock from 'lucide-react/dist/esm/icons/calendar-clock';
+import Keyboard from 'lucide-react/dist/esm/icons/keyboard';
 import { usePrintMode } from '../../hooks/usePrintMode';
 import './UserVoiceQuotes.css';
 

@@ -17,21 +17,13 @@ export const usePrintMode = () => {
 
         setIsPrintMode(mediaQuery.matches);
 
-        if (mediaQuery.addEventListener) {
-            mediaQuery.addEventListener('change', handleChange);
-        } else {
-            mediaQuery.addListener(handleChange);
-        }
+        mediaQuery.addEventListener('change', handleChange);
 
         window.addEventListener('beforeprint', handleBeforePrint);
         window.addEventListener('afterprint', handleAfterPrint);
 
         return () => {
-            if (mediaQuery.addEventListener) {
-                mediaQuery.removeEventListener('change', handleChange);
-            } else {
-                mediaQuery.removeListener(handleChange);
-            }
+            mediaQuery.removeEventListener('change', handleChange);
             window.removeEventListener('beforeprint', handleBeforePrint);
             window.removeEventListener('afterprint', handleAfterPrint);
         };

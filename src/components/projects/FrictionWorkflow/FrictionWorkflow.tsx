@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-    RefreshCw, Layers, FileWarning,
-    Image, MessageCircle, ClipboardCheck
-} from 'lucide-react';
+import RefreshCw from 'lucide-react/dist/esm/icons/refresh-cw';
+import Layers from 'lucide-react/dist/esm/icons/layers';
+import FileWarning from 'lucide-react/dist/esm/icons/file-warning';
+import Image from 'lucide-react/dist/esm/icons/image';
+import MessageCircle from 'lucide-react/dist/esm/icons/message-circle';
+import ClipboardCheck from 'lucide-react/dist/esm/icons/clipboard-check';
 import styles from './FrictionWorkflow.module.css';
 import { useOnScreen } from '../../../hooks/useOnScreen';
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Download, Check, Link as LinkIcon } from 'lucide-react';
+import Download from 'lucide-react/dist/esm/icons/download';
+import Check from 'lucide-react/dist/esm/icons/check';
+import LinkIcon from 'lucide-react/dist/esm/icons/link';
 import './ProjectHeader.css';
 
 interface ProjectHeaderProps {
@@ -51,7 +53,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
         };
 
         updateScrollState();
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', handleScroll);
 
         return () => {
@@ -102,92 +104,92 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
         <>
             <div ref={sentinelRef} className="project-header-sentinel" aria-hidden="true" />
             <header className={`project-header ${isScrolled ? 'sticky-active' : ''}`}>
-            <div className="project-header-text-container">
-                <div className={`header-main-info ${isScrolled && activeSection ? 'scrolled-mode' : ''}`}>
-                    <h1 className="project-title">
-                        <button
-                            className="project-title-button"
-                            type="button"
-                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                        >
-                            {title}
-                        </button>
-                    </h1>
-
-                    {!isScrolled ? (
-                        <span className="project-date">{date}</span>
-                    ) : (
-                        <div className="section-navigator">
-                            <span className="divider">/</span>
+                <div className="project-header-text-container">
+                    <div className={`header-main-info ${isScrolled && activeSection ? 'scrolled-mode' : ''}`}>
+                        <h1 className="project-title">
                             <button
+                                className="project-title-button"
                                 type="button"
-                                className="active-section-name"
-                                aria-haspopup="menu"
-                                aria-expanded={isMenuOpen}
-                                onClick={toggleMenu}
-                                onBlur={(e) => {
-                                    if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
-                                        closeMenu();
-                                    }
-                                }}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Escape') {
-                                        closeMenu();
-                                    }
-                                }}
+                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                             >
-                                {activeSectionTitle || 'Intro'}
+                                {title}
                             </button>
+                        </h1>
 
-                            {/* Dropdown Menu */}
-                            <div
-                                className={`section-dropdown ${isMenuOpen ? 'open' : ''}`}
-                                role="menu"
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Escape') {
-                                        closeMenu();
-                                    }
-                                }}
-                            >
-                                {sections.map((section) => (
-                                    <button
-                                        type="button"
-                                        key={section.id}
-                                        className={`dropdown-item ${activeSection === section.id ? 'active' : ''}`}
-                                        onClick={(e) => {
-                                            onSectionClick(section.id, e);
+                        {!isScrolled ? (
+                            <span className="project-date">{date}</span>
+                        ) : (
+                            <div className="section-navigator">
+                                <span className="divider">/</span>
+                                <button
+                                    type="button"
+                                    className="active-section-name"
+                                    aria-haspopup="menu"
+                                    aria-expanded={isMenuOpen}
+                                    onClick={toggleMenu}
+                                    onBlur={(e) => {
+                                        if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
                                             closeMenu();
-                                        }}
-                                        role="menuitem"
-                                    >
-                                        {section.title}
-                                    </button>
-                                ))}
+                                        }
+                                    }}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Escape') {
+                                            closeMenu();
+                                        }
+                                    }}
+                                >
+                                    {activeSectionTitle || 'Intro'}
+                                </button>
+
+                                {/* Dropdown Menu */}
+                                <div
+                                    className={`section-dropdown ${isMenuOpen ? 'open' : ''}`}
+                                    role="menu"
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Escape') {
+                                            closeMenu();
+                                        }
+                                    }}
+                                >
+                                    {sections.map((section) => (
+                                        <button
+                                            type="button"
+                                            key={section.id}
+                                            className={`dropdown-item ${activeSection === section.id ? 'active' : ''}`}
+                                            onClick={(e) => {
+                                                onSectionClick(section.id, e);
+                                                closeMenu();
+                                            }}
+                                            role="menuitem"
+                                        >
+                                            {section.title}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    )}
-                </div>
-            </div>
-
-            <div className="action-buttons-container">
-                <div className="tooltip-container tooltip-bottom">
-                    <button onClick={handlePrint} className="action-btn" aria-label="Print/Download PDF">
-                        <Download size={16} />
-                    </button>
-                    <span className="tooltip-text">{downloadTooltip}</span>
+                        )}
+                    </div>
                 </div>
 
-                <div className="tooltip-container tooltip-bottom">
-                    <button onClick={handleCopyLink} className="action-btn" aria-label="Copy Link">
-                        {copied ? <Check size={16} /> : <LinkIcon size={16} />}
-                    </button>
-                    <span className="tooltip-text">{copied ? copiedTooltip : copyTooltip}</span>
-                </div>
-            </div>
+                <div className="action-buttons-container">
+                    <div className="tooltip-container tooltip-bottom">
+                        <button onClick={handlePrint} className="action-btn" aria-label="Print/Download PDF">
+                            <Download size={16} />
+                        </button>
+                        <span className="tooltip-text">{downloadTooltip}</span>
+                    </div>
 
-            <div className={`header-progress-track ${isScrolled ? 'visible' : ''}`}>
-                <div className="header-progress-fill" style={{ width: `${scrollProgress}%` }}></div>
-            </div>
+                    <div className="tooltip-container tooltip-bottom">
+                        <button onClick={handleCopyLink} className="action-btn" aria-label="Copy Link">
+                            {copied ? <Check size={16} /> : <LinkIcon size={16} />}
+                        </button>
+                        <span className="tooltip-text">{copied ? copiedTooltip : copyTooltip}</span>
+                    </div>
+                </div>
+
+                <div className={`header-progress-track ${isScrolled ? 'visible' : ''}`}>
+                    <div className="header-progress-fill" style={{ width: `${scrollProgress}%` }}></div>
+                </div>
             </header>
         </>
     );
