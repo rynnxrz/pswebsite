@@ -258,18 +258,82 @@
 }
 
 @media print {
+    .design-moves-container {
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    /* Force print block rendering */
+    .dm-print-block {
+        margin-bottom: 1rem;
+    }
+
+    .dm-print-block h3 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 0 0 0.5rem 0;
+        color: #000;
+    }
+
     .dm-accordion-item {
-        break-inside: avoid;
-        border-bottom: 1px solid #000;
+        /* Allow content to break across columns/pages to fill space */
+        break-inside: auto;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 0.5rem;
     }
 
     .dm-accordion-header {
         position: static;
+        padding: 0.15rem 0;
+        break-after: avoid;
+    }
+
+    /* Hide chevron icon in print */
+    .dm-header-icon {
+        display: none;
+    }
+
+    /* CRITICAL: Force ALL accordion panels to show in print */
+    .dm-accordion-panel {
+        display: block !important;
+        opacity: 1 !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .dm-accordion-item>div[role="region"],
+    .dm-accordion-item>div {
+        display: block !important;
+        opacity: 1 !important;
+        height: auto !important;
+        overflow: visible !important;
     }
 
     .dm-accordion-body-content {
         display: block !important;
         opacity: 1 !important;
         height: auto !important;
+        padding-top: 0.5rem;
+    }
+
+    .dm-context-card {
+        padding: 0.5rem;
+        gap: 0.35rem;
+        break-inside: avoid;
+    }
+
+    .dm-footer-section {
+        padding-top: 0.35rem;
+        gap: 0.5rem;
+    }
+
+    .dm-image-wrapper {
+        max-height: 150px;
+        break-inside: avoid;
+    }
+
+    .dm-main-image {
+        max-height: 150px;
+        object-fit: contain;
     }
 }

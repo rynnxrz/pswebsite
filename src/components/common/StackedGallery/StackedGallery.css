@@ -171,13 +171,16 @@
 @media print {
     .gallery-container {
         height: auto;
-        min-height: 260px;
+        min-height: 0;
+        max-height: 180px;
+        margin: 0.75rem 0;
         background-color: #ffffff;
         border-color: #d0d0d0;
     }
 
     .gallery-container img.gallery-main-image,
     .gallery-container iframe.gallery-main-image {
+        max-height: 180px;
         object-fit: contain;
         animation: none;
     }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { usePrintMode } from '../../hooks/usePrintMode';
 import './DesignMoves.css';
@@ -70,28 +70,28 @@ export const DesignMoves = () => {
 
                 {/* 3. Visual Section */}
                 <div className="dm-visual-section">
-                <div className="dm-image-wrapper">
-                    {imageSrc && (
-                        isVideo ? (
-                            <video
-                                src={imageSrc}
-                                className="dm-main-image"
-                                autoPlay={!prefersReducedMotion}
-                                loop={!prefersReducedMotion}
-                                muted
-                                playsInline
-                                controls
-                                aria-label={move.image?.alt || move.headline}
-                            />
-                        ) : (
-                            <img
-                                src={imageSrc}
-                                alt={move.image?.alt || move.headline}
-                                className="dm-main-image"
-                                loading="lazy"
-                            />
-                        )
-                    )}
+                    <div className="dm-image-wrapper">
+                        {imageSrc && (
+                            isVideo ? (
+                                <video
+                                    src={imageSrc}
+                                    className="dm-main-image"
+                                    autoPlay={!prefersReducedMotion}
+                                    loop={!prefersReducedMotion}
+                                    muted
+                                    playsInline
+                                    controls
+                                    aria-label={move.image?.alt || move.headline}
+                                />
+                            ) : (
+                                <img
+                                    src={imageSrc}
+                                    alt={move.image?.alt || move.headline}
+                                    className="dm-main-image"
+                                    loading="lazy"
+                                />
+                            )
+                        )}
                         {move.image?.annotation && (
                             <div className="dm-annotation">
                                 <ArrowUpRight size={16} className="dm-arrow" />
@@ -173,22 +173,22 @@ export const DesignMoves = () => {
                             </div>
                         </button>
 
-                        <AnimatePresence>
-                            {isOpen && (
-                                <motion.div
-                                    initial={prefersReducedMotion ? false : { height: 0, opacity: 0 }}
-                                    animate={{ height: 'auto', opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3, ease: 'easeInOut' }}
-                                    style={{ overflow: 'hidden' }}
-                                    id={panelId}
-                                    role="region"
-                                    aria-labelledby={headerId}
-                                >
-                                    {renderMoveContent(move)}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
+                        {/* Always render content in DOM for print CSS to work */}
+                        <motion.div
+                            initial={false}
+                            animate={isOpen
+                                ? { height: 'auto', opacity: 1 }
+                                : { height: 0, opacity: 0 }
+                            }
+                            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3, ease: 'easeInOut' }}
+                            style={{ overflow: 'hidden' }}
+                            className="dm-accordion-panel"
+                            id={panelId}
+                            role="region"
+                            aria-labelledby={headerId}
+                        >
+                            {renderMoveContent(move)}
+                        </motion.div>
                     </div>
                 );
             })}

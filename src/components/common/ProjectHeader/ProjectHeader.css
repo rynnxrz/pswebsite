@@ -259,7 +259,7 @@
 @media print {
     .project-header {
         position: static;
-        margin-bottom: 12px;
+        margin-bottom: 0.5rem;
         padding: 0;
     }
 
@@ -276,9 +276,18 @@
         display: none;
     }
 
+    .project-title {
+        font-size: 1rem;
+    }
+
+    .project-date {
+        font-size: 0.75rem;
+        margin-top: 2px;
+    }
+
     .header-main-info.scrolled-mode .project-title {
         opacity: 1;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .header-main-info.scrolled-mode .project-date {

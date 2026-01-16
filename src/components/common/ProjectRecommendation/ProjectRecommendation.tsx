@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
 import './ProjectRecommendation.css';
 
 export interface RecommendedProject {
@@ -16,6 +17,7 @@ interface ProjectRecommendationProps {
 export const ProjectRecommendation = ({ projects }: ProjectRecommendationProps) => {
   const { t } = useTranslation();
 
+
   return (
     <section className="project-recommendation">
       <div className="typo-eyebrow">{t('recommendations.eyebrow')}</div>
@@ -28,7 +30,11 @@ export const ProjectRecommendation = ({ projects }: ProjectRecommendationProps) 
             className="project-recommendation-card"
           >
             <div className="project-recommendation-media">
-              <img src={project.image} alt={project.title} loading="lazy" />
+              <img
+                src={project.image}
+                alt={project.title}
+                loading="eager"
+              />
             </div>
             <div className="project-recommendation-body">
               <div>

@@ -94,3 +94,57 @@
     min-height: 200px;
   }
 }
+
+@media print {
+  .project-recommendation {
+    margin-top: 1rem;
+  }
+
+  .project-recommendation h2 {
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem;
+  }
+
+  /* Side-by-side cards */
+  .project-recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .project-recommendation-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .project-recommendation-media {
+    min-height: 200px;
+    height: 200px;
+    display: block;
+  }
+
+  .project-recommendation-body {
+    padding: 0.5rem 0 0;
+    gap: 0.25rem;
+  }
+
+  .project-recommendation-body h3 {
+    font-size: 0.8rem;
+    margin: 0 0 0.25rem;
+    color: #000;
+  }
+
+  .project-recommendation-body p {
+    font-size: 0.7rem;
+    line-height: 1.35;
+    color: #333;
+    margin: 0;
+  }
+
+  .project-recommendation-cta {
+    display: none;
+  }
+}

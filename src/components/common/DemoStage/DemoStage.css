@@ -294,6 +294,11 @@ body.demo-stage-open {
     .demoStage {
         border: 1px solid #ccc;
         box-shadow: none;
+        border-radius: 8px;
+        margin: 0;
+        /* Full page hero - force page break after */
+        break-after: page;
+        page-break-after: always;
     }
 
     .demoHeader,
@@ -302,7 +307,20 @@ body.demo-stage-open {
         display: none !important;
     }
 
+    /* Full page hero viewport */
+    .demoViewport {
+        height: calc(100vh - 80px);
+        /* Fill page minus margins */
+        min-height: 500px;
+    }
+
     .demoPoster {
         display: block;
+        object-fit: contain;
+    }
+
+    .demoCaption {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
     }
 }
