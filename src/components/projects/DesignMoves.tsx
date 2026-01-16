@@ -158,7 +158,7 @@ export const DesignMoves = () => {
                                 {/* Use tab title/subtitle combo if available, else headline */}
                                 {tabInfo ? (
                                     <>
-                                        {/* Parsing "01. Unify Views" -> "01" and "Unify Views" */}
+                                        {/* Keep numeric prefixes for visual continuity */}
                                         <span className="dm-header-number">{tabInfo.title.split('.')[0]}</span>
                                         <h3 className="dm-header-title">
                                             {tabInfo.title.split('.').slice(1).join('.').trim()} {tabInfo.subtitle}

@@ -7,11 +7,6 @@ import './ProjectIvy.css';
 import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
 import { DemoStage } from '../common/DemoStage/DemoStage';
 
-import { AttentionChart } from './AttentionChart/AttentionChart';
-import { MiniAdminBar } from './AttentionChart/MiniAdminBar';
-import { LinearTaskFlow } from './LinearTaskFlow/LinearTaskFlow';
-import { DisputeFlow } from './DisputeFlow/DisputeFlow';
-import { DecisionCard } from './DecisionCard/DecisionCard';
 import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRecommendation';
 
 export const ProjectIvy = () => {
@@ -19,15 +14,11 @@ export const ProjectIvy = () => {
     const [activeSection, setActiveSection] = useState('');
 
     const navSections = [
-        { id: 'intro', title: 'Overview' },
-        { id: 'context', title: 'Context' },
-        { id: 'cost', title: 'The Real Cost' },
-        { id: 'target', title: 'Design Target' },
-        { id: 'decisions', title: 'Key Decisions' },
-        { id: 'system', title: 'The System' },
-        { id: 'ai', title: 'AI Capability' },
-        { id: 'outcome', title: 'Outcome' },
-        { id: 'reflection', title: 'Reflection' },
+        { id: 'summary', title: t('ivy.section.summary') },
+        { id: 'context', title: t('ivy.section.context') },
+        { id: 'decisions', title: t('ivy.section.decisions') },
+        { id: 'non-decisions', title: t('ivy.section.non_decisions') },
+        { id: 'reflection', title: t('ivy.section.reflection') },
     ];
 
     const recommendedProjects = [
@@ -96,10 +87,11 @@ export const ProjectIvy = () => {
                 />
 
                 {/* Hero Section */}
-                <section id="intro" className="project-section compact-section">
-                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.overview')}</div>
-
-                    <p className="project-description" dangerouslySetInnerHTML={{ __html: t('ivy.intro.title') }} />
+                <section id="summary" className="project-section compact-section">
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.summary')}</div>
+                    <h2>{t('ivy.summary.headline')}</h2>
+                    <h3>{t('ivy.summary.subheadline')}</h3>
+                    <p>{t('ivy.summary.body')}</p>
                 </section>
 
                 <hr className="section-divider compact-divider" />
@@ -107,203 +99,117 @@ export const ProjectIvy = () => {
                 {/* 01. Context */}
                 <section id="context" className="project-section compact-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.context')}</div>
-                    <h3>{t('ivy.context.title')}</h3>
-                    <p>{t('ivy.context.content')}</p>
-                    <p><strong>{t('ivy.context.problem')}</strong></p>
-
-                    <AttentionChart variant="context" />
+                    <h2>{t('ivy.context.title')}</h2>
+                    <h3>{t('ivy.context.context_title')}</h3>
+                    <p>{t('ivy.context.context_body')}</p>
+                    <h3>{t('ivy.context.why_title')}</h3>
+                    <p>{t('ivy.context.why_body')}</p>
+                    <h3>{t('ivy.context.impact_title')}</h3>
+                    <table className="ivy-decision-table">
+                        <thead>
+                            <tr>
+                                <th>{t('ivy.context.table.headers.user_type')}</th>
+                                <th>{t('ivy.context.table.headers.key_pain_point')}</th>
+                                <th>{t('ivy.context.table.headers.time_drain')}</th>
+                                <th>{t('ivy.context.table.headers.emotional_impact')}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{t('ivy.context.table.rows.founder.user_type')}</td>
+                                <td>{t('ivy.context.table.rows.founder.key_pain_point')}</td>
+                                <td>{t('ivy.context.table.rows.founder.time_drain')}</td>
+                                <td>{t('ivy.context.table.rows.founder.emotional_impact')}</td>
+                            </tr>
+                            <tr>
+                                <td>{t('ivy.context.table.rows.clients.user_type')}</td>
+                                <td>{t('ivy.context.table.rows.clients.key_pain_point')}</td>
+                                <td>{t('ivy.context.table.rows.clients.time_drain')}</td>
+                                <td>{t('ivy.context.table.rows.clients.emotional_impact')}</td>
+                            </tr>
+                            <tr>
+                                <td>{t('ivy.context.table.rows.stakeholders.user_type')}</td>
+                                <td>{t('ivy.context.table.rows.stakeholders.key_pain_point')}</td>
+                                <td>{t('ivy.context.table.rows.stakeholders.time_drain')}</td>
+                                <td>{t('ivy.context.table.rows.stakeholders.emotional_impact')}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
 
                 <hr className="section-divider" />
 
-                {/* 02. The Real Cost */}
-                <section id="cost" className="project-section">
-                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.cost')}</div>
-                    <MiniAdminBar />
-                    <h3>{t('ivy.real_cost.title')}</h3>
-                    <p className="ivy-cost-headline"><strong>{t('ivy.real_cost.anchor_label')}</strong></p>
-                    <p className="ivy-cost-detail">{t('ivy.real_cost.subtitle')}</p>
-
-                    <div className="ivy-cost-case">
-                        <div className="ivy-cost-case-header">
-                            <div className="ivy-cost-label">{t('ivy.real_cost.case1.label')}</div>
-                            <h4 className="ivy-cost-title">{t('ivy.real_cost.case1.title')}</h4>
-                            <p className="ivy-cost-desc">{t('ivy.real_cost.case1.description')}</p>
-                        </div>
-                        <LinearTaskFlow />
-                        <p className="ivy-cost-summary">{t('ivy.real_cost.case1.summary_cost')}</p>
-                    </div>
-
-                    <DisputeFlow />
-                </section>
-
-                <hr className="section-divider" />
-
-                {/* 03. Design Target */}
-                <section id="target" className="project-section">
-                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.target')}</div>
-                    <h3>{t('ivy.target.title')}</h3>
-                    <p>{t('ivy.target.statement')}</p>
-
-                    <AttentionChart variant="target" />
-
-                    <DecisionCard
-                        insightKey="ivy.decision.insight"
-                        decisionKey="ivy.decision.decision"
-                    />
-                </section>
-
-                <hr className="section-divider" />
-
-                {/* 04. Key Decisions */}
+                {/* 02. Design Decisions */}
                 <section id="decisions" className="project-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.decisions')}</div>
+                    <h2>{t('ivy.decisions.title')}</h2>
+                    {['d1', 'd2', 'd3', 'd4'].map((key) => {
+                        const isDualScenario = key === 'd4';
+                        const happySteps = isDualScenario
+                            ? (t('ivy.decisions.d4.how.happy_steps', { returnObjects: true }) as string[])
+                            : [];
+                        const unhappySteps = isDualScenario
+                            ? (t('ivy.decisions.d4.how.unhappy_steps', { returnObjects: true }) as string[])
+                            : [];
 
-                    <div style={{ marginBottom: '4rem' }}>
-                        <h3>{t('ivy.decisions.d1.title')}</h3>
-                        <table className="ivy-decision-table">
-                            <thead>
-                                <tr>
-                                    <th>Option</th>
-                                    <th>Looks Complete?</th>
-                                    <th>Removes Real Work?</th>
-                                    <th>Long-term Cost</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Stripe Checkout</td>
-                                    <td>✅ Yes</td>
-                                    <td>❌ No</td>
-                                    <td>🔴 High</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Invoice-based</strong></td>
-                                    <td>✅ Yes</td>
-                                    <td>✅ <strong>Yes</strong></td>
-                                    <td>🟢 Low</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p><em>{t('ivy.decisions.d1.why')}</em></p>
-                        <div style={{ padding: '1rem', background: '#f5f5f5', borderRadius: '6px' }}>
-                            <strong>Decision:</strong> {t('ivy.decisions.d1.decision')}
-                        </div>
+                        return (
+                            <div key={key} style={{ marginBottom: '3.5rem' }}>
+                                <h3>{t(`ivy.decisions.${key}.title`)}</h3>
+                                <h4>Problem</h4>
+                                <p>{t(`ivy.decisions.${key}.problem`)}</p>
+                                <h4>Solution</h4>
+                                <p>{t(`ivy.decisions.${key}.solution`)}</p>
+                                <h4>How it Works</h4>
+                                {isDualScenario ? (
+                                    <>
+                                        <p><strong>{t('ivy.decisions.d4.how.happy_title')}</strong></p>
+                                        <ol>
+                                            {Array.isArray(happySteps) && happySteps.map((step) => (
+                                                <li key={step}>{step}</li>
+                                            ))}
+                                        </ol>
+                                        <p><strong>{t('ivy.decisions.d4.how.unhappy_title')}</strong></p>
+                                        <ol>
+                                            {Array.isArray(unhappySteps) && unhappySteps.map((step) => (
+                                                <li key={step}>{step}</li>
+                                            ))}
+                                        </ol>
+                                    </>
+                                ) : (
+                                    <p>{t(`ivy.decisions.${key}.how`)}</p>
+                                )}
+                                <h4>Design Rationale</h4>
+                                <p>{t(`ivy.decisions.${key}.rationale`)}</p>
+                            </div>
+                        );
+                    })}
+                </section>
+
+                <hr className="section-divider" />
+
+                {/* 03. Key Non-Design Decisions */}
+                <section id="non-decisions" className="project-section">
+                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.non_decisions')}</div>
+                    <h2>{t('ivy.non_decisions.title')}</h2>
+                    <div style={{ marginBottom: '2.5rem' }}>
+                        <h3>{t('ivy.non_decisions.d1.title')}</h3>
+                        <p>{t('ivy.non_decisions.d1.rationale')}</p>
                     </div>
-
                     <div>
-                        <h3>{t('ivy.decisions.d2.title')}</h3>
-                        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-                            <div style={{ flex: 1 }}>
-                                <div className="ivy-chart-placeholder">
-                                    {/* Simple Pie Chart Representation */}
-                                    <div style={{ position: 'relative', width: '150px', height: '150px', borderRadius: '50%', background: 'conic-gradient(#333 0% 70%, #ddd 70% 100%)' }}></div>
-                                </div>
-                                <div style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>⚫ System Logic (70%) ⚪ UI Polish (30%)</div>
-                            </div>
-                            <div style={{ flex: 1 }}>
-                                <p>{t('ivy.decisions.d2.why')}</p>
-                                <div style={{ padding: '1rem', background: '#f5f5f5', borderRadius: '6px' }}>
-                                    <strong>Decision:</strong> {t('ivy.decisions.d2.decision')}
-                                </div>
-                            </div>
-                        </div>
+                        <h3>{t('ivy.non_decisions.d2.title')}</h3>
+                        <p>{t('ivy.non_decisions.d2.rationale')}</p>
                     </div>
                 </section>
 
                 <hr className="section-divider" />
 
-                {/* 05. The System */}
-                <section id="system" className="project-section">
-                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.system')}</div>
-
-                    <div style={{ marginBottom: '4rem' }}>
-                        <h3>1. {t('ivy.system.p1.title')}</h3>
-                        <div className="ivy-before-after">
-                            <div style={{ opacity: 0.6 }}>
-                                <div className="ivy-chart-placeholder">PDF Lookbook (Before)</div>
-                                <ul>
-                                    <li>Manual</li>
-                                    <li>Static</li>
-                                    <li>Rebuilt every time</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <div className="ivy-chart-placeholder" style={{ border: '2px solid #000', color: '#000' }}>Live Catalog (After)</div>
-                                <ul>
-                                    <li><strong>Date-aware</strong></li>
-                                    <li><strong>Shareable link</strong></li>
-                                    <li><strong>Always current</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p><strong>Result:</strong> {t('ivy.system.p1.result')}</p>
-                    </div>
-
-                    <div>
-                        <h3>2. {t('ivy.system.p2.title')}</h3>
-                        <div className="ivy-flow-step" style={{ justifyContent: 'center', background: 'transparent', borderLeft: 'none' }}>
-                            Box Items 📦 <span className="ivy-flow-arrow">→</span> <strong style={{ border: '2px solid red', padding: '4px 8px', borderRadius: '4px', color: 'red' }}>Take Photo 📸</strong> <span className="ivy-flow-arrow">→</span> Ship 🚚 <span className="ivy-flow-arrow">→</span> Record Exists ✅
-                        </div>
-                        <p>{t('ivy.system.p2.content')}</p>
-                        <p><strong>Result:</strong> {t('ivy.system.p2.result')}</p>
-                    </div>
-                </section>
-
-                <hr className="section-divider" />
-
-                {/* 06. AI Capability */}
-                <section id="ai" className="project-section">
-                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.ai')}</div>
-                    <h3>{t('ivy.ai.title')}</h3>
-
-                    <div className="ivy-statement-card">
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem' }}>
-                            <div>Messy Inputs 📄</div>
-                            <span className="ivy-flow-arrow">→</span>
-                            <div style={{ border: '1px solid #333', padding: '1rem', borderRadius: '6px' }}>AI Draft 🤖</div>
-                            <span className="ivy-flow-arrow">→</span>
-                            <div style={{ border: '1px solid #333', padding: '1rem', borderRadius: '6px', background: '#000', color: '#fff' }}>Human Confirm 👩‍💻</div>
-                        </div>
-                        <p style={{ marginTop: '2rem', fontSize: '0.9rem' }}><em>{t('ivy.ai.design')}</em></p>
-                    </div>
-                    <p>{t('ivy.ai.content')}</p>
-                </section>
-
-                <hr className="section-divider" />
-
-                {/* 07. Outcome */}
-                <section id="outcome" className="project-section">
-                    <div className="typo-eyebrow section-eyebrow">{t('ivy.section.outcome')}</div>
-                    <h3>{t('ivy.outcome.title')}</h3>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '600px', margin: '3rem auto', alignItems: 'center' }}>
-                        <div style={{ textAlign: 'right', color: '#888' }}>
-                            <h4>Before</h4>
-                            <div>Operator</div>
-                            <div>Checker</div>
-                            <div>Defender</div>
-                        </div>
-                        <div style={{ fontSize: '2rem' }}>➡️</div>
-                        <div style={{ textAlign: 'left', fontWeight: 'bold' }}>
-                            <h4>After</h4>
-                            <div>Designer</div>
-                            <div>Decision-maker</div>
-                            <div>Strategist</div>
-                        </div>
-                    </div>
-                    <p style={{ textAlign: 'center' }}>{t('ivy.outcome.result')}</p>
-                </section>
-
-                <hr className="section-divider" />
-
-                {/* 08. Reflection */}
+                {/* 04. Reflection */}
                 <section id="reflection" className="project-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.reflection')}</div>
                     <div className="ivy-statement-card" style={{ background: 'transparent', textAlign: 'left', padding: '0' }}>
-                        <h3>{t('ivy.reflection.title')}</h3>
-                        <p>{t('ivy.reflection.content')}</p>
-                        <br />
-                        <p><strong>{t('ivy.reflection.closing')}</strong></p>
+                        <h2>{t('ivy.reflection.title')}</h2>
+                        <p>{t('ivy.reflection.body')}</p>
+                        <p><em>{t('ivy.reflection.note')}</em></p>
                     </div>
                 </section>
 

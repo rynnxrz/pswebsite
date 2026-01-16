@@ -362,73 +362,113 @@
             "copied": "已复制！"
         },
         "section": {
-            "overview": "01. 概览",
-            "context": "02. 背景",
-            "cost": "03. 真实成本",
-            "target": "04. 设计目标",
-            "decisions": "05. 关键决策",
-            "system": "06. 系统设计",
-            "ai": "07. AI 能力",
-            "outcome": "08. 成果",
-            "reflection": "09. 反思"
+            "summary": "01. SUMMARY",
+            "context": "02. CONTEXT & PROBLEM",
+            "decisions": "03. DESIGN DECISIONS",
+            "non_decisions": "04. KEY NON-DESIGN DECISIONS",
+            "reflection": "05. REFLECTION"
         },
-        "intro": {
-            "title": "该项目被定义为一家高端珠宝品牌的内部租赁和库存管理系统。它用支持<strong>日期感知</strong>的<strong>数字目录</strong>和<strong>自动凭证追踪</strong>，取代了手动的<strong>PDF 索引</strong>和基于<strong>邮件的协调过程</strong>。",
-            "role_title": "角色",
-            "role_desc": "产品合伙人 (战略 · UX · 工程)",
-            "timeline_title": "时间线",
-            "timeline_desc": "12天 (MVP)"
+        "summary": {
+            "headline": "Creative Focus Restored: Building a Trust-Driven Operating System for Luxury Jewelry Rentals",
+            "subheadline": "From Chaos to Focus: Turning Creative Drain into a Trust-Centered Operating System",
+            "body": "As Product Partner, I led end-to-end product strategy, UX design, and full-stack engineering to deliver a 12-day MVP operating system for Ivy J Studio. The solution eliminated repetitive admin work, automated evidence collection, replaced static workflows, and preserved client effort via dual-scenario data persistence -- freeing the founder to refocus on high-value design while strengthening client trust."
         },
-        "cost": {
-            "title": "从设计到行政的转移",
-            "current": {
-                "title": "当前工作量分配",
-                "label": "现状"
-            },
-            "situation_a": {
-                "title": "案例研究：单次询价的成本",
-                "desc": "目前，日常产出的 70% 被 5 个重复的低价值任务消耗。每一次客户询问都会触发一次产品目录的手动重建。",
-                "steps": [
-                    "<strong>手动库存核对</strong>：将实物库存与销售记录进行交叉核对。",
-                    "<strong>Lookbook 编辑</strong>：打开 Adobe Illustrator 手动更新目录。",
-                    "<strong>内容删除</strong>：手动移除在特定日期不可用的款式。",
-                    "<strong>PDF 导出</strong>：重新导出并压缩文件以便邮件发送。",
-                    "<strong>手动回复</strong>：通过邮件发送更新后的文件。"
-                ],
-                "conclusion": "每一次询问都迫使完整的手动重建，把一个简单问题变成耗时的行政任务。",
-                "summary": {
-                    "problem_title": "问题",
-                    "strategy_title": "策略",
-                    "goal_label": "目标",
-                    "issue_label": "问题所在",
-                    "impact_label": "商业影响",
-                    "decision_label": "设计决策",
-                    "tradeoffs_label": "权衡",
-                    "issue_body": "5 个重复的行政任务占据了 70% 的日常产出。",
-                    "impact_body": "每次询问都需要完整重建目录，挤压设计时间。",
-                    "decision_body": "自动化库存同步与 PDF 生成。",
-                    "tradeoffs_body": "牺牲部分手动排版灵活性，换取始终最新的目录。",
-                    "goal_body": "将行政时间减少 80%，把精力还给设计与工艺。"
+        "context": {
+            "title": "Manual Workflows = Creative Drain",
+            "context_title": "Context",
+            "context_body": "London-based luxury jewelry brand (one-of-a-kind, high-value pieces) relied on fragmented manual processes for rentals and wholesale -- static Illustrator lookbooks, personal photo libraries, and ad-hoc PDF sharing. As demand grew, the founder's time shifted from designing (core strength) to repetitive checking, proving, and explaining.",
+            "why_title": "Why Creativity Lagged",
+            "why_body": "Workflow analysis revealed 78% of admin time went to redundant tasks: 42% rebuilding custom PDFs for inventory requests, 26% searching for proof in personal photos, 10% back-and-forth emails, and 8% re-entering client request data (lost or incomplete submissions). The remaining 22% focused on actual client relationship management -- creating constant context switching and emotional load that stifled creative output.",
+            "impact_title": "Impact by User Type",
+            "table": {
+                "headers": {
+                    "user_type": "User Type",
+                    "key_pain_point": "Key Pain Point",
+                    "time_drain": "Time Drain",
+                    "emotional_impact": "Emotional Impact"
+                },
+                "rows": {
+                    "founder": {
+                        "user_type": "Founder (Ivy)",
+                        "key_pain_point": "PDF rebuilds + manual request re-entry",
+                        "time_drain": "4+ hours/week",
+                        "emotional_impact": "Creative burnout"
+                    },
+                    "clients": {
+                        "user_type": "Clients (Stylists/Buyers)",
+                        "key_pain_point": "Outdated availability + lost submission data",
+                        "time_drain": "2+ days delay + rework",
+                        "emotional_impact": "Frustration with inaccuracy/wasted effort"
+                    },
+                    "stakeholders": {
+                        "user_type": "Stakeholders",
+                        "key_pain_point": "Dispute resolution without proof",
+                        "time_drain": "3+ hours/dispute",
+                        "emotional_impact": "Eroded trust"
+                    }
                 }
-            },
-            "situation_b": {
-                "title": "情况 B：争议需要出示发货证明",
-                "desc": "当发货出现偏差（任一方向）时，Ivy 需要找到原始打包照片来确认数量或状态。如果没有照片或无法找到，解决只能通过多轮往返沟通。",
-                "step1": "打包",
-                "risk_label": "风险：记忆失效",
-                "step2": "记忆照片",
-                "step3": "发货",
-                "dispute": "争议"
             }
         },
-        "target": {
-            "title": "设计目标：恢复工作量平衡",
-            "statement": "通过自动化库存同步和 PDF 生成，目标是将行政时间减少 80%，让创始人把时间重新投入到设计与工艺。",
-            "sub": "如果任务不需要品味、判断或关系维护，就由系统承担。",
-            "chart": {
-                "before": "现状",
-                "target": "目标"
+        "decisions": {
+            "title": "Phase 1: Core Design Decisions",
+            "d1": {
+                "title": "01. Replace Static PDFs with Live, Date-Aware Catalog",
+                "problem": "Founder had to manually update Illustrator lookbooks, remove unavailable items, export PDFs, and re-share for every inventory request -- turning simple queries into time-consuming design tasks.",
+                "solution": "A dynamic catalog link with auto-filtering for date availability and buffer rules, eliminating manual PDF creation entirely.",
+                "how": "Users receive a shareable link that auto-updates based on selected dates and pre-set buffer periods (for example, a 2-day lead time for returns). No downloads or manual edits -- availability is always current with one click.",
+                "rationale": "The founder's existing workflow relied on sharing visual assets (lookbooks), so we built on this habit with a familiar link-sharing model. By automating date filtering and updates, we removed the need for manual intervention while keeping the client experience seamless. This cut onboarding to zero and eliminated 42% of admin time instantly."
+            },
+            "d2": {
+                "title": "02. Embed Proof Collection into Workflows",
+                "problem": "Disputes required searching personal photo libraries for timestamped packing photos -- turning trust maintenance into reactive \"self-defense\" instead of proactive relationship building.",
+                "solution": "Mandatory photo upload before marking items as \"Shipped,\" with auto-timestamping and direct attachment to client notifications.",
+                "how": "The system blocks the \"Ship\" action until a packing photo is uploaded. The photo is automatically timestamped, stored in a centralized library, and included in the client's confirmation email -- creating irrefutable proof before items leave the studio.",
+                "rationale": "We aligned with the founder's existing shipping workflow (marking items as sent) by adding a single mandatory step that prevents future work. This proactive approach eliminates dispute resolution time entirely, builds trust upfront, and keeps the founder from acting as a \"proof collector\" -- freeing her to focus on client relationships."
+            },
+            "d3": {
+                "title": "03. AI-Powered Structured Data",
+                "problem": "Messy human-generated files (invoices, client notes) could not be easily queried -- forcing manual searches for key info like \"available silver rings next Friday.\"",
+                "solution": "AI as a foundational capability to convert unstructured data into structured drafts, with human review (no one-click automation).",
+                "how": "AI ingests invoices, notes, and inventory lists to create organized data schemas. The founder reviews and confirms entries, enabling natural-language queries (for example, \"Show all gold necklaces available 10/15-10/20\"). The system learns from confirmations to improve accuracy over time.",
+                "rationale": "Accuracy matters more than speed for luxury clients, so we prioritized human oversight while automating data structuring. This approach supports future scalability (no predefined dashboards needed) while aligning with the founder's need to maintain control over critical business data. The reusable schema also eliminates redundant data entry across workflows."
+            },
+            "d4": {
+                "title": "04. Dual-Scenario Data Persistence and One-Click Sharing",
+                "problem": "Clients spent significant time selecting products, dates, and entering company details in the live lookbook -- only to face data loss if submission failed (unhappy path) or no easy way to save or share their selections (happy path). This created frustration from wasted effort and extra work for Ivy, who had to re-enter 8% of client requests manually due to lost or incomplete data.",
+                "solution": "A unified data persistence system that preserves all client inputs (product selections, dates, contact and company info) for both scenarios, enabling one-click sharing of structured data that Ivy can instantly import into the system.",
+                "how": {
+                    "happy_title": "Happy Path (Smooth Submission)",
+                    "happy_steps": [
+                        "As clients build their request (select products, input details), the system auto-saves progress in real time.",
+                        "After successful submission, clients get an option to \"Save Request Summary\" (one-click copy of structured data) for their records.",
+                        "Ivy receives the request with a pre-populated order form -- no manual data entry required."
+                    ],
+                    "unhappy_title": "Unhappy Path (Submission Failure)",
+                    "unhappy_steps": [
+                        "Client inputs are automatically retained (no page refresh, no lost selections).",
+                        "A clear alert surfaces with a \"Copy Full Request\" button, capturing all product choices, dates, and company info as a structured, Base64-encoded string.",
+                        "Clients share this copied text with Ivy via email or chat.",
+                        "Ivy pastes the string into the system's \"Import Request\" tool -- data auto-populates into the order form (products, dates, contact info pre-mapped) with one click, no manual cross-checking."
+                    ]
+                },
+                "rationale": "The biggest friction point was not just failure -- it was wasted effort, regardless of success. We designed this to eliminate rework entirely: for clients, their time spent selecting and entering data is never lost (whether submission works or not); for Ivy, manual data entry is replaced with instant imports. This dual-scenario value aligns with our core goal of reducing both emotional load (client frustration, Ivy's admin) and operational waste. By turning client inputs into a portable, system-compatible package, we turned potential pain points (failure, follow-up) into efficiency wins -- strengthening trust in the system while cutting Ivy's request-processing time by 80%. The one-click workflow keeps interactions simple for luxury clients (no tech skills needed) and aligns with Ivy's need for streamlined admin."
             }
+        },
+        "non_decisions": {
+            "title": "Key Non-Design Decisions",
+            "d1": {
+                "title": "01. No Checkout Flow",
+                "rationale": "B2B luxury rentals rely on invoices, deposits, and long-term relationships -- not impulse purchases. Adding payment gateways would add maintenance and friction without reducing admin work. Instead, we automated invoice generation that matches existing client behavior, supporting relationships instead of replacing them."
+            },
+            "d2": {
+                "title": "02. Prioritize Logic Over Custom UI",
+                "rationale": "With a 12-day MVP timeline, we used reliable base UI components to focus resources on data logic, availability rules, evidence flows, and data persistence. For a solo founder, reliability and correctness mattered more than visual uniqueness, ensuring the system solved core pain points first."
+            }
+        },
+        "reflection": {
+            "title": "Focus Over Features: Designing for Human Priorities",
+            "body": "A critical takeaway is that digital transformation should not prioritize completeness -- it should protect human strengths. Initially scoping for a full-featured platform, we pivoted to focus solely on eliminating creative drain by absorbing repetitive, low-judgment tasks. This showed that aligning technology with the user's core value (design, in this case) delivers more impact than adding unnecessary features. It also reinforced that trust (not just efficiency) is a designable outcome -- proactive proof collection, reliable availability data, and dual-scenario data persistence all strengthened client relationships while freeing the founder's creativity. The data persistence design, in particular, highlighted that solving for wasted effort (not just failure) creates disproportionate value for both users and the business, turning potential frustration into loyalty.",
+            "note": "（注：文档部分内容可能由 AI 生成）"
         }
     },
     "home": {

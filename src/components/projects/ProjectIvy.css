@@ -33,7 +33,7 @@
   padding: 0.8rem;
   border-left: 2px solid var(--border-color);
   background: var(--bg-secondary);
-  font-size: 0.9rem;
+  font-size: 1rem;
   flex-wrap: wrap;
   /* Allow wrapping */
 }
@@ -67,7 +67,7 @@
 }
 
 .ivy-cost-current-title {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 1rem;
@@ -154,7 +154,7 @@
   width: 100%;
   border-collapse: collapse;
   margin: 2rem 0;
-  font-size: 0.9rem;
+  font-size: 1rem;
   table-layout: fixed;
   /* Enforce width */
 }
@@ -234,7 +234,6 @@
 .ivy-cost-detail {
   margin-top: 0;
   color: var(--text-secondary);
-  font-size: 0.9rem;
 }
 
 .ivy-cost-case {
@@ -255,14 +254,12 @@
 
 .ivy-cost-title {
   margin: 0.35rem 0 0.5rem 0;
-  font-size: 1.1rem;
   color: var(--text-primary);
 }
 
 .ivy-cost-desc {
   margin: 0;
   color: var(--text-secondary);
-  font-size: 0.92rem;
   line-height: 1.6;
 }
 
