@@ -478,6 +478,21 @@
             }
         }
     },
+    "recommendations": {
+        "eyebrow": "Recommended Reading",
+        "title": "Keep Exploring",
+        "cta": "View project",
+        "projects": {
+            "oraweb": {
+                "title": "ORA Web",
+                "description": "Integrated data management system for contracts, production, and cross-team decisions."
+            },
+            "ivy-j-studio": {
+                "title": "Ivy J Studio",
+                "description": "Internal operating system for a high-end jewelry brand, replacing manual PDF workflows."
+            }
+        }
+    },
     "workloadGraph": {
         "title": "Workload Analysis",
         "dataEntry": "Data Entry",

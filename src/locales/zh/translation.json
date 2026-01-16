@@ -458,6 +458,21 @@
             }
         }
     },
+    "recommendations": {
+        "eyebrow": "推荐阅读",
+        "title": "继续探索",
+        "cta": "查看项目",
+        "projects": {
+            "oraweb": {
+                "title": "ORA Web",
+                "description": "面向合同、生产与跨团队协作的统一数据系统。"
+            },
+            "ivy-j-studio": {
+                "title": "Ivy J Studio",
+                "description": "高端珠宝品牌的内部系统，用实时库存取代手动 PDF 流程。"
+            }
+        }
+    },
     "workloadGraph": {
         "title": "工作量分析",
         "dataEntry": "数据录入",

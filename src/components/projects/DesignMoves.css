@@ -1,159 +1,107 @@
 /* src/components/projects/DesignMoves.css */
 
 .design-moves-container {
-    /* Removed Card Styles per user request */
     width: 100%;
-    /* background: var(--graph-bg); */
-    /* border: var(--graph-border); */
-    /* border-radius: var(--graph-radius); */
-    /* padding: var(--graph-card-padding-y, 1.25rem) var(--graph-card-padding-x, 1.5rem) 1.5rem; */
-    /* backdrop-filter: blur(10px); */
-
     margin: 2rem 0;
     box-sizing: border-box;
-
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
+    /* Gap between accordion items */
 }
 
 .dm-print-block {
     margin-bottom: 2rem;
 }
 
-/* Tabs */
-.dm-tabs {
-    display: flex;
+/* --- Accordion Item --- */
+.dm-accordion-item {
+    border-bottom: 1px solid var(--surface-divider);
+    padding-bottom: 1.5rem;
+}
+
+.dm-accordion-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* --- Accordion Header --- */
+.dm-accordion-header {
     width: 100%;
-    gap: 0.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--surface-card-border-strong);
-}
-
-.dm-tab {
-    flex: 1;
-    /* Force equal width initially */
-    background: transparent;
-    border: 1px solid transparent;
-    /* Prevent layout shift on active */
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0.2rem;
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Organic spring */
-    opacity: 0.5;
-    min-width: 0;
-    /* Allow flex shrinking if needed */
-}
-
-.dm-tab:hover {
-    background: var(--surface-card);
-    opacity: 0.8;
-}
-
-.dm-tab.active {
-    flex: 1.5;
-    /* Grow to reveal more text */
-    background: var(--surface-card-strong);
-    opacity: 1;
-    border: 1px solid var(--surface-card-border-strong);
-}
-
-.dm-tab-title {
-    font-size: 0.75rem;
-    /* Match --graph-font-title-size ish */
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--graph-text-secondary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    text-align: left;
-}
-
-.dm-tab.active .dm-tab-title {
-    color: var(--text-primary);
-}
-
-.dm-tab-subtitle {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    text-align: left;
-}
-
-/* Content Layout - Vertical Stack */
-.dm-content-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* Row 1: Header */
-.dm-header-row {
-    display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: flex-start;
+    background: transparent;
+    border: none;
+    padding: 0.5rem 0;
+    cursor: pointer;
+    text-align: left;
+    transition: opacity 0.2s ease;
     gap: 1rem;
+    position: sticky;
+    top: var(--project-header-offset, 56px);
+    z-index: 10;
+    background-color: var(--bg-system);
 }
 
-.dm-header-row .dm-headline {
+.dm-accordion-header:hover {
+    opacity: 0.85;
+}
+
+.dm-accordion-header:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 4px;
+    border-radius: 6px;
+}
+
+.dm-header-left {
+    display: flex;
+    align-items: baseline;
+    /* Align number and title */
+    gap: 1rem;
+    flex: 1;
+}
+
+.dm-header-number {
+    font-family: var(--font-sans);
+    /* Use sans for number */
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    /* Muted color for number */
+    min-width: 1.5rem;
+}
+
+.dm-header-title {
+    font-family: 'Soehne', sans-serif;
+    /* Or primary font */
     font-size: 1.1rem;
     font-weight: 500;
     color: var(--text-primary);
-    font-family: 'Soehne', sans-serif;
     margin: 0;
-    max-width: 70%;
-    /* Allow slightly more space with smaller font */
-    padding-left: 1.25rem;
 }
 
-.dm-scope-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-}
-
-.dm-scope-pill {
+.dm-header-icon {
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.35rem 0.8rem;
-    border: 1px solid var(--pill-border);
-    /* Subtle border like tabs */
-    border-radius: 8px;
-    /* Match tab radius */
-    color: var(--text-primary);
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    background: var(--pill-bg);
-    /* Slight gray background */
 }
 
-.dm-scope-pill svg {
-    opacity: 0.8;
+.dm-accordion-header[aria-expanded="true"] .dm-header-icon {
+    transform: rotate(180deg);
 }
 
-/* Row 2: Context (Restored Pain/Move Layout) */
-.dm-context-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+
+/* --- Accordion Body --- */
+.dm-accordion-body-content {
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
 }
 
+/* Reverting to Context Card Style (Dot Indicators) */
 .dm-context-card {
     background: var(--surface-card);
     border: 1px solid var(--surface-card-border);
@@ -174,6 +122,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-weight: 600;
 }
 
 .dm-context-card h4::before {
@@ -184,11 +133,13 @@
     border-radius: 50%;
 }
 
+/* Pain / Problem Style */
 .dm-context-card.pain h4::before {
     background-color: #ef4444;
     box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
 }
 
+/* Move / Solution Style */
 .dm-context-card.move h4::before {
     background-color: #4ade80;
     box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
@@ -201,16 +152,16 @@
     margin: 0;
 }
 
-/* Row 3: Visual & How it Works */
+
+/* --- Visual Section --- */
 .dm-visual-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    width: 100%;
+    margin-top: 0.5rem;
 }
 
 .dm-image-wrapper {
     position: relative;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--surface-card-border-strong);
     background: var(--bg-elevated);
@@ -246,70 +197,82 @@
     flex-shrink: 0;
 }
 
-.dm-how-it-works {
+
+/* --- Footer / Rationale --- */
+.dm-footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--surface-divider);
+    /* Subtle separator */
+}
+
+.dm-footer-block {
     font-size: 0.9rem;
     color: var(--text-secondary);
-    line-height: 1.5;
-    padding: 0 0.5rem;
+    line-height: 1.6;
 }
 
-/* Rationale Block at bottom */
-.dm-rationale {
-    margin-top: 1rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--surface-divider);
-}
-
-.dm-rationale h4 {
-    font-size: 0.8rem;
+.dm-footer-label {
     font-weight: 600;
+    color: var(--text-primary);
+    margin-right: 0.4rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
 }
 
 
 /* Mobile */
 @media (max-width: 768px) {
-    .dm-grid-layout {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .dm-bottom-row {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .dm-tabs {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .dm-tab {
-        width: 100%;
-        flex: none;
-    }
-
     .design-moves-container {
-        padding: 0;
-        /* Remove padding on mobile to align with page */
+        gap: 1rem;
     }
 
-    .dm-headline {
-        padding-left: 0;
+    .dm-header-left {
+        flex-direction: column;
+        gap: 0.2rem;
+        align-items: flex-start;
+    }
+
+    .dm-header-number {
+        font-size: 0.8rem;
+    }
+
+    .dm-header-title {
+        font-size: 1rem;
+    }
+
+    .dm-problem-block,
+    .dm-solution-block {
+        padding: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dm-accordion-header {
+        transition: none;
+    }
+
+    .dm-header-icon {
+        transition: none;
     }
 }
 
 @media print {
-
-    .dm-grid-layout,
-    .dm-bottom-row {
-        display: block;
+    .dm-accordion-item {
+        break-inside: avoid;
+        border-bottom: 1px solid #000;
     }
 
-    .dm-block {
-        margin-bottom: 1.5rem;
+    .dm-accordion-header {
+        position: static;
+    }
+
+    .dm-accordion-body-content {
+        display: block !important;
+        opacity: 1 !important;
+        height: auto !important;
     }
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { usePrintMode } from '../../hooks/usePrintMode';
 import './DesignMoves.css';
 
@@ -26,14 +26,22 @@ interface Tab {
 
 export const DesignMoves = () => {
     const { t } = useTranslation();
-    const [activeTabId, setActiveTabId] = useState('unify'); // Default to first new id
     const isPrintMode = usePrintMode();
+    const prefersReducedMotion = useReducedMotion();
 
     const tabs = t('project_p.design_moves.tabs', { returnObjects: true }) as Tab[];
     const moves = t('project_p.design_moves.moves', { returnObjects: true }) as DesignMove[];
 
-    const activeMove = moves.find(m => m.id === activeTabId) || moves[0];
+    // Default to the first item open
+    const [openItems, setOpenItems] = useState<string[]>(moves.length > 0 ? [moves[0].id] : []);
 
+    const toggleItem = (id: string) => {
+        setOpenItems(prev =>
+            prev.includes(id)
+                ? prev.filter(item => item !== id)
+                : [...prev, id]
+        );
+    };
 
     // Placeholder images map
     const imageMap: Record<string, string> = {
@@ -47,72 +55,75 @@ export const DesignMoves = () => {
         const isVideo = imageSrc?.endsWith('.mp4');
 
         return (
-            <div className="dm-detailed-content">
-                {/* 1. Context Row (Side by Side: Problem & Solution) */}
-                <div className="dm-context-row">
-                    <div className="dm-context-card pain">
-                        <h4>{move.problem.title}</h4>
-                        <p>{move.problem.body}</p>
-                    </div>
-                    <div className="dm-context-card move">
-                        <h4>{move.solution.title}</h4>
-                        <p>{move.solution.body}</p>
-                    </div>
+            <div className="dm-accordion-body-content">
+                {/* 1. Problem Section (Top) */}
+                <div className="dm-context-card pain">
+                    <h4>{move.problem.title}</h4>
+                    <p>{move.problem.body}</p>
                 </div>
 
-                {/* 2. Visual & How it Works */}
+                {/* 2. Solution Section (Middle - Stacked) */}
+                <div className="dm-context-card move">
+                    <h4>{move.solution.title}</h4>
+                    <p>{move.solution.body}</p>
+                </div>
+
+                {/* 3. Visual Section */}
                 <div className="dm-visual-section">
-                    <div className="dm-image-wrapper">
-                        {imageSrc && (
-                            isVideo ? (
-                                <video
-                                    src={imageSrc}
-                                    className="dm-main-image"
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                />
-                            ) : (
-                                <img
-                                    src={imageSrc}
-                                    alt={move.image?.alt || ''}
-                                    className="dm-main-image"
-                                />
-                            )
-                        )}
+                <div className="dm-image-wrapper">
+                    {imageSrc && (
+                        isVideo ? (
+                            <video
+                                src={imageSrc}
+                                className="dm-main-image"
+                                autoPlay={!prefersReducedMotion}
+                                loop={!prefersReducedMotion}
+                                muted
+                                playsInline
+                                controls
+                                aria-label={move.image?.alt || move.headline}
+                            />
+                        ) : (
+                            <img
+                                src={imageSrc}
+                                alt={move.image?.alt || move.headline}
+                                className="dm-main-image"
+                                loading="lazy"
+                            />
+                        )
+                    )}
                         {move.image?.annotation && (
                             <div className="dm-annotation">
                                 <ArrowUpRight size={16} className="dm-arrow" />
-                                <span>{move.image.annotation}</span>
+                                <span className="dm-annotation-text">{move.image.annotation}</span>
                             </div>
                         )}
                     </div>
-
-                    {/* How It Works (Below visual, smaller font) */}
-                    <div className="dm-how-it-works">
-                        <strong>{move.how_it_works.title}: </strong>
-                        {move.how_it_works.body}
-                    </div>
                 </div>
 
-                {/* 3. Rationale */}
-                <div className="dm-rationale">
-                    <h4>{move.rationale.title}</h4>
-                    <p>{move.rationale.body}</p>
+                {/* 4. Footer (How it Works + Rationale) */}
+                <div className="dm-footer-section">
+                    <div className="dm-footer-block">
+                        <span className="dm-footer-label">{move.how_it_works.title}:</span>
+                        {move.how_it_works.body}
+                    </div>
+                    <div className="dm-footer-block">
+                        <span className="dm-footer-label">{move.rationale.title}:</span>
+                        {move.rationale.body}
+                    </div>
                 </div>
             </div>
         );
     };
 
+    // Print Mode: Just render everything stacked
     if (isPrintMode) {
         return (
             <div className="design-moves-container">
                 {moves.map((move) => (
                     <div key={move.id} className="dm-print-block">
-                        <div className="dm-content-container">
-                            {renderMoveContent(move)}
-                        </div>
+                        <h3>{move.headline}</h3>
+                        {renderMoveContent(move)}
                     </div>
                 ))}
             </div>
@@ -121,35 +132,66 @@ export const DesignMoves = () => {
 
     return (
         <div className="design-moves-container">
-            {/* Header / Tabs */}
-            <div className="dm-tabs">
-                {tabs.map((tab) => (
-                    <button
-                        key={tab.id}
-                        className={`dm-tab ${activeTabId === tab.id ? 'active' : ''}`}
-                        onClick={() => setActiveTabId(tab.id)}
-                    >
-                        <span className="dm-tab-title">{tab.title}</span>
-                        <span className="dm-tab-subtitle">{tab.subtitle}</span>
-                    </button>
-                ))}
-            </div>
+            {moves.map((move) => {
+                const tabInfo = tabs.find(t => t.id === move.id);
+                // Extract "01.", "02." from title if present, or just use index
+                // Assuming title format "01. Title", let's split if possible or just render.
+                // Based on translation.json: "01. Unify Views", we can just use it as is.
+                // Logic: Let's split Number and Text for better styling if possible, but keeping it simple is safer.
+                // Let's rely on the tab title which has the numbering "01. Unify Views"
 
-            {/* Content Area */}
-            <div className="dm-content-area">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={activeTabId}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3 }}
-                        className="dm-content-container"
-                    >
-                        {renderMoveContent(activeMove)}
-                    </motion.div>
-                </AnimatePresence>
-            </div>
+                const isOpen = openItems.includes(move.id);
+                const headerId = `dm-header-${move.id}`;
+                const panelId = `dm-panel-${move.id}`;
+
+                return (
+                    <div key={move.id} className="dm-accordion-item">
+                        <button
+                            className="dm-accordion-header"
+                            onClick={() => toggleItem(move.id)}
+                            aria-expanded={isOpen}
+                            aria-controls={panelId}
+                            id={headerId}
+                            type="button"
+                        >
+                            <div className="dm-header-left">
+                                {/* Use tab title/subtitle combo if available, else headline */}
+                                {tabInfo ? (
+                                    <>
+                                        {/* Parsing "01. Unify Views" -> "01" and "Unify Views" */}
+                                        <span className="dm-header-number">{tabInfo.title.split('.')[0]}</span>
+                                        <h3 className="dm-header-title">
+                                            {tabInfo.title.split('.').slice(1).join('.').trim()} {tabInfo.subtitle}
+                                        </h3>
+                                    </>
+                                ) : (
+                                    <h3 className="dm-header-title">{move.headline}</h3>
+                                )}
+                            </div>
+                            <div className="dm-header-icon">
+                                <ChevronDown size={20} />
+                            </div>
+                        </button>
+
+                        <AnimatePresence>
+                            {isOpen && (
+                                <motion.div
+                                    initial={prefersReducedMotion ? false : { height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3, ease: 'easeInOut' }}
+                                    style={{ overflow: 'hidden' }}
+                                    id={panelId}
+                                    role="region"
+                                    aria-labelledby={headerId}
+                                >
+                                    {renderMoveContent(move)}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                );
+            })}
         </div>
     );
 };

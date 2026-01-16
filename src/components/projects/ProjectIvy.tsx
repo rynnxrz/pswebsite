@@ -12,6 +12,7 @@ import { MiniAdminBar } from './AttentionChart/MiniAdminBar';
 import { LinearTaskFlow } from './LinearTaskFlow/LinearTaskFlow';
 import { DisputeFlow } from './DisputeFlow/DisputeFlow';
 import { DecisionCard } from './DecisionCard/DecisionCard';
+import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRecommendation';
 
 export const ProjectIvy = () => {
     const { t, i18n } = useTranslation();
@@ -27,6 +28,15 @@ export const ProjectIvy = () => {
         { id: 'ai', title: 'AI Capability' },
         { id: 'outcome', title: 'Outcome' },
         { id: 'reflection', title: 'Reflection' },
+    ];
+
+    const recommendedProjects = [
+        {
+            id: 'oraweb',
+            title: t('recommendations.projects.oraweb.title'),
+            description: t('recommendations.projects.oraweb.description'),
+            image: '/assets/images/ora-web/Mockup.webp'
+        }
     ];
 
     useEffect(() => {
@@ -296,6 +306,10 @@ export const ProjectIvy = () => {
                         <p><strong>{t('ivy.reflection.closing')}</strong></p>
                     </div>
                 </section>
+
+                <hr className="section-divider" />
+
+                <ProjectRecommendation projects={recommendedProjects} />
 
             </div>
         </motion.div>

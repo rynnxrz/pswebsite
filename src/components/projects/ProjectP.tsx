@@ -10,6 +10,7 @@ import { UserStakeholdersGraph } from './UserStakeholdersGraph';
 import { DesignMoves } from './DesignMoves';
 import { UserVoiceQuotes } from './UserVoiceQuotes';
 import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
+import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRecommendation';
 
 import '../Tooltip.css';
 
@@ -32,6 +33,14 @@ export const ProjectP = () => {
 
   // IDs that belong to the summary/problem area if we want to group them, but they are distinct now.
   // For scrolling logic, we can keep it simple.
+  const recommendedProjects = [
+    {
+      id: 'ivy-j-studio',
+      title: t('recommendations.projects.ivy-j-studio.title'),
+      description: t('recommendations.projects.ivy-j-studio.description'),
+      image: '/assets/images/ivy-j/project-card.webp'
+    }
+  ];
 
   useEffect(() => {
     // Intersection Observer for active section
@@ -167,6 +176,10 @@ export const ProjectP = () => {
           <h2>{t('project_p.reflection.title')}</h2>
           <p>{t('project_p.reflection.body')}</p>
         </section>
+
+        <hr className="section-divider" />
+
+        <ProjectRecommendation projects={recommendedProjects} />
 
       </div>
     </motion.div>

@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { pageTransition } from '../../utils/animations';
+import { useTranslation } from 'react-i18next';
 import './ProjectDialogic.css';
+import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRecommendation';
 
 type DialogicState = 'intro' | 'demo' | 'experience';
 
@@ -30,6 +32,7 @@ interface Connection3D {
 }
 
 export const ProjectDialogic = () => {
+  const { t } = useTranslation();
   const [currentState, setCurrentState] = useState<DialogicState>('intro');
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -47,6 +50,14 @@ export const ProjectDialogic = () => {
   const [connections, setConnections] = useState<Connection3D[]>([]);
   const [currentCoordinates, setCurrentCoordinates] = useState({ x: 0, y: 0, z: 0 });
   const unitPx = 60; // scale 1.0 unit to pixels
+  const recommendedProjects = [
+    {
+      id: 'ivy-j-studio',
+      title: t('recommendations.projects.ivy-j-studio.title'),
+      description: t('recommendations.projects.ivy-j-studio.description'),
+      image: '/assets/images/ivy-j/project-card.webp'
+    }
+  ];
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -334,6 +345,9 @@ export const ProjectDialogic = () => {
       {currentState === 'intro' && renderIntro()}
       {currentState === 'demo' && renderDemo()}
       {currentState === 'experience' && renderExperience()}
+      <div className="project-recommendation-shell">
+        <ProjectRecommendation projects={recommendedProjects} />
+      </div>
     </motion.div>
   );
 };
