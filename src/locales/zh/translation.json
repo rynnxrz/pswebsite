@@ -15,15 +15,70 @@
         "viewPortfolio": "查看作品集",
         "experience": "工作经历",
         "education": "教育背景",
-        "skills": "技能"
+        "skills": "技能",
+        "experience_list": [
+            {
+                "role": "产品设计师",
+                "company": "OraNutrition 有限公司",
+                "period": "2023年7月 - 2023年12月"
+            },
+            {
+                "role": "用户体验设计师",
+                "company": "阿维塔科技",
+                "period": "2024年1月 - 2024年3月"
+            },
+            {
+                "role": "研究实习生",
+                "company": "清华大学 - 安踏集团",
+                "period": "2024年3月 - 2024年8月"
+            }
+        ],
+        "education_list": [
+            {
+                "degree": "设计研究硕士",
+                "institution": "皇家艺术学院",
+                "period": "2024年9月 - 2025年7月"
+            },
+            {
+                "degree": "计算机科学学士",
+                "institution": "奥克兰大学",
+                "period": "2020年1月 - 2024年5月"
+            }
+        ],
+        "skills_list": [
+            {
+                "title": "用户体验研究与设计",
+                "subtitle": "工作坊引导、以用户为中心的设计、原型设计、设计系统、Figma。"
+            },
+            {
+                "title": "技术能力",
+                "subtitle": "Python, SQL, HTML/CSS, JavaScript, Kotlin, Three.js。"
+            }
+        ]
+    },
+    "project": {
+        "labels": {
+            "problem": "问题",
+            "solution": "解决方案",
+            "how": "它是如何工作的",
+            "rationale": "设计理念"
+        },
+        "tooltips": {
+            "download": "下载 PDF",
+            "copy": "复制链接",
+            "copied": "已复制！"
+        }
     },
     "project_p": {
         "header": {
             "title": "ORA Web",
-            "date": "December 6th, 2025",
-            "download": "Download PDF",
-            "copy": "Copy URL",
-            "copied": "Successfully copied to clipboard"
+            "date": "December 6th, 2025"
+        },
+        "nav": {
+            "summary": "摘要",
+            "problem": "背景与问题",
+            "decisions": "决策",
+            "reflection": "反思"
         },
         "intro": {
             "title": "Intro",
@@ -68,10 +123,12 @@
             "summary": "SUMMARY",
             "problem": "CONTEXT & PROBLEM",
             "decisions": "DECISIONS",
-            "delivery": "DELIVERY & SCOPE"
+            "delivery": "DELIVERY & SCOPE",
+            "reflection": "归纳与反思"
         },
         "summary": {
-            "title": "Phase 1 (contracted): Decision dashboard integrating D365 + legacy spreadsheets",
+            "title": "从 Ora Nutrition 实习生到 SaaS 联合创始人：利用 Ora Web 解决前雇主的工作流痛点，并确保他们成为客户",
+            "subtitle": "作为实习生，我发现了团队混乱的工作流程。这一观察转变为创业机会，我主导了端到端的用户体验设计，构建了功能演示，并与客户达成一致，交付了一个能够简化混乱电子表格、与 Dynamics 365 集成、确保客户合同并为未来自动调度功能奠定关键基础的仪表盘。",
             "engagement_body": "This engagement is a signed Phase 1 delivery for Ora Nutrition: a decision dashboard built on top of production data currently spread across shared spreadsheets.",
             "d365_body": "After the client adopted Microsoft Dynamics 365 (D365), Phase 1 scope was defined as a dashboard and decision layer, prioritising D365 as the source of truth instead of rebuilding overlapping data-entry features.",
             "input_gap_body": "We are currently confirming whether all required fields can be sourced from D365, or whether ORA Web needs a small input module to capture only the confirmed gaps.",
@@ -483,18 +540,33 @@
             "lastUpdated": "更新于",
             "oraweb": {
                 "title": "ORA Web",
-                "description": "通过将合同与生产数据整合到一个简单的 ERP 工具中，我们提高了工厂管理的效率。",
-                "date": "2025年12月6日"
+                "description": "从实习生到 SaaS 联合创始人，我主导了端到端的用户体验设计，将 4 个 Google Sheets 表格和 Dynamics 365 数据整合为统一的仪表盘，解决了前雇主 40 人团队的工作流痛点，并成功将他们转化为客户。",
+                "date": "2025年12月6日",
+                "tags": [
+                    "用户体验设计",
+                    "端到端",
+                    "数据整合"
+                ]
             },
             "one": {
-                "title": "Innerpeace",
-                "description": "我们为学生创建了一款低成本的心理健康应用，针对经济型 Android 设备进行了优化，通过研究数据库实现了大规模测试，并大规模提供可及的减压服务。",
-                "date": "2024年10月10日"
+                "title": "Project One: Hitch'n Farm 弥合城市中的自然鸿沟",
+                "description": "连接城市居民与自然和可持续农业实践的创新解决方案。",
+                "date": "2024年10月10日",
+                "tags": [
+                    "用户体验研究",
+                    "安卓应用",
+                    "可扩展"
+                ]
             },
             "ivy-j-studio": {
                 "title": "Ivy J Studio",
                 "description": "高端珠宝品牌的内部操作系统，用实时库存和基于证据的租赁系统取代了手动 PDF 工作流程。",
-                "date": "2026年1月15日"
+                "date": "2026年1月15日",
+                "tags": [
+                    "产品策略",
+                    "全栈开发",
+                    "内部工具"
+                ]
             },
             "notification": {
                 "title": "Vibe Coding 进行中 🚧",

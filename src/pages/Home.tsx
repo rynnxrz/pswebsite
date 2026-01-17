@@ -15,17 +15,14 @@ const projectsData = [
   {
     id: "ivy-j-studio",
     image: "/assets/images/ivy-j/project-card.webp",
-    tags: ["Product Strategy", "Full-stack", "Internal Tool"],
   },
   {
     id: "oraweb",
     image: "/assets/images/ora-web/Mockup.webp",
-    tags: ["UX Design", "End-to-end", "Data Integration"],
   },
   // {
   //   id: "one",
   //   image: "/assets/images/innerpeace-cover.webp",
-  //   tags: ["UX Research", "Android App", "Scalable"],
   // },
 ];
 
@@ -114,6 +111,7 @@ export const Home = () => {
                 const dateRaw = t(`home.projects.${project.id}.date`);
                 const lastUpdated = t('home.projects.lastUpdated');
                 const date = dateRaw ? `${lastUpdated} ${dateRaw}` : undefined;
+                const tags = t(`home.projects.${project.id}.tags`, { returnObjects: true }) as string[];
 
                 return (
                   <Fragment key={project.id}>
@@ -133,7 +131,7 @@ export const Home = () => {
                         title={title}
                         image={project.image}
                         description={description}
-                        tags={project.tags}
+                        tags={tags}
                         date={date}
                       />
                     </div>

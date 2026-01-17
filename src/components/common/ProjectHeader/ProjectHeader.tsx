@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Download from 'lucide-react/dist/esm/icons/download';
 import Check from 'lucide-react/dist/esm/icons/check';
 import LinkIcon from 'lucide-react/dist/esm/icons/link';
@@ -21,10 +22,14 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
     sections,
     activeSection,
     onSectionClick,
-    downloadTooltip = 'Download PDF',
-    copyTooltip = 'Copy Link',
-    copiedTooltip = 'Copied!',
+    downloadTooltip,
+    copyTooltip,
+    copiedTooltip,
 }) => {
+    const { t } = useTranslation();
+    const finalDownloadTooltip = downloadTooltip || t('project.tooltips.download');
+    const finalCopyTooltip = copyTooltip || t('project.tooltips.copy');
+    const finalCopiedTooltip = copiedTooltip || t('project.tooltips.copied');
     const [isScrolled, setIsScrolled] = useState(false);
     const [copied, setCopied] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -176,14 +181,14 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
                         <button onClick={handlePrint} className="action-btn" aria-label="Print/Download PDF">
                             <Download size={16} />
                         </button>
-                        <span className="tooltip-text">{downloadTooltip}</span>
+                        <span className="tooltip-text">{finalDownloadTooltip}</span>
                     </div>
 
                     <div className="tooltip-container tooltip-bottom">
                         <button onClick={handleCopyLink} className="action-btn" aria-label="Copy Link">
                             {copied ? <Check size={16} /> : <LinkIcon size={16} />}
                         </button>
-                        <span className="tooltip-text">{copied ? copiedTooltip : copyTooltip}</span>
+                        <span className="tooltip-text">{copied ? finalCopiedTooltip : finalCopyTooltip}</span>
                     </div>
                 </div>
 

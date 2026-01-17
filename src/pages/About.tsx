@@ -5,21 +5,17 @@ import { Link } from 'react-router-dom';
 import { pageTransition } from '../utils/animations';
 import './About.css';
 
-const experienceData = [
-  { role: 'Product Designer', company: 'OraNutrition Ltd.', period: 'Jul 2023 - Dec 2023' },
-  { role: 'UX Designer', company: 'Avatr Technology Ltd.', period: 'Jan 2024 - Mar 2024' },
-  { role: 'Research Intern', company: 'Tsinghua University - ANTA Group', period: 'Mar 2024 - Aug 2024' }
-];
 
-const educationData = [
-  { degree: 'Master of Research, Design', institution: 'Royal College of Art', period: 'Sep 2024 - Jul 2025' },
-  { degree: 'Bachelor of Computer Science', institution: 'University of Auckland', period: 'Jan 2020 - May 2024' }
-];
 
 import { useTranslation } from 'react-i18next';
 
 export const About = () => {
   const { t } = useTranslation();
+
+  const experienceData = t('about.experience_list', { returnObjects: true }) as Array<{ role: string; company: string; period: string }>;
+  const educationData = t('about.education_list', { returnObjects: true }) as Array<{ degree: string; institution: string; period: string }>;
+  const skillsData = t('about.skills_list', { returnObjects: true }) as Array<{ title: string; subtitle: string }>;
+
   return (
     <motion.div {...pageTransition} className="main-content-container-about">
 
@@ -58,8 +54,8 @@ export const About = () => {
         </div>
         <div className="grid-col-right-about">
           <div className="list-container">
-            {experienceData.map((item) => (
-              <div className="list-item" key={item.company}><div className="item-main"><p className="item-title">{item.role}</p><p className="item-subtitle">{item.company}</p></div><p className="item-period">{item.period}</p></div>
+            {experienceData.map((item, index) => (
+              <div className="list-item" key={index}><div className="item-main"><p className="item-title">{item.role}</p><p className="item-subtitle">{item.company}</p></div><p className="item-period">{item.period}</p></div>
             ))}
           </div>
         </div>
@@ -76,8 +72,8 @@ export const About = () => {
         </div>
         <div className="grid-col-right-about">
           <div className="list-container">
-            {educationData.map((item) => (
-              <div className="list-item" key={item.institution}><div className="item-main"><p className="item-title">{item.degree}</p><p className="item-subtitle">{item.institution}</p></div><p className="item-period">{item.period}</p></div>
+            {educationData.map((item, index) => (
+              <div className="list-item" key={index}><div className="item-main"><p className="item-title">{item.degree}</p><p className="item-subtitle">{item.institution}</p></div><p className="item-period">{item.period}</p></div>
             ))}
           </div>
         </div>
@@ -94,8 +90,9 @@ export const About = () => {
         </div>
         <div className="grid-col-right-about">
           <div className="list-container">
-            <div className="skills-item"><p className="item-title">UX Research & Design</p><p className="item-subtitle">Workshop Facilitation, User-Centered Design, Prototyping, Design Systems, Figma.</p></div>
-            <div className="skills-item"><p className="item-title">Technical</p><p className="item-subtitle">Python, SQL, HTML/CSS, JavaScript, Kotlin, Three.js.</p></div>
+            {skillsData.map((item, index) => (
+              <div className="skills-item" key={index}><p className="item-title">{item.title}</p><p className="item-subtitle">{item.subtitle}</p></div>
+            ))}
           </div>
         </div>
       </section>

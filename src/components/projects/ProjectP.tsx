@@ -25,10 +25,10 @@ export const ProjectP = () => {
   // Section definitions for Navigation
   // Adjusted to match new content hierarchy
   const navSections = [
-    { id: 'summary', title: 'Summary' },
-    { id: 'problem', title: 'Context & Problem' },
-    { id: 'decisions', title: 'Decisions' },
-    { id: 'reflection', title: 'Reflection' },
+    { id: 'summary', title: t('project_p.nav.summary') },
+    { id: 'problem', title: t('project_p.nav.problem') },
+    { id: 'decisions', title: t('project_p.nav.decisions') },
+    { id: 'reflection', title: t('project_p.nav.reflection') },
   ];
 
   // IDs that belong to the summary/problem area if we want to group them, but they are distinct now.
@@ -98,9 +98,9 @@ export const ProjectP = () => {
           sections={navSections}
           activeSection={activeSection}
           onSectionClick={scrollToSection}
-          downloadTooltip={t('project_p.header.download')}
-          copyTooltip={t('project_p.header.copy')}
-          copiedTooltip={t('project_p.header.copied')}
+          downloadTooltip={t('project.tooltips.download')}
+          copyTooltip={t('project.tooltips.copy')}
+          copiedTooltip={t('project.tooltips.copied')}
         />
 
         {/* 1. Summary Section */}

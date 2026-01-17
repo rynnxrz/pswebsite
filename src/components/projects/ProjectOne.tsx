@@ -6,8 +6,8 @@ import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRe
 export const ProjectOne = () => {
   const { t } = useTranslation();
   const project = {
-    title: "Project One: Hitch'n Farm Bridging the Nature Gap in Cities",
-    description: "An innovative solution to connect urban dwellers with nature and sustainable farming practices.",
+    title: t('home.projects.one.title'),
+    description: t('home.projects.one.description'),
     image: "/images/project-one.jpg"
   };
   const recommendedProjects = [

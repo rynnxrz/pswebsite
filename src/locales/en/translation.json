@@ -15,21 +15,115 @@
         "viewPortfolio": "view portfolio",
         "experience": "experience",
         "education": "education",
-        "skills": "skills"
+        "skills": "skills",
+        "experience_list": [
+            {
+                "role": "Product Designer",
+                "company": "OraNutrition Ltd.",
+                "period": "Jul 2023 - Dec 2023"
+            },
+            {
+                "role": "UX Designer",
+                "company": "Avatr Technology Ltd.",
+                "period": "Jan 2024 - Mar 2024"
+            },
+            {
+                "role": "Research Intern",
+                "company": "Tsinghua University - ANTA Group",
+                "period": "Mar 2024 - Aug 2024"
+            }
+        ],
+        "education_list": [
+            {
+                "degree": "Master of Research, Design",
+                "institution": "Royal College of Art",
+                "period": "Sep 2024 - Jul 2025"
+            },
+            {
+                "degree": "Bachelor of Computer Science",
+                "institution": "University of Auckland",
+                "period": "Jan 2020 - May 2024"
+            }
+        ],
+        "skills_list": [
+            {
+                "title": "UX Research & Design",
+                "subtitle": "Workshop Facilitation, User-Centered Design, Prototyping, Design Systems, Figma."
+            },
+            {
+                "title": "Technical",
+                "subtitle": "Python, SQL, HTML/CSS, JavaScript, Kotlin, Three.js."
+            }
+        ]
+    },
+    "project": {
+        "labels": {
+            "problem": "Problem",
+            "solution": "Solution",
+            "how": "How it Works",
+            "rationale": "Design Rationale"
+        },
+        "tooltips": {
+            "download": "Download PDF",
+            "copy": "Copy Link",
+            "copied": "Copied!"
+        }
     },
     "project_p": {
         "header": {
             "title": "ORA Web",
-            "date": "December 6th, 2025",
-            "download": "Download PDF",
-            "copy": "Copy URL",
-            "copied": "Successfully copied to clipboard"
+            "date": "December 6th, 2025"
+        },
+        "nav": {
+            "summary": "Summary",
+            "problem": "Context & Problem",
+            "decisions": "Decisions",
+            "reflection": "Reflection"
         },
         "section": {
             "summary": "SUMMARY",
             "problem": "CONTEXT & PROBLEM",
             "decisions": "DECISIONS",
             "reflection": "REFLECTION"
+        },
+        "intro": {
+            "title": "Intro",
+            "content": "The project is defined as ORA Web, a small-scale software system for a contract manufacturing company, focusing on integrating contract production data management and efficiency. <strong>Case study scope:</strong> (Jul 2023 – Aug 2024 · Ongoing)"
+        },
+        "team": {
+            "title": "Team & My Role",
+            "client": "Client",
+            "clientDesc": "Ora Nutrition Ltd (contract-manufacturing factory).",
+            "clientPoints": [
+                "Founded in 2019, scaled into one of the leading nutrition contract manufacturers in Auckland.",
+                "Acquired in 2025 by a China-listed company.",
+                "No in-house design team; I operated as the <strong>sole designer</strong> in cross-functional delivery."
+            ],
+            "role": "My Role",
+            "roleDesc": "UX Designer (Solo)",
+            "rolePoints": [
+                "Led end-to-end UX for ORA Web, from problem framing to workflow design and system structure.",
+                "Mapped contract-to-shipment processes and translated operational logic into scalable data and UI models.",
+                "Facilitated alignment across Finance, Production Planning, Warehouse/Procurement, and Management.",
+                "Worked closely with engineering to ensure feasibility and consistent status logic across views."
+            ],
+            "duration": "Project Duration",
+            "durationDesc": "<strong>Case study scope:</strong><br/>(Jul 2023 – Aug 2024 · Ongoing)"
+        },
+        "scope": {
+            "title": "System Scope",
+            "content": "This system spans three operational layers across the contract-to-production lifecycle:",
+            "points": [
+                "<strong>Decision Makers:</strong> They read and consolidated data for timing, risk, and client decisions.",
+                "<strong>Shift/Planning Managers:</strong> They need accurate status and capacity signals to allocate work.",
+                "<strong>Operators/Executors:</strong> They need structured input and clear next-step prompts to keep data reliable."
+            ],
+            "read": "Read: Decide timing and client priorities.",
+            "readDesc": "Decide timing and client priorities.",
+            "plan": "Plan: Connect orders to capacity.",
+            "planDesc": "Connect orders to capacity.",
+            "input": "Input: Heavy data entry & initial validation.",
+            "inputDesc": "Heavy data entry & initial validation."
         },
         "summary": {
             "title": "From Intern at Ora Nutrition to SaaS Co-founder: Solving Former Employer’s Workflow Pain Points with Ora Web, Securing Them as Clients",
@@ -464,17 +558,32 @@
             "oraweb": {
                 "title": "ORA Web",
                 "description": "From intern to SaaS co-founder, I led end-to-end UX design to unify 4 Google Sheets + Dynamics 365 data into a single dashboard for my former employer’s 40-person office team. Secured them as a client with this solution.",
-                "date": "December 6th, 2025"
+                "date": "December 6th, 2025",
+                "tags": [
+                    "UX Design",
+                    "End-to-end",
+                    "Data Integration"
+                ]
             },
             "one": {
-                "title": "Innerpeace",
-                "description": "We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale.",
-                "date": "October 10th, 2024"
+                "title": "Project One: Hitch'n Farm Bridging the Nature Gap in Cities",
+                "description": "An innovative solution to connect urban dwellers with nature and sustainable farming practices.",
+                "date": "October 10th, 2024",
+                "tags": [
+                    "UX Research",
+                    "Android App",
+                    "Scalable"
+                ]
             },
             "ivy-j-studio": {
                 "title": "Ivy J Studio",
                 "description": "Internal operating system for a high-end jewelry brand, replacing manual PDF workflows with live inventory and evidence-based rentals.",
-                "date": "January 15th, 2026"
+                "date": "January 15th, 2026",
+                "tags": [
+                    "Product Strategy",
+                    "Full-stack",
+                    "Internal Tool"
+                ]
             },
             "notification": {
                 "title": "Vibe Coding in Progress 🚧",

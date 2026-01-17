@@ -30,12 +30,8 @@ export const ProjectIvy = () => {
             image: '/assets/images/ora-web/Mockup.webp'
         }
     ];
-    const decisionLabels = {
-        problem: 'Problem',
-        solution: 'Solution',
-        how: 'How it Works',
-        rationale: 'Design Rationale'
-    };
+    const decisionLabels = t('project.labels', { returnObjects: true }) as { problem: string; solution: string; how: string; rationale: string };
+
     const happySteps = t('ivy.decisions.d4.how.happy_steps', { returnObjects: true }) as string[];
     const unhappySteps = t('ivy.decisions.d4.how.unhappy_steps', { returnObjects: true }) as string[];
     const decisionMoves: DesignMove[] = ['d1', 'd2', 'd3', 'd4'].map((key) => {
@@ -126,9 +122,9 @@ export const ProjectIvy = () => {
                     sections={navSections}
                     activeSection={activeSection}
                     onSectionClick={scrollToSection}
-                    downloadTooltip={t('ivy.header.download')}
-                    copyTooltip={t('ivy.header.copy')}
-                    copiedTooltip={t('ivy.header.copied')}
+                    downloadTooltip={t('project.tooltips.download')}
+                    copyTooltip={t('project.tooltips.copy')}
+                    copiedTooltip={t('project.tooltips.copied')}
                 />
 
                 {/* Hero Section */}
