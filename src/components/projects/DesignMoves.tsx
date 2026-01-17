@@ -46,9 +46,9 @@ export const DesignMoves = () => {
 
     // Placeholder images map
     const imageMap: Record<string, string> = {
-        unify: '/assets/images/ora-web/Unify.mp4',
-        guide: '/assets/images/ora-web/move-guide-placeholder.png',
-        reveal: '/assets/images/ora-web/move-reveal-placeholder.png'
+        unify: '/assets/images/ora-web/videoloop/01contractable.mp4',
+        guide: '/assets/images/ora-web/videoloop/02editcontracts.mp4',
+        reveal: '/assets/images/ora-web/videoloop/03dashboard.mp4'
     };
 
     const renderMoveContent = (move: DesignMove) => {
@@ -72,6 +72,12 @@ export const DesignMoves = () => {
                 {/* 3. Visual Section */}
                 <div className="dm-visual-section">
                     <div className="dm-image-wrapper">
+                        {move.image?.annotation && (
+                            <div className="dm-annotation">
+                                <ArrowUpRight size={16} className="dm-arrow" />
+                                <span className="dm-annotation-text">{move.image.annotation}</span>
+                            </div>
+                        )}
                         {imageSrc && (
                             isVideo ? (
                                 <video
@@ -92,12 +98,6 @@ export const DesignMoves = () => {
                                     loading="lazy"
                                 />
                             )
-                        )}
-                        {move.image?.annotation && (
-                            <div className="dm-annotation">
-                                <ArrowUpRight size={16} className="dm-arrow" />
-                                <span className="dm-annotation-text">{move.image.annotation}</span>
-                            </div>
                         )}
                     </div>
                 </div>
