@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'framer-motion';
 import ArrowUpRight from 'lucide-react/dist/esm/icons/arrow-up-right';
@@ -6,13 +6,13 @@ import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down';
 import { usePrintMode } from '../../hooks/usePrintMode';
 import './DesignMoves.css';
 
-interface DesignMove {
+export interface DesignMove {
     id: string;
     headline: string;
-    problem: { title: string; body: string };
-    solution: { title: string; body: string };
-    how_it_works: { title: string; body: string };
-    rationale: { title: string; body: string };
+    problem: { title: string; body: ReactNode };
+    solution: { title: string; body: ReactNode };
+    how_it_works: { title: string; body: ReactNode };
+    rationale: { title: string; body: ReactNode };
     image?: {
         alt: string;
         annotation: string;
@@ -25,13 +25,19 @@ interface Tab {
     subtitle: string;
 }
 
-export const DesignMoves = () => {
+export interface DesignMovesProps {
+    tabs?: Tab[];
+    moves?: DesignMove[];
+    imageMap?: Record<string, string>;
+}
+
+export const DesignMoves = ({ tabs: tabsProp, moves: movesProp, imageMap: imageMapProp }: DesignMovesProps) => {
     const { t } = useTranslation();
     const isPrintMode = usePrintMode();
     const prefersReducedMotion = useReducedMotion();
 
-    const tabs = t('project_p.design_moves.tabs', { returnObjects: true }) as Tab[];
-    const moves = t('project_p.design_moves.moves', { returnObjects: true }) as DesignMove[];
+    const tabs = tabsProp ?? (t('project_p.design_moves.tabs', { returnObjects: true }) as Tab[]);
+    const moves = movesProp ?? (t('project_p.design_moves.moves', { returnObjects: true }) as DesignMove[]);
 
     // Default to the first item open
     const [openItems, setOpenItems] = useState<string[]>(moves.length > 0 ? [moves[0].id] : []);
@@ -45,7 +51,7 @@ export const DesignMoves = () => {
     };
 
     // Placeholder images map
-    const imageMap: Record<string, string> = {
+    const imageMap: Record<string, string> = imageMapProp ?? {
         unify: '/assets/images/ora-web/videoloop/01contractable.mp4',
         guide: '/assets/images/ora-web/videoloop/02editcontracts.mp4',
         reveal: '/assets/images/ora-web/videoloop/03dashboard.mp4'
@@ -54,6 +60,7 @@ export const DesignMoves = () => {
     const renderMoveContent = (move: DesignMove) => {
         const imageSrc = imageMap[move.id];
         const isVideo = imageSrc?.endsWith('.mp4');
+        const hasVisual = Boolean(imageSrc);
 
         return (
             <div className="dm-accordion-body-content">
@@ -70,37 +77,39 @@ export const DesignMoves = () => {
                 </div>
 
                 {/* 3. Visual Section */}
-                <div className="dm-visual-section">
-                    <div className="dm-image-wrapper">
-                        {move.image?.annotation && (
-                            <div className="dm-annotation">
-                                <ArrowUpRight size={16} className="dm-arrow" />
-                                <span className="dm-annotation-text">{move.image.annotation}</span>
-                            </div>
-                        )}
-                        {imageSrc && (
-                            isVideo ? (
-                                <video
-                                    src={imageSrc}
-                                    className="dm-main-image"
-                                    autoPlay={!prefersReducedMotion}
-                                    loop={!prefersReducedMotion}
-                                    muted
-                                    playsInline
-                                    controls
-                                    aria-label={move.image?.alt || move.headline}
-                                />
-                            ) : (
-                                <img
-                                    src={imageSrc}
-                                    alt={move.image?.alt || move.headline}
-                                    className="dm-main-image"
-                                    loading="lazy"
-                                />
-                            )
-                        )}
+                {hasVisual && (
+                    <div className="dm-visual-section">
+                        <div className="dm-image-wrapper">
+                            {move.image?.annotation && (
+                                <div className="dm-annotation">
+                                    <ArrowUpRight size={16} className="dm-arrow" />
+                                    <span className="dm-annotation-text">{move.image.annotation}</span>
+                                </div>
+                            )}
+                            {imageSrc && (
+                                isVideo ? (
+                                    <video
+                                        src={imageSrc}
+                                        className="dm-main-image"
+                                        autoPlay={!prefersReducedMotion}
+                                        loop={!prefersReducedMotion}
+                                        muted
+                                        playsInline
+                                        controls
+                                        aria-label={move.image?.alt || move.headline}
+                                    />
+                                ) : (
+                                    <img
+                                        src={imageSrc}
+                                        alt={move.image?.alt || move.headline}
+                                        className="dm-main-image"
+                                        loading="lazy"
+                                    />
+                                )
+                            )}
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {/* 4. Footer (How it Works + Rationale) */}
                 <div className="dm-footer-section">

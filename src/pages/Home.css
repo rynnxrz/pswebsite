@@ -156,13 +156,18 @@ body {
     width: 100%;
   }
   
-  .project-card-link {
+.project-card-link {
   text-decoration: none;
   color: inherit;
   display: block;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+
+.project-card-link:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
   
 .project-card-link:hover {
   box-shadow: var(--shadow-hover);

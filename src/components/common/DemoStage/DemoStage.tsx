@@ -10,6 +10,8 @@ interface DemoStageProps {
     poster?: string;
     /** Caption text below the stage */
     caption?: string;
+    /** Preload iframe content before interaction */
+    preload?: boolean;
 }
 
 export const DemoStage = ({
@@ -17,12 +19,13 @@ export const DemoStage = ({
     src,
     poster,
     caption,
+    preload = false,
 }: DemoStageProps) => {
     const triggerRef = useRef<HTMLButtonElement | null>(null);
     const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
     // hasLoaded: controls whether iframe is rendered (lazy by interaction)
-    const [hasLoaded, setHasLoaded] = useState(false);
+    const [hasLoaded, setHasLoaded] = useState(preload);
 
     // isOpen: fullscreen theater mode
     const [isOpen, setIsOpen] = useState(false);
@@ -37,6 +40,13 @@ export const DemoStage = ({
         // Return focus to trigger
         triggerRef.current?.focus();
     };
+
+    // Ensure preloaded iframe mounts on first paint.
+    useEffect(() => {
+        if (preload) {
+            setHasLoaded(true);
+        }
+    }, [preload]);
 
     // Keyboard handler for Esc
     useEffect(() => {
@@ -63,11 +73,12 @@ export const DemoStage = ({
     return (
         <>
             {/* Fullscreen Theater Mode */}
-            {isOpen && (
+            {hasLoaded && (
                 <section
-                    className="demoTheater"
-                    role="dialog"
-                    aria-modal="true"
+                    className={`demoTheater${isOpen ? '' : ' demoTheaterHidden'}`}
+                    role={isOpen ? 'dialog' : undefined}
+                    aria-modal={isOpen ? 'true' : undefined}
+                    aria-hidden={!isOpen}
                     aria-label={title}
                 >
                     <header className="demoHeader">
@@ -87,16 +98,14 @@ export const DemoStage = ({
                         </div>
                     </header>
                     <div className="demoTheaterViewport">
-                        {hasLoaded && (
-                            <iframe
-                                title={title}
-                                src={src}
-                                loading="lazy"
-                                allow="fullscreen"
-                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                                className="demoIframe"
-                            />
-                        )}
+                        <iframe
+                            title={title}
+                            src={src}
+                            loading="eager"
+                            allow="fullscreen"
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                            className="demoIframe"
+                        />
                     </div>
                 </section>
             )}
@@ -129,7 +138,7 @@ export const DemoStage = ({
                             className="demoIframe"
                             src={src}
                             title={title}
-                            loading="lazy"
+                            loading="eager"
                             style={{ pointerEvents: 'none' }} // Ensure clicks go to the cover button
                             tabIndex={-1}
                         />

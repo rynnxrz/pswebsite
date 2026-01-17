@@ -8,6 +8,7 @@ import { ProjectHeader } from '../common/ProjectHeader/ProjectHeader';
 import { DemoStage } from '../common/DemoStage/DemoStage';
 
 import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRecommendation';
+import { DesignMoves, type DesignMove } from './DesignMoves';
 
 export const ProjectIvy = () => {
     const { t, i18n } = useTranslation();
@@ -29,6 +30,49 @@ export const ProjectIvy = () => {
             image: '/assets/images/ora-web/Mockup.webp'
         }
     ];
+    const decisionLabels = {
+        problem: 'Problem',
+        solution: 'Solution',
+        how: 'How it Works',
+        rationale: 'Design Rationale'
+    };
+    const happySteps = t('ivy.decisions.d4.how.happy_steps', { returnObjects: true }) as string[];
+    const unhappySteps = t('ivy.decisions.d4.how.unhappy_steps', { returnObjects: true }) as string[];
+    const decisionMoves: DesignMove[] = ['d1', 'd2', 'd3', 'd4'].map((key) => {
+        const isDualScenario = key === 'd4';
+        const howContent = isDualScenario ? (
+            <div>
+                <p><strong>{t('ivy.decisions.d4.how.happy_title')}</strong></p>
+                <ol>
+                    {Array.isArray(happySteps) && happySteps.map((step) => (
+                        <li key={step}>{step}</li>
+                    ))}
+                </ol>
+                <p><strong>{t('ivy.decisions.d4.how.unhappy_title')}</strong></p>
+                <ol>
+                    {Array.isArray(unhappySteps) && unhappySteps.map((step) => (
+                        <li key={step}>{step}</li>
+                    ))}
+                </ol>
+            </div>
+        ) : (
+            t(`ivy.decisions.${key}.how`)
+        );
+
+        return {
+            id: key,
+            headline: t(`ivy.decisions.${key}.title`),
+            problem: { title: decisionLabels.problem, body: t(`ivy.decisions.${key}.problem`) },
+            solution: { title: decisionLabels.solution, body: t(`ivy.decisions.${key}.solution`) },
+            how_it_works: { title: decisionLabels.how, body: howContent },
+            rationale: { title: decisionLabels.rationale, body: t(`ivy.decisions.${key}.rationale`) }
+        };
+    });
+    const decisionTabs = decisionMoves.map((move) => ({
+        id: move.id,
+        title: move.headline,
+        subtitle: ''
+    }));
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -69,6 +113,7 @@ export const ProjectIvy = () => {
                     <DemoStage
                         title="Live Prototype"
                         src={`https://ivyjstudio.shipbyx.com/?lang=${i18n.language}`}
+                        preload
                     />
                 </div>
             </div>
@@ -143,46 +188,7 @@ export const ProjectIvy = () => {
                 <section id="decisions" className="project-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.decisions')}</div>
                     <h2>{t('ivy.decisions.title')}</h2>
-                    {['d1', 'd2', 'd3', 'd4'].map((key) => {
-                        const isDualScenario = key === 'd4';
-                        const happySteps = isDualScenario
-                            ? (t('ivy.decisions.d4.how.happy_steps', { returnObjects: true }) as string[])
-                            : [];
-                        const unhappySteps = isDualScenario
-                            ? (t('ivy.decisions.d4.how.unhappy_steps', { returnObjects: true }) as string[])
-                            : [];
-
-                        return (
-                            <div key={key} style={{ marginBottom: '3.5rem' }}>
-                                <h3>{t(`ivy.decisions.${key}.title`)}</h3>
-                                <h4>Problem</h4>
-                                <p>{t(`ivy.decisions.${key}.problem`)}</p>
-                                <h4>Solution</h4>
-                                <p>{t(`ivy.decisions.${key}.solution`)}</p>
-                                <h4>How it Works</h4>
-                                {isDualScenario ? (
-                                    <>
-                                        <p><strong>{t('ivy.decisions.d4.how.happy_title')}</strong></p>
-                                        <ol>
-                                            {Array.isArray(happySteps) && happySteps.map((step) => (
-                                                <li key={step}>{step}</li>
-                                            ))}
-                                        </ol>
-                                        <p><strong>{t('ivy.decisions.d4.how.unhappy_title')}</strong></p>
-                                        <ol>
-                                            {Array.isArray(unhappySteps) && unhappySteps.map((step) => (
-                                                <li key={step}>{step}</li>
-                                            ))}
-                                        </ol>
-                                    </>
-                                ) : (
-                                    <p>{t(`ivy.decisions.${key}.how`)}</p>
-                                )}
-                                <h4>Design Rationale</h4>
-                                <p>{t(`ivy.decisions.${key}.rationale`)}</p>
-                            </div>
-                        );
-                    })}
+                    <DesignMoves moves={decisionMoves} tabs={decisionTabs} imageMap={{}} />
                 </section>
 
                 <hr className="section-divider" />

@@ -480,17 +480,21 @@
         },
         "projects": {
             "heading": "项目",
-            "p": {
-                "title": "Ora Web",
-                "description": "通过将合同与生产数据整合到一个简单的 ERP 工具中，我们提高了工厂管理的效率。"
+            "lastUpdated": "更新于",
+            "oraweb": {
+                "title": "ORA Web",
+                "description": "通过将合同与生产数据整合到一个简单的 ERP 工具中，我们提高了工厂管理的效率。",
+                "date": "2025年12月6日"
             },
             "one": {
                 "title": "Innerpeace",
-                "description": "我们为学生创建了一款低成本的心理健康应用，针对经济型 Android 设备进行了优化，通过研究数据库实现了大规模测试，并大规模提供可及的减压服务。"
+                "description": "我们为学生创建了一款低成本的心理健康应用，针对经济型 Android 设备进行了优化，通过研究数据库实现了大规模测试，并大规模提供可及的减压服务。",
+                "date": "2024年10月10日"
             },
             "ivy-j-studio": {
                 "title": "Ivy J Studio",
-                "description": "高端珠宝品牌的内部操作系统，用实时库存和基于证据的租赁系统取代了手动 PDF 工作流程。"
+                "description": "高端珠宝品牌的内部操作系统，用实时库存和基于证据的租赁系统取代了手动 PDF 工作流程。",
+                "date": "2026年1月15日"
             },
             "notification": {
                 "title": "Vibe Coding 进行中 🚧",

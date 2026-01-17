@@ -32,8 +32,8 @@
             "reflection": "REFLECTION"
         },
         "summary": {
-            "title": "Intern to Co-founder: Turning Workflow Pain Points into a Startup Contract & UX-Driven Dashboard",
-            "subtitle": "When I started as an intern, I noticed the team’s messy workflows. That observation turned into a startup opportunity where I led end-to-end UX design, built a functional demo, and aligned with clients to deliver a dashboard that streamlined chaotic spreadsheets, integrated with Dynamics 365, secured a client contract, and laid the groundwork for future auto-scheduling features.",
+            "title": "From Intern at Ora Nutrition to SaaS Co-founder: Solving Former Employer’s Workflow Pain Points with Ora Web, Securing Them as Clients",
+            "subtitle": "When I started as an intern, I quickly identified the team’s messy workflows. That observation turned into a startup opportunity where I led end-to-end UX design, built a functional demo, and aligned with clients to deliver a dashboard that streamlined chaotic spreadsheets, integrated with Dynamics 365, secured a client contract, and laid the key groundwork for future auto-scheduling features.",
             "points": [],
             "engagement_body": "DEPRECATED",
             "d365_body": "DEPRECATED",
@@ -460,17 +460,21 @@
         },
         "projects": {
             "heading": "projects",
+            "lastUpdated": "Last updated",
             "oraweb": {
                 "title": "ORA Web",
-                "description": "Integrated Data Management System"
+                "description": "From intern to SaaS co-founder, I led end-to-end UX design to unify 4 Google Sheets + Dynamics 365 data into a single dashboard for my former employer’s 40-person office team. Secured them as a client with this solution.",
+                "date": "December 6th, 2025"
             },
             "one": {
                 "title": "Innerpeace",
-                "description": "We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale."
+                "description": "We created a low-cost mental health app for students, optimized to run on affordable Android devices, enabling large-scale testing with a research database and delivering accessible stress-relief at scale.",
+                "date": "October 10th, 2024"
             },
             "ivy-j-studio": {
                 "title": "Ivy J Studio",
-                "description": "Internal operating system for a high-end jewelry brand, replacing manual PDF workflows with live inventory and evidence-based rentals."
+                "description": "Internal operating system for a high-end jewelry brand, replacing manual PDF workflows with live inventory and evidence-based rentals.",
+                "date": "January 15th, 2026"
             },
             "notification": {
                 "title": "Vibe Coding in Progress 🚧",

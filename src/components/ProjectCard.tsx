@@ -7,17 +7,21 @@ interface ProjectCardProps {
   image: string;
   description: string;
   tags: string[];
+  date?: string;
 }
 
-export const ProjectCard = ({ title, image, description, tags }: ProjectCardProps) => (
+export const ProjectCard = ({ title, image, description, tags, date }: ProjectCardProps) => (
   <div className="project-card">
     <img src={image} alt={title} className="project-card-image" />
-    
-    <div className="project-card-overlay">
-      <div className="overlay-content">
-        <h3 className="overlay-title">{title.toLowerCase()}</h3>
-        <p className="overlay-description">{description}</p>
-        <div className="overlay-tags">
+
+    <div className="project-card-content">
+      <div className="card-body">
+        <div className="card-header">
+          <h3 className="card-title">{title.toLowerCase()}</h3>
+        </div>
+        {date && <p className="card-meta">{date}</p>}
+        <p className="card-description">{description}</p>
+        <div className="card-tags">
           {tags.map((tag, index) => (
             <span key={index} className="tag">{tag.toLowerCase()}</span>
           ))}

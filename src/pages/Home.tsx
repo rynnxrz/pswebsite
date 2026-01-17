@@ -13,20 +13,20 @@ import './Home.css';
 
 const projectsData = [
   {
-    id: "oraweb",
-    image: "/assets/images/ora-web/Mockup.webp",
-    tags: ["UX Design", "End-to-end", "Data Integration"],
-  },
-  {
-    id: "one",
-    image: "/assets/images/innerpeace-cover.webp",
-    tags: ["UX Research", "Android App", "Scalable"],
-  },
-  {
     id: "ivy-j-studio",
     image: "/assets/images/ivy-j/project-card.webp",
     tags: ["Product Strategy", "Full-stack", "Internal Tool"],
   },
+  {
+    id: "oraweb",
+    image: "/assets/images/ora-web/Mockup.webp",
+    tags: ["UX Design", "End-to-end", "Data Integration"],
+  },
+  // {
+  //   id: "one",
+  //   image: "/assets/images/innerpeace-cover.webp",
+  //   tags: ["UX Research", "Android App", "Scalable"],
+  // },
 ];
 
 
@@ -111,15 +111,30 @@ export const Home = () => {
               {projectsData.map((project, index) => {
                 const title = t(`home.projects.${project.id}.title`);
                 const description = t(`home.projects.${project.id}.description`);
+                const dateRaw = t(`home.projects.${project.id}.date`);
+                const lastUpdated = t('home.projects.lastUpdated');
+                const date = dateRaw ? `${lastUpdated} ${dateRaw}` : undefined;
 
                 return (
                   <Fragment key={project.id}>
-                    <div className="project-card-link" onClick={() => handleProjectClick(project.id, title)}>
+                    <div
+                      className="project-card-link"
+                      onClick={() => handleProjectClick(project.id, title)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleProjectClick(project.id, title);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                    >
                       <ProjectCard
                         title={title}
                         image={project.image}
                         description={description}
                         tags={project.tags}
+                        date={date}
                       />
                     </div>
 

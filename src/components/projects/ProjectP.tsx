@@ -85,7 +85,7 @@ export const ProjectP = () => {
           <DemoStage
             title="Live Prototype"
             src={`https://ora.shipbyx.com/?lang=${i18n.language}`}
-            poster="/assets/images/ora-web/dashboard-mockup.webp"
+            preload
           />
         </div>
       </div>
