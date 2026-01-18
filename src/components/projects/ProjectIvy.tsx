@@ -28,7 +28,7 @@ export const ProjectIvy = () => {
             id: 'oraweb',
             title: t('recommendations.projects.oraweb.title'),
             description: t('recommendations.projects.oraweb.description'),
-            image: '/assets/images/ora-web/Mockup.webp'
+            image: '/assets/images/ora-web/orawebn.webp'
         }
     ];
     const decisionLabels = t('project.labels', { returnObjects: true }) as { problem: string; solution: string; how: string; rationale: string };
@@ -256,14 +256,20 @@ export const ProjectIvy = () => {
 
                 {/* Back to Demo Hint */}
                 <div className="back-to-demo-hint">
-                    <button
-                        type="button"
-                        className="back-to-demo-button"
-                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                        aria-label={t('project.backToDemo.hint')}
-                    >
-                        {t('project.backToDemo.hint')}
-                    </button>
+                    <div className="back-to-demo-row">
+                        <button
+                            type="button"
+                            className="back-to-demo-button"
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            aria-label={t('project.backToDemo.hint')}
+                        >
+                            {t('project.backToDemo.hint')}
+                        </button>
+                        <span className="project-update-widget" aria-label="Latest update">
+                            <span className="update-indicator" aria-hidden="true" />
+                            <span className="update-text">{t('project.backToDemo.ivyUpdate')}</span>
+                        </span>
+                    </div>
                 </div>
 
                 <ProjectRecommendation projects={recommendedProjects} />

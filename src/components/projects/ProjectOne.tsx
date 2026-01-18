@@ -15,7 +15,7 @@ export const ProjectOne = () => {
       id: 'oraweb',
       title: t('recommendations.projects.oraweb.title'),
       description: t('recommendations.projects.oraweb.description'),
-      image: '/assets/images/ora-web/Mockup.webp'
+      image: '/assets/images/ora-web/orawebn.webp'
     }
   ];
 

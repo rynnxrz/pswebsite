@@ -181,14 +181,20 @@ export const ProjectP = () => {
 
         {/* Back to Demo Hint */}
         <div className="back-to-demo-hint">
-          <button
-            type="button"
-            className="back-to-demo-button"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            aria-label={t('project.backToDemo.hint')}
-          >
-            {t('project.backToDemo.hint')}
-          </button>
+          <div className="back-to-demo-row">
+            <button
+              type="button"
+              className="back-to-demo-button"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              aria-label={t('project.backToDemo.hint')}
+            >
+              {t('project.backToDemo.hint')}
+            </button>
+            <span className="project-update-widget" aria-label="Latest update">
+              <span className="update-indicator" aria-hidden="true" />
+              <span className="update-text">{t('project.backToDemo.oraUpdate')}</span>
+            </span>
+          </div>
         </div>
 
         <ProjectRecommendation projects={recommendedProjects} />

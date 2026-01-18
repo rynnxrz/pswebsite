@@ -18,7 +18,7 @@ const projectsData = [
   },
   {
     id: "oraweb",
-    image: "/assets/images/ora-web/Mockup.webp",
+    image: "/assets/images/ora-web/orawebn.webp",
   },
   // {
   //   id: "one",

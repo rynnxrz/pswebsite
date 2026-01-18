@@ -69,7 +69,9 @@
             "copied": "Copied!"
         },
         "backToDemo": {
-            "hint": "↑ Try the live prototype"
+            "hint": "↑ Try the live prototype",
+            "oraUpdate": "Jan 17 · Added contract import + calendar UI",
+            "ivyUpdate": "Jan 18 · Invoice review & dispatch flow live"
         }
     },
     "project_p": {
@@ -578,12 +580,12 @@
             },
             "ivy-j-studio": {
                 "title": "Ivy J Studio",
-                "description": "Internal operating system for a high-end jewelry brand, replacing manual PDF workflows with live inventory and evidence-based rentals.",
+                "description": "In 12 days, I built a live catalog + reservation system for a London jewelry brand, eliminating 4+ hrs/week of manual PDF rebuilding. Deployed just in time for Paris Fashion Week prep.",
                 "date": "January 15th, 2026",
                 "tags": [
-                    "Product Strategy",
+                    "Product Design",
                     "Full-stack",
-                    "Internal Tool"
+                    "12-Day MVP"
                 ]
             },
             "notification": {
