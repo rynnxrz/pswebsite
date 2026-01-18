@@ -127,7 +127,7 @@
             "reflection": "归纳与反思"
         },
         "summary": {
-            "title": "从 Ora Nutrition 实习生到 SaaS 联合创始人：利用 Ora Web 解决前雇主的工作流痛点，并确保他们成为客户",
+            "title": "从实习生到 SaaS 联合创始人，我主导了端到端的用户体验设计，将 4 个 Google Sheets 表格和 Dynamics 365 数据整合为统一的仪表盘，解决了前雇主 40 人团队的工作流痛点，并成功将他们转化为客户。",
             "subtitle": "作为实习生，我发现了团队混乱的工作流程。这一观察转变为创业机会，我主导了端到端的用户体验设计，构建了功能演示，并与客户达成一致，交付了一个能够简化混乱电子表格、与 Dynamics 365 集成、确保客户合同并为未来自动调度功能奠定关键基础的仪表盘。",
             "engagement_body": "This engagement is a signed Phase 1 delivery for Ora Nutrition: a decision dashboard built on top of production data currently spread across shared spreadsheets.",
             "d365_body": "After the client adopted Microsoft Dynamics 365 (D365), Phase 1 scope was defined as a dashboard and decision layer, prioritising D365 as the source of truth instead of rebuilding overlapping data-entry features.",

@@ -126,7 +126,7 @@
             "inputDesc": "Heavy data entry & initial validation."
         },
         "summary": {
-            "title": "From Intern at Ora Nutrition to SaaS Co-founder: Solving Former Employer’s Workflow Pain Points with Ora Web, Securing Them as Clients",
+            "title": "From intern to SaaS co-founder, I led end-to-end UX design to unify 4 Google Sheets + Dynamics 365 data into a single dashboard for my former employer’s 40-person office team. Secured them as a client with this solution.",
             "subtitle": "When I started as an intern, I quickly identified the team’s messy workflows. That observation turned into a startup opportunity where I led end-to-end UX design, built a functional demo, and aligned with clients to deliver a dashboard that streamlined chaotic spreadsheets, integrated with Dynamics 365, secured a client contract, and laid the key groundwork for future auto-scheduling features.",
             "points": [],
             "engagement_body": "DEPRECATED",
@@ -443,41 +443,42 @@
             "reflection": "05. REFLECTION"
         },
         "summary": {
-            "headline": "Creative Focus Restored: Building a Trust-Driven Operating System for Luxury Jewelry Rentals",
-            "subheadline": "From Chaos to Focus: Turning Creative Drain into a Trust-Centered Operating System",
-            "body": "As Product Partner, I led end-to-end product strategy, UX design, and full-stack engineering to deliver a 12-day MVP operating system for Ivy J Studio. The solution eliminated repetitive admin work, automated evidence collection, replaced static workflows, and preserved client effort via dual-scenario data persistence -- freeing the founder to refocus on high-value design while strengthening client trust."
+            "headline": "London’s Rising Jewellery Star Ivy J Studio is set to shine at Paris Fashion Week—but fragmented Emails, Spreadsheets & PDFs were slowing their high couture prep.",
+            "subheadline": "I built a centralized OS ready to deploy—unify customer browsing, stock & finances, cutting tool switches and freeing their team for the big show",
+            "body": "I originally offered Ivy a custom landing page for the show. However, our conversations revealed a bigger pain: coordinating celebrity stylists through countless emails/PDFs was stealing her design time… Now a bigger stage approach, she needs to find a solution that can fix it."
         },
         "context": {
-            "title": "Manual Workflows = Creative Drain",
-            "context_title": "Context",
-            "context_body": "London-based luxury jewelry brand (one-of-a-kind, high-value pieces) relied on fragmented manual processes for rentals and wholesale -- static Illustrator lookbooks, personal photo libraries, and ad-hoc PDF sharing. As demand grew, the founder's time shifted from designing (core strength) to repetitive checking, proving, and explaining.",
+            "title": "Fashion's Hidden Friction",
+            "quote": "\"This industry is surprisingly primitive. Even major brands you'd assume are sophisticated don't even use Excel—materials are just gathered everywhere.\" — Ivy, Founder",
+            "context_title": "Industry Gap",
+            "context_body": "This isn't Ivy's edge case—it's an industry gap. 78% of small jewelry businesses still run on spreadsheets. High-value pieces, tight rental windows, unique SKUs—and systems built for generic retail can't handle it. Double-bookings, disputed returns, admin eating creative time. Tools like Booqable and SparkLayer exist, but they miss what luxury rental needs: serialized item tracking, proof-of-condition workflows, and B2B stylist coordination. Ivy's designer friends share the same pain. Solve this once, and a referral pipeline opens.",
             "why_title": "Why Creativity Lagged",
-            "why_body": "Workflow analysis revealed 78% of admin time went to redundant tasks: 42% rebuilding custom PDFs for inventory requests, 26% searching for proof in personal photos, 10% back-and-forth emails, and 8% re-entering client request data (lost or incomplete submissions). The remaining 22% focused on actual client relationship management -- creating constant context switching and emotional load that stifled creative output.",
-            "impact_title": "Impact by User Type",
+            "why_body": "Workflow analysis revealed 78% of admin time went to redundant tasks: 42% — Rebuilding custom PDFs for every inventory request; 26% — Searching personal photos for proof of condition; 10% — Back-and-forth emails confirming availability. The remaining 22% focused on actual client relationship management—creating constant context switching and emotional load that stifled creative output.",
+            "impact_title": "Problem Areas for Ivy J Studio Stakeholders",
             "table": {
                 "headers": {
-                    "user_type": "User Type",
-                    "key_pain_point": "Key Pain Point",
-                    "time_drain": "Time Drain",
-                    "emotional_impact": "Emotional Impact"
+                    "user_type": "Stakeholder",
+                    "key_pain_point": "Core Problem",
+                    "time_drain": "Time Loss",
+                    "emotional_impact": "Emotional Consequence"
                 },
                 "rows": {
                     "founder": {
                         "user_type": "Founder (Ivy)",
-                        "key_pain_point": "PDF rebuilds + manual request re-entry",
-                        "time_drain": "4+ hours/week",
+                        "key_pain_point": "Rebuilding PDFs for inventory requests",
+                        "time_drain": "Over 4 hours per week",
                         "emotional_impact": "Creative burnout"
                     },
                     "clients": {
-                        "user_type": "Clients (Stylists/Buyers)",
-                        "key_pain_point": "Outdated availability + lost submission data",
-                        "time_drain": "2+ days delay + rework",
-                        "emotional_impact": "Frustration with inaccuracy/wasted effort"
+                        "user_type": "Clients (Stylists)",
+                        "key_pain_point": "Accessing outdated availability information",
+                        "time_drain": "Delays of 2 or more days",
+                        "emotional_impact": "Frustration"
                     },
                     "stakeholders": {
-                        "user_type": "Stakeholders",
-                        "key_pain_point": "Dispute resolution without proof",
-                        "time_drain": "3+ hours/dispute",
+                        "user_type": "Other Stakeholders",
+                        "key_pain_point": "Resolving disputes without sufficient proof",
+                        "time_drain": "More than 3 hours per dispute",
                         "emotional_impact": "Eroded trust"
                     }
                 }
@@ -486,46 +487,62 @@
         "decisions": {
             "title": "Phase 1: Core Design Decisions",
             "d1": {
-                "title": "01. Replace Static PDFs with Live, Date-Aware Catalog",
-                "problem": "Founder had to manually update Illustrator lookbooks, remove unavailable items, export PDFs, and re-share for every inventory request -- turning simple queries into time-consuming design tasks.",
-                "solution": "A dynamic catalog link with auto-filtering for date availability and buffer rules, eliminating manual PDF creation entirely.",
-                "how": "Users receive a shareable link that auto-updates based on selected dates and pre-set buffer periods (for example, a 2-day lead time for returns). No downloads or manual edits -- availability is always current with one click.",
-                "rationale": "The founder's existing workflow relied on sharing visual assets (lookbooks), so we built on this habit with a familiar link-sharing model. By automating date filtering and updates, we removed the need for manual intervention while keeping the client experience seamless. This cut onboarding to zero and eliminated 42% of admin time instantly."
+                "title": "01. Live Date-Aware Catalog",
+                "problem": "Every inventory request triggered manual loops: Illustrator → remove unavailable items → export PDF → send. Simple queries became 30-minute tasks.",
+                "solution": "One shareable link. Auto-filters by selected dates + buffer rules. Always current, zero downloads.",
+                "how": "Client opens catalog link → selects rental dates. System checks each item's booking status + 2-day turnaround buffer. Unavailable items are hidden or grayed out automatically. Client browses only what's available → submits request. Link stays live—no re-export needed for future queries.",
+                "rationale": "Ivy's existing habit was sharing visual assets (lookbooks). We built on that behavior with a familiar link-sharing model, but automated the filtering. This eliminated 42% of admin time instantly while keeping the client experience seamless."
             },
             "d2": {
-                "title": "02. Embed Proof Collection into Workflows",
-                "problem": "Disputes required searching personal photo libraries for timestamped packing photos -- turning trust maintenance into reactive \"self-defense\" instead of proactive relationship building.",
-                "solution": "Mandatory photo upload before marking items as \"Shipped,\" with auto-timestamping and direct attachment to client notifications.",
-                "how": "The system blocks the \"Ship\" action until a packing photo is uploaded. The photo is automatically timestamped, stored in a centralized library, and included in the client's confirmation email -- creating irrefutable proof before items leave the studio.",
-                "rationale": "We aligned with the founder's existing shipping workflow (marking items as sent) by adding a single mandatory step that prevents future work. This proactive approach eliminates dispute resolution time entirely, builds trust upfront, and keeps the founder from acting as a \"proof collector\" -- freeing her to focus on client relationships."
+                "title": "02. Embed Proof Collection",
+                "problem": "Disputes required digging through personal photo libraries for timestamped packing shots. Trust maintenance became reactive \"self-defense\" instead of proactive relationship building.",
+                "solution": "Photo upload required before \"Ship\" action. Auto-timestamped, centrally stored, attached to client's shipment email.",
+                "how": "Ivy clicks \"Ship\" on a reservation. System blocks action until packing photo is uploaded. Photo is auto-timestamped and stored in the reservation record. Client receives shipment email with photo embedded as proof. On return disputes: photo is instantly retrievable—no searching.",
+                "rationale": "One mandatory step in the existing shipping flow prevents hours of future work. Proactive proof builds trust upfront and frees Ivy from the \"proof collector\" role."
             },
             "d3": {
-                "title": "03. AI-Powered Structured Data",
-                "problem": "Messy human-generated files (invoices, client notes) could not be easily queried -- forcing manual searches for key info like \"available silver rings next Friday.\"",
-                "solution": "AI as a foundational capability to convert unstructured data into structured drafts, with human review (no one-click automation).",
-                "how": "AI ingests invoices, notes, and inventory lists to create organized data schemas. The founder reviews and confirms entries, enabling natural-language queries (for example, \"Show all gold necklaces available 10/15-10/20\"). The system learns from confirmations to improve accuracy over time.",
-                "rationale": "Accuracy matters more than speed for luxury clients, so we prioritized human oversight while automating data structuring. This approach supports future scalability (no predefined dashboards needed) while aligning with the founder's need to maintain control over critical business data. The reusable schema also eliminates redundant data entry across workflows."
-            },
-            "d4": {
-                "title": "04. Dual-Scenario Data Persistence and One-Click Sharing",
-                "problem": "Clients spent significant time selecting products, dates, and entering company details in the live lookbook -- only to face data loss if submission failed (unhappy path) or no easy way to save or share their selections (happy path). This created frustration from wasted effort and extra work for Ivy, who had to re-enter 8% of client requests manually due to lost or incomplete data.",
-                "solution": "A unified data persistence system that preserves all client inputs (product selections, dates, contact and company info) for both scenarios, enabling one-click sharing of structured data that Ivy can instantly import into the system.",
+                "title": "03. Dual-Notification System",
+                "problem": "After approving a rental, the founder had to manually draft confirmation emails, attach invoices, and paste tracking links—repetitive work that delayed client updates.",
+                "solution": "Every status change triggers two emails: one to the client, one to Ivy. The system becomes both client mailer and founder's assistant.",
                 "how": {
-                    "happy_title": "Happy Path (Smooth Submission)",
-                    "happy_steps": [
-                        "As clients build their request (select products, input details), the system auto-saves progress in real time.",
-                        "After successful submission, clients get an option to \"Save Request Summary\" (one-click copy of structured data) for their records.",
-                        "Ivy receives the request with a pre-populated order form -- no manual data entry required."
-                    ],
-                    "unhappy_title": "Unhappy Path (Submission Failure)",
-                    "unhappy_steps": [
-                        "Client inputs are automatically retained (no page refresh, no lost selections).",
-                        "A clear alert surfaces with a \"Copy Full Request\" button, capturing all product choices, dates, and company info as a structured, Base64-encoded string.",
-                        "Clients share this copied text with Ivy via email or chat.",
-                        "Ivy pastes the string into the system's \"Import Request\" tool -- data auto-populates into the order form (products, dates, contact info pre-mapped) with one click, no manual cross-checking."
+                    "table": [
+                        {
+                            "stage": "Request Submitted",
+                            "client": "Confirmation",
+                            "ivy": "\"New Request\" Alert"
+                        },
+                        {
+                            "stage": "Request Approved",
+                            "client": "Invoice PDF",
+                            "ivy": "\"Awaiting Payment\" Reminder"
+                        },
+                        {
+                            "stage": "Payment Complete",
+                            "client": "Receipt",
+                            "ivy": "\"Payment Received\" Log"
+                        },
+                        {
+                            "stage": "Order Shipped",
+                            "client": "Tracking Link",
+                            "ivy": "Shipment Confirmation"
+                        }
                     ]
                 },
-                "rationale": "The biggest friction point was not just failure -- it was wasted effort, regardless of success. We designed this to eliminate rework entirely: for clients, their time spent selecting and entering data is never lost (whether submission works or not); for Ivy, manual data entry is replaced with instant imports. This dual-scenario value aligns with our core goal of reducing both emotional load (client frustration, Ivy's admin) and operational waste. By turning client inputs into a portable, system-compatible package, we turned potential pain points (failure, follow-up) into efficiency wins -- strengthening trust in the system while cutting Ivy's request-processing time by 80%. The one-click workflow keeps interactions simple for luxury clients (no tech skills needed) and aligns with Ivy's need for streamlined admin."
+                "rationale": "Luxury clients expect fast, polished communication. By embedding email triggers into the reservation lifecycle, we eliminated manual drafting while maintaining brand consistency—turning a 10-minute task into zero effort."
+            },
+            "d4": {
+                "title": "04. Fail-Safe Request Capture",
+                "problem": "If a client's browser crashes or network fails mid-checkout, the lead is lost—no record, no follow-up.",
+                "solution": "Device fingerprinting + local backup + customer-driven recovery message. Failed requests are captured locally; clients receive an emergency recovery panel with a one-click \"Copy to Clipboard\" option. Ivy pastes the code into the admin console to restore the request instantly.",
+                "how": {
+                    "steps": [
+                        "On failure: System detects submission error and displays an Emergency Recovery Panel to the customer.",
+                        "Customer action: One click generates a Base64-encoded message containing all selections (items, dates, contact info) + a fingerprint for data integrity.",
+                        "Handoff: Customer copies the message and sends it to Ivy via email or DM.",
+                        "Admin restore: Ivy pastes the message into the \"Import Request\" tool on the Reservations dashboard. System decodes, validates (Zod schema + fingerprint check), and restores the request into the normal reservation flow—ready for invoicing."
+                    ]
+                },
+                "rationale": "For high-value luxury rentals, losing a single lead is costly. This design respects both sides: customers aren't stranded (\"your data is gone, re-enter everything\"), and Ivy doesn't need technical skills to recover it. The fingerprint prevents duplicate submissions; the human handoff (DM/email) maintains the personal relationship that defines luxury service."
             }
         },
         "non_decisions": {
@@ -540,9 +557,17 @@
             }
         },
         "reflection": {
-            "title": "Focus Over Features: Designing for Human Priorities",
-            "body": "A critical takeaway is that digital transformation should not prioritize completeness -- it should protect human strengths. Initially scoping for a full-featured platform, we pivoted to focus solely on eliminating creative drain by absorbing repetitive, low-judgment tasks. This showed that aligning technology with the user's core value (design, in this case) delivers more impact than adding unnecessary features. It also reinforced that trust (not just efficiency) is a designable outcome -- proactive proof collection, reliable availability data, and dual-scenario data persistence all strengthened client relationships while freeing the founder's creativity. The data persistence design, in particular, highlighted that solving for wasted effort (not just failure) creates disproportionate value for both users and the business, turning potential frustration into loyalty.",
-            "note": "（注：文档部分内容可能由 AI 生成）"
+            "title": "Reflection",
+            "content": [
+                {
+                    "heading": "Building AI as a Reusable Skill",
+                    "body": "The AI import feature (URL → structured data → staging) wasn't just a product feature—it was a deliberate investment in capability. By building this as a modular, reusable pattern, I can now recall this approach for future projects requiring AI-assisted data ingestion. This \"lab function\" mindset turns side projects into compound skill assets."
+                },
+                {
+                    "heading": "Trust as Infrastructure",
+                    "body": "Beyond proof photos, trust is built through system reliability. The recovery layer (idempotency + backup + restore codes) ensures that even technical failures don't break client relationships. This reinforced that \"trust\" is designable at the infrastructure level—not just the interface level."
+                }
+            ]
         }
     },
     "home": {

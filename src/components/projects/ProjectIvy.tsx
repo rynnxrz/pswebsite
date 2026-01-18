@@ -32,28 +32,66 @@ export const ProjectIvy = () => {
     ];
     const decisionLabels = t('project.labels', { returnObjects: true }) as { problem: string; solution: string; how: string; rationale: string };
 
-    const happySteps = t('ivy.decisions.d4.how.happy_steps', { returnObjects: true }) as string[];
-    const unhappySteps = t('ivy.decisions.d4.how.unhappy_steps', { returnObjects: true }) as string[];
     const decisionMoves: DesignMove[] = ['d1', 'd2', 'd3', 'd4'].map((key) => {
-        const isDualScenario = key === 'd4';
-        const howContent = isDualScenario ? (
-            <div>
-                <p><strong>{t('ivy.decisions.d4.how.happy_title')}</strong></p>
+        const howData = t(`ivy.decisions.${key}.how`, { returnObjects: true }) as any;
+        let howContent: React.ReactNode;
+
+        if (typeof howData === 'string') {
+            howContent = howData;
+        } else if (howData?.table) {
+            howContent = (
+                <div style={{ overflowX: 'auto' }}>
+                    <table className="ivy-decision-table" style={{ minWidth: '100%' }}>
+                        <thead>
+                            <tr>
+                                <th>Stage</th>
+                                <th>Client Receives</th>
+                                <th>Ivy J Studio Receives</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Array.isArray(howData.table) && howData.table.map((row: any, i: number) => (
+                                <tr key={i}>
+                                    <td>{row.stage}</td>
+                                    <td>{row.client}</td>
+                                    <td>{row.ivy}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            );
+        } else if (howData?.steps) {
+            howContent = (
                 <ol>
-                    {Array.isArray(happySteps) && happySteps.map((step) => (
-                        <li key={step}>{step}</li>
+                    {Array.isArray(howData.steps) && howData.steps.map((step: string, i: number) => (
+                        <li key={i} style={{ marginBottom: '0.5rem' }}>{step}</li>
                     ))}
                 </ol>
-                <p><strong>{t('ivy.decisions.d4.how.unhappy_title')}</strong></p>
-                <ol>
-                    {Array.isArray(unhappySteps) && unhappySteps.map((step) => (
-                        <li key={step}>{step}</li>
-                    ))}
-                </ol>
-            </div>
-        ) : (
-            t(`ivy.decisions.${key}.how`)
-        );
+            );
+        } else if (howData?.happy_steps) {
+            // Fallback for old structure if needed or if translation matches old format
+            const happySteps = howData.happy_steps;
+            const unhappySteps = howData.unhappy_steps;
+            howContent = (
+                <div>
+                    <p><strong>{howData.happy_title}</strong></p>
+                    <ol>
+                        {Array.isArray(happySteps) && happySteps.map((step: string) => (
+                            <li key={step}>{step}</li>
+                        ))}
+                    </ol>
+                    <p><strong>{howData.unhappy_title}</strong></p>
+                    <ol>
+                        {Array.isArray(unhappySteps) && unhappySteps.map((step: string) => (
+                            <li key={step}>{step}</li>
+                        ))}
+                    </ol>
+                </div>
+            );
+        } else {
+            howContent = null;
+        }
 
         return {
             id: key,
@@ -208,11 +246,28 @@ export const ProjectIvy = () => {
                 {/* 04. Reflection */}
                 <section id="reflection" className="project-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.reflection')}</div>
-                    <div className="ivy-statement-card" style={{ background: 'transparent', textAlign: 'left', padding: '0' }}>
-                        <h2>{t('ivy.reflection.title')}</h2>
-                        <p>{t('ivy.reflection.body')}</p>
-                        <p><em>{t('ivy.reflection.note')}</em></p>
-                    </div>
+
+                    <h2>{t('ivy.reflection.title')}</h2>
+
+                    {(() => {
+                        const content = t('ivy.reflection.content', { returnObjects: true });
+                        if (Array.isArray(content)) {
+                            return content.map((item: any, index: number) => (
+                                <div key={index} className="ivy-statement-card" style={{ background: 'transparent', textAlign: 'left', padding: '0', marginBottom: '2rem' }}>
+                                    <h3>{item.heading}</h3>
+                                    <p>{item.body}</p>
+                                </div>
+                            ));
+                        } else {
+                            // Fallback
+                            return (
+                                <div className="ivy-statement-card" style={{ background: 'transparent', textAlign: 'left', padding: '0' }}>
+                                    <p>{t('ivy.reflection.body')}</p>
+                                    <p><em>{t('ivy.reflection.note')}</em></p>
+                                </div>
+                            );
+                        }
+                    })()}
                 </section>
 
                 <hr className="section-divider" />
