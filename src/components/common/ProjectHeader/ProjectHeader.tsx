@@ -72,7 +72,10 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                setIsScrolled(!entry.isIntersecting);
+                const isSticky = !entry.isIntersecting;
+                setIsScrolled(isSticky);
+                // Dispatch custom event for sticky state change
+                window.dispatchEvent(new CustomEvent('projectheader-sticky', { detail: { isSticky } }));
             },
             { threshold: 0 }
         );

@@ -2,7 +2,8 @@
 
 .theme-toggle {
   position: fixed;
-  top: 20px;
+  top: 30px;
+  /* Aligns center of 36px button with RetroToggle handle center (~48px from top) */
   left: 20px;
   width: 36px;
   height: 36px;
@@ -18,7 +19,7 @@
   box-shadow: var(--shadow-soft);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
-  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, opacity 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease;
 }
 
 .theme-toggle:hover {
@@ -33,6 +34,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Project Case Page: when sticky, align with action buttons (40px size) */
+.theme-toggle.project-page-toggle.sticky-mode {
+  top: 10px;
+  /* Match sticky header padding */
+  width: 40px;
+  height: 40px;
 }
 
 @media (max-width: 768px) {
