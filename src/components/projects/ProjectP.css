@@ -518,3 +518,42 @@
     margin-top: 1rem;
   }
 }
+
+/* --- Back to Demo Hint --- */
+.back-to-demo-hint {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 3rem;
+}
+
+.back-to-demo-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--separator);
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-to-demo-button:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  background: var(--surface-card);
+}
+
+.back-to-demo-button:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+@media print {
+  .back-to-demo-hint {
+    display: none;
+  }
+}

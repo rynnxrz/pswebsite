@@ -67,6 +67,9 @@
             "download": "Download PDF",
             "copy": "Copy Link",
             "copied": "Copied!"
+        },
+        "backToDemo": {
+            "hint": "↑ Try the live prototype"
         }
     },
     "project_p": {
