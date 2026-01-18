@@ -37,8 +37,10 @@
 
 @media (max-width: 768px) {
   .theme-toggle {
-    top: 16px;
-    left: 16px;
+    top: 10px;
+    /* Vertically center with sticky header */
+    left: 20px;
+    /* Align concentrically with header's rounded corner */
   }
 }
 

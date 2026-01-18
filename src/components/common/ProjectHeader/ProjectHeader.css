@@ -38,6 +38,14 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Mobile: Add left padding to make room for theme toggle button */
+@media (max-width: 768px) {
+    .project-header.sticky-active {
+        padding-left: 56px;
+        /* 16px (toggle left) + 36px (toggle width) + 4px gap */
+    }
+}
+
 @supports not (backdrop-filter: url(#liquid-glass-filter)) {
     .project-header.sticky-active {
         background-color: var(--bg-glass-strong);
