@@ -1,5 +1,34 @@
 /* src/components/projects/ProjectIvy.css */
 
+/* ===== Ivy Quote ===== */
+.ivy-quote {
+  margin: 1.5rem 0 2rem 0;
+  padding: 0;
+  border-left: none;
+  background: transparent;
+  border-radius: 0;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ===== Pain Points List ===== */
+.ivy-pain-list {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.ivy-pain-list li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.ivy-pain-list li:last-child {
+  margin-bottom: 0;
+}
+
 .ivy-context-diagram {
   position: relative;
   width: 100%;
@@ -166,6 +195,139 @@
   text-align: left;
   word-wrap: break-word;
   /* Prevent overflow */
+}
+
+/* ===== Enhanced Stakeholder Table ===== */
+.ivy-stakeholder-table-wrapper {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.ivy-stakeholder-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+  background: var(--surface-card);
+  border: 1px solid var(--surface-card-border);
+  box-shadow: var(--shadow-card-hover-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.ivy-stakeholder-table th {
+  padding: 0.75rem 1rem;
+  background: var(--surface-card-hover);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ivy-stakeholder-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.ivy-stakeholder-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.ivy-stakeholder-table tbody tr:hover {
+  background: var(--surface-card-hover);
+}
+
+.ivy-stakeholder-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.stakeholder-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.stakeholder-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.time-loss {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: #f97316;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.emotional-impact {
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+.emotional-burnout {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+}
+
+.emotional-frustration {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+}
+
+.emotional-trust {
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
+}
+
+/* ===== How it Works Table (Dual Notification) ===== */
+.ivy-decision-table.ivy-workflow-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--surface-card);
+  border: 1px solid var(--surface-card-border);
+  box-shadow: var(--shadow-card-hover-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 1rem 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.ivy-decision-table.ivy-workflow-table th {
+  padding: 0.75rem 1rem;
+  background: var(--surface-card-hover);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+}
+
+.ivy-decision-table.ivy-workflow-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ivy-decision-table.ivy-workflow-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.ivy-decision-table.ivy-workflow-table td:first-child {
+  font-weight: 500;
+  color: var(--text-primary);
 }
 
 /* Force stack on the main column width (576px) for better readability */

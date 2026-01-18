@@ -10,6 +10,7 @@ import { DemoStage } from '../common/DemoStage/DemoStage';
 import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRecommendation';
 import { DesignMoves, type DesignMove } from './DesignMoves';
 
+
 export const ProjectIvy = () => {
     const { t, i18n } = useTranslation();
     const [activeSection, setActiveSection] = useState('');
@@ -40,8 +41,8 @@ export const ProjectIvy = () => {
             howContent = howData;
         } else if (howData?.table) {
             howContent = (
-                <div style={{ overflowX: 'auto' }}>
-                    <table className="ivy-decision-table" style={{ minWidth: '100%' }}>
+                <div className="ivy-stakeholder-table-wrapper">
+                    <table className="ivy-decision-table ivy-workflow-table">
                         <thead>
                             <tr>
                                 <th>Stage</th>
@@ -166,11 +167,10 @@ export const ProjectIvy = () => {
                 />
 
                 {/* Hero Section */}
-                <section id="summary" className="project-section compact-section">
+                <section id="summary" className="project-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.summary')}</div>
-                    <h2>{t('ivy.summary.headline')}</h2>
-                    <h3>{t('ivy.summary.subheadline')}</h3>
-                    <p>{t('ivy.summary.body')}</p>
+                    <h2>{t('ivy.summary.title')}</h2>
+                    <p className="summary-subtitle" style={{ fontSize: '1.2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>{t('ivy.summary.subtitle')}</p>
                 </section>
 
                 <hr className="section-divider compact-divider" />
@@ -179,41 +179,14 @@ export const ProjectIvy = () => {
                 <section id="context" className="project-section compact-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.context')}</div>
                     <h2>{t('ivy.context.title')}</h2>
-                    <h3>{t('ivy.context.context_title')}</h3>
+                    <blockquote className="ivy-quote">{t('ivy.context.quote')}</blockquote>
                     <p>{t('ivy.context.context_body')}</p>
-                    <h3>{t('ivy.context.why_title')}</h3>
-                    <p>{t('ivy.context.why_body')}</p>
-                    <h3>{t('ivy.context.impact_title')}</h3>
-                    <table className="ivy-decision-table">
-                        <thead>
-                            <tr>
-                                <th>{t('ivy.context.table.headers.user_type')}</th>
-                                <th>{t('ivy.context.table.headers.key_pain_point')}</th>
-                                <th>{t('ivy.context.table.headers.time_drain')}</th>
-                                <th>{t('ivy.context.table.headers.emotional_impact')}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{t('ivy.context.table.rows.founder.user_type')}</td>
-                                <td>{t('ivy.context.table.rows.founder.key_pain_point')}</td>
-                                <td>{t('ivy.context.table.rows.founder.time_drain')}</td>
-                                <td>{t('ivy.context.table.rows.founder.emotional_impact')}</td>
-                            </tr>
-                            <tr>
-                                <td>{t('ivy.context.table.rows.clients.user_type')}</td>
-                                <td>{t('ivy.context.table.rows.clients.key_pain_point')}</td>
-                                <td>{t('ivy.context.table.rows.clients.time_drain')}</td>
-                                <td>{t('ivy.context.table.rows.clients.emotional_impact')}</td>
-                            </tr>
-                            <tr>
-                                <td>{t('ivy.context.table.rows.stakeholders.user_type')}</td>
-                                <td>{t('ivy.context.table.rows.stakeholders.key_pain_point')}</td>
-                                <td>{t('ivy.context.table.rows.stakeholders.time_drain')}</td>
-                                <td>{t('ivy.context.table.rows.stakeholders.emotional_impact')}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h3>{t('ivy.context.pain_title')}</h3>
+                    <ul className="ivy-pain-list">
+                        {(t('ivy.context.pain_points', { returnObjects: true }) as string[]).map((point, index) => (
+                            <li key={index}>{point}</li>
+                        ))}
+                    </ul>
                 </section>
 
                 <hr className="section-divider" />
@@ -222,7 +195,16 @@ export const ProjectIvy = () => {
                 <section id="decisions" className="project-section">
                     <div className="typo-eyebrow section-eyebrow">{t('ivy.section.decisions')}</div>
                     <h2>{t('ivy.decisions.title')}</h2>
-                    <DesignMoves moves={decisionMoves} tabs={decisionTabs} imageMap={{}} />
+                    <DesignMoves
+                        moves={decisionMoves}
+                        tabs={decisionTabs}
+                        imageMap={{
+                            d1: '/assets/images/ivy-j/videoloop/01.mp4',
+                            d2: '/assets/images/ivy-j/videoloop/03.mp4',
+                            d3: '/assets/images/ivy-j/videoloop/04.mp4',
+                            d4: '/assets/images/ivy-j/videoloop/05.mp4'
+                        }}
+                    />
                 </section>
 
                 <hr className="section-divider" />

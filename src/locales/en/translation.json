@@ -81,10 +81,10 @@
             "reflection": "Reflection"
         },
         "section": {
-            "summary": "SUMMARY",
-            "problem": "CONTEXT & PROBLEM",
-            "decisions": "DECISIONS",
-            "reflection": "REFLECTION"
+            "summary": "Summary",
+            "problem": "Context & Problem",
+            "decisions": "Decisions",
+            "reflection": "Reflection"
         },
         "intro": {
             "title": "Intro",
@@ -436,53 +436,26 @@
             "copied": "Copied!"
         },
         "section": {
-            "summary": "01. SUMMARY",
-            "context": "02. CONTEXT & PROBLEM",
-            "decisions": "03. DESIGN DECISIONS",
-            "non_decisions": "04. KEY NON-DESIGN DECISIONS",
-            "reflection": "05. REFLECTION"
+            "summary": "Summary",
+            "context": "Context & Problem",
+            "decisions": "Design Decisions",
+            "non_decisions": "Key Non-Design Decisions",
+            "reflection": "Reflection"
         },
         "summary": {
-            "headline": "London’s Rising Jewellery Star Ivy J Studio is set to shine at Paris Fashion Week—but fragmented Emails, Spreadsheets & PDFs were slowing their high couture prep.",
-            "subheadline": "I built a centralized OS ready to deploy—unify customer browsing, stock & finances, cutting tool switches and freeing their team for the big show",
-            "body": "I originally offered Ivy a custom landing page for the show. However, our conversations revealed a bigger pain: coordinating celebrity stylists through countless emails/PDFs was stealing her design time… Now a bigger stage approach, she needs to find a solution that can fix it."
+            "title": "London’s Rising Jewellery Star Ivy J Studio is set to shine at Paris Fashion Week—but fragmented Emails, Spreadsheets & PDFs were slowing their high couture prep.",
+            "subtitle": "I built a centralized OS ready to deploy—unify customer browsing, stock & finances, cutting tool switches and freeing their team for the big show. I originally offered Ivy a custom landing page for the show. However, our conversations revealed a bigger pain: coordinating celebrity stylists through countless emails/PDFs was stealing her design time… Now a bigger stage approach, she needs to find a solution that can fix it."
         },
         "context": {
             "title": "Fashion's Hidden Friction",
             "quote": "\"This industry is surprisingly primitive. Even major brands you'd assume are sophisticated don't even use Excel—materials are just gathered everywhere.\" — Ivy, Founder",
-            "context_title": "Industry Gap",
-            "context_body": "This isn't Ivy's edge case—it's an industry gap. 78% of small jewelry businesses still run on spreadsheets. High-value pieces, tight rental windows, unique SKUs—and systems built for generic retail can't handle it. Double-bookings, disputed returns, admin eating creative time. Tools like Booqable and SparkLayer exist, but they miss what luxury rental needs: serialized item tracking, proof-of-condition workflows, and B2B stylist coordination. Ivy's designer friends share the same pain. Solve this once, and a referral pipeline opens.",
-            "why_title": "Why Creativity Lagged",
-            "why_body": "Workflow analysis revealed 78% of admin time went to redundant tasks: 42% — Rebuilding custom PDFs for every inventory request; 26% — Searching personal photos for proof of condition; 10% — Back-and-forth emails confirming availability. The remaining 22% focused on actual client relationship management—creating constant context switching and emotional load that stifled creative output.",
-            "impact_title": "Problem Areas for Ivy J Studio Stakeholders",
-            "table": {
-                "headers": {
-                    "user_type": "Stakeholder",
-                    "key_pain_point": "Core Problem",
-                    "time_drain": "Time Loss",
-                    "emotional_impact": "Emotional Consequence"
-                },
-                "rows": {
-                    "founder": {
-                        "user_type": "Founder (Ivy)",
-                        "key_pain_point": "Rebuilding PDFs for inventory requests",
-                        "time_drain": "Over 4 hours per week",
-                        "emotional_impact": "Creative burnout"
-                    },
-                    "clients": {
-                        "user_type": "Clients (Stylists)",
-                        "key_pain_point": "Accessing outdated availability information",
-                        "time_drain": "Delays of 2 or more days",
-                        "emotional_impact": "Frustration"
-                    },
-                    "stakeholders": {
-                        "user_type": "Other Stakeholders",
-                        "key_pain_point": "Resolving disputes without sufficient proof",
-                        "time_drain": "More than 3 hours per dispute",
-                        "emotional_impact": "Eroded trust"
-                    }
-                }
-            }
+            "context_body": "This isn't Ivy's edge case—it's an industry gap. 78% of small jewelry businesses still run on spreadsheets. High-value pieces, tight rental windows, unique SKUs—and systems built for generic retail can't keep up. Tools like Booqable and SparkLayer exist, but they miss what luxury rental actually needs: serialized tracking, proof-of-condition workflows, and B2B stylist coordination. Ivy's designer friends share the same pain. Solve this once, and a referral pipeline opens.",
+            "pain_title": "78% of admin time was burned on redundant tasks:",
+            "pain_points": [
+                "Rebuilding PDFs for every inventory request (4+ hrs/week)",
+                "Hunting personal photos for proof of condition",
+                "Availability emails that went nowhere"
+            ]
         },
         "decisions": {
             "title": "Phase 1: Core Design Decisions",
@@ -494,14 +467,7 @@
                 "rationale": "Ivy's existing habit was sharing visual assets (lookbooks). We built on that behavior with a familiar link-sharing model, but automated the filtering. This eliminated 42% of admin time instantly while keeping the client experience seamless."
             },
             "d2": {
-                "title": "02. Embed Proof Collection",
-                "problem": "Disputes required digging through personal photo libraries for timestamped packing shots. Trust maintenance became reactive \"self-defense\" instead of proactive relationship building.",
-                "solution": "Photo upload required before \"Ship\" action. Auto-timestamped, centrally stored, attached to client's shipment email.",
-                "how": "Ivy clicks \"Ship\" on a reservation. System blocks action until packing photo is uploaded. Photo is auto-timestamped and stored in the reservation record. Client receives shipment email with photo embedded as proof. On return disputes: photo is instantly retrievable—no searching.",
-                "rationale": "One mandatory step in the existing shipping flow prevents hours of future work. Proactive proof builds trust upfront and frees Ivy from the \"proof collector\" role."
-            },
-            "d3": {
-                "title": "03. Dual-Notification System",
+                "title": "02. Dual-Notification System",
                 "problem": "After approving a rental, the founder had to manually draft confirmation emails, attach invoices, and paste tracking links—repetitive work that delayed client updates.",
                 "solution": "Every status change triggers two emails: one to the client, one to Ivy. The system becomes both client mailer and founder's assistant.",
                 "how": {
@@ -529,6 +495,13 @@
                     ]
                 },
                 "rationale": "Luxury clients expect fast, polished communication. By embedding email triggers into the reservation lifecycle, we eliminated manual drafting while maintaining brand consistency—turning a 10-minute task into zero effort."
+            },
+            "d3": {
+                "title": "03. Embed Proof Collection",
+                "problem": "Disputes required digging through personal photo libraries for timestamped packing shots. Trust maintenance became reactive \"self-defense\" instead of proactive relationship building.",
+                "solution": "Photo upload required before \"Ship\" action. Auto-timestamped, centrally stored, attached to client's shipment email.",
+                "how": "Ivy clicks \"Ship\" on a reservation. System blocks action until packing photo is uploaded. Photo is auto-timestamped and stored in the reservation record. Client receives shipment email with photo embedded as proof. On return disputes: photo is instantly retrievable—no searching.",
+                "rationale": "One mandatory step in the existing shipping flow prevents hours of future work. Proactive proof builds trust upfront and frees Ivy from the \"proof collector\" role."
             },
             "d4": {
                 "title": "04. Fail-Safe Request Capture",

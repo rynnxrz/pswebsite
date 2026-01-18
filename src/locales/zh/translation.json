@@ -120,11 +120,11 @@
             "inputDesc": "Heavy data entry & initial validation."
         },
         "section": {
-            "summary": "SUMMARY",
-            "problem": "CONTEXT & PROBLEM",
-            "decisions": "DECISIONS",
-            "delivery": "DELIVERY & SCOPE",
-            "reflection": "归纳与反思"
+            "summary": "Summary",
+            "problem": "Context & Problem",
+            "decisions": "Decisions",
+            "delivery": "Delivery & Scope",
+            "reflection": "Reflection"
         },
         "summary": {
             "title": "从实习生到 SaaS 联合创始人，我主导了端到端的用户体验设计，将 4 个 Google Sheets 表格和 Dynamics 365 数据整合为统一的仪表盘，解决了前雇主 40 人团队的工作流痛点，并成功将他们转化为客户。",
@@ -419,52 +419,26 @@
             "copied": "已复制！"
         },
         "section": {
-            "summary": "01. SUMMARY",
-            "context": "02. CONTEXT & PROBLEM",
-            "decisions": "03. DESIGN DECISIONS",
-            "non_decisions": "04. KEY NON-DESIGN DECISIONS",
-            "reflection": "05. REFLECTION"
+            "summary": "Summary",
+            "context": "Context & Problem",
+            "decisions": "Design Decisions",
+            "non_decisions": "Key Non-Design Decisions",
+            "reflection": "Reflection"
         },
         "summary": {
-            "headline": "Creative Focus Restored: Building a Trust-Driven Operating System for Luxury Jewelry Rentals",
-            "subheadline": "From Chaos to Focus: Turning Creative Drain into a Trust-Centered Operating System",
-            "body": "As Product Partner, I led end-to-end product strategy, UX design, and full-stack engineering to deliver a 12-day MVP operating system for Ivy J Studio. The solution eliminated repetitive admin work, automated evidence collection, replaced static workflows, and preserved client effort via dual-scenario data persistence -- freeing the founder to refocus on high-value design while strengthening client trust."
+            "title": "伦敦新锐珠宝品牌Ivy J Studio即将亮相巴黎时装周——但碎片化的邮件、表格和PDF正在拖慢高级定制的准备工作。",
+            "subtitle": "我构建了一套可即时部署的中心化操作系统——统一客户浏览、库存和财务，减少工具切换，让团队专注于大秀准备。最初我只是为Ivy提供一个展会落地页。但我们的对话揭示了更大的痛点：通过无数邮件/PDF协调明星造型师正在蚕食她的设计时间。这一发现转化为产品合作，我主导了端到端的设计和工程，交付了一套自动化库存分享、内置证据收集、保留客户输入的操作系统——让创始人重新聚焦于设计本身。"
         },
         "context": {
-            "title": "Manual Workflows = Creative Drain",
-            "context_title": "Context",
-            "context_body": "London-based luxury jewelry brand (one-of-a-kind, high-value pieces) relied on fragmented manual processes for rentals and wholesale -- static Illustrator lookbooks, personal photo libraries, and ad-hoc PDF sharing. As demand grew, the founder's time shifted from designing (core strength) to repetitive checking, proving, and explaining.",
-            "why_title": "Why Creativity Lagged",
-            "why_body": "Workflow analysis revealed 78% of admin time went to redundant tasks: 42% rebuilding custom PDFs for inventory requests, 26% searching for proof in personal photos, 10% back-and-forth emails, and 8% re-entering client request data (lost or incomplete submissions). The remaining 22% focused on actual client relationship management -- creating constant context switching and emotional load that stifled creative output.",
-            "impact_title": "Impact by User Type",
-            "table": {
-                "headers": {
-                    "user_type": "User Type",
-                    "key_pain_point": "Key Pain Point",
-                    "time_drain": "Time Drain",
-                    "emotional_impact": "Emotional Impact"
-                },
-                "rows": {
-                    "founder": {
-                        "user_type": "Founder (Ivy)",
-                        "key_pain_point": "PDF rebuilds + manual request re-entry",
-                        "time_drain": "4+ hours/week",
-                        "emotional_impact": "Creative burnout"
-                    },
-                    "clients": {
-                        "user_type": "Clients (Stylists/Buyers)",
-                        "key_pain_point": "Outdated availability + lost submission data",
-                        "time_drain": "2+ days delay + rework",
-                        "emotional_impact": "Frustration with inaccuracy/wasted effort"
-                    },
-                    "stakeholders": {
-                        "user_type": "Stakeholders",
-                        "key_pain_point": "Dispute resolution without proof",
-                        "time_drain": "3+ hours/dispute",
-                        "emotional_impact": "Eroded trust"
-                    }
-                }
-            }
+            "title": "手动流程 = 创意消耗",
+            "quote": "\"这个行业出人意料地原始。即使是你以为很成熟的大品牌，连Excel都不用——物料信息散落各处。\" — Ivy, 创始人",
+            "context_body": "这不是Ivy的个例——而是整个行业的痛点。78%的小型珠宝企业仍依赖电子表格。高价值单品、紧凑的租赁周期、独特的SKU——为通用零售设计的系统根本应付不来。Booqable和SparkLayer这类工具存在，但它们无法满足奢侈品租赁的真正需求：序列化追踪、状态证明流程、B2B造型师协调。Ivy的设计师朋友们都有同样的痛点。解决一次，推荐管道就打开了。",
+            "pain_title": "78%的行政时间被浪费在冗余任务上：",
+            "pain_points": [
+                "每次库存请求都要重建PDF（每周4+小时）",
+                "翻找个人照片库寻找物品状态证明",
+                "石沉大海的可用性确认邮件"
+            ]
         },
         "decisions": {
             "title": "Phase 1: Core Design Decisions",
@@ -476,18 +450,41 @@
                 "rationale": "The founder's existing workflow relied on sharing visual assets (lookbooks), so we built on this habit with a familiar link-sharing model. By automating date filtering and updates, we removed the need for manual intervention while keeping the client experience seamless. This cut onboarding to zero and eliminated 42% of admin time instantly."
             },
             "d2": {
-                "title": "02. Embed Proof Collection into Workflows",
-                "problem": "Disputes required searching personal photo libraries for timestamped packing photos -- turning trust maintenance into reactive \"self-defense\" instead of proactive relationship building.",
-                "solution": "Mandatory photo upload before marking items as \"Shipped,\" with auto-timestamping and direct attachment to client notifications.",
-                "how": "The system blocks the \"Ship\" action until a packing photo is uploaded. The photo is automatically timestamped, stored in a centralized library, and included in the client's confirmation email -- creating irrefutable proof before items leave the studio.",
-                "rationale": "We aligned with the founder's existing shipping workflow (marking items as sent) by adding a single mandatory step that prevents future work. This proactive approach eliminates dispute resolution time entirely, builds trust upfront, and keeps the founder from acting as a \"proof collector\" -- freeing her to focus on client relationships."
+                "title": "02. Dual-Notification System",
+                "problem": "After approving a rental, the founder had to manually draft confirmation emails, attach invoices, and paste tracking links—repetitive work that delayed client updates.",
+                "solution": "Every status change triggers two emails: one to the client, one to Ivy. The system becomes both client mailer and founder's assistant.",
+                "how": {
+                    "table": [
+                        {
+                            "stage": "Request Submitted",
+                            "client": "Confirmation",
+                            "ivy": "\"New Request\" Alert"
+                        },
+                        {
+                            "stage": "Request Approved",
+                            "client": "Invoice PDF",
+                            "ivy": "\"Awaiting Payment\" Reminder"
+                        },
+                        {
+                            "stage": "Payment Complete",
+                            "client": "Receipt",
+                            "ivy": "\"Payment Received\" Log"
+                        },
+                        {
+                            "stage": "Order Shipped",
+                            "client": "Tracking Link",
+                            "ivy": "Shipment Confirmation"
+                        }
+                    ]
+                },
+                "rationale": "Luxury clients expect fast, polished communication. By embedding email triggers into the reservation lifecycle, we eliminated manual drafting while maintaining brand consistency—turning a 10-minute task into zero effort."
             },
             "d3": {
-                "title": "03. AI-Powered Structured Data",
-                "problem": "Messy human-generated files (invoices, client notes) could not be easily queried -- forcing manual searches for key info like \"available silver rings next Friday.\"",
-                "solution": "AI as a foundational capability to convert unstructured data into structured drafts, with human review (no one-click automation).",
-                "how": "AI ingests invoices, notes, and inventory lists to create organized data schemas. The founder reviews and confirms entries, enabling natural-language queries (for example, \"Show all gold necklaces available 10/15-10/20\"). The system learns from confirmations to improve accuracy over time.",
-                "rationale": "Accuracy matters more than speed for luxury clients, so we prioritized human oversight while automating data structuring. This approach supports future scalability (no predefined dashboards needed) while aligning with the founder's need to maintain control over critical business data. The reusable schema also eliminates redundant data entry across workflows."
+                "title": "03. Embed Proof Collection",
+                "problem": "Disputes required digging through personal photo libraries for timestamped packing shots. Trust maintenance became reactive \"self-defense\" instead of proactive relationship building.",
+                "solution": "Photo upload required before \"Ship\" action. Auto-timestamped, centrally stored, attached to client's shipment email.",
+                "how": "Ivy clicks \"Ship\" on a reservation. System blocks action until packing photo is uploaded. Photo is auto-timestamped and stored in the reservation record. Client receives shipment email with photo embedded as proof. On return disputes: photo is instantly retrievable—no searching.",
+                "rationale": "One mandatory step in the existing shipping flow prevents hours of future work. Proactive proof builds trust upfront and frees Ivy from the \"proof collector\" role."
             },
             "d4": {
                 "title": "04. Dual-Scenario Data Persistence and One-Click Sharing",
