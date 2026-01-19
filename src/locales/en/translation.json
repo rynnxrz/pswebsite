@@ -18,6 +18,11 @@
         "skills": "skills",
         "experience_list": [
             {
+                "role": "Product Partner",
+                "company": "Ivy J Studio",
+                "period": "Dec 2025 - Jan 2026"
+            },
+            {
                 "role": "Product Designer",
                 "company": "OraNutrition Ltd.",
                 "period": "Jul 2023 - Dec 2023"

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { pageTransition } from '../utils/animations';
@@ -59,7 +59,7 @@ export const Home = () => {
               </p>
 
               {/* --- 2. 修改点: 将 a 标签替换为 Link 组件，并添加 SVG 图标 --- */}
-              <Link to="/portfolio" className="portfolio-link">
+              {/* <Link to="/portfolio" className="portfolio-link">
                 <span>{t('home.intro.viewPortfolio')}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ export const Home = () => {
                   <path d="M7 7h10v10"></path>
                   <path d="M7 17 17 7"></path>
                 </svg>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </section>

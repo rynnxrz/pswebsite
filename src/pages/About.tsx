@@ -1,7 +1,7 @@
 // src/components/About.tsx
 
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { pageTransition } from '../utils/animations';
 import './About.css';
 
@@ -35,12 +35,12 @@ export const About = () => {
           <p className="about-bio">
             {t('about.bio')}
           </p>
-          <Link to="/portfolio" className="about-link">
+          {/* <Link to="/portfolio" className="about-link">
             <span>{t('about.viewPortfolio')}</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>
             </svg>
-          </Link>
+          </Link> */}
         </div>
       </section>
 
