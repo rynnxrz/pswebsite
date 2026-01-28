@@ -2,7 +2,7 @@
     "nav": {
         "home": "首页",
         "about": "关于",
-        "portfolio": "作品集",
+        "workwithme": "合作咨询",
         "language": "语言"
     },
     "theme": {
@@ -61,6 +61,49 @@
             }
         ]
     },
+    "workwithme": {
+        "hero": {
+            "title": "shipbyx design",
+            "subtitle": "产品合伙人",
+            "tagline": "我协助创始团队打造精致、以用户为核心的数字产品——从概念到上线交付。",
+            "button": "开启合作"
+        },
+        "services": {
+            "title": "服务范围",
+            "items": [
+                {
+                    "title": "Product Design",
+                    "description": "从探索调研到高保真原型的端到端产品设计"
+                },
+                {
+                    "title": "UX Research",
+                    "description": "用户访谈、体验地图绘制与核心洞察提炼"
+                },
+                {
+                    "title": "Full-Stack Development",
+                    "description": "React、TypeScript 与现代化 Web 应用交付"
+                },
+                {
+                    "title": "Design Systems",
+                    "description": "构建可扩展组件库、设计令牌 (Tokens) 与规范体系"
+                },
+                {
+                    "title": "Rapid Prototyping",
+                    "description": "用于团队对齐与方向验证的高保真可交互原型"
+                }
+            ]
+        },
+        "process": {
+            "title": "工作模式",
+            "description": "以短期 Discovery Sprint 开启，明确目标成果，随后进入周迭代开发。您将获得清晰的项目节点、透明的决策权衡，以及即时可用的交付成果。"
+        },
+        "cta": {
+            "title": "即刻启动",
+            "description": "有新的产品构想？请告知您的目标、时间线与项目范围，我将在 48 小时内回复。",
+            "button": "取得联系",
+            "email": "rongze.xu@outlook.com"
+        }
+    },
     "project": {
         "labels": {
             "problem": "问题",
@@ -71,7 +114,8 @@
         "tooltips": {
             "download": "下载 PDF",
             "copy": "复制链接",
-            "copied": "已复制！"
+            "copied": "已复制！",
+            "pitch": "播放演示"
         },
         "backToDemo": {
             "hint": "↑ 体验在线原型",
@@ -429,110 +473,111 @@
             "copied": "已复制！"
         },
         "section": {
-            "summary": "Summary",
-            "context": "Context & Problem",
-            "decisions": "Design Decisions",
-            "non_decisions": "Key Non-Design Decisions",
-            "reflection": "Reflection"
+            "summary": "摘要",
+            "context": "背景与问题",
+            "decisions": "设计决策",
+            "non_decisions": "关键非设计决策",
+            "reflection": "反思"
         },
         "summary": {
-            "title": "伦敦新锐珠宝品牌Ivy J Studio即将亮相巴黎时装周——但碎片化的邮件、表格和PDF正在拖慢高级定制的准备工作。",
-            "subtitle": "我构建了一套可即时部署的中心化操作系统——统一客户浏览、库存和财务，减少工具切换，让团队专注于大秀准备。最初我只是为Ivy提供一个展会落地页。但我们的对话揭示了更大的痛点：通过无数邮件/PDF协调明星造型师正在蚕食她的设计时间。这一发现转化为产品合作，我主导了端到端的设计和工程，交付了一套自动化库存分享、内置证据收集、保留客户输入的操作系统——让创始人重新聚焦于设计本身。"
+            "title": "伦敦新星珠宝品牌 Ivy J Studio 准备在巴黎时装周大放异彩——但碎片化的邮件、表格和 PDF 正在拖慢她们的高定准备工作。",
+            "subtitle": "我构建了一个即时可用的中心化操作系统——统一客户浏览、库存与财务，减少工具切换，解放团队以专注于大秀。我最初只是提议做一个大秀落地页。但沟通中发现了一个更大的痛点：通过无数邮件/PDF协调明星造型师正在蚕食她的设计时间……现在不仅是为大秀，她需要一个能根本解决问题的方案。"
         },
         "context": {
-            "title": "手动流程 = 创意消耗",
-            "quote": "\"这个行业出人意料地原始。即使是你以为很成熟的大品牌，连Excel都不用——物料信息散落各处。\" — Ivy, 创始人",
-            "context_body": "这不是Ivy的个例——而是整个行业的痛点。78%的小型珠宝企业仍依赖电子表格。高价值单品、紧凑的租赁周期、独特的SKU——为通用零售设计的系统根本应付不来。Booqable和SparkLayer这类工具存在，但它们无法满足奢侈品租赁的真正需求：序列化追踪、状态证明流程、B2B造型师协调。Ivy的设计师朋友们都有同样的痛点。解决一次，推荐管道就打开了。",
-            "pain_title": "78%的行政时间被浪费在冗余任务上：",
+            "title": "时尚圈的隐形摩擦",
+            "quote": "“这个行业出奇地原始。即便是一些你以为很成熟的大品牌，连 Excel 都不怎么用——物料信息到处都是。” — Ivy, 创始人",
+            "context_body": "这不是 Ivy 的个例——这是一个行业缺口。78% 的小型珠宝业务仍运行在电子表格上。高价值单品、紧张的租赁窗口、独特的 SKU——为通用零售设计的系统根本跟不上。虽然有 Booqable 和 SparkLayer 这样的工具，但它们忽略了奢侈品租赁的真实需求：序列化追踪、品相证明流程以及 B2B 造型师协同。Ivy 的设计师朋友们也面临同样的痛点。解决这一次，就能打开推荐转化的管道。",
+            "pain_title": "78% 的行政时间被浪费在冗余任务上：",
             "pain_points": [
-                "每次库存请求都要重建PDF（每周4+小时）",
-                "翻找个人照片库寻找物品状态证明",
-                "石沉大海的可用性确认邮件"
+                "每次库存请求都要重做 PDF（每周 4+ 小时）",
+                "翻找个人照片库以自证物品状态",
+                "石沉大海的档期确认邮件"
             ]
         },
         "decisions": {
-            "title": "Phase 1: Core Design Decisions",
+            "title": "第一阶段：核心设计决策",
             "d1": {
-                "title": "01. Replace Static PDFs with Live, Date-Aware Catalog",
-                "problem": "Founder had to manually update Illustrator lookbooks, remove unavailable items, export PDFs, and re-share for every inventory request -- turning simple queries into time-consuming design tasks.",
-                "solution": "A dynamic catalog link with auto-filtering for date availability and buffer rules, eliminating manual PDF creation entirely.",
-                "how": "Users receive a shareable link that auto-updates based on selected dates and pre-set buffer periods (for example, a 2-day lead time for returns). No downloads or manual edits -- availability is always current with one click.",
-                "rationale": "The founder's existing workflow relied on sharing visual assets (lookbooks), so we built on this habit with a familiar link-sharing model. By automating date filtering and updates, we removed the need for manual intervention while keeping the client experience seamless. This cut onboarding to zero and eliminated 42% of admin time instantly."
+                "title": "01. 实时日期感知的目录",
+                "problem": "每次库存请求都触发手动循环：Illustrator → 删掉不可用单品 → 导出 PDF → 发送。简单的查询变成了 30 分钟的任务。",
+                "solution": "一条可分享链接。根据所选日期 + 缓冲规则自动过滤。永远最新，无需下载。",
+                "how": "用户收到一个可分享的链接，该链接会根据所选日期和预设的缓冲期（例如，2天的退货缓冲期）自动更新。无需下载或手动编辑——只需点击一下，可用性始终保持最新。",
+                "rationale": "创始人现有的工作流依赖于分享视觉资产（Lookbook），因此我们沿用了这一习惯，采用了熟悉的链接分享模式。通过自动化日期筛选和更新，我们消除了人工干预的需求，同时保持了流畅的客户体验。这实现了零门槛上手，并瞬间减少了 42% 的行政时间。"
             },
             "d2": {
-                "title": "02. Dual-Notification System",
-                "problem": "After approving a rental, the founder had to manually draft confirmation emails, attach invoices, and paste tracking links—repetitive work that delayed client updates.",
-                "solution": "Every status change triggers two emails: one to the client, one to Ivy. The system becomes both client mailer and founder's assistant.",
+                "title": "02. 双向通知系统",
+                "problem": "确认租赁后，创始人必须手动起草确认邮件、附上发票并粘贴物流链接——重复性工作拖慢了客户更新。",
+                "solution": "每次状态变更触发两封邮件：一封给客户，一封给 Ivy。系统既是客户信使，也是创始人助理。",
                 "how": {
                     "table": [
                         {
-                            "stage": "Request Submitted",
-                            "client": "Confirmation",
-                            "ivy": "\"New Request\" Alert"
+                            "stage": "提交请求",
+                            "client": "确认信",
+                            "ivy": "“新请求” 提醒"
                         },
                         {
-                            "stage": "Request Approved",
-                            "client": "Invoice PDF",
-                            "ivy": "\"Awaiting Payment\" Reminder"
+                            "stage": "请求已批准",
+                            "client": "发票 PDF",
+                            "ivy": "“等待付款” 提醒"
                         },
                         {
-                            "stage": "Payment Complete",
-                            "client": "Receipt",
-                            "ivy": "\"Payment Received\" Log"
+                            "stage": "付款完成",
+                            "client": "收据",
+                            "ivy": "“已收款” 记录"
                         },
                         {
-                            "stage": "Order Shipped",
-                            "client": "Tracking Link",
-                            "ivy": "Shipment Confirmation"
+                            "stage": "订单已发货",
+                            "client": "物流链接",
+                            "ivy": "发货确认"
                         }
                     ]
                 },
-                "rationale": "Luxury clients expect fast, polished communication. By embedding email triggers into the reservation lifecycle, we eliminated manual drafting while maintaining brand consistency—turning a 10-minute task into zero effort."
+                "rationale": "奢侈品客户期待快速、精致的沟通。通过将邮件触发嵌入预订生命周期，我们消除了手动起草，同时保持品牌一致性——将 10 分钟的任务变为零工作量。"
             },
             "d3": {
-                "title": "03. Embed Proof Collection",
-                "problem": "Disputes required digging through personal photo libraries for timestamped packing shots. Trust maintenance became reactive \"self-defense\" instead of proactive relationship building.",
-                "solution": "Photo upload required before \"Ship\" action. Auto-timestamped, centrally stored, attached to client's shipment email.",
-                "how": "Ivy clicks \"Ship\" on a reservation. System blocks action until packing photo is uploaded. Photo is auto-timestamped and stored in the reservation record. Client receives shipment email with photo embedded as proof. On return disputes: photo is instantly retrievable—no searching.",
-                "rationale": "One mandatory step in the existing shipping flow prevents hours of future work. Proactive proof builds trust upfront and frees Ivy from the \"proof collector\" role."
+                "title": "03. 嵌入式取证",
+                "problem": "争议处理需要翻找个人照片库寻找带时间戳的打包照。信任维护变成了被动的“正当防卫”，而非主动的关系建设。",
+                "solution": "“发货”操作前强制上传照片。自动打时间戳，集中存储，并随发货邮件附送给客户。",
+                "how": "Ivy 点击预订上的“发货”。系统阻止该操作，直到上传打包照片。照片自动打上时间戳并存入预订记录。客户收到包含照片证据的发货邮件。发生退还争议时：照片即时可查——无需翻找。",
+                "rationale": "现有发货流程中的这一强制步骤，避免了未来的数小时工作。主动取证在前期建立信任，让 Ivy 从“证据收集员”的角色中解脱出来。"
             },
             "d4": {
-                "title": "04. Dual-Scenario Data Persistence and One-Click Sharing",
-                "problem": "Clients spent significant time selecting products, dates, and entering company details in the live lookbook -- only to face data loss if submission failed (unhappy path) or no easy way to save or share their selections (happy path). This created frustration from wasted effort and extra work for Ivy, who had to re-enter 8% of client requests manually due to lost or incomplete data.",
-                "solution": "A unified data persistence system that preserves all client inputs (product selections, dates, contact and company info) for both scenarios, enabling one-click sharing of structured data that Ivy can instantly import into the system.",
+                "title": "04. 故障安全请求捕获",
+                "problem": "如果客户浏览器崩溃或网络在结账中途断开，线索就丢了——没有记录，无法跟进。",
+                "solution": "设备指纹 + 本地备份 + 客户驱动的恢复消息。失败的请求被本地捕获；客户会看到一个紧急恢复面板，带有一键“复制到剪贴板”选项。Ivy 将代码粘贴到管理控制台通过即可瞬间恢复请求。",
                 "how": {
-                    "happy_title": "Happy Path (Smooth Submission)",
-                    "happy_steps": [
-                        "As clients build their request (select products, input details), the system auto-saves progress in real time.",
-                        "After successful submission, clients get an option to \"Save Request Summary\" (one-click copy of structured data) for their records.",
-                        "Ivy receives the request with a pre-populated order form -- no manual data entry required."
-                    ],
-                    "unhappy_title": "Unhappy Path (Submission Failure)",
-                    "unhappy_steps": [
-                        "Client inputs are automatically retained (no page refresh, no lost selections).",
-                        "A clear alert surfaces with a \"Copy Full Request\" button, capturing all product choices, dates, and company info as a structured, Base64-encoded string.",
-                        "Clients share this copied text with Ivy via email or chat.",
-                        "Ivy pastes the string into the system's \"Import Request\" tool -- data auto-populates into the order form (products, dates, contact info pre-mapped) with one click, no manual cross-checking."
+                    "steps": [
+                        "故障发生时：系统检测到提交错误，向客户显示紧急恢复面板。",
+                        "客户操作：一键生成包含所有选项（物品、日期、联系方式）的 Base64 编码消息 + 用于数据完整性的指纹。",
+                        "交接：客户复制该消息并通过邮件或私信发送给 Ivy。",
+                        "后台恢复：Ivy 将消息粘贴到预订仪表盘的“导入请求”工具中。系统解码、验证（Zod 模式 + 指纹检查），并将请求恢复到正常的预订流程中——准备开票。"
                     ]
                 },
-                "rationale": "The biggest friction point was not just failure -- it was wasted effort, regardless of success. We designed this to eliminate rework entirely: for clients, their time spent selecting and entering data is never lost (whether submission works or not); for Ivy, manual data entry is replaced with instant imports. This dual-scenario value aligns with our core goal of reducing both emotional load (client frustration, Ivy's admin) and operational waste. By turning client inputs into a portable, system-compatible package, we turned potential pain points (failure, follow-up) into efficiency wins -- strengthening trust in the system while cutting Ivy's request-processing time by 80%. The one-click workflow keeps interactions simple for luxury clients (no tech skills needed) and aligns with Ivy's need for streamlined admin."
+                "rationale": "对于高价值奢侈品租赁，丢失一条线索代价高昂。此设计尊重双方：客户不会陷入困境（“数据没了，重填一遍”），Ivy 也不需要技术技能来恢复它。指纹防止重复提交；人工交接（私信/邮件）维持了定义奢侈品服务的私人关系。"
             }
         },
         "non_decisions": {
-            "title": "Key Non-Design Decisions",
+            "title": "关键非设计决策",
             "d1": {
-                "title": "01. No Checkout Flow",
-                "rationale": "B2B luxury rentals rely on invoices, deposits, and long-term relationships -- not impulse purchases. Adding payment gateways would add maintenance and friction without reducing admin work. Instead, we automated invoice generation that matches existing client behavior, supporting relationships instead of replacing them."
+                "title": "01. 无结账流程",
+                "rationale": "B2B 奢侈品租赁依赖发票、定金和长期关系——而非冲动消费。增加支付网关只会增加维护成本和摩擦，却不能减少行政工作。相反，我们自动化了符合现有客户习惯的发票生成，支持关系而非取代关系。"
             },
             "d2": {
-                "title": "02. Prioritize Logic Over Custom UI",
-                "rationale": "With a 12-day MVP timeline, we used reliable base UI components to focus resources on data logic, availability rules, evidence flows, and data persistence. For a solo founder, reliability and correctness mattered more than visual uniqueness, ensuring the system solved core pain points first."
+                "title": "02. 逻辑优先于自定义 UI",
+                "rationale": "在 12 天 MVP 时间线内，我们使用可靠的基础 UI 组件，将资源集中在数据逻辑、可用性规则、证据流和数据持久性上。对于单人创始人，可靠性和正确性比视觉独特性更重要，确保系统首先解决核心痛点。"
             }
         },
         "reflection": {
-            "title": "Focus Over Features: Designing for Human Priorities",
-            "body": "A critical takeaway is that digital transformation should not prioritize completeness -- it should protect human strengths. Initially scoping for a full-featured platform, we pivoted to focus solely on eliminating creative drain by absorbing repetitive, low-judgment tasks. This showed that aligning technology with the user's core value (design, in this case) delivers more impact than adding unnecessary features. It also reinforced that trust (not just efficiency) is a designable outcome -- proactive proof collection, reliable availability data, and dual-scenario data persistence all strengthened client relationships while freeing the founder's creativity. The data persistence design, in particular, highlighted that solving for wasted effort (not just failure) creates disproportionate value for both users and the business, turning potential frustration into loyalty.",
-            "note": "（注：文档部分内容可能由 AI 生成）"
+            "title": "反思",
+            "content": [
+                {
+                    "heading": "将 AI 构建为可复用技能",
+                    "body": "AI 导入功能（URL → 结构化数据 → 暂存）不仅是产品功能——它是对能力的刻意投资。通过将其构建为模块化、可复用的模式，我现在可以在未来需要 AI 辅助数据摄取的项目中调用此方法。这种“实验室功能”思维将副业项目转化为复利技能资产。"
+                },
+                {
+                    "heading": "信任作为基础设施",
+                    "body": "除了证据照片，信任建立在系统可靠性之上。恢复层（幂等性 + 备份 + 恢复码）确保即使技术故障也不会破坏客户关系。这强化了“信任”是可以在基础设施层面设计的——而不仅仅是界面层面。"
+                }
+            ]
         }
     },
     "home": {

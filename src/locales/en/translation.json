@@ -2,7 +2,7 @@
     "nav": {
         "home": "Home",
         "about": "About",
-        "portfolio": "Portfolio",
+        "workwithme": "Work With Me",
         "language": "Language"
     },
     "theme": {
@@ -61,6 +61,49 @@
             }
         ]
     },
+    "workwithme": {
+        "hero": {
+            "title": "shipbyx design",
+            "subtitle": "Design partner for ambitious products",
+            "tagline": "I help founders and teams ship polished, user-centered products—from concept to launch.",
+            "button": "start a project"
+        },
+        "services": {
+            "title": "what i do",
+            "items": [
+                {
+                    "title": "Product Design",
+                    "description": "End-to-end UX from discovery to high-fidelity prototypes"
+                },
+                {
+                    "title": "UX Research",
+                    "description": "User interviews, journey mapping, and insight synthesis"
+                },
+                {
+                    "title": "Full-Stack Development",
+                    "description": "React, TypeScript, and modern web delivery"
+                },
+                {
+                    "title": "Design Systems",
+                    "description": "Scalable component libraries, tokens, and UI standards"
+                },
+                {
+                    "title": "Rapid Prototyping",
+                    "description": "Clickable demos to align stakeholders and validate direction"
+                }
+            ]
+        },
+        "process": {
+            "title": "how i work",
+            "description": "Start with a focused discovery sprint, align on outcomes, then move in weekly build cycles. You get clear checkpoints, honest tradeoffs, and shippable progress."
+        },
+        "cta": {
+            "title": "let's build something",
+            "description": "Have a project in mind? Share goals, timeline, and scope, and I'll reply within 48 hours.",
+            "button": "get in touch",
+            "email": "rongze.xu@outlook.com"
+        }
+    },
     "project": {
         "labels": {
             "problem": "Problem",
@@ -71,7 +114,8 @@
         "tooltips": {
             "download": "Download PDF",
             "copy": "Copy Link",
-            "copied": "Copied!"
+            "copied": "Copied!",
+            "pitch": "Play Pitch Deck"
         },
         "backToDemo": {
             "hint": "↑ Try the live prototype",

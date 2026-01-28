@@ -1,109 +1,132 @@
-// src/components/Portfolio.tsx
+// src/pages/WorkWithMe.tsx
 
 import { motion } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
 import { pageTransition } from '../utils/animations';
-import Expand from 'lucide-react/dist/esm/icons/expand';
-import Download from 'lucide-react/dist/esm/icons/download';
-import Copy from 'lucide-react/dist/esm/icons/copy';
-import { useNotification } from '../components/NotificationContext';
+import { useTranslation } from 'react-i18next';
+
+import Dither from '../components/interactive/Dither';
 import './Portfolio.css';
 
-const TooltipButton = ({ onClick, children, tooltipText, href, download, isMobile }: any) => {
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-
-  const handleMouseEnter = () => !isMobile && setTooltipVisible(true);
-  const handleMouseLeave = () => setTooltipVisible(false);
-
-  const commonProps = {
-    className: 'action-btn',
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-    onClick: onClick,
-  };
-
-  return (
-    <div className="tooltip-container">
-      {href ? (
-        <a href={href} download={download} {...commonProps} target="_blank" rel="noopener noreferrer">
-          {children}
-        </a>
-      ) : (
-        <button {...commonProps}>{children}</button>
-      )}
-      {tooltipVisible && <span className="tooltip-text">{tooltipText}</span>}
-    </div>
-  );
-};
+interface ServiceItem {
+  title: string;
+  description: string;
+}
 
 export const Portfolio = () => {
-  const pdfContainerRef = useRef<HTMLElement>(null);
-  const { showNotification } = useNotification();
-  const [isMobile, setIsMobile] = useState(false);
+  const { t } = useTranslation();
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const portfolioPdfUrl = "https://drive.usercontent.google.com/download?id=1cfOeyQdeB95VFB889BVrqjhxi4_qVXqg&export=download&authuser=0";
-
-  const handleCopyLink = () => {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-      showNotification('Successfully copied to clipboard', url);
-    });
-  };
-
-  const toggleFullscreen = () => {
-    const element = pdfContainerRef.current;
-    if (!element) return;
-    if (!document.fullscreenElement) {
-      element.requestFullscreen().catch(err => console.error(err));
-    } else {
-      document.exitFullscreen();
-    }
-  };
+  const servicesData = t('workwithme.services.items', { returnObjects: true }) as ServiceItem[];
 
   return (
-    <motion.div {...pageTransition} className="portfolio-page-container">
-      <div className="portfolio-content-wrapper">
-        <header className="portfolio-header">
-          <div className="portfolio-header-text">
-            <h2 className="portfolio-title">product & design portfolio</h2>
-            <p className="portfolio-date">October 14th, 2025</p>
-          </div>
-          <div className="action-buttons-container">
-            {!isMobile && (
-              <TooltipButton onClick={toggleFullscreen} tooltipText="Full window view" isMobile={isMobile}>
-                <Expand size={16} />
-              </TooltipButton>
-            )}
-            <TooltipButton href={portfolioPdfUrl} download="Rongze_Xu_Portfolio.pdf" tooltipText="Download PDF" isMobile={isMobile}>
-              <Download size={16} />
-            </TooltipButton>
-            <TooltipButton onClick={handleCopyLink} tooltipText="Copy URL" isMobile={isMobile}>
-              <Copy size={16} />
-            </TooltipButton>
-          </div>
-        </header>
-
-        <section ref={pdfContainerRef} className="pdf-container">
-          {isMobile ? (
-            <div className="mobile-overlay">
-              <p>For the best viewing experience, please download the PDF.</p>
-            </div>
-          ) : (
-            <iframe
-              src="/portfolio_small.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-              title="Portfolio PDF"
-              className="pdf-viewer"
-            />
-          )}
-        </section>
+    <div className="workwithme-shell">
+      <div className="workwithme-background" aria-hidden="true">
+        <Dither
+          waveColor={[0.5, 0.5, 0.5]}
+          disableAnimation={false}
+          enableMouseInteraction
+          mouseRadius={0.3}
+          colorNum={4}
+          waveAmplitude={0.3}
+          waveFrequency={3}
+          waveSpeed={0.05}
+        />
       </div>
-    </motion.div>
+
+      <motion.div {...pageTransition} className="workwithme-wrapper">
+        <div className="workwithme-page-container">
+          <div className="workwithme-content-backdrop">
+            {/* Hero Section */}
+            <section className="workwithme-hero" aria-label={t('workwithme.hero.title')}>
+              <div className="workwithme-grid-col-left">
+                <h1 className="workwithme-name">{t('workwithme.hero.title')}</h1>
+                <a href="https://www.linkedin.com/in/rongze-xu-493688233/" target="_blank" rel="noopener noreferrer" className="workwithme-link">
+                  <span>{t('workwithme.hero.button')}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 7h10v10"></path>
+                    <path d="M7 17 17 7"></path>
+                  </svg>
+                </a>
+              </div>
+              <div className="workwithme-grid-col-right">
+                <p className="workwithme-tagline">{t('workwithme.hero.tagline')}</p>
+              </div>
+            </section>
+
+            {/* Services Section */}
+            <section className="workwithme-section" aria-labelledby="services-heading">
+              <div className="workwithme-grid-col-left">
+                <div className="workwithme-section-title">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                  <h2 id="services-heading">{t('workwithme.services.title')}</h2>
+                </div>
+              </div>
+              <div className="workwithme-grid-col-right">
+                <div className="workwithme-services-list">
+                  {servicesData.map((service, index) => (
+                    <div className="workwithme-service-item" key={index}>
+                      <h3 className="workwithme-service-title">{service.title}</h3>
+                      <p className="workwithme-service-desc">{service.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Process Section */}
+            <section className="workwithme-section" aria-labelledby="process-heading">
+              <div className="workwithme-grid-col-left">
+                <div className="workwithme-section-title">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                    <path d="M3 9h18"></path>
+                    <path d="M9 21V9"></path>
+                  </svg>
+                  <h2 id="process-heading">{t('workwithme.process.title')}</h2>
+                </div>
+              </div>
+              <div className="workwithme-grid-col-right">
+                <p className="workwithme-process-desc">{t('workwithme.process.description')}</p>
+              </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="workwithme-cta-section" aria-labelledby="cta-heading">
+              <div className="workwithme-grid-col-left">
+                <div className="workwithme-section-title">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                    <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                  </svg>
+                  <h2 id="cta-heading">{t('workwithme.cta.title')}</h2>
+                </div>
+              </div>
+              <div className="workwithme-grid-col-right">
+                <p className="workwithme-cta-desc">
+                  {t('workwithme.cta.description')}{' '}
+                  <a
+                    href="https://www.linkedin.com/in/rongze-xu-493688233/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="workwithme-link"
+                  >
+                    <span>{t('workwithme.cta.button')}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 7h10v10"></path>
+                      <path d="M7 17 17 7"></path>
+                    </svg>
+                  </a>
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        {/* Floating CTA Button - bottom right */}
+
+      </motion.div>
+    </div>
   );
 };

@@ -1,6 +1,6 @@
 // src/App.tsx
 
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { ScrollToTop } from './components/common/ScrollToTop';
@@ -34,6 +34,25 @@ const PageLoader = () => (
 const AppContent = () => {
   const location = useLocation();
 
+  useEffect(() => {
+    const preloadWorkWithMe = () => {
+      void import('./pages/Portfolio');
+    };
+
+    const win = window as Window & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (win.requestIdleCallback) {
+      const handle = win.requestIdleCallback(preloadWorkWithMe, { timeout: 1500 });
+      return () => win.cancelIdleCallback?.(handle);
+    }
+
+    const timeout = window.setTimeout(preloadWorkWithMe, 1200);
+    return () => window.clearTimeout(timeout);
+  }, []);
+
   return (
     <>
       <ScrollToTop />
@@ -53,7 +72,7 @@ const AppContent = () => {
                 <About />
               </Suspense>
             } />
-            <Route path="/portfolio" element={
+            <Route path="/workwithme" element={
               <Suspense fallback={<PageLoader />}>
                 <Portfolio />
               </Suspense>
@@ -67,6 +86,11 @@ const AppContent = () => {
             <Route path="/profile" element={
               <Suspense fallback={<PageLoader />}>
                 <Home />
+              </Suspense>
+            } />
+            <Route path="/portfolio" element={
+              <Suspense fallback={<PageLoader />}>
+                <Portfolio />
               </Suspense>
             } />
             <Route path="/settings" element={

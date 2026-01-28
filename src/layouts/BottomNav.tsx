@@ -40,7 +40,7 @@ const LanguageSwitchIcon = ({ lang }: { lang: string }) => (
 const navItems = [
   { id: 'home', icon: Home, to: '/', tooltip: 'menu.home' },
   { id: 'about', icon: User, to: '/about', tooltip: 'menu.about' },
-  { id: 'portfolio', icon: Briefcase, to: '/portfolio', tooltip: 'menu.portfolio' },
+  { id: 'workwithme', icon: Briefcase, to: '/workwithme', tooltip: 'menu.workwithme' },
   { id: 'language', icon: Globe, to: null, tooltip: 'menu.language' }, // Special item
 ];
 

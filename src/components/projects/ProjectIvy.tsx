@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { pageTransition } from '../../utils/animations';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import './ProjectP.css';
 import './ProjectIvy.css';
@@ -9,11 +9,17 @@ import { DemoStage } from '../common/DemoStage/DemoStage';
 
 import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRecommendation';
 import { DesignMoves, type DesignMove } from './DesignMoves';
+import { usePitchDeckSlides } from '../../hooks/usePitchDeckSlides';
+
+// Lazy load PitchDeckModal for better initial performance
+const PitchDeckModal = lazy(() => import('../common/PitchDeck/PitchDeckModal').then(m => ({ default: m.PitchDeckModal })));
 
 
 export const ProjectIvy = () => {
     const { t, i18n } = useTranslation();
     const [activeSection, setActiveSection] = useState('');
+    const [isPitchOpen, setIsPitchOpen] = useState(false);
+    const pitchSlides = usePitchDeckSlides('ivy');
 
     const navSections = [
         { id: 'summary', title: t('ivy.section.summary') },
@@ -164,6 +170,7 @@ export const ProjectIvy = () => {
                     downloadTooltip={t('project.tooltips.download')}
                     copyTooltip={t('project.tooltips.copy')}
                     copiedTooltip={t('project.tooltips.copied')}
+                    onPlayPitch={() => setIsPitchOpen(true)}
                 />
 
                 {/* Hero Section */}
@@ -275,6 +282,17 @@ export const ProjectIvy = () => {
                 <ProjectRecommendation projects={recommendedProjects} />
 
             </div>
+
+            {isPitchOpen && (
+                <Suspense fallback={null}>
+                    <PitchDeckModal
+                        isOpen={isPitchOpen}
+                        onClose={() => setIsPitchOpen(false)}
+                        slides={pitchSlides}
+                        projectTitle={t('ivy.header.title')}
+                    />
+                </Suspense>
+            )}
         </motion.div>
     );
 };

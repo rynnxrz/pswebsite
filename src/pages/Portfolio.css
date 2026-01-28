@@ -1,113 +1,284 @@
-/* src/components/Portfolio.css */
+/* src/pages/WorkWithMe.css (Portfolio.css) */
 
-.portfolio-page-container {
-  box-sizing: border-box;
+/* Wrapper for the entire page to handle full-width background and transitions */
+.workwithme-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--bg-system);
+}
+
+.workwithme-wrapper {
   width: 100%;
-  padding: 4rem 32px;
-  font-family: 'Soehne', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  color: var(--text-primary);
+  position: relative;
+  font-family: var(--font-sans);
+  z-index: 1;
 }
 
-.portfolio-content-wrapper {
-  max-width: 576px;
+.workwithme-page-container {
+  max-width: 780px;
   margin: 0 auto;
-}
-
-.portfolio-header {
+  padding: 3rem 1.5rem 120px;
+  /* Reduced top padding (80px -> 3rem) for visual alignment */
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 3rem;
+  flex-direction: column;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 1;
 }
 
-.portfolio-title {
+/* Content backdrop for text readability - allows mouse interaction to pass through */
+.workwithme-content-backdrop {
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  border: 1px solid var(--border-subtle);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Let the background mouse tracking stay active across the content */
+.workwithme-content-backdrop * {
+  pointer-events: none;
+}
+
+/* Re-enable pointer events for interactive elements inside backdrop */
+.workwithme-content-backdrop a,
+.workwithme-content-backdrop button {
+  pointer-events: auto;
+}
+
+/* === Background === */
+.workwithme-background {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: auto;
+  overflow: hidden;
+  background-color: var(--bg-system);
+}
+
+/* Ensure the canvas fills the container */
+.workwithme-background .dither-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Light theme adaptations */
+:root[data-theme="light"] .workwithme-content-backdrop {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-subtle);
+}
+
+:root[data-theme="light"] .workwithme-background {
+  opacity: 0.6;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .workwithme-background {
+    opacity: 0.5;
+  }
+
+  .workwithme-content-backdrop {
+    padding: 1.5rem;
+    border-radius: 12px;
+    gap: 1.5rem;
+  }
+}
+
+/* === Grid Layout === */
+.workwithme-hero,
+.workwithme-section,
+.workwithme-cta-section {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  grid-column-gap: 1.5rem;
+  align-items: start;
+}
+
+.workwithme-grid-col-left,
+.workwithme-grid-col-right {
+  padding: 0;
+}
+
+/* === Hero Section === */
+.workwithme-name {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
   color: var(--text-primary);
 }
 
-.portfolio-date {
+.workwithme-subtitle {
   font-size: 0.9rem;
   font-weight: 400;
   color: var(--text-secondary);
-  margin-top: 4px;
+  margin-top: 0.25rem;
 }
 
-.action-buttons-container {
-  display: flex;
-  gap: 0.5rem;
-  flex-shrink: 0;
+/* Remove margin-top for link in hero section */
+.workwithme-hero .workwithme-link {
+  margin-top: 0.25rem;
 }
 
-.action-btn {
+.workwithme-tagline {
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* === Section Styles === */
+.workwithme-section {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.25rem;
+}
+
+.workwithme-section-title {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: 999px;
+  gap: 0.25rem;
+  /* Matched to projects-heading-wrapper */
+  color: var(--text-primary);
+  /* Matched to text-primary */
+  font-size: 1rem;
+  /* Matched to projects-heading */
+  font-weight: 400;
+  margin: 0;
+}
+
+.workwithme-section-title svg {
+  width: 16px;
+  /* Matched inferred size from home */
+  height: 16px;
+  opacity: 1;
+  /* Matched opacity */
+  color: var(--text-primary);
+}
+
+.workwithme-section-title h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: inherit;
+  margin: 0;
+}
+
+/* === Services List === */
+.workwithme-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.workwithme-service-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.workwithme-service-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.workwithme-service-desc {
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  cursor: pointer;
-  padding: 0;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  margin: 0;
+  line-height: 1.5;
 }
 
-.action-btn:hover {
-  background-color: var(--bg-tertiary);
+/* === Process Section === */
+.workwithme-process-desc {
+  font-size: 1rem;
   color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
 }
 
-.pdf-container {
-  position: relative;
-  width: 100%;
-  height: 378px;
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: var(--bg-secondary);
-  padding: 0;
+/* === CTA Section === */
+.workwithme-cta-section {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.25rem;
 }
 
-.pdf-viewer {
-  width: 100%;
-  height: 100%;
-  border: none;
+.workwithme-cta-title {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
-.pdf-container:fullscreen {
-  border-radius: 0;
-  border: none;
-  background-color: var(--bg-system);
+.workwithme-cta-desc {
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
 }
 
-.mobile-overlay {
-  display: none; /* Initially hidden */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--bg-scrim);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  justify-content: center;
+/* Remove margin for inline link in CTA desc */
+.workwithme-cta-desc .workwithme-link {
+  margin-top: 0;
+  display: inline-flex;
+  vertical-align: baseline;
+}
+
+/* === Links (Ported from About.css) === */
+.workwithme-link {
+  display: inline-flex;
   align-items: center;
-  text-align: center;
-  padding: 20px;
-  color: var(--text-primary);
-  border-radius: 12px;
+  gap: 0.15rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+  margin-top: 2rem;
 }
 
-/* This media query now only handles the PDF viewer and overlay visibility */
+.workwithme-link span {
+  border-bottom: 1px solid var(--link-underline);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.workwithme-link:hover {
+  color: var(--text-primary);
+}
+
+.workwithme-link:hover span {
+  border-bottom-color: var(--text-primary);
+}
+
+.workwithme-link svg {
+  transform: translateY(-1px);
+}
+
+/* === Responsive === */
 @media (max-width: 768px) {
-  .pdf-viewer {
-    display: none;
+  .workwithme-page-container {
+    padding: 60px 1rem 140px;
+    gap: 2rem;
   }
 
-  .mobile-overlay {
-    display: flex;
+  .workwithme-hero,
+  .workwithme-section,
+  .workwithme-cta-section {
+    grid-template-columns: 1fr;
+    grid-row-gap: 0.75rem;
+  }
+
+  .workwithme-section,
+  .workwithme-cta-section {
+    padding-top: 1.25rem;
   }
 }

@@ -8,197 +8,196 @@ body {
   font-family: 'Soehne', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background-color: var(--bg-system);
   color: var(--text-primary);
-  }
-  
-  /* ================================== /
+}
+
+/* ================================== /
   / ===      主要内容容器         === /
   / ================================== */
-  
-  .content-container {
+
+.content-container {
   max-width: 780px;
   margin: 0 auto;
   padding: 80px 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  }
-  
-  /* ================================== /
+}
+
+/* ================================== /
   / ===      共享的网格 Section 样式  === /
   / ================================== */
-  
-  .intro-section,
-  .projects-section {
+
+.intro-section,
+.projects-section {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   grid-column-gap: 1.5rem;
-  }
-  
+}
+
 .projects-section {
   border-top: 1px solid var(--border-strong);
   padding-top: 1.5rem;
-  }
-  
-  /* ================================== /
+}
+
+/* ================================== /
   / ===     网格栏和介绍部分        === /
   / ================================== */
-  
-  .grid-col-left,
-  .grid-col-right {
+
+.grid-col-left,
+.grid-col-right {
   padding-left: 1rem;
   padding-right: 1rem;
-  }
-  
-  .grid-col-left {
+}
+
+.grid-col-left {
   grid-column: 1 / 2;
   padding-top: 0.1rem;
-  }
-  
-  .grid-col-right {
+}
+
+.grid-col-right {
   grid-column: 2 / 3;
-  }
-  
+}
+
 .intro-name {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
   color: var(--text-primary);
-  }
-  
+}
+
 .intro-subtitle {
   font-size: 0.9rem;
   font-weight: 400;
   color: var(--text-secondary);
   margin-top: 0.25rem;
-  }
-  
-  .intro-text {
+}
+
+.intro-text {
   display: flex;
   flex-direction: column;
-  }
-  
+}
+
 .intro-statement {
   font-size: 1rem;
   color: var(--text-primary);
   font-weight: 400;
   line-height: 1.6;
   margin: 0;
-  }
-  
-  .portfolio-link {
-    /* --- 修改点 1: 使用 flexbox 对齐文本和图标 --- */
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem; /* 文本和图标之间的间距 */
+}
 
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-    margin-top: 2rem;
-    align-self: flex-start;
-  }
+.portfolio-link {
+  /* --- 修改点 1: 使用 flexbox 对齐文本和图标 --- */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  /* 文本和图标之间的间距 */
 
-  /* --- 修改点 2: 将下划线应用到 span 标签上，这样它就不会划过图标 --- */
-  .portfolio-link span {
-    border-bottom: 1px solid var(--link-underline);
-    padding-bottom: 2px;
-    transition: border-color 0.2s ease;
-  }
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+/* --- 修改点 2: 将下划线应用到 span 标签上，这样它就不会划过图标 --- */
+.portfolio-link span {
+  border-bottom: 1px solid var(--link-underline);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
 
 .portfolio-link:hover {
-    color: var(--text-primary);
-  }
-  
-  /* --- 修改点 3: 悬停时只改变 span 的下划线颜色 --- */
+  color: var(--text-primary);
+}
+
+/* --- 修改点 3: 悬停时只改变 span 的下划线颜色 --- */
 .portfolio-link:hover span {
-    border-bottom-color: var(--text-primary);
-  }
+  border-bottom-color: var(--text-primary);
+}
 
-  /* --- 修改点 4: 轻微向上移动图标，使其在视觉上更居中 --- */
-  .portfolio-link svg {
-    transform: translateY(-1px);
-  }
+/* --- 修改点 4: 轻微向上移动图标，使其在视觉上更居中 --- */
+.portfolio-link svg {
+  transform: translateY(-1px);
+}
 
-  
-  /* ================================== /
+
+/* ================================== /
   / ===        项目部分           === /
   / ================================== */
-  
-  .projects-heading-wrapper {
+
+.projects-heading-wrapper {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  }
-  
+}
+
 .projects-heading-wrapper svg {
   color: var(--text-primary);
-  }
-  
+}
+
 .projects-heading {
   font-size: 1rem;
   font-weight: 400;
   color: var(--text-primary);
   margin: 0;
-  }
-  
-  .project-list {
+}
+
+.project-list {
   display: flex;
   flex-direction: column;
-  }
-  
-  .project-separator {
-    border: none;
-    height: 0.25px;
-    background-color: var(--separator);
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
-  
+}
+
+.project-separator {
+  border: none;
+  height: 0.25px;
+  background-color: var(--separator);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
 .project-card-link {
   text-decoration: none;
   color: inherit;
   display: block;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+}
 
 .project-card-link:focus-visible {
   outline: 2px solid var(--accent-primary);
   outline-offset: 3px;
 }
-  
+
 .project-card-link:hover {
   box-shadow: var(--shadow-hover);
-  }
-  
-  /* ================================== /
+}
+
+/* ================================== /
   / ===       响应式设计          === /
   / ================================== */
-  
-  @media (max-width: 768px) {
-    .content-container {
-      padding: 60px 1.5rem;
-      gap: 2.5rem;
-    }
-  
-    .intro-section,
-    .projects-section {
-      grid-template-columns: 1fr;
-      grid-row-gap: 1.5rem;
-    }
-  
-    .grid-col-left,
-    .grid-col-right {
-      grid-column: 1 / 2;
-    }
-  
-    .intro-text {
-      margin-top: 1rem;
-    }
-  
-    .projects-section {
-      padding-top: 1.5rem;
-    }
+
+@media (max-width: 768px) {
+  .content-container {
+    padding: 60px 1.5rem;
+    gap: 2.5rem;
   }
+
+  .intro-section,
+  .projects-section {
+    grid-template-columns: 1fr;
+    grid-row-gap: 1.5rem;
+  }
+
+  .grid-col-left,
+  .grid-col-right {
+    grid-column: 1 / 2;
+  }
+
+  .intro-text {
+    margin-top: 1rem;
+  }
+
+  .projects-section {
+    padding-top: 1.5rem;
+  }
+}

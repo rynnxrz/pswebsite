@@ -11,17 +11,22 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@react-three/fiber": "^8.18.0",
+    "@react-three/postprocessing": "^2.19.1",
     "framer-motion": "^12.1.0",
     "i18next": "^25.7.2",
     "i18next-browser-languagedetector": "^8.2.0",
     "ipad-cursor": "^0.5.2",
     "lucide-react": "^0.545.0",
+    "ogl": "^1.0.11",
+    "postprocessing": "^6.38.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^16.4.0",
     "react-rough-notation": "^1.0.8",
     "react-router-dom": "^7.1.5",
-    "react-split-flap": "^0.1.7"
+    "react-split-flap": "^0.1.7",
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

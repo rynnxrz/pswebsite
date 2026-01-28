@@ -50,32 +50,35 @@ export const Home = () => {
         <section className="intro-section">
           <div className="grid-col-left">
             <h1 className="intro-name">{t('home.intro.name')}</h1>
-            <p className="intro-subtitle">{t('home.intro.subtitle')}</p>
+            <a
+              href="https://www.linkedin.com/in/rongze-xu-493688233/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="portfolio-link"
+              style={{ marginTop: '0.25rem' }}
+            >
+              <span>contact me</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 7h10v10"></path>
+                <path d="M7 17 17 7"></path>
+              </svg>
+            </a>
           </div>
           <div className="grid-col-right">
             <div className="intro-text">
               <p className="intro-statement">
                 {t('home.intro.statement')}
               </p>
-
-              {/* --- 2. 修改点: 将 a 标签替换为 Link 组件，并添加 SVG 图标 --- */}
-              {/* <Link to="/portfolio" className="portfolio-link">
-                <span>{t('home.intro.viewPortfolio')}</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M7 7h10v10"></path>
-                  <path d="M7 17 17 7"></path>
-                </svg>
-              </Link> */}
             </div>
           </div>
         </section>

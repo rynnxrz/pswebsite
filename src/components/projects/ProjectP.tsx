@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { pageTransition } from '../../utils/animations';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import './ProjectP.css';
@@ -11,12 +11,18 @@ import { DesignMoves } from './DesignMoves';
 import { UserVoiceQuotes } from './UserVoiceQuotes';
 import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
 import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRecommendation';
+import { usePitchDeckSlides } from '../../hooks/usePitchDeckSlides';
 
 import '../Tooltip.css';
+
+// Lazy load PitchDeckModal for better initial performance
+const PitchDeckModal = lazy(() => import('../common/PitchDeck/PitchDeckModal').then(m => ({ default: m.PitchDeckModal })));
 
 export const ProjectP = () => {
   const { t, i18n } = useTranslation();
   const [activeQuoteFilter, setActiveQuoteFilter] = useState<string | null>(null);
+  const [isPitchOpen, setIsPitchOpen] = useState(false);
+  const pitchSlides = usePitchDeckSlides('project_p');
   // const { showNotification } = useNotification();
 
   // State
@@ -101,6 +107,7 @@ export const ProjectP = () => {
           downloadTooltip={t('project.tooltips.download')}
           copyTooltip={t('project.tooltips.copy')}
           copiedTooltip={t('project.tooltips.copied')}
+          onPlayPitch={() => setIsPitchOpen(true)}
         />
 
         {/* 1. Summary Section */}
@@ -200,6 +207,17 @@ export const ProjectP = () => {
         <ProjectRecommendation projects={recommendedProjects} />
 
       </div>
+
+      {isPitchOpen && (
+        <Suspense fallback={null}>
+          <PitchDeckModal
+            isOpen={isPitchOpen}
+            onClose={() => setIsPitchOpen(false)}
+            slides={pitchSlides}
+            projectTitle={t('project_p.header.title')}
+          />
+        </Suspense>
+      )}
     </motion.div>
   );
 };

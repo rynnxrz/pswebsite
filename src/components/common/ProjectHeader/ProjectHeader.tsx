@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Download from 'lucide-react/dist/esm/icons/download';
 import Check from 'lucide-react/dist/esm/icons/check';
 import LinkIcon from 'lucide-react/dist/esm/icons/link';
+import Play from 'lucide-react/dist/esm/icons/play';
 import './ProjectHeader.css';
 
 interface ProjectHeaderProps {
@@ -14,6 +15,8 @@ interface ProjectHeaderProps {
     downloadTooltip?: string;
     copyTooltip?: string;
     copiedTooltip?: string;
+    pitchTooltip?: string;
+    onPlayPitch?: () => void;
 }
 
 export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
@@ -25,11 +28,14 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
     downloadTooltip,
     copyTooltip,
     copiedTooltip,
+    pitchTooltip,
+    onPlayPitch,
 }) => {
     const { t } = useTranslation();
     const finalDownloadTooltip = downloadTooltip || t('project.tooltips.download');
     const finalCopyTooltip = copyTooltip || t('project.tooltips.copy');
     const finalCopiedTooltip = copiedTooltip || t('project.tooltips.copied');
+    const finalPitchTooltip = pitchTooltip || t('project.tooltips.pitch');
     const [isScrolled, setIsScrolled] = useState(false);
     const [copied, setCopied] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -180,6 +186,15 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
                 </div>
 
                 <div className="action-buttons-container">
+                    {onPlayPitch && (
+                        <div className="tooltip-container tooltip-bottom">
+                            <button onClick={onPlayPitch} className="action-btn" aria-label="Play Pitch Deck">
+                                <Play size={16} />
+                            </button>
+                            <span className="tooltip-text">{finalPitchTooltip}</span>
+                        </div>
+                    )}
+
                     <div className="tooltip-container tooltip-bottom">
                         <button onClick={handlePrint} className="action-btn" aria-label="Print/Download PDF">
                             <Download size={16} />

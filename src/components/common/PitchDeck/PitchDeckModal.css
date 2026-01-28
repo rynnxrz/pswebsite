@@ -1,0 +1,344 @@
+/* src/components/common/PitchDeck/PitchDeckModal.css */
+
+.pitch-deck-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: var(--bg-system);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.pitch-deck-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    z-index: 10;
+}
+
+.pitch-deck-project-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pitch-deck-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.pitch-deck-counter {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+}
+
+.pitch-deck-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.pitch-deck-close:hover {
+    background: var(--bg-tertiary);
+    transform: scale(1.05);
+}
+
+/* Content area */
+.pitch-deck-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 4rem 4rem;
+    overflow: hidden;
+}
+
+/* Slide base */
+.pitch-slide {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Title slide */
+.slide-title-content {
+    text-align: center;
+}
+
+.slide-headline {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin: 0 0 1rem;
+}
+
+.slide-subheadline {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Statement slide */
+.slide-statement-content {
+    text-align: center;
+    max-width: 900px;
+    padding: 0 2rem;
+}
+
+.slide-statement {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Visual slide */
+.slide-visual-content {
+    text-align: center;
+    max-width: 800px;
+}
+
+.slide-visual-headline {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 2rem;
+}
+
+.slide-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.slide-stat-value {
+    font-size: clamp(4rem, 15vw, 10rem);
+    font-weight: 700;
+    color: var(--accent-primary);
+    line-height: 1;
+}
+
+.slide-stat-label {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+}
+
+.slide-quote {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-style: italic;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 1.5rem;
+    margin: 2rem auto 0;
+    max-width: 700px;
+    text-align: left;
+}
+
+/* Decision slide */
+.slide-decision-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    width: 100%;
+    align-items: center;
+}
+
+.slide-decision-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.slide-decision-headline {
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.slide-decision-body {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.slide-decision-media {
+    aspect-ratio: 16 / 10;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+
+.slide-video,
+.slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Reflection slide */
+.slide-reflection-content {
+    text-align: center;
+    max-width: 800px;
+}
+
+.slide-reflection-headline {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 1.5rem;
+}
+
+.slide-reflection-body {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Navigation arrows */
+.pitch-deck-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, opacity 0.2s, transform 0.2s;
+    z-index: 10;
+}
+
+.pitch-deck-nav:hover:not(:disabled) {
+    background: var(--bg-tertiary);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.pitch-deck-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.pitch-deck-nav--prev {
+    left: 2rem;
+}
+
+.pitch-deck-nav--next {
+    right: 2rem;
+}
+
+/* Progress dots */
+.pitch-deck-progress {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.pitch-deck-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    padding: 0;
+}
+
+.pitch-deck-dot:hover {
+    background: var(--text-secondary);
+    transform: scale(1.2);
+}
+
+.pitch-deck-dot.active {
+    background: var(--text-primary);
+    transform: scale(1.3);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .pitch-deck-header {
+        padding: 1rem 1.5rem;
+    }
+
+    .pitch-deck-content {
+        padding: 5rem 1.5rem 5rem;
+    }
+
+    .pitch-deck-nav {
+        width: 44px;
+        height: 44px;
+    }
+
+    .pitch-deck-nav--prev {
+        left: 1rem;
+    }
+
+    .pitch-deck-nav--next {
+        right: 1rem;
+    }
+
+    /* Stack decision slides vertically on mobile */
+    .slide-decision-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .slide-decision-media {
+        order: -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .pitch-deck-nav {
+        display: none;
+    }
+
+    .slide-headline {
+        font-size: 2.5rem;
+    }
+}
+
+/* Print - hide pitch deck */
+@media print {
+    .pitch-deck-overlay {
+        display: none;
+    }
+}

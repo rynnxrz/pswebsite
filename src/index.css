@@ -2,6 +2,9 @@
 :root {
   color-scheme: dark;
 
+  /* --- Typography --- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+
   /* --- 0. Layout & Stage --- */
   --page-gutter: 16px;
   --stage-max: 1120px;
@@ -158,8 +161,11 @@ html {
 body {
   background-color: var(--bg-system);
   color: var(--text-primary);
+  font-family: var(--font-sans);
   /* Optimize font rendering */
   -webkit-font-smoothing: antialiased;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
 code {
