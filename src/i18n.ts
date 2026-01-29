@@ -21,10 +21,10 @@ i18n
         interpolation: {
             escapeValue: false, // react already safes from xss
         },
-        // Optional: detection options
+        // Detection options: prioritize URL query string for direct language links
         detection: {
-            order: ['localStorage', 'navigator', 'querystring', 'cookie', 'htmlTag'],
-            lookupQuerystring: 'lang',
+            order: ['querystring', 'localStorage', 'navigator', 'cookie', 'htmlTag'],
+            lookupQuerystring: 'locale',
             lookupLocalStorage: 'i18nextLng',
             caches: ['localStorage'],
         }

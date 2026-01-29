@@ -1,7 +1,7 @@
 // src/components/BottomNav.tsx
 
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Home from 'lucide-react/dist/esm/icons/home';
 import User from 'lucide-react/dist/esm/icons/user';
@@ -88,6 +88,7 @@ const NavItem = ({ item, isActive, onClick, currentLang }: { item: any; isActive
 
 export const BottomNav = () => {
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { i18n } = useTranslation();
 
   // Adjust path mapping for the new "about" route
@@ -141,8 +142,13 @@ export const BottomNav = () => {
 
   const handleTransitionComplete = () => {
     i18n.changeLanguage(targetLang).then(() => {
-      // Force a page reload to ensure all external resources (like iframe) update correctly
-      window.location.reload();
+      // Update URL with locale parameter (preserves other query params)
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set('locale', targetLang);
+      setSearchParams(newParams, { replace: true });
+
+      // End the transition overlay
+      setIsTransitioning(false);
     });
   };
 
