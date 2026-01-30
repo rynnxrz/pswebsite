@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Semantic Design System (Pro Dark Mode) */
 :root {
   color-scheme: dark;

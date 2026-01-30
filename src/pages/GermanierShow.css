@@ -1,0 +1,6 @@
+/* Hide the global ThemeToggle and LanguageToggle on this page */
+.theme-toggle-container,
+#language-toggle,
+[role="switch"][aria-label="Toggle theme"] {
+    display: none !important;
+}

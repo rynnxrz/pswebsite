@@ -681,5 +681,269 @@
                 ]
             }
         }
+    },
+    "germanier": {
+        "credits": {
+            "title": "Show Credits",
+            "collection": {
+                "title": "Collection",
+                "name": "« Les Chardoneuses » SS26",
+                "desc": "UPCYCLED COUTURE Built from unsold garments from @lvmh"
+            },
+            "direction": {
+                "title": "Creative Direction & Styling",
+                "names": [
+                    {
+                        "name": "@kevingermanier",
+                        "link": "https://instagram.com/kevingermanier"
+                    }
+                ]
+            },
+            "headpieces": {
+                "title": "3D Headpieces",
+                "names": [
+                    {
+                        "name": "@ivyjstudio",
+                        "link": "https://instagram.com/ivyjstudio"
+                    }
+                ]
+            },
+            "production": {
+                "title": "Production",
+                "names": [
+                    {
+                        "name": "@oboglobal",
+                        "link": "https://instagram.com/oboglobal"
+                    }
+                ]
+            },
+            "beauty": {
+                "title": "Beauty",
+                "items": [
+                    {
+                        "label": "Hair",
+                        "name": "@charlielemindu",
+                        "link": "https://instagram.com/charlielemindu"
+                    },
+                    {
+                        "label": "Make-up",
+                        "name": "Domitille Guilbault"
+                    }
+                ]
+            },
+            "team": {
+                "title": "Team",
+                "items": [
+                    {
+                        "label": "Shoes",
+                        "name": "@carelparis",
+                        "link": "https://instagram.com/carelparis"
+                    },
+                    {
+                        "label": "Music",
+                        "name": "@raphparpex",
+                        "link": "https://instagram.com/raphparpex"
+                    },
+                    {
+                        "label": "Casting",
+                        "name": "@alexandrejuniorcyprien",
+                        "link": "https://instagram.com/alexandrejuniorcyprien"
+                    },
+                    {
+                        "label": "Photos",
+                        "name": "@gregoire_avenel",
+                        "link": "https://instagram.com/gregoire_avenel"
+                    },
+                    {
+                        "label": "Press",
+                        "name": "@spreadtheword_communications",
+                        "link": "https://instagram.com/spreadtheword_communications"
+                    }
+                ]
+            },
+            "models": {
+                "title": "Models",
+                "list": [
+                    {
+                        "name": "@lisarinna",
+                        "link": "https://instagram.com/lisarinna"
+                    },
+                    {
+                        "name": "@_hyn_w",
+                        "link": "https://instagram.com/_hyn_w"
+                    },
+                    {
+                        "name": "@baptistectd",
+                        "link": "https://instagram.com/baptistectd"
+                    },
+                    {
+                        "name": "@clement.bryr",
+                        "link": "https://instagram.com/clement.bryr"
+                    },
+                    {
+                        "name": "@marcbozz",
+                        "link": "https://instagram.com/marcbozz"
+                    },
+                    {
+                        "name": "@manyuonnnnn",
+                        "link": "https://instagram.com/manyuonnnnn"
+                    },
+                    {
+                        "name": "@iamdanyrose",
+                        "link": "https://instagram.com/iamdanyrose"
+                    },
+                    {
+                        "name": "@evaasik",
+                        "link": "https://instagram.com/evaasik"
+                    },
+                    {
+                        "name": "@awetthecat",
+                        "link": "https://instagram.com/awetthecat"
+                    },
+                    {
+                        "name": "@aline.wgj",
+                        "link": "https://instagram.com/aline.wgj"
+                    },
+                    {
+                        "name": "@abijah.dbs",
+                        "link": "https://instagram.com/abijah.dbs"
+                    },
+                    {
+                        "name": "@ouelletflorence",
+                        "link": "https://instagram.com/ouelletflorence"
+                    },
+                    {
+                        "name": "@sofiasilvanas",
+                        "link": "https://instagram.com/sofiasilvanas"
+                    },
+                    {
+                        "name": "@marylou_ml",
+                        "link": "https://instagram.com/marylou_ml"
+                    },
+                    {
+                        "name": "@agata.rudko",
+                        "link": "https://instagram.com/agata.rudko"
+                    },
+                    {
+                        "name": "@lerashatilava",
+                        "link": "https://instagram.com/lerashatilava"
+                    },
+                    {
+                        "name": "@nicolkosinova",
+                        "link": "https://instagram.com/nicolkosinova"
+                    },
+                    {
+                        "name": "@tereza_faltinova",
+                        "link": "https://instagram.com/tereza_faltinova"
+                    },
+                    {
+                        "name": "@djobibalou",
+                        "link": "https://instagram.com/djobibalou"
+                    },
+                    {
+                        "name": "@amiira",
+                        "link": "https://instagram.com/amiira"
+                    },
+                    {
+                        "name": "@dina_vasileva",
+                        "link": "https://instagram.com/dina_vasileva"
+                    },
+                    {
+                        "name": "@viawlld",
+                        "link": "https://instagram.com/viawlld"
+                    },
+                    {
+                        "name": "@chen.chienyu",
+                        "link": "https://instagram.com/chen.chienyu"
+                    },
+                    {
+                        "name": "@sasha_models",
+                        "link": "https://instagram.com/sasha_models"
+                    }
+                ]
+            },
+            "thanks": {
+                "title": "Special Thanks",
+                "list": [
+                    {
+                        "name": "@lvmh",
+                        "link": "https://instagram.com/lvmh"
+                    },
+                    {
+                        "name": "@antoinearnault",
+                        "link": "https://instagram.com/antoinearnault"
+                    },
+                    {
+                        "name": "@nona_source",
+                        "link": "https://instagram.com/nona_source"
+                    },
+                    {
+                        "name": "@laurastar",
+                        "link": "https://instagram.com/laurastar"
+                    },
+                    {
+                        "name": "@lorealparis",
+                        "link": "https://instagram.com/lorealparis"
+                    },
+                    {
+                        "name": "@defi_la_mode_de_france",
+                        "link": "https://instagram.com/defi_la_mode_de_france"
+                    },
+                    {
+                        "name": "@parisfashionweek",
+                        "link": "https://instagram.com/parisfashionweek"
+                    },
+                    {
+                        "name": "@oboglobal",
+                        "link": "https://instagram.com/oboglobal"
+                    },
+                    {
+                        "name": "@romain_brd_",
+                        "link": "https://instagram.com/romain_brd_"
+                    },
+                    {
+                        "name": "@maison_kalij",
+                        "link": "https://instagram.com/maison_kalij"
+                    },
+                    {
+                        "name": "@kam_hugh",
+                        "link": "https://instagram.com/kam_hugh"
+                    }
+                ]
+            },
+            "dedicated": {
+                "label": "Dedicated Team",
+                "list": [
+                    {
+                        "name": "@atelier_dianamartinez",
+                        "link": "https://instagram.com/atelier_dianamartinez"
+                    },
+                    {
+                        "name": "@gustav.13",
+                        "link": "https://instagram.com/gustav.13"
+                    },
+                    {
+                        "name": "@maevabessis",
+                        "link": "https://instagram.com/maevabessis"
+                    },
+                    {
+                        "name": "@13.99stoli",
+                        "link": "https://instagram.com/13.99stoli"
+                    },
+                    {
+                        "name": "@dipietrooceane",
+                        "link": "https://instagram.com/dipietrooceane"
+                    },
+                    {
+                        "name": "@raphpayet",
+                        "link": "https://instagram.com/raphpayet"
+                    },
+                    {
+                        "name": "@bleugabriel",
+                        "link": "https://instagram.com/bleugabriel"
+                    }
+                ]
+            }
+        }
     }
 }

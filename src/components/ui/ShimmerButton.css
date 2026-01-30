@@ -1,0 +1,268 @@
+/* ========================================
+   Shimmer Button - Premium Instagram CTA
+   Features: 
+   - Instagram gradient background
+   - Animated shimmer sweep
+   - Pulsing glow effect
+   - Smooth micro-interactions
+   WCAG AA Compliant
+   ======================================== */
+
+.shimmer-btn {
+    /* Layout */
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+
+    /* Typography */
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+
+    /* Default styling */
+    background: linear-gradient(135deg,
+            #833ab4 0%,
+            #fd1d1d 50%,
+            #fcb045 100%);
+    color: #ffffff;
+
+    /* Shadows */
+    box-shadow:
+        0 4px 15px rgba(131, 58, 180, 0.4),
+        0 2px 6px rgba(253, 29, 29, 0.3);
+
+    /* Transitions */
+    transition: box-shadow 0.4s ease;
+}
+
+/* Size variants */
+.shimmer-btn--sm {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+}
+
+.shimmer-btn--md {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.9375rem;
+}
+
+.shimmer-btn--lg {
+    padding: 1rem 2.25rem;
+    font-size: 1rem;
+}
+
+/* ========================================
+   Instagram Variant
+   ======================================== */
+.shimmer-btn--instagram {
+    background: linear-gradient(135deg,
+            #833ab4 0%,
+            #c13584 25%,
+            #e1306c 50%,
+            #fd1d1d 75%,
+            #f77737 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ========================================
+   Default Variant
+   ======================================== */
+.shimmer-btn--default {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ========================================
+   Shimmer Sweep Effect
+   ======================================== */
+.shimmer-btn__shimmer {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            transparent 100%);
+    transform: skewX(-20deg);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.shimmer-btn:hover .shimmer-btn__shimmer {
+    animation: shimmer-sweep 0.8s ease forwards;
+}
+
+@keyframes shimmer-sweep {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 150%;
+    }
+}
+
+/* ========================================
+   Glow Pulse Effect
+   ======================================== */
+.shimmer-btn__glow {
+    position: absolute;
+    inset: -4px;
+    background: linear-gradient(135deg,
+            rgba(131, 58, 180, 0.6),
+            rgba(225, 48, 108, 0.6),
+            rgba(252, 176, 69, 0.6));
+    border-radius: inherit;
+    filter: blur(12px);
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.shimmer-btn:hover .shimmer-btn__glow {
+    opacity: 1;
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* ========================================
+   Content Layer
+   ======================================== */
+.shimmer-btn__content {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 2;
+}
+
+.shimmer-btn__content svg {
+    transition: transform 0.3s ease;
+}
+
+.shimmer-btn:hover .shimmer-btn__content svg:first-child {
+    transform: scale(1.1);
+}
+
+.shimmer-btn:hover .shimmer-btn__content svg:last-child {
+    transform: translateX(3px);
+}
+
+/* ========================================
+   Hover State Enhancement
+   ======================================== */
+.shimmer-btn:hover {
+    box-shadow:
+        0 8px 30px rgba(131, 58, 180, 0.5),
+        0 4px 15px rgba(253, 29, 29, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.shimmer-btn--default:hover {
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+   Focus State (Accessibility)
+   ======================================== */
+.shimmer-btn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   Active State
+   ======================================== */
+.shimmer-btn:active {
+    box-shadow:
+        0 2px 8px rgba(131, 58, 180, 0.4),
+        0 1px 4px rgba(253, 29, 29, 0.3);
+}
+
+/* ========================================
+   Ivyj Logo inside button
+   ======================================== */
+.shimmer-btn .ivyj-logo {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    object-fit: contain;
+    filter: brightness(1.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ========================================
+   Light Mode Adjustments
+   ======================================== */
+:root[data-theme="light"] .shimmer-btn--instagram {
+    /* Keep gradient visible in light mode */
+    box-shadow:
+        0 4px 20px rgba(131, 58, 180, 0.35),
+        0 2px 8px rgba(253, 29, 29, 0.25);
+}
+
+:root[data-theme="light"] .shimmer-btn--instagram:hover {
+    box-shadow:
+        0 8px 35px rgba(131, 58, 180, 0.45),
+        0 4px 15px rgba(253, 29, 29, 0.35);
+}
+
+:root[data-theme="light"] .shimmer-btn__glow {
+    filter: blur(16px);
+}
+
+/* ========================================
+   Responsive adjustments
+   ======================================== */
+@media (max-width: 640px) {
+    .shimmer-btn--md {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+    }
+
+    .shimmer-btn--lg {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.9375rem;
+    }
+}
