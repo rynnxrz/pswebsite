@@ -51,16 +51,7 @@
   background-color: var(--bg-secondary);
 }
 
-.logoLoopWrapper {
-  margin-bottom: 6rem;
-  opacity: 0.7;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
-}
 
-.logoLoopWrapper:hover {
-  filter: grayscale(0%);
-}
 
 .masonryGrid {
   display: grid;

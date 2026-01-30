@@ -1,18 +1,11 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
-import LogoLoop from '../components/common/LogoLoop/LogoLoop';
+
 import styles from './GermanierShow.module.css';
 import { ArrowRight, Instagram, ExternalLink } from 'lucide-react';
 
 export const GermanierShow = () => {
-  const mediaLinks = [
-    { src: '/assets/images/media/wwd.png', alt: 'WWD', href: 'https://wwd.com/runway/spring-couture-2026/paris/germanier/review/', title: 'WWD Review' },
-    { src: '/assets/images/media/vogue.png', alt: 'Vogue', href: 'https://www.vogue.com/fashion-shows/spring-2026-couture/germanier', title: 'Vogue Runway' },
-    { src: '/assets/images/media/reuters.png', alt: 'Reuters', href: 'https://www.reuters.com/pictures/style-celebrities-haute-couture-week-paris-2026-01-27/', title: 'Reuters' },
-    { src: '/assets/images/media/wwd.png', alt: 'WWD', href: 'https://wwd.com/runway/spring-couture-2026/paris/germanier/review/', title: 'WWD Review' },
-    { src: '/assets/images/media/vogue.png', alt: 'Vogue', href: 'https://www.vogue.com/fashion-shows/spring-2026-couture/germanier', title: 'Vogue Runway' },
-    { src: '/assets/images/media/reuters.png', alt: 'Reuters', href: 'https://www.reuters.com/pictures/style-celebrities-haute-couture-week-paris-2026-01-27/', title: 'Reuters' },
-  ];
+
 
   const pressArticles = [
     {
@@ -122,17 +115,7 @@ export const GermanierShow = () => {
       </header>
 
       <section className={styles.mediaSection}>
-        <div className={styles.logoLoopWrapper}>
-          <LogoLoop 
-            logos={mediaLinks}
-            speed={40}
-            logoHeight={40}
-            gap={80}
-            fadeOut={true}
-            fadeOutColor="var(--bg-system)"
-            scaleOnHover={true}
-          />
-        </div>
+
         
         <div className={styles.masonryGrid}>
           {pressArticles.map((article, index) => (
