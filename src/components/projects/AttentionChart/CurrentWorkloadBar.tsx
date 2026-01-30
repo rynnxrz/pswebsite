@@ -20,7 +20,7 @@ export const CurrentWorkloadBar = ({ className = '' }: CurrentWorkloadBarProps) 
         visible: (custom: number) => ({
             width: `${custom}%`,
             opacity: 1,
-            transition: { duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }
+            transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as any, delay: 0.1 }
         })
     };
 

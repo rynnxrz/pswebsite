@@ -17,6 +17,7 @@ const Home = lazy(() => import('./pages/Home').then(module => ({ default: module
 const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
 const Portfolio = lazy(() => import('./pages/Portfolio').then(module => ({ default: module.Portfolio })));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail').then(module => ({ default: module.ProjectDetail })));
+const GermanierShow = lazy(() => import('./pages/GermanierShow').then(module => ({ default: module.GermanierShow })));
 
 const PageLoader = () => (
   <div style={{
@@ -80,6 +81,11 @@ const AppContent = () => {
             <Route path="/project/:id" element={
               <Suspense fallback={<PageLoader />}>
                 <ProjectDetail />
+              </Suspense>
+            } />
+            <Route path="/germanier-paris-2026" element={
+              <Suspense fallback={<PageLoader />}>
+                <GermanierShow />
               </Suspense>
             } />
             {/* Fallbacks */}

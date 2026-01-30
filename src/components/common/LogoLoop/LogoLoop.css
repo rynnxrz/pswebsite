@@ -1,0 +1,98 @@
+.logo-loop-container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* Default background if not provided */
+  --background: #ffffff; 
+}
+
+.logo-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.logo-track.horizontal {
+  flex-direction: row;
+  animation: scroll-horizontal 10s linear infinite;
+  animation-play-state: var(--play-state, running);
+  animation-direction: var(--direction, normal);
+}
+
+.logo-track.vertical {
+  flex-direction: column;
+  animation: scroll-vertical 10s linear infinite;
+  animation-play-state: var(--play-state, running);
+  animation-direction: var(--direction, normal);
+}
+
+.logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.logo-item img {
+  display: block;
+  max-width: none;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.7);
+  transition: filter 0.3s ease;
+}
+
+.logo-item:hover img {
+  filter: grayscale(0%) opacity(1);
+}
+
+.scale-on-hover:hover {
+  transform: scale(1.1);
+}
+
+.fade-overlay {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.fade-overlay.horizontal {
+  top: 0;
+  bottom: 0;
+  width: 100px;
+}
+
+.fade-overlay.vertical {
+  left: 0;
+  right: 0;
+  height: 100px;
+}
+
+.fade-start {
+  left: 0;
+  top: 0;
+}
+
+.fade-end {
+  right: 0;
+  bottom: 0;
+}
+
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
