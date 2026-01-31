@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import { useCallback, useState, useEffect } from 'react';
 import { ArrowRight, ExternalLink, Clock, Moon, Sun } from 'lucide-react';
-import { germanierMediaCoverage, lastUpdated, MediaCoverage } from '../data/germanierMediaCoverage';
+import { germanierMediaCoverage, lastUpdated } from '../data/germanierMediaCoverage';
 import ShimmerButton from '@/components/ui/ShimmerButton';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import SplitText from '@/components/reactbits/SplitText';
@@ -123,14 +123,7 @@ const GermanierShowContent = () => {
   const mediaTitleY = useTransform(scrollY, [300, 450], [0, -20]);
 
 
-  const handleMediaCardClick = useCallback((article: MediaCoverage) => {
-    trackClick('media_card_click', {
-      outlet: article.outlet,
-      url: article.url,
-      source: 'germanier_show_page'
-    });
-    openPanel(article);
-  }, [openPanel]);
+
 
   const schemaData = {
     "@context": "https://schema.org",
@@ -313,7 +306,7 @@ const GermanierShowContent = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="font-mono text-xs tracking-[0.2em] uppercase mb-4 font-bold text-foreground"
+              className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase mb-4 font-medium sm:font-bold text-foreground opacity-80 sm:opacity-100"
             >
               PARIS HAUTE COUTURE WEEK 2026
             </motion.div>
@@ -324,7 +317,7 @@ const GermanierShowContent = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-                className="font-serif italic text-[0.4em] max-sm:text-[0.6em] font-light my-2 inline-block opacity-80"
+                className="font-serif italic text-[0.4em] font-light my-2 inline-block opacity-80"
               >
                 ×
               </motion.span>
@@ -428,45 +421,61 @@ const GermanierShowContent = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="break-inside-avoid h-full mb-8"
+                  className="break-inside-avoid mb-8"
                 >
-                  <button
-                    type="button"
-                    onClick={() => handleMediaCardClick(article)}
-                    className="block group h-full w-full text-left cursor-pointer bg-transparent border-0 p-0"
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block group w-full text-left cursor-pointer bg-transparent border-0 p-0 no-underline"
+                    aria-label={`Read full review on ${article.outlet}`}
                   >
-                    <Card className="h-full flex flex-col border border-border bg-card p-8 rounded text-card-foreground transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:border-primary/50 group-hover:bg-accent/5 relative overflow-hidden">
-                      <CardHeader className="p-0 mb-6 pb-6 border-b border-border flex flex-row items-center justify-between space-y-0 shrink-0">
-                        <span className="font-display text-xl font-semibold tracking-tight">{article.outlet}</span>
-                        <ExternalLink size={16} className="opacity-50 transition-opacity duration-300 group-hover:opacity-100" />
-                      </CardHeader>
-                      <CardContent className="p-0 flex flex-col flex-grow relative">
-                        <CardTitle className="font-display text-2xl md:text-[1.75rem] leading-[1.2] mb-4 font-normal">
-                          {article.headline}
-                        </CardTitle>
-
-                        {article.quote && (
-                          <blockquote className="font-display text-lg leading-[1.4] mb-12 pl-0 border-l-0 text-foreground block flex-grow">
-                            <span className="block font-serif text-4xl leading-none text-accent opacity-30 mb-2">“</span>
-                            {article.quote}
-                            {article.quoteAuthor && (
-                              <cite className="block not-italic text-sm opacity-80 mt-3 font-sans">— {article.quoteAuthor}</cite>
-                            )}
-                          </blockquote>
-                        )}
-
-                        {!article.quote && article.excerpt && (
-                          <CardDescription className="text-base leading-relaxed opacity-80 mb-12 flex-grow">
-                            {article.excerpt}
-                          </CardDescription>
-                        )}
-
-                        <div className="flex items-center gap-2 text-sm font-medium uppercase tracking-wider opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 mt-auto">
-                          Read Review <ArrowRight size={14} />
+                    <Card className="flex flex-col border border-border bg-card rounded text-card-foreground transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:border-primary/50 group-hover:bg-accent/5 relative overflow-hidden">
+                      {article.ogImage && (
+                        <div className="w-full relative overflow-hidden border-b border-border/50">
+                          <img
+                            src={article.ogImage}
+                            alt=""
+                            className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-105"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
-                      </CardContent>
+                      )}
+
+                      <div className="p-8 flex flex-col">
+                        <CardHeader className="p-0 mb-6 pb-6 border-b border-border flex flex-row items-center justify-between space-y-0 shrink-0">
+                          <span className="font-display text-xl font-semibold tracking-tight">{article.outlet}</span>
+                          <ExternalLink size={16} className="opacity-50 transition-opacity duration-300 group-hover:opacity-100" />
+                        </CardHeader>
+                        <CardContent className="p-0 flex flex-col relative">
+                          <CardTitle className="font-display text-2xl md:text-[1.75rem] leading-[1.2] mb-4 font-normal">
+                            {article.headline}
+                          </CardTitle>
+
+                          {article.quote && (
+                            <blockquote className="font-display text-lg leading-[1.4] mb-8 pl-0 border-l-0 text-foreground block">
+                              <span className="block font-serif text-4xl leading-none text-accent opacity-30 mb-2">“</span>
+                              {article.quote}
+                              {article.quoteAuthor && (
+                                <cite className="block not-italic text-sm opacity-80 mt-3 font-sans">— {article.quoteAuthor}</cite>
+                              )}
+                            </blockquote>
+                          )}
+
+                          {!article.quote && article.excerpt && (
+                            <CardDescription className="text-base leading-relaxed opacity-80 mb-8">
+                              {article.excerpt}
+                            </CardDescription>
+                          )}
+
+                          <div className="flex items-center gap-2 text-sm font-medium uppercase tracking-wider opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 pt-4 mt-auto">
+                            Read Review <ArrowRight size={14} />
+                          </div>
+                        </CardContent>
+                      </div>
                     </Card>
-                  </button>
+                  </a>
                 </motion.div>
               ))}
           </div>
