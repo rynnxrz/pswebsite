@@ -117,11 +117,12 @@ export const germanierMediaCoverage: MediaCoverage[] = [
         date: '2026-01-29',
         impactScore: 10,
         language: 'en',
-        verified: true
+        verified: true,
+        blocksIframe: true
     },
     {
         id: 'marie-claire-us-ss26',
-        outlet: 'Marie Claire US',
+        outlet: 'Marie Claire',
         url: 'https://www.marieclaire.com/fashion/celebrity-style/lisa-rinna-haute-couture-week-runway-debut-the-traitors/',
         headline: 'Lisa Rinna Makes Her Haute Couture Runway Debut',
         excerpt: 'Lisa Rinna walked the runway for Kevin Germanier during Paris Fashion Week, making her Haute Couture Week debut.',
@@ -129,18 +130,8 @@ export const germanierMediaCoverage: MediaCoverage[] = [
         date: '2026-01-29',
         impactScore: 10,
         language: 'en',
-        verified: true
-    },
-    {
-        id: 'marie-claire-fr-ss26',
-        outlet: 'Marie Claire France',
-        url: 'https://www.marieclaire.fr/mode/germanier-haute-couture-printemps-ete-2026/',
-        headline: 'Germanier Haute Couture Printemps-Été 2026',
-        excerpt: 'Le défilé Germanier clôture la semaine de la Haute Couture avec Lisa Rinna en ouverture.',
-        date: '2026-01-29',
-        impactScore: 9,
-        language: 'fr',
-        verified: true
+        verified: true,
+        blocksIframe: true
     }
 ];
 
