@@ -155,8 +155,8 @@ export const SlidePanel: React.FC<SlidePanelProps> = ({ panel, index, totalPanel
     // Memoize transition config for performance
     const transitionConfig = useMemo(() =>
         isMobile
-            ? { type: 'tween', duration: 0.25, ease: [0.32, 0.72, 0, 1] } // Faster tween on mobile
-            : { type: 'spring', damping: 30, stiffness: 300 }
+            ? { type: 'tween' as const, duration: 0.25, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } // Faster tween on mobile
+            : { type: 'spring' as const, damping: 30, stiffness: 300 }
         , []);
 
     return (
