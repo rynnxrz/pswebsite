@@ -28,7 +28,7 @@ const PageLoader = () => (
     justifyContent: 'center',
     background: 'var(--bg-system)'
   }}>
-    <div style={{ opacity: 0.6 }}>Loading...</div>
+    <div style={{ opacity: 0.6 }}></div>
   </div>
 );
 

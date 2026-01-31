@@ -14,6 +14,7 @@ export interface MediaCoverage {
     language?: string;
     verified: boolean;
     blocksIframe?: boolean; // Sites that block iframe embedding
+    type?: 'instagram'; // Special type for Instagram embed
 }
 
 // 按媒体重要性排序，仅包含欧洲权威媒体针对 2026-01-29 大秀的真实评价
@@ -97,7 +98,7 @@ export const germanierMediaCoverage: MediaCoverage[] = [
         id: 'wwd-backstage-ss26',
         outlet: 'WWD Backstage',
         url: 'https://wwd.com/beauty-industry-news/beauty-features/gallery/backstage-at-germanier-spring-2026-spring-couture-1238531541/',
-        headline: 'Backstage at Germanier Spring 2026 Couture [Photos]',
+        headline: 'Backstage at Germanier Spring 2026 Couture',
         excerpt: 'Backstage at Germanier Spring 2026 Spring Couture at Paris Couture Week. Photography by Mirella Malaguti/WWD.',
         date: '2026-01-29',
         impactScore: 10,

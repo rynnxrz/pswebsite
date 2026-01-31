@@ -12,13 +12,13 @@ interface SlidePanelContextType {
     openPanel: (article: MediaCoverage) => void;
     closePanel: (id: string) => void;
     closeAllPanels: () => void;
-    totalOffset: number; // Total offset for main content
+    totalOffset: string | number; // Total offset for main content
     getPanelOffset: (index: number, total: number) => number; // Get dynamic offset for each panel
 }
 
 const SlidePanelContext = createContext<SlidePanelContextType | null>(null);
 
-const PANEL_WIDTH = 480; // Base panel width in pixels
+const PANEL_WIDTH = '40vw'; // Base panel width in percentage of screen
 const TOTAL_STACK_SPACE = 120; // Fixed total space for stacked panel tabs
 const MAX_PUSH_PANELS = 3; // Max panels that push content, additional panels stack on right
 
@@ -70,7 +70,7 @@ export const SlidePanelProvider: React.FC<SlidePanelProviderProps> = ({ children
     // Calculate total offset for main content (max 3 panels push)
     const panelsThatPush = Math.min(panels.length, MAX_PUSH_PANELS);
     const totalOffset = panelsThatPush > 0
-        ? PANEL_WIDTH + TOTAL_STACK_SPACE
+        ? `calc(${PANEL_WIDTH} + ${TOTAL_STACK_SPACE}px)`
         : 0;
 
     return (

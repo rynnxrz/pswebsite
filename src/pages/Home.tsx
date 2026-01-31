@@ -45,7 +45,8 @@ export const Home = () => {
 
   return (
     <motion.div {...pageTransition}>
-      <main className="content-container">
+      {/* Changed from <main> to <div> to avoid nested landmarks - App.tsx provides the <main> */}
+      <div className="content-container">
         {/* --- Section 1: 个人介绍 --- */}
         <section className="intro-section">
           <div className="grid-col-left">
@@ -149,7 +150,7 @@ export const Home = () => {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </motion.div>
   );
 };

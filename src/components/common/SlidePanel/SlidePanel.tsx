@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Loader2, ExternalLink, Calendar } from 'lucide-react';
 import { MediaCoverage } from '@/data/germanierMediaCoverage';
@@ -21,6 +21,8 @@ export const SlidePanel: React.FC<SlidePanelProps> = ({ panel, index, totalPanel
     const { article } = panel;
     const [isLoading, setIsLoading] = useState(true);
     const [loadError, setLoadError] = useState(false);
+    const [loadProgress, setLoadProgress] = useState(0);
+    const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
     // Check if this site blocks iframe
     const blocksIframe = article.blocksIframe === true;
@@ -55,19 +57,90 @@ export const SlidePanel: React.FC<SlidePanelProps> = ({ panel, index, totalPanel
         }
     }, []);
 
+    // Simulated progress animation
+    const startProgressSimulation = useCallback(() => {
+        setLoadProgress(0);
+
+        // Clear any existing interval
+        if (progressIntervalRef.current) {
+            clearInterval(progressIntervalRef.current);
+        }
+
+        // Simulate progress: fast at first, then slows down as it approaches 90%
+        progressIntervalRef.current = setInterval(() => {
+            setLoadProgress(prev => {
+                if (prev >= 90) {
+                    // Stop at 90% until actual load completes
+                    return prev;
+                }
+                // Slow down as we approach 90%
+                const increment = Math.max(1, (90 - prev) * 0.1);
+                return Math.min(90, prev + increment);
+            });
+        }, 100);
+    }, []);
+
+    const completeProgress = useCallback(() => {
+        if (progressIntervalRef.current) {
+            clearInterval(progressIntervalRef.current);
+            progressIntervalRef.current = null;
+        }
+        // Complete to 100%
+        setLoadProgress(100);
+        // Reset after animation completes
+        setTimeout(() => {
+            setLoadProgress(0);
+        }, 300);
+    }, []);
+
     // Reset loading state when article changes
     useEffect(() => {
-        if (!blocksIframe) {
+        if (!blocksIframe && article.type !== 'instagram') {
             setIsLoading(true);
             setLoadError(false);
+            startProgressSimulation();
         }
-    }, [article.url, blocksIframe]);
+
+        // Handle Instagram loading with progress
+        if (article.type === 'instagram') {
+            setIsLoading(true);
+            startProgressSimulation();
+
+            // Process Instagram embeds if this is an Instagram panel
+            if (typeof window !== 'undefined' && (window as any).instgrm) {
+                // Small timeout to ensure DOM is ready
+                setTimeout(() => {
+                    (window as any).instgrm.Embeds.process();
+                    // Complete loading after embed processes
+                    setTimeout(() => {
+                        completeProgress();
+                        setIsLoading(false);
+                    }, 500);
+                }, 100);
+            } else {
+                // If Instagram SDK not loaded, complete after a delay
+                setTimeout(() => {
+                    completeProgress();
+                    setIsLoading(false);
+                }, 2000);
+            }
+        }
+
+        // Cleanup interval on unmount
+        return () => {
+            if (progressIntervalRef.current) {
+                clearInterval(progressIntervalRef.current);
+            }
+        };
+    }, [article.url, blocksIframe, article.type, startProgressSimulation, completeProgress]);
 
     const handleIframeLoad = () => {
+        completeProgress();
         setIsLoading(false);
     };
 
     const handleIframeError = () => {
+        completeProgress();
         setIsLoading(false);
         setLoadError(true);
     };
@@ -124,9 +197,82 @@ export const SlidePanel: React.FC<SlidePanelProps> = ({ panel, index, totalPanel
                     </button>
                 </div>
             </div>
+            {/* Content - Preview style for blocked sites, iframe for others, or specialized Instagram view */}
+            {article.type === 'instagram' ? (
+                <div className="slide-panel-content instagram-panel">
+                    {/* Loading Progress Bar */}
+                    {isLoading && loadProgress > 0 && (
+                        <div className="slide-panel-progress-container">
+                            <div className="slide-panel-progress">
+                                <div
+                                    className="slide-panel-progress-bar"
+                                    style={{ width: `${loadProgress}%` }}
+                                />
+                            </div>
+                        </div>
+                    )}
 
-            {/* Content - Preview style for blocked sites, iframe for others */}
-            {blocksIframe ? (
+                    {/* Loading Skeleton - shown while Instagram embed loads */}
+                    {isLoading && (
+                        <div className="instagram-loading-skeleton">
+                            <div className="instagram-skeleton-header">
+                                <div className="instagram-gradient-bg" />
+                            </div>
+                            <div className="instagram-skeleton-content">
+                                <div className="skeleton-avatar" />
+                                <div className="skeleton-line skeleton-line-short" />
+                                <div className="skeleton-line skeleton-line-medium" />
+                                <div className="skeleton-line skeleton-line-long" />
+                                <div className="skeleton-grid">
+                                    <div className="skeleton-grid-item" />
+                                    <div className="skeleton-grid-item" />
+                                    <div className="skeleton-grid-item" />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Instagram Embed */}
+                    <div className={`instagram-embed-container ${isLoading ? 'instagram-embed-loading' : ''}`}>
+                        <blockquote
+                            className="instagram-media"
+                            data-instgrm-permalink={article.url}
+                            data-instgrm-version="14"
+                            style={{
+                                background: 'var(--bg-tertiary)',
+                                border: '0',
+                                borderRadius: '12px',
+                                boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                                margin: '0 auto',
+                                maxWidth: '540px',
+                                minWidth: '326px',
+                                padding: '0',
+                                width: 'calc(100% - 2px)',
+                            }}
+                        >
+                            <div style={{ padding: '16px' }}>
+                                <a
+                                    href={article.url}
+                                    style={{
+                                        background: 'transparent',
+                                        lineHeight: '1.5',
+                                        padding: '0',
+                                        textAlign: 'center',
+                                        textDecoration: 'none',
+                                        width: '100%',
+                                        color: 'var(--text-secondary)',
+                                        fontSize: '0.875rem',
+                                    }}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    View this profile on Instagram
+                                </a>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+            ) : blocksIframe ? (
                 // Original preview style for sites that block iframe
                 <div className="slide-panel-content">
                     <h2 className="slide-panel-headline">{article.headline}</h2>
@@ -161,6 +307,18 @@ export const SlidePanel: React.FC<SlidePanelProps> = ({ panel, index, totalPanel
             ) : (
                 // Iframe for sites that allow embedding
                 <div className="slide-panel-iframe-container">
+                    {/* Loading Progress Bar */}
+                    {isLoading && loadProgress > 0 && (
+                        <div className="slide-panel-progress-container">
+                            <div className="slide-panel-progress">
+                                <div
+                                    className="slide-panel-progress-bar"
+                                    style={{ width: `${loadProgress}%` }}
+                                />
+                            </div>
+                        </div>
+                    )}
+
                     {isLoading && (
                         <div className="slide-panel-loader">
                             <Loader2 className="animate-spin" size={32} />

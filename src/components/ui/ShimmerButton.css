@@ -132,13 +132,13 @@
    ======================================== */
 .shimmer-btn__glow {
     position: absolute;
-    inset: -4px;
+    inset: -2px;
     background: linear-gradient(135deg,
-            rgba(131, 58, 180, 0.6),
-            rgba(225, 48, 108, 0.6),
-            rgba(252, 176, 69, 0.6));
+            rgba(131, 58, 180, 0.5),
+            rgba(225, 48, 108, 0.5),
+            rgba(252, 176, 69, 0.5));
     border-radius: inherit;
-    filter: blur(12px);
+    filter: blur(8px);
     opacity: 0;
     z-index: -1;
     pointer-events: none;

@@ -1,6 +1,6 @@
 /* Hide the global ThemeToggle and LanguageToggle on this page */
 .theme-toggle-container,
 #language-toggle,
-[role="switch"][aria-label="Toggle theme"] {
+button.theme-toggle:not(.local-theme-toggle) {
     display: none !important;
 }

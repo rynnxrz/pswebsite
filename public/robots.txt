@@ -1,0 +1,21 @@
+# Robots.txt for Ivy J Studio
+# https://shipbyx.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://shipbyx.com/sitemap.xml
+
+# Block development/build artifacts
+Disallow: /assets/*.map
+
+# AI Crawlers - allow for visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /

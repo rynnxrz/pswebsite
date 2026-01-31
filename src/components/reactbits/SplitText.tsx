@@ -5,6 +5,7 @@ interface SplitTextProps {
     className?: string;
     delay?: number;
     duration?: number;
+    triggerOnScroll?: boolean;
 }
 
 const SplitText = ({
@@ -12,6 +13,7 @@ const SplitText = ({
     className = '',
     delay = 0.05,
     duration = 0.5,
+    triggerOnScroll = true,
 }: SplitTextProps) => {
     const words = text.split(' ');
 
@@ -48,11 +50,12 @@ const SplitText = ({
 
     return (
         <motion.div
-            style={{ overflow: 'hidden', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
+            style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
             variants={container}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            animate={triggerOnScroll ? undefined : "visible"}
+            whileInView={triggerOnScroll ? "visible" : undefined}
+            viewport={triggerOnScroll ? { once: true } : undefined}
             className={className}
         >
             {words.map((word, index) => (
