@@ -339,7 +339,15 @@ const GermanierShowContent = () => {
 
         <section id="main-content" className="px-8 pb-32 bg-transparent relative">
           <div className="max-w-[1800px] mx-auto mb-12 flex items-center justify-between border-b border-border/40 pb-4 sticky top-0 z-[60] bg-background/95 backdrop-blur-md pt-4 overflow-hidden -mx-8 px-8 shadow-[0_1px_3px_rgba(0,0,0,0.05)] max-sm:pt-[max(1rem,env(safe-area-inset-top))]">
-            <div className="flex items-center gap-4 min-w-0">
+
+            {/* Mobile: Simplified left-aligned info */}
+            <div className="sm:hidden flex flex-col min-w-0">
+              <span className="font-display text-xs font-medium leading-tight">GERMANIER × Ivy J</span>
+              <span className="font-display text-[10px] opacity-50 mt-0.5">{new Date(lastUpdated).toLocaleDateString()}</span>
+            </div>
+
+            {/* Desktop: Original layout */}
+            <div className="hidden sm:flex items-center gap-4 min-w-0">
               <motion.div
                 style={{ opacity: titleOpacity, y: titleY, width: titleWidth }}
                 className="flex flex-col min-w-0 overflow-hidden"
@@ -354,7 +362,7 @@ const GermanierShowContent = () => {
               />
             </div>
 
-            {/* Centered Title */}
+            {/* Centered Title - Desktop only */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block pointer-events-none">
               <motion.h2
                 style={{ opacity: mediaTitleOpacity, y: mediaTitleY }}
@@ -364,13 +372,14 @@ const GermanierShowContent = () => {
               </motion.h2>
             </div>
 
+            {/* Right side actions */}
             <motion.div
               style={{ opacity: titleOpacity, y: titleY }}
               className="flex items-center gap-4"
             >
               <button
                 type="button"
-                className={`local-theme-toggle theme-toggle ${theme} !relative !top-auto !left-auto shadow-none border-border/40 !bg-background/50`}
+                className={`local-theme-toggle theme-toggle ${theme} !relative !top-auto !left-auto shadow-none border-border/40 !bg-background/50 max-sm:hidden`}
                 onClick={toggleTheme}
                 aria-label="Switch to dark mode"
                 title="Switch to dark mode"
@@ -386,15 +395,14 @@ const GermanierShowContent = () => {
                 onClick={handleFollowClick}
                 variant="instagram"
                 size="sm"
-                className="pointer-events-auto shadow-none bg-background/50 hover:bg-background/80 border-border/40 text-[11px] tracking-widest h-9 px-4"
+                className="pointer-events-auto shadow-none bg-background/50 hover:bg-background/80 border-border/40 text-[11px] tracking-widest h-9 px-4 max-sm:h-8 max-sm:px-3 max-sm:text-[10px]"
               >
                 <span className="font-medium">@ivyjstudio</span>
               </ShimmerButton>
 
-              <div className="flex items-center gap-2 text-xs font-display opacity-80 uppercase tracking-widest border-l border-border/40 pl-4 h-8">
+              <div className="hidden sm:flex items-center gap-2 text-xs font-display opacity-80 uppercase tracking-widest border-l border-border/40 pl-4 h-8">
                 <Clock size={10} />
-                <span className="hidden sm:inline">Last Updated: {formattedDate}</span>
-                <span className="sm:hidden">{new Date(lastUpdated).toLocaleDateString()}</span>
+                <span>Last Updated: {formattedDate}</span>
               </div>
             </motion.div>
           </div>
