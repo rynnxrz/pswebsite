@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Loader2, ExternalLink, Calendar } from 'lucide-react';
 import { MediaCoverage } from '@/data/germanierMediaCoverage';
 import { useSlidePanels, PANEL_WIDTH } from './SlidePanelContext';
 import './SlidePanel.css';
+
+// Check if device is mobile for optimized animations
+const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
 
 interface SlidePanelProps {
     panel: {
@@ -149,6 +152,13 @@ export const SlidePanel: React.FC<SlidePanelProps> = ({ panel, index, totalPanel
         window.open(article.url, '_blank', 'noopener,noreferrer');
     };
 
+    // Memoize transition config for performance
+    const transitionConfig = useMemo(() =>
+        isMobile
+            ? { type: 'tween', duration: 0.25, ease: [0.32, 0.72, 0, 1] } // Faster tween on mobile
+            : { type: 'spring', damping: 30, stiffness: 300 }
+        , []);
+
     return (
         <motion.div
             ref={panelRef}
@@ -157,15 +167,12 @@ export const SlidePanel: React.FC<SlidePanelProps> = ({ panel, index, totalPanel
                 width: PANEL_WIDTH,
                 right: rightOffset,
                 zIndex: 1000 + panel.zIndex,
+                willChange: 'transform', // Hint browser for GPU acceleration
             }}
-            initial={{ x: PANEL_WIDTH }}
+            initial={{ x: '100%' }}
             animate={{ x: 0 }}
-            exit={{ x: PANEL_WIDTH }}
-            transition={{
-                type: 'spring',
-                damping: 30,
-                stiffness: 300
-            }}
+            exit={{ x: '100%' }}
+            transition={transitionConfig}
             tabIndex={-1}
             role="dialog"
             aria-modal="true"

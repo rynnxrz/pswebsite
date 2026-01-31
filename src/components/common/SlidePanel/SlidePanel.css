@@ -20,6 +20,11 @@
     flex-direction: column;
     pointer-events: auto;
     overflow: hidden;
+    /* GPU acceleration for smooth animations */
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* Header */
@@ -467,10 +472,34 @@
     .slide-panel {
         width: 100% !important;
         right: 0 !important;
+        /* Additional mobile optimizations */
+        contain: layout style paint;
+        -webkit-overflow-scrolling: touch;
     }
 
     .instagram-loading-skeleton {
         max-width: 100%;
         margin: 0 1rem;
+    }
+
+    /* Reduce animation complexity on mobile */
+    .slide-panel-progress-bar {
+        animation: none;
+        background: var(--accent-primary);
+    }
+}
+
+/* Honor reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .slide-panel {
+        transition: none !important;
+    }
+
+    .slide-panel-progress-bar,
+    .skeleton-avatar::after,
+    .skeleton-line,
+    .skeleton-grid-item,
+    .instagram-loading-skeleton {
+        animation: none !important;
     }
 }
