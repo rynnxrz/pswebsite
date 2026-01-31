@@ -137,6 +137,8 @@ const GermanierShowContent = () => {
     "@type": "Event",
     "name": "Kevin Germanier Spring 2026 Couture Show",
     "startDate": "2026-01-29",
+    "endDate": "2026-01-29",
+    "image": "https://shipbyx.com/og-germanier-2026.jpg",
     "eventStatus": "https://schema.org/EventScheduled",
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "location": {

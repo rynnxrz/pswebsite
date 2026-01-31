@@ -122,7 +122,11 @@
         ],
         "description": "Kevin Germanier's 'Les Chardonneuses' Spring Summer 2026 Upcycled Couture collection at Paris Haute Couture Week, featuring three customised 3D-printed floral headpieces designed by Ivy J Studio. The pieces are inspired by the quiet stages of a flower—from seed to bloom to gentle decay. Each moment carries its own form of beauty.",
         "image": "https://shipbyx.com/og-germanier-2026.jpg",
-        "keywords": "Les Chardonneuses, Kevin Germanier, Ivy J Studio, Paris Haute Couture, Upcycled Couture, LVMH"
+        "keywords": "Les Chardonneuses, Kevin Germanier, Ivy J Studio, Paris Haute Couture, Upcycled Couture, LVMH",
+        "mentions": [
+          {"@type": "Brand", "name": "LVMH"},
+          {"@type": "Organization", "name": "Fédération de la Haute Couture et de la Mode"}
+        ]
       },
       {
         "@type": "Organization",
@@ -173,7 +177,8 @@
           "headpiece design",
           "haute couture accessories",
           "upcycled fashion"
-        ]
+        ],
+        "award": "Featured at Paris Haute Couture Week 2026"
       },
       {
         "@type": "CreativeWork",
@@ -213,7 +218,91 @@
           "@type": "WebPage",
           "@id": "https://shipbyx.com/germanier-paris-2026"
         },
-        "keywords": "Ivy J Studio, Kevin Germanier, Les Chardonneuses, Paris Haute Couture 2026, 3D printed headpiece, Lisa Rinna, Sofia Silvanas, Amiira, floral headpiece, wearable art, upcycled couture, LVMH"
+        "keywords": "Ivy J Studio, Kevin Germanier, Les Chardonneuses, Paris Haute Couture 2026, 3D printed headpiece, Lisa Rinna, Sofia Silvanas, Amiira, floral headpiece, wearable art, upcycled couture, LVMH",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["article header h1", "article main section:first-of-type p"]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://shipbyx.com/germanier-paris-2026#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who designed the headpieces for Kevin Germanier's Paris Haute Couture 2026 show?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ivy J Studio, a London-based 3D printed wearable art studio founded by architect-trained artist Ivy, designed three customised 3D-printed floral headpieces for Kevin Germanier's 'Les Chardonneuses' collection at Paris Haute Couture Spring Summer 2026."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Les Chardonneuses?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Les Chardonneuses is Kevin Germanier's Spring Summer 2026 Upcycled Couture collection presented at Paris Haute Couture Week. The collection features sustainable fashion made from upcycled materials, with three custom 3D-printed headpieces by Ivy J Studio inspired by the lifecycle of flowers—from seed to bloom to gentle decay."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who opened Kevin Germanier's 2026 couture show?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "American actress and TV personality Lisa Rinna opened Kevin Germanier's 'Les Chardonneuses' show at Paris Haute Couture Week 2026, wearing a custom 3D-printed floral headpiece designed by Ivy J Studio."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Ivy J Studio known for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ivy J Studio is a London-based wearable art studio specializing in 3D-printed body sculptures, jewellery, and headpieces. Founded by Ivy, a UCL Bartlett School of Architecture graduate and former Foster + Partners architect, the studio uses computational generative modelling to create intimate sculptural forms inspired by natural creatures and floral beauty."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where can I follow Ivy J Studio?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can follow Ivy J Studio on Instagram at @ivyjstudio or visit their website at ivyjstudio.com to see their latest 3D-printed wearable art and haute couture collaborations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What materials are used in Ivy J Studio's headpieces?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ivy J Studio creates headpieces using innovative 3D printing technology and computational generative modelling. The pieces for Germanier's 'Les Chardonneuses' collection feature delicate floral-inspired designs that capture the quiet stages of a flower's lifecycle."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://shipbyx.com/germanier-paris-2026#media",
+        "name": "Media Coverage of Ivy J Studio × Germanier Collaboration",
+        "description": "Press coverage and reviews of Ivy J Studio's 3D-printed headpieces at Paris Haute Couture Week 2026",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Vogue Coverage",
+            "description": "Vogue's coverage of Lisa Rinna opening Kevin Germanier's couture show wearing Ivy J Studio headpiece"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "WWD Coverage",
+            "description": "WWD's review of Kevin Germanier's Les Chardonneuses collection featuring 3D-printed headpieces"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Harper's Bazaar Coverage",
+            "description": "Harper's Bazaar feature on sustainable couture and innovative 3D-printed accessories"
+          }
+        ]
       }
     ]
   }
@@ -227,36 +316,93 @@
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 
-  <!-- Semantic Content for Crawlers -->
+  <!-- Semantic Content for Crawlers - Enhanced for GEO/AI Search -->
   <noscript>
-    <article>
+    <article itemscope itemtype="https://schema.org/Article">
       <header>
-        <h1>Ivy J Studio × Kevin Germanier "Les Chardonneuses" | Paris Haute Couture SS26</h1>
-        <p>Three customised 3D-printed floral headpieces for Spring Summer 2026 Upcycled Couture</p>
+        <h1 itemprop="headline">Ivy J Studio × Kevin Germanier "Les Chardonneuses" | Paris Haute Couture SS26</h1>
+        <p itemprop="description">Three customised 3D-printed floral headpieces for Spring Summer 2026 Upcycled Couture
+        </p>
+        <meta itemprop="datePublished" content="2026-01-29">
+        <meta itemprop="author" content="Ivy J Studio">
       </header>
       <main>
         <section>
           <h2>About the Collaboration</h2>
-          <p>Ivy J Studio created three customised 3D-printed headpieces for Kevin Germanier's "Les Chardonneuses"
-            Spring Summer 2026 Upcycled Couture collection at Paris Haute Couture Week.</p>
+          <p><strong>Ivy J Studio</strong>, a London-based 3D printed wearable art studio, created three customised
+            3D-printed headpieces for Kevin Germanier's "Les Chardonneuses" Spring Summer 2026 Upcycled Couture
+            collection at Paris Haute Couture Week.</p>
           <p>The pieces are inspired by the quiet stages of a flower—from seed to bloom to gentle decay. Each moment
             carries its own form of beauty. Imperfection shapes the most unforgettable silhouettes.</p>
-          <p>Lisa Rinna opened the show wearing Ivy's custom floral headpiece. Models Sofia Silvanas and Amiira
-            also wore the 3D-printed headpieces.</p>
+          <p><strong>Lisa Rinna</strong>, American actress and TV personality, opened the show wearing Ivy's custom
+            floral headpiece. Models <strong>Sofia Silvanas</strong> and <strong>Amiira</strong> also wore the
+            3D-printed headpieces.</p>
         </section>
+
+        <section>
+          <h2>About Ivy J Studio</h2>
+          <p>Ivy J Studio is a London-based wearable art studio founded by <strong>Ivy</strong>, a UCL Bartlett School
+            of Architecture graduate and former Foster + Partners architect. The studio specializes in 3D-printed body
+            sculptures, jewellery, and headpieces using computational generative modelling.</p>
+          <p>Ivy's work draws inspiration from natural creatures and the quiet beauty of flowers from birth to decay.
+            Each piece is created using innovative 3D printing technology to produce intimate sculptural forms.</p>
+        </section>
+
+        <section>
+          <h2>Frequently Asked Questions</h2>
+          <dl>
+            <dt>Who designed the headpieces for Kevin Germanier's Paris Haute Couture 2026 show?</dt>
+            <dd>Ivy J Studio, a London-based 3D printed wearable art studio founded by architect-trained artist Ivy,
+              designed three customised 3D-printed floral headpieces for Kevin Germanier's 'Les Chardonneuses'
+              collection at Paris Haute Couture Spring Summer 2026.</dd>
+
+            <dt>What is Les Chardonneuses?</dt>
+            <dd>Les Chardonneuses is Kevin Germanier's Spring Summer 2026 Upcycled Couture collection presented at Paris
+              Haute Couture Week. The collection features sustainable fashion made from upcycled materials, with three
+              custom 3D-printed headpieces by Ivy J Studio inspired by the lifecycle of flowers.</dd>
+
+            <dt>Who opened Kevin Germanier's 2026 couture show?</dt>
+            <dd>American actress and TV personality Lisa Rinna opened Kevin Germanier's 'Les Chardonneuses' show at
+              Paris Haute Couture Week 2026, wearing a custom 3D-printed floral headpiece designed by Ivy J Studio.</dd>
+
+            <dt>What is Ivy J Studio known for?</dt>
+            <dd>Ivy J Studio is a London-based wearable art studio specializing in 3D-printed body sculptures,
+              jewellery, and headpieces. Founded by Ivy, a UCL Bartlett School of Architecture graduate and former
+              Foster + Partners architect, the studio uses computational generative modelling to create intimate
+              sculptural forms.</dd>
+
+            <dt>Where can I follow Ivy J Studio?</dt>
+            <dd>You can follow Ivy J Studio on Instagram at @ivyjstudio or visit their website at ivyjstudio.com.</dd>
+          </dl>
+        </section>
+
         <section>
           <h2>Credits</h2>
           <ul>
-            <li>Dress: Kevin Germanier (@kevingermanier)</li>
-            <li>3D Headpieces: Ivy J Studio (@ivyjstudio)</li>
-            <li>Headpiece Design Assistant: Grace (@archigrace.s)</li>
-            <li>Models: Lisa Rinna, Sofia Silvanas, Amiira</li>
+            <li><strong>Collection:</strong> Kevin Germanier (@kevingermanier) - "Les Chardonneuses" SS26 Upcycled
+              Couture</li>
+            <li><strong>3D Headpieces:</strong> Ivy J Studio (@ivyjstudio)</li>
+            <li><strong>Headpiece Design Assistant:</strong> Grace (@archigrace.s)</li>
+            <li><strong>Models wearing Ivy J Studio headpieces:</strong> Lisa Rinna, Sofia Silvanas, Amiira</li>
+            <li><strong>Event:</strong> Paris Haute Couture Week Spring Summer 2026</li>
           </ul>
         </section>
+
         <section>
           <h2>Follow Ivy J Studio</h2>
-          <p>Instagram: <a href="https://www.instagram.com/ivyjstudio">@ivyjstudio</a></p>
+          <p>Instagram: <a href="https://www.instagram.com/ivyjstudio" rel="me">@ivyjstudio</a></p>
           <p>Website: <a href="https://ivyjstudio.com">ivyjstudio.com</a></p>
+        </section>
+
+        <section>
+          <h2>Key Facts</h2>
+          <ul>
+            <li>Ivy J Studio created 3 custom 3D-printed headpieces for Paris Haute Couture Week 2026</li>
+            <li>Lisa Rinna opened Kevin Germanier's "Les Chardonneuses" couture show</li>
+            <li>The headpieces are inspired by the lifecycle of flowers - from seed to bloom to decay</li>
+            <li>Ivy is a UCL Bartlett graduate and former Foster + Partners architect</li>
+            <li>Ivy J Studio is based in London and specializes in wearable 3D-printed art</li>
+          </ul>
         </section>
       </main>
     </article>
