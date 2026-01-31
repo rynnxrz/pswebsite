@@ -257,7 +257,8 @@ const GermanierShowContent = () => {
           <meta property="og:url" content="https://shipbyx.com/germanier-paris-2026" />
           <meta property="og:title" content="Kevin Germanier Paris Show 2026 | Ivy J Studio Collaboration" />
           <meta property="og:description" content="Discover the collaboration between Kevin Germanier and Ivy J Studio for the Spring 2026 Couture show in Paris. Featuring the iconic opening headpiece worn by Lisa Rinna." />
-          <meta property="og:image" content="https://shipbyx.com/weblogo.png" />
+          <meta property="og:image" content="https://shipbyx.com/og-germanier-2026.jpg" />
+          <meta property="og:image:alt" content="Germanier × Ivy J Studio - Paris Haute Couture Week 2026 - 3D Printed Wearable Art" />
           <meta property="og:site_name" content="Ivy J Studio" />
           <meta property="og:locale" content="en_US" />
           <meta property="article:published_time" content="2026-01-29" />
@@ -268,7 +269,8 @@ const GermanierShowContent = () => {
           <meta name="twitter:url" content="https://shipbyx.com/germanier-paris-2026" />
           <meta name="twitter:title" content="Kevin Germanier Paris Show 2026 | Ivy J Studio Collaboration" />
           <meta name="twitter:description" content="Discover the collaboration between Kevin Germanier and Ivy J Studio for the Spring 2026 Couture show in Paris. Featuring the iconic opening headpiece worn by Lisa Rinna." />
-          <meta name="twitter:image" content="https://shipbyx.com/weblogo.png" />
+          <meta name="twitter:image" content="https://shipbyx.com/og-germanier-2026.jpg" />
+          <meta name="twitter:image:alt" content="Germanier × Ivy J Studio - Paris Haute Couture Week 2026 - 3D Printed Wearable Art" />
           <meta name="twitter:site" content="@ivyjstudio" />
 
           {/* Geo-Targeting Meta Tags */}
