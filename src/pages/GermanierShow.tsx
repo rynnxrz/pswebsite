@@ -320,7 +320,7 @@ const GermanierShowContent = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-                className="font-serif italic text-[0.4em] font-light my-2 inline-block opacity-80"
+                className="font-serif italic text-[0.4em] max-sm:text-[0.6em] font-light my-2 inline-block opacity-80"
               >
                 ×
               </motion.span>
@@ -338,7 +338,7 @@ const GermanierShowContent = () => {
 
 
         <section id="main-content" className="px-8 pb-32 bg-transparent relative">
-          <div className="max-w-[1800px] mx-auto mb-12 flex items-center justify-between border-b border-border/40 pb-4 sticky top-0 z-[60] bg-background/80 backdrop-blur-md pt-4 overflow-hidden">
+          <div className="max-w-[1800px] mx-auto mb-12 flex items-center justify-between border-b border-border/40 pb-4 sticky top-0 z-[60] bg-background/95 backdrop-blur-md pt-4 overflow-hidden -mx-8 px-8 shadow-[0_1px_3px_rgba(0,0,0,0.05)] max-sm:pt-[max(1rem,env(safe-area-inset-top))]">
             <div className="flex items-center gap-4 min-w-0">
               <motion.div
                 style={{ opacity: titleOpacity, y: titleY, width: titleWidth }}
