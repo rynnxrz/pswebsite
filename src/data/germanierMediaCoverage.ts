@@ -105,7 +105,43 @@ export const germanierMediaCoverage: MediaCoverage[] = [
         language: 'en',
         verified: true,
         blocksIframe: true
+    },
+    // New sources found 2026-01-31
+    {
+        id: 'harpers-bazaar-ss26',
+        outlet: "Harper's Bazaar",
+        url: 'https://www.harpersbazaar.com/fashion/a70192841/couture-week-trends-spring-2026/',
+        headline: 'Couture Week Trends Spring 2026',
+        excerpt: 'Kevin Germanier aimed for a bold and less serious approach to couture.',
+        quote: 'Lisa Rinna opened the show in a midnight blue leotard, an expansive tulle skirt, and a distinctive spiky branch hat.',
+        date: '2026-01-29',
+        impactScore: 10,
+        language: 'en',
+        verified: true
+    },
+    {
+        id: 'marie-claire-us-ss26',
+        outlet: 'Marie Claire US',
+        url: 'https://www.marieclaire.com/fashion/celebrity-style/lisa-rinna-haute-couture-week-runway-debut-the-traitors/',
+        headline: 'Lisa Rinna Makes Her Haute Couture Runway Debut',
+        excerpt: 'Lisa Rinna walked the runway for Kevin Germanier during Paris Fashion Week, making her Haute Couture Week debut.',
+        quote: 'The ensemble was accessorized with a distinctive headpiece featuring "decaying blooms" and a "barbed wire-esque edge" that cradled her head like a distorted crown.',
+        date: '2026-01-29',
+        impactScore: 10,
+        language: 'en',
+        verified: true
+    },
+    {
+        id: 'marie-claire-fr-ss26',
+        outlet: 'Marie Claire France',
+        url: 'https://www.marieclaire.fr/mode/germanier-haute-couture-printemps-ete-2026/',
+        headline: 'Germanier Haute Couture Printemps-Été 2026',
+        excerpt: 'Le défilé Germanier clôture la semaine de la Haute Couture avec Lisa Rinna en ouverture.',
+        date: '2026-01-29',
+        impactScore: 9,
+        language: 'fr',
+        verified: true
     }
 ];
 
-export const lastUpdated = '2026-01-30T20:55:00Z';
+export const lastUpdated = '2026-01-31T21:06:00Z';
