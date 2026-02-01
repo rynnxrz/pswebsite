@@ -4,3 +4,17 @@
 button.theme-toggle:not(.local-theme-toggle) {
     display: none !important;
 }
+
+/* Instagram Social Wall Skeleton Shimmer Animation */
+@keyframes skeleton-shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.skeleton-shimmer {
+    animation: skeleton-shimmer 1.5s infinite ease-in-out;
+}

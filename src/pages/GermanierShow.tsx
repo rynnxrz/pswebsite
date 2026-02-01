@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import SplitText from '@/components/reactbits/SplitText';
 import { useTranslation } from 'react-i18next';
 import { SlidePanelProvider, SlidePanelManager, useSlidePanels } from '@/components/common/SlidePanel';
+// import { InstagramSocialWall } from '@/components/common/InstagramSocialWall';
 
 import { setTheme } from '@/utils/theme';
 
@@ -128,7 +129,8 @@ const GermanierShowContent = () => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": "Kevin Germanier Spring 2026 Couture Show",
+    "name": "Germanier SS26 Paris 2026 – Ivy J Studio × Les Chardonneuses",
+    "alternateName": ["Germanier 26", "Germanier SS26", "Kevin Germanier Paris 2026", "Les Chardonneuses Germanier", "Germanier Les Chardonneuses 2026"],
     "startDate": "2026-01-29",
     "endDate": "2026-01-29",
     "image": "https://shipbyx.com/og-germanier-2026.jpg",
@@ -159,14 +161,14 @@ const GermanierShowContent = () => {
     "contributor": {
       "@type": "Organization",
       "name": "Ivy J Studio",
-      "alternateName": "Ivy J",
+      "alternateName": ["Ivy J", "IvyJ"],
       "url": "https://ivyjstudio.com",
       "sameAs": [
         "https://www.instagram.com/ivyjstudio",
         "https://ivyjstudio.com/pages/about-ivy"
       ],
       "foundingDate": "2023",
-      "description": "London-based 3D printed wearable art studio. Creates body sculpture, jewellery, and headpieces using digital computational generative modelling and innovative 3D printing technology. Featured at Paris Fashion Week 2026 with Kevin Germanier.",
+      "description": "London-based 3D printed wearable art studio. Creates body sculpture, jewellery, and headpieces using digital computational generative modelling and innovative 3D printing technology. Featured at Germanier Paris 2026 (SS26).",
       "areaServed": {
         "@type": "Place",
         "name": "Worldwide"
@@ -209,15 +211,15 @@ const GermanierShowContent = () => {
     },
     "about": {
       "@type": "CreativeWork",
-      "name": "3D-Printed Couture Headpiece",
+      "name": "3D-Printed Couture Headpiece for Germanier Paris 2026",
       "creator": {
         "@type": "Organization",
         "name": "Ivy J Studio"
       },
-      "description": "Custom 3D-printed wearable body sculpture designed for Paris Fashion Week 2026, blending architectural thinking with intimate sculptural form."
+      "description": "Custom 3D-printed wearable body sculpture designed for Germanier Paris 2026 (SS26), blending architectural thinking with intimate sculptural form."
     },
-    "description": "The Kevin Germanier Spring 2026 Couture show in Paris, featuring exclusive 3D-printed wearable sculptures designed and crafted by London-based Ivy J Studio for the opening set with Lisa Rinna.",
-    "keywords": "Ivy J, Ivy J Studio, Kevin Germanier, Paris Fashion Week 2026, haute couture, 3D printed headpiece, Lisa Rinna, wearable art, body sculpture, London designer, UCL architect"
+    "description": "Germanier Paris 2026: Ivy J Studio's 3D-printed floral headpieces for Kevin Germanier's 'Les Chardonneuses' SS26 upcycled couture collection. Lisa Rinna opened the show wearing Ivy's headpiece.",
+    "keywords": "Germanier Paris 2026, Germanier 26, Germanier SS26, Ivy J, Ivy J Studio, IvyJ, Kevin Germanier, Paris Fashion Week 2026, haute couture, 3D printed headpiece, Lisa Rinna, wearable art, body sculpture, London designer"
   };
 
   // Format the last updated date
@@ -240,9 +242,9 @@ const GermanierShowContent = () => {
         }}
       >
         <Helmet>
-          <title>Kevin Germanier Paris Show 2026 | Ivy J Studio Collaboration</title>
-          <meta name="description" content="London-based Ivy J Studio collaborated with Kevin Germanier for the Spring 2026 Couture show in Paris. Featuring the iconic 3D-printed opening headpiece worn by Lisa Rinna, created by UCL-trained architect Ivy." />
-          <meta name="keywords" content="Kevin Germanier, Ivy J Studio, Ivy J, Paris Fashion Week 2026, Couture, Lisa Rinna, 3D printed headpiece, wearable art, body sculpture, London designer, UCL architect, haute couture, Foster Partners" />
+          <title>Germanier SS26 Paris 2026 | Ivy J Studio Headpieces</title>
+          <meta name="description" content="Ivy J Studio's 3D-printed floral headpieces for Germanier Paris 2026 (SS26) 'Les Chardonneuses'. Custom pieces for Kevin Germanier's upcycled couture. Lisa Rinna opened the show." />
+          <meta name="keywords" content="Germanier Paris 2026, Germanier SS26, Germanier 26, Ivy J Studio, Ivy J, IvyJ, Kevin Germanier, Les Chardonneuses, Les Chardonneuses Germanier, Paris Haute Couture Week 2026, 3D printed headpiece, Lisa Rinna, wearable art, upcycled couture, LVMH, sustainable fashion" />
 
           {/* Canonical URL */}
           <link rel="canonical" href="https://shipbyx.com/germanier-paris-2026" />
@@ -250,10 +252,10 @@ const GermanierShowContent = () => {
           {/* Open Graph / Facebook */}
           <meta property="og:type" content="article" />
           <meta property="og:url" content="https://shipbyx.com/germanier-paris-2026" />
-          <meta property="og:title" content="Kevin Germanier Paris Show 2026 | Ivy J Studio Collaboration" />
-          <meta property="og:description" content="Discover the collaboration between Kevin Germanier and Ivy J Studio for the Spring 2026 Couture show in Paris. Featuring the iconic opening headpiece worn by Lisa Rinna." />
+          <meta property="og:title" content="Germanier SS26 Paris 2026 | Ivy J Studio Headpieces" />
+          <meta property="og:description" content="Ivy J Studio's 3D-printed floral headpieces for Germanier Paris 2026 (SS26) 'Les Chardonneuses'. Custom pieces for Kevin Germanier's upcycled couture. Lisa Rinna opened the show." />
           <meta property="og:image" content="https://shipbyx.com/og-germanier-2026.jpg" />
-          <meta property="og:image:alt" content="Germanier × Ivy J Studio - Paris Haute Couture Week 2026 - 3D Printed Wearable Art" />
+          <meta property="og:image:alt" content="Germanier Paris 2026 × Ivy J Studio - 3D Printed Wearable Art Headpieces" />
           <meta property="og:site_name" content="Ivy J Studio" />
           <meta property="og:locale" content="en_US" />
           <meta property="article:published_time" content="2026-01-29" />
@@ -262,10 +264,10 @@ const GermanierShowContent = () => {
           {/* Twitter Card */}
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:url" content="https://shipbyx.com/germanier-paris-2026" />
-          <meta name="twitter:title" content="Kevin Germanier Paris Show 2026 | Ivy J Studio Collaboration" />
-          <meta name="twitter:description" content="Discover the collaboration between Kevin Germanier and Ivy J Studio for the Spring 2026 Couture show in Paris. Featuring the iconic opening headpiece worn by Lisa Rinna." />
+          <meta name="twitter:title" content="Germanier SS26 Paris 2026 | Ivy J Studio Headpieces" />
+          <meta name="twitter:description" content="Ivy J Studio's 3D-printed floral headpieces for Germanier Paris 2026 (SS26) 'Les Chardonneuses'. Lisa Rinna opened the show." />
           <meta name="twitter:image" content="https://shipbyx.com/og-germanier-2026.jpg" />
-          <meta name="twitter:image:alt" content="Germanier × Ivy J Studio - Paris Haute Couture Week 2026 - 3D Printed Wearable Art" />
+          <meta name="twitter:image:alt" content="Germanier Paris 2026 × Ivy J Studio - 3D Printed Wearable Art Headpieces" />
           <meta name="twitter:site" content="@ivyjstudio" />
 
           {/* Geo-Targeting Meta Tags */}
@@ -310,14 +312,17 @@ const GermanierShowContent = () => {
             >
               PARIS HAUTE COUTURE WEEK 2026
             </motion.div>
-            {/* H1 for WCAG heading hierarchy (WCAG 1.3.1) */}
+            {/* H1 for WCAG heading hierarchy (WCAG 1.3.1) + SEO keyword inclusion */}
             <h1 className="font-display text-[clamp(1rem,2.5vw,2.5rem)] font-light leading-[0.9] tracking-[-0.04em] flex flex-col items-center gap-[0.1em] text-foreground">
-              <SplitText text="Germanier" className="block uppercase tracking-[0.15em]" delay={0.1} triggerOnScroll={false} />
+              {/* Visually hidden for SEO - crawlers read full keyword phrase */}
+              <span className="sr-only">Germanier Paris 2026 × Ivy J Studio - 3D Printed Headpieces for Les Chardonneuses SS26</span>
+              <SplitText text="Germanier" className="block uppercase tracking-[0.15em]" delay={0.1} triggerOnScroll={false} aria-hidden="true" />
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
                 className="font-serif italic text-[0.4em] font-light my-2 inline-block opacity-80"
+                aria-hidden="true"
               >
                 ×
               </motion.span>
@@ -325,6 +330,7 @@ const GermanierShowContent = () => {
                 type="button"
                 onClick={handleIvyJClick}
                 className="bg-transparent border-0 p-0 cursor-pointer transition-opacity hover:opacity-70"
+                aria-hidden="true"
               >
                 <SplitText text="Ivy J Studio" className="block" delay={0.2} triggerOnScroll={false} />
               </button>
@@ -435,7 +441,7 @@ const GermanierShowContent = () => {
                         <div className="w-full relative overflow-hidden border-b border-border/50">
                           <img
                             src={article.ogImage}
-                            alt=""
+                            alt={`${article.outlet} coverage of Ivy J Studio headpieces at Germanier Paris 2026`}
                             className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-105"
                             loading="lazy"
                           />
@@ -483,6 +489,15 @@ const GermanierShowContent = () => {
 
         <div className="w-full border-t border-border/40" />
 
+        {/* TEMPORARILY HIDDEN: Instagram Social Wall
+        <section className="px-8 pt-24 pb-16 max-w-[1400px] mx-auto">
+          <InstagramSocialWall maxPosts={6} showHashtags={true} />
+        </section>
+
+        <div className="w-full border-t border-border/40" />
+        */}
+
+        {/* Show Credits */}
         <section className="px-8 pt-24 pb-32 max-w-[1800px] mx-auto">
           <div>
             <h3 className="font-display text-sm tracking-[0.2em] uppercase opacity-50 mb-16 text-center">{t('germanier.credits.title')}</h3>
