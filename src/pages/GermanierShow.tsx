@@ -341,12 +341,12 @@ const GermanierShowContent = () => {
 
 
         <section id="main-content" className="px-8 pb-32 bg-transparent relative">
-          <div className="max-w-[1800px] mx-auto mb-12 flex items-center justify-between border-b border-border/40 pb-4 sticky top-0 z-[60] bg-background/95 backdrop-blur-md pt-4 overflow-hidden -mx-8 px-8 shadow-[0_1px_3px_rgba(0,0,0,0.05)] max-sm:pt-[max(1rem,env(safe-area-inset-top))]">
+          <div className="sticky-glass-header max-w-[1800px] mx-auto mb-12 flex items-center justify-between border-b border-border/40 pb-4 sticky top-0 z-[60] bg-background/80 backdrop-blur-2xl pt-4 overflow-hidden -mx-8 px-8 shadow-[0_1px_3px_rgba(0,0,0,0.05)] max-sm:pt-[max(1rem,env(safe-area-inset-top))]">
 
             {/* Mobile: Simplified left-aligned info */}
             <div className="sm:hidden flex flex-col min-w-0">
               <span className="font-display text-xs font-medium leading-tight">GERMANIER × Ivy J</span>
-              <span className="font-display text-[10px] opacity-50 mt-0.5">{new Date(lastUpdated).toLocaleDateString()}</span>
+              <span className="font-display text-[10px] opacity-70 mt-0.5">{new Date(lastUpdated).toLocaleDateString()}</span>
             </div>
 
             {/* Desktop: Original layout */}
@@ -355,7 +355,7 @@ const GermanierShowContent = () => {
                 style={{ opacity: titleOpacity, y: titleY, width: titleWidth }}
                 className="flex flex-col min-w-0 overflow-hidden"
               >
-                <span className="font-display text-xs uppercase tracking-widest opacity-60 whitespace-nowrap">Paris Haute Couture Week 2026</span>
+                <span className="font-display text-xs uppercase tracking-widest opacity-80 whitespace-nowrap">Paris Haute Couture Week 2026</span>
                 <span className="font-display text-sm font-medium leading-none whitespace-nowrap">GERMANIER × Ivy J Studio</span>
               </motion.div>
 

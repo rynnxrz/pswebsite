@@ -10,6 +10,7 @@ button.theme-toggle:not(.local-theme-toggle) {
     0% {
         transform: translateX(-100%);
     }
+
     100% {
         transform: translateX(100%);
     }
@@ -17,4 +18,37 @@ button.theme-toggle:not(.local-theme-toggle) {
 
 .skeleton-shimmer {
     animation: skeleton-shimmer 1.5s infinite ease-in-out;
+}
+
+/* === Light Mode Glassmorphism Optimization === */
+/* Best practices for frosted glass in light mode:
+   1. Use stronger semi-opaque background to stabilize contrast
+   2. Add subtle text shadow to lift text from background
+   3. Add subtle border to define the glass panel edge
+*/
+
+:root[data-theme="light"] .sticky-glass-header {
+    /* Stronger opaque background for light mode */
+    background: rgba(245, 245, 247, 0.92) !important;
+    /* Stronger blur to smooth out background noise */
+    backdrop-filter: blur(32px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+    /* Subtle bottom border for definition */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    /* Stronger shadow for depth */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Text legibility in light mode - add subtle shadow */
+:root[data-theme="light"] .sticky-glass-header span,
+:root[data-theme="light"] .sticky-glass-header h2,
+:root[data-theme="light"] .sticky-glass-header button,
+:root[data-theme="light"] .sticky-glass-header a {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Ensure foreground elements have high contrast in light mode */
+:root[data-theme="light"] .sticky-glass-header .font-display,
+:root[data-theme="light"] .sticky-glass-header .font-mono {
+    color: rgba(0, 0, 0, 0.85);
 }

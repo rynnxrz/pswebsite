@@ -14,7 +14,7 @@ import './Home.css';
 const projectsData = [
   {
     id: "germanier-show",
-    image: "/germanier-paris-2026-ivy-j-studio-headpiece-lisa-rinna.jpg",
+    image: "/germanier-seo-project-card.png",
     link: "/germanier-paris-2026"
   },
   {
