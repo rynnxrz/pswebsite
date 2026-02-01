@@ -118,6 +118,16 @@ export const DemoStage = ({
                         {title}
                     </div>
                     <div className="demoActions">
+                        <a
+                            href={src}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="demoBtn demoBtnSecondary"
+                            aria-label="Open in new tab"
+                            style={{ marginRight: '0.5rem', textDecoration: 'none' }}
+                        >
+                            <span>Open in new tab</span>
+                        </a>
                         <button
                             ref={triggerRef}
                             className="demoBtn demoBtnPrimary"
