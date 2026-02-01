@@ -133,7 +133,7 @@ const GermanierShowContent = () => {
     "alternateName": ["Germanier 26", "Germanier SS26", "Kevin Germanier Paris 2026", "Les Chardonneuses Germanier", "Germanier Les Chardonneuses 2026"],
     "startDate": "2026-01-29",
     "endDate": "2026-01-29",
-    "image": "https://shipbyx.com/og-germanier-2026.jpg",
+    "image": "https://shipbyx.com/germanier-paris-2026-ivy-j-studio-headpiece-lisa-rinna.jpg",
     "eventStatus": "https://schema.org/EventScheduled",
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "location": {
@@ -254,7 +254,7 @@ const GermanierShowContent = () => {
           <meta property="og:url" content="https://shipbyx.com/germanier-paris-2026" />
           <meta property="og:title" content="Germanier SS26 Paris 2026 | Ivy J Studio Headpieces" />
           <meta property="og:description" content="Ivy J Studio's 3D-printed floral headpieces for Germanier Paris 2026 (SS26) 'Les Chardonneuses'. Custom pieces for Kevin Germanier's upcycled couture. Lisa Rinna opened the show." />
-          <meta property="og:image" content="https://shipbyx.com/og-germanier-2026.jpg" />
+          <meta property="og:image" content="https://shipbyx.com/germanier-paris-2026-ivy-j-studio-headpiece-lisa-rinna.jpg" />
           <meta property="og:image:alt" content="Germanier Paris 2026 × Ivy J Studio - 3D Printed Wearable Art Headpieces" />
           <meta property="og:site_name" content="Ivy J Studio" />
           <meta property="og:locale" content="en_US" />
@@ -266,7 +266,7 @@ const GermanierShowContent = () => {
           <meta name="twitter:url" content="https://shipbyx.com/germanier-paris-2026" />
           <meta name="twitter:title" content="Germanier SS26 Paris 2026 | Ivy J Studio Headpieces" />
           <meta name="twitter:description" content="Ivy J Studio's 3D-printed floral headpieces for Germanier Paris 2026 (SS26) 'Les Chardonneuses'. Lisa Rinna opened the show." />
-          <meta name="twitter:image" content="https://shipbyx.com/og-germanier-2026.jpg" />
+          <meta name="twitter:image" content="https://shipbyx.com/germanier-paris-2026-ivy-j-studio-headpiece-lisa-rinna.jpg" />
           <meta name="twitter:image:alt" content="Germanier Paris 2026 × Ivy J Studio - 3D Printed Wearable Art Headpieces" />
           <meta name="twitter:site" content="@ivyjstudio" />
 
