@@ -282,6 +282,17 @@ export const SlidePanel: React.FC<SlidePanelProps> = ({ panel, index, totalPanel
             ) : blocksIframe ? (
                 // Original preview style for sites that block iframe
                 <div className="slide-panel-content">
+                    {/* OG Image - Full Display */}
+                    {article.ogImage && (
+                        <div className="slide-panel-image">
+                            <img
+                                src={article.ogImage}
+                                alt={`${article.outlet} coverage of Ivy J Studio headpieces at Germanier Paris 2026`}
+                                className="slide-panel-og-image"
+                            />
+                        </div>
+                    )}
+
                     <h2 className="slide-panel-headline">{article.headline}</h2>
 
                     <div className="slide-panel-meta">

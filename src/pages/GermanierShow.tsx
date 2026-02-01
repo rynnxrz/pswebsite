@@ -429,10 +429,9 @@ const GermanierShowContent = () => {
                   transition={{ delay: index * 0.1 }}
                   className="break-inside-avoid mb-8"
                 >
-                  <a
-                    href={article.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => openPanel(article)}
                     className="block group w-full text-left cursor-pointer bg-transparent border-0 p-0 no-underline"
                     aria-label={`Read full review on ${article.outlet}`}
                   >
@@ -481,7 +480,7 @@ const GermanierShowContent = () => {
                         </CardContent>
                       </div>
                     </Card>
-                  </a>
+                  </button>
                 </motion.div>
               ))}
           </div>
