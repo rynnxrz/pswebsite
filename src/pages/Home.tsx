@@ -13,6 +13,11 @@ import './Home.css';
 
 const projectsData = [
   {
+    id: "germanier-show",
+    image: "/germanier-paris-2026-ivy-j-studio-headpiece-lisa-rinna.jpg",
+    link: "/germanier-paris-2026"
+  },
+  {
     id: "ivy-j-studio",
     image: "/assets/images/ivy-j/project-card.webp",
   },
@@ -32,7 +37,12 @@ export const Home = () => {
   const { showNotification } = useNotification();
   const navigate = useNavigate();
 
-  const handleProjectClick = (id: string, title: string) => {
+  const handleProjectClick = (id: string, title: string, link?: string) => {
+    if (link) {
+      navigate(link);
+      return;
+    }
+
     if (id === 'one') {
       showNotification(
         t('home.projects.notification.title'),
@@ -121,11 +131,11 @@ export const Home = () => {
                   <Fragment key={project.id}>
                     <div
                       className="project-card-link"
-                      onClick={() => handleProjectClick(project.id, title)}
+                      onClick={() => handleProjectClick(project.id, title, (project as any).link)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                           e.preventDefault();
-                          handleProjectClick(project.id, title);
+                          handleProjectClick(project.id, title, (project as any).link);
                         }
                       }}
                       role="button"
