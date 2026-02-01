@@ -1,7 +1,5 @@
 /* Hide the global ThemeToggle and LanguageToggle on this page */
-.theme-toggle-container,
-#language-toggle,
-button.theme-toggle:not(.local-theme-toggle) {
+#language-toggle {
     display: none !important;
 }
 

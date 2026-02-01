@@ -23,7 +23,7 @@ export const ThemeToggle = () => {
   const [theme, setThemeState] = useState<ThemeMode>(() => getActiveTheme());
   const [isHeaderSticky, setIsHeaderSticky] = useState(false);
 
-  const isProjectPage = location.pathname.startsWith('/project/');
+  const isProjectPage = location.pathname.startsWith('/project/') || location.pathname === '/germanier-paris-2026';
 
   useEffect(() => {
     setThemeState(getActiveTheme());

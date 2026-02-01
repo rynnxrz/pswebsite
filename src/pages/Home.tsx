@@ -8,13 +8,16 @@ import { useTranslation } from 'react-i18next';
 import { pageTransition } from '../utils/animations';
 import { ProjectCard } from '../components/ProjectCard';
 import { useNotification } from '../components/NotificationContext';
+import { useThemeDetector } from '../hooks/useThemeDetector';
 
 import './Home.css';
 
 const projectsData = [
   {
     id: "germanier-show",
-    image: "/germanier-seo-project-card.png",
+    image: "/germanier-card-dark.png", // Default/fallback
+    imageLight: "/germanier-card-light.png",
+    imageDark: "/germanier-card-dark.png",
     link: "/germanier-paris-2026"
   },
   {
@@ -36,6 +39,7 @@ export const Home = () => {
   const { t } = useTranslation();
   const { showNotification } = useNotification();
   const navigate = useNavigate();
+  const currentTheme = useThemeDetector();
 
   const handleProjectClick = (id: string, title: string, link?: string) => {
     if (link) {
@@ -127,6 +131,14 @@ export const Home = () => {
                 const date = dateRaw ? `${lastUpdated} ${dateRaw}` : undefined;
                 const tags = t(`home.projects.${project.id}.tags`, { returnObjects: true }) as string[];
 
+                // Determine which image to use based on theme
+                let projectImage = project.image;
+                if ((project as any).imageLight && (project as any).imageDark) {
+                  projectImage = currentTheme === 'light'
+                    ? (project as any).imageLight
+                    : (project as any).imageDark;
+                }
+
                 return (
                   <Fragment key={project.id}>
                     <div
@@ -143,7 +155,7 @@ export const Home = () => {
                     >
                       <ProjectCard
                         title={title}
-                        image={project.image}
+                        image={projectImage}
                         description={description}
                         tags={tags}
                         date={date}
