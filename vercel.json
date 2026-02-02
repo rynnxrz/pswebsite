@@ -1,6 +1,19 @@
 {
     "headers": [
         {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Content-Security-Policy",
+                    "value": "frame-ancestors 'self' https://shipbyx.com https://www.shipbyx.com https://ivyjstudio.shipbyx.com;"
+                },
+                {
+                    "key": "X-Frame-Options",
+                    "value": "ALLOW-FROM https://shipbyx.com"
+                }
+            ]
+        },
+        {
             "source": "/germanier-paris-2026",
             "headers": [
                 {
