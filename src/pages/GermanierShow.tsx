@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import { Helmet } from 'react-helmet';
 import { useCallback, useState, useEffect } from 'react';
 import { ArrowRight, ExternalLink, Clock, Moon, Sun } from 'lucide-react';
@@ -16,19 +17,13 @@ import { setTheme } from '@/utils/theme';
 import './GermanierShow.css';
 
 // Click tracking utility - sends event to analytics
-const trackClick = (eventName: string, eventData?: Record<string, unknown>) => {
-  // Log for future backend integration
+// Click tracking utility - sends event to analytics
+const trackClick = (eventName: string, eventData?: Record<string, string | number | boolean | null>) => {
+  // Log for debugging
   console.log('[TRACK]', eventName, eventData);
 
-  // Store in localStorage for now (can be replaced with backend API)
-  const trackingData = JSON.parse(localStorage.getItem('ivyj_tracking') || '[]');
-  trackingData.push({
-    event: eventName,
-    data: eventData,
-    timestamp: new Date().toISOString(),
-    page: window.location.pathname
-  });
-  localStorage.setItem('ivyj_tracking', JSON.stringify(trackingData));
+  // Send to Vercel Analytics
+  track(eventName, eventData);
 };
 
 export const GermanierShow = () => {
