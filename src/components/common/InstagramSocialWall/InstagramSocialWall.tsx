@@ -24,7 +24,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '1',
         permalink: 'https://www.instagram.com/germanier_official',
-        mediaUrl: 'https://placehold.co/600x600/E4405F/FFFFFF?text=Germanier+Look+1',
+        mediaUrl: '/germanier-paris-2026-ivy-j-studio-headpiece-lisa-rinna.jpg', // Local asset
         caption: '✨ Germanier SS26 Opening Look featuring @ivyjstudio 3D printed headpiece worn by @lisarinna #GermanierSS26 #ParisHauteCouture',
         likeCount: 2847,
         commentCount: 156,
@@ -36,7 +36,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '2',
         permalink: 'https://www.instagram.com/ivyjstudio/',
-        mediaUrl: 'https://placehold.co/600x600/833AB4/FFFFFF?text=Headpiece+Detail',
+        mediaUrl: '/germanier-card-dark.png', // Local asset
         caption: 'The making of our Germanier collaboration headpiece 🌟 3D printed wearable art for Paris Haute Couture Week 2026',
         likeCount: 1923,
         commentCount: 89,
@@ -48,7 +48,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '3',
         permalink: 'https://www.instagram.com/p/DE8bpJhNDuN/',
-        mediaUrl: 'https://placehold.co/600x600/F77737/FFFFFF?text=Runway+Moment',
+        mediaUrl: '/germanier-seo-project-card.png', // Local asset
         caption: 'That moment when @lisarinna opened Germanier in our piece 💫 #WearableArt #3DPrinting',
         likeCount: 1456,
         commentCount: 67,
@@ -59,7 +59,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '4',
         permalink: 'https://www.instagram.com/germanier_official/',
-        mediaUrl: 'https://placehold.co/600x600/405DE6/FFFFFF?text=Backstage',
+        mediaUrl: '/assets/images/ivy-j/project-card.webp', // Existing asset from Home.tsx
         caption: 'Backstage magic at Paris Haute Couture Week ✨ So honoured to collaborate with @ivyjstudio on this incredible piece',
         likeCount: 1234,
         commentCount: 45,
@@ -70,7 +70,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '5',
         permalink: 'https://www.instagram.com/ivyjstudio/',
-        mediaUrl: 'https://placehold.co/600x600/5851DB/FFFFFF?text=Studio+Process',
+        mediaUrl: '/germanier-card-light.png',
         caption: 'From digital design to runway reality 🖥️✨ Our computational design process for the Germanier headpiece',
         likeCount: 987,
         commentCount: 34,
@@ -81,14 +81,14 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '6',
         permalink: 'https://www.instagram.com/germanier_official/',
-        mediaUrl: 'https://placehold.co/600x600/C13584/FFFFFF?text=Final+Look',
+        mediaUrl: '/germanier-paris-2026-ivy-j-studio-headpiece-lisa-rinna.jpg', // Reusing for filling out the grid
         caption: 'The complete look - Haute Couture craftsmanship meets 3D printed innovation #GermanierSS26',
         likeCount: 876,
         commentCount: 29,
         username: 'germanier_official',
         timestamp: '2026-01-30T12:00:00Z',
         mediaType: 'IMAGE',
-    },
+    }
 ];
 
 // Hashtags being tracked
@@ -120,15 +120,15 @@ export const InstagramSocialWall = ({
 
     useEffect(() => {
         const processData = async () => {
-            // If we have API data and it's valid
-            if (apiData && apiData.data && Array.isArray(apiData.data)) {
+            // If we have API data and it has items
+            if (apiData && apiData.data && Array.isArray(apiData.data) && apiData.data.length > 0) {
                 setPosts(apiData.data.slice(0, maxPosts));
                 setIsLoading(false);
                 return;
             }
 
-            // If API error or still loading initial state without data, wait a bit then show fallback
-            if (error || (apiData && !apiData.data)) {
+            // If API error, invalid data, or EMPTY data -> Show Fallback
+            if (error || (apiData && (!apiData.data || apiData.data.length === 0))) {
                 // Fallback to mock data
                 // Determine "Hot" posts based on engagement logic
                 const finalPosts = [...FEATURED_POSTS]
@@ -184,7 +184,7 @@ export const InstagramSocialWall = ({
                     className="inline-flex items-center gap-2 mb-4"
                 >
                     <Instagram size={18} className="text-[#E4405F]" />
-                    <span className="font-mono text-xs tracking-[0.2em] uppercase opacity-60">Social Wall</span>
+                    <span className="font-mono text-xs tracking-[0.2em] uppercase opacity-60">Instagram</span>
                 </motion.div>
 
                 <motion.h3
@@ -194,7 +194,7 @@ export const InstagramSocialWall = ({
                     transition={{ delay: 0.1 }}
                     className="font-display text-2xl md:text-3xl font-light tracking-tight mb-4"
                 >
-                    Join the Conversation
+                    Social Highlights
                 </motion.h3>
 
                 <motion.p
@@ -204,31 +204,8 @@ export const InstagramSocialWall = ({
                     transition={{ delay: 0.2 }}
                     className="font-display text-sm md:text-base opacity-60 max-w-xl mx-auto"
                 >
-                    See what people are saying about the Germanier × Ivy J Studio collaboration
+                    Highlights from the Germanier × Ivy J Studio collaboration at Paris Haute Couture Week
                 </motion.p>
-
-                {/* Tracked Hashtags */}
-                {showHashtags && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 }}
-                        className="flex flex-wrap justify-center gap-2 mt-6"
-                    >
-                        {TRACKED_HASHTAGS.map((tag) => (
-                            <a
-                                key={tag}
-                                href={`https://www.instagram.com/explore/tags/${tag.replace('#', '')}/`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-3 py-1.5 bg-accent/10 hover:bg-accent/20 rounded-full text-xs font-mono tracking-wide transition-all duration-300 hover:scale-105"
-                            >
-                                {tag}
-                            </a>
-                        ))}
-                    </motion.div>
-                )}
             </div>
 
             {/* Posts Grid - Masonry-style */}

@@ -1,0 +1,33 @@
+.privacy-policy-container {
+    padding-top: var(--nav-height);
+    min-height: 100vh;
+    background-color: var(--bg-system);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+}
+
+.privacy-content {
+    max-width: 800px;
+    width: 90%;
+    padding: 2rem 0;
+}
+
+.privacy-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.privacy-content h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.privacy-content p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
