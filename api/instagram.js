@@ -1,5 +1,20 @@
+// We need to import the list of posts. 
+// Since this is a serverless function in Vercel/Next.js, we might not be able to import directly from src/data if it's not configured in tsconfig/webpack for api routes easily.
+// For safety/simplicity in this specific environment, I will duplicate the list here or read it if possible. 
+// Let's rely on a shared definition if possible, but to avoid module resolution issues in mixed JS/TS envs without complex config, I'll define it here for now or import it if I'm sure.
+// Given the project structure (`api/instagram.js` vs `src/...`), imports can be tricky.
+// Better approach: Define the list here for the API to use.
+
+const CURATED_URLS = [
+    'https://www.instagram.com/p/DFa_kMItvO-/',
+    'https://www.instagram.com/p/DFbA_3RNvO-/',
+    'https://www.instagram.com/p/DFblqX6txO-/',
+    'https://www.instagram.com/p/DFbZ_3RtXO-/',
+    'https://www.instagram.com/p/DFc_kMItvO-/',
+];
+
 export default async function handler(req, res) {
-    // Set CORS headers to allow requests from the frontend
+    // Set CORS headers
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -8,7 +23,6 @@ export default async function handler(req, res) {
         'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     );
 
-    // Handle OPTIONS request
     if (req.method === 'OPTIONS') {
         res.status(200).end();
         return;
@@ -16,7 +30,6 @@ export default async function handler(req, res) {
 
     const token = process.env.IG_ACCESS_TOKEN;
 
-    // If no token is configured, return 401/Empty so frontend uses fallback mock data
     if (!token) {
         return res.status(200).json({
             error: 'No access token configured',
@@ -26,36 +39,48 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Fetch media from Instagram Basic Display API
-        // Fields: id, caption, media_type, media_url, permalink, thumbnail_url, timestamp, username
-        const response = await fetch(
-            `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username,like_count,comments_count&access_token=${token}&limit=12`
-        );
+        // Fetch oEmbed data for each URL
+        // Endpoint: https://graph.facebook.com/v22.0/instagram_oembed?url={url}&access_token={token}&hidecaption=0&maxwidth=600
 
-        const data = await response.json();
+        const fetchPromises = CURATED_URLS.map(async (url) => {
+            try {
+                const apiUrl = `https://graph.facebook.com/v22.0/instagram_oembed?url=${encodeURIComponent(url)}&access_token=${token}&hidecaption=1&maxwidth=600&omitscript=1`;
+                const response = await fetch(apiUrl);
 
-        if (data.error) {
-            console.error('Instagram API Error:', data.error);
-            return res.status(500).json({ error: data.error.message });
-        }
+                if (!response.ok) {
+                    console.error(`Failed to fetch oEmbed for ${url}: ${response.status}`);
+                    return null;
+                }
 
-        // Transform data to match our frontend interface
-        const posts = data.data.map(post => ({
-            id: post.id,
-            permalink: post.permalink,
-            mediaUrl: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
-            caption: post.caption || '',
-            // Note: Basic Display API might not return like_count/comments_count for all account types
-            // We'll use 0 if missing, frontend can hide or use randomized realistic numbers if preferred
-            likeCount: post.like_count || 0,
-            commentCount: post.comments_count || 0,
-            username: post.username,
-            timestamp: post.timestamp,
-            mediaType: post.media_type,
-            isHot: false // Logic for "hot" can be added here or on frontend
-        }));
+                const data = await response.json();
 
-        // Cache the response for 1 hour (3600 seconds)
+                // Transform to match our frontend interface
+                // oEmbed returns: { version, title, author_name, author_url, provider_url, width, height, html, thumbnail_url, thumbnail_width, thumbnail_height }
+                // Note: oEmbed does NOT always return a `thumbnail_url` for all post types (especially private or varied ones), but usually does for public.
+                // It does NOT return like_count or comment_count. We might have to live without those or fake them/hide them.
+
+                return {
+                    id: url.split('/p/')[1]?.replace('/', '') || url,
+                    permalink: url,
+                    mediaUrl: data.thumbnail_url || 'https://placehold.co/600x600?text=No+Image', // Fallback
+                    caption: data.title || 'Germanier Paris 2026',
+                    likeCount: 0, // oEmbed doesn't provide this via basic endpoint
+                    commentCount: 0,
+                    username: data.author_name || 'Instagram User',
+                    timestamp: new Date().toISOString(), // No timestamp in oEmbed
+                    mediaType: 'IMAGE',
+                    isHot: false
+                };
+            } catch (err) {
+                console.error(`Error processing ${url}:`, err);
+                return null;
+            }
+        });
+
+        const results = await Promise.all(fetchPromises);
+        const posts = results.filter(post => post !== null);
+
+        // Cache for 1 hour
         res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=1800');
 
         return res.status(200).json({ data: posts });

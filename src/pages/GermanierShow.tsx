@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import SplitText from '@/components/reactbits/SplitText';
 import { useTranslation } from 'react-i18next';
 import { SlidePanelProvider, SlidePanelManager, useSlidePanels } from '@/components/common/SlidePanel';
-// import { InstagramSocialWall } from '@/components/common/InstagramSocialWall';
+import { InstagramSocialWall } from '@/components/common/InstagramSocialWall';
 
 import { setTheme } from '@/utils/theme';
 
@@ -481,15 +481,16 @@ const GermanierShowContent = () => {
           </div>
         </section>
 
+
         <div className="w-full border-t border-border/40" />
 
-        {/* TEMPORARILY HIDDEN: Instagram Social Wall
+        {/* Instagram Social Wall */}
         <section className="px-8 pt-24 pb-16 max-w-[1400px] mx-auto">
           <InstagramSocialWall maxPosts={6} showHashtags={true} />
         </section>
 
         <div className="w-full border-t border-border/40" />
-        */}
+
 
         {/* Show Credits */}
         <section className="px-8 pt-24 pb-32 max-w-[1800px] mx-auto">

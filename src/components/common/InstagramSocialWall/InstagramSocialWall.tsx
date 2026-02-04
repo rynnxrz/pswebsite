@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Heart, MessageCircle, Instagram, Sparkles } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
+import useSWR from 'swr';
 
 // Mock data structure for Instagram posts
 // In production, this would come from Instagram API via a backend service
@@ -22,8 +23,8 @@ interface InstagramPost {
 const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '1',
-        permalink: 'https://www.instagram.com/p/DE8bpJhNDuN/',
-        mediaUrl: 'https://shipbyx.com/images/germanier/look1-front.jpg',
+        permalink: 'https://www.instagram.com/germanier_official',
+        mediaUrl: 'https://placehold.co/600x600/E4405F/FFFFFF?text=Germanier+Look+1',
         caption: '✨ Germanier SS26 Opening Look featuring @ivyjstudio 3D printed headpiece worn by @lisarinna #GermanierSS26 #ParisHauteCouture',
         likeCount: 2847,
         commentCount: 156,
@@ -35,7 +36,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '2',
         permalink: 'https://www.instagram.com/ivyjstudio/',
-        mediaUrl: 'https://shipbyx.com/images/germanier/headpiece-detail.jpg',
+        mediaUrl: 'https://placehold.co/600x600/833AB4/FFFFFF?text=Headpiece+Detail',
         caption: 'The making of our Germanier collaboration headpiece 🌟 3D printed wearable art for Paris Haute Couture Week 2026',
         likeCount: 1923,
         commentCount: 89,
@@ -47,7 +48,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '3',
         permalink: 'https://www.instagram.com/p/DE8bpJhNDuN/',
-        mediaUrl: 'https://shipbyx.com/images/germanier/runway-moment.jpg',
+        mediaUrl: 'https://placehold.co/600x600/F77737/FFFFFF?text=Runway+Moment',
         caption: 'That moment when @lisarinna opened Germanier in our piece 💫 #WearableArt #3DPrinting',
         likeCount: 1456,
         commentCount: 67,
@@ -58,7 +59,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '4',
         permalink: 'https://www.instagram.com/germanier_official/',
-        mediaUrl: 'https://shipbyx.com/images/germanier/backstage.jpg',
+        mediaUrl: 'https://placehold.co/600x600/405DE6/FFFFFF?text=Backstage',
         caption: 'Backstage magic at Paris Haute Couture Week ✨ So honoured to collaborate with @ivyjstudio on this incredible piece',
         likeCount: 1234,
         commentCount: 45,
@@ -69,7 +70,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '5',
         permalink: 'https://www.instagram.com/ivyjstudio/',
-        mediaUrl: 'https://shipbyx.com/images/germanier/studio-process.jpg',
+        mediaUrl: 'https://placehold.co/600x600/5851DB/FFFFFF?text=Studio+Process',
         caption: 'From digital design to runway reality 🖥️✨ Our computational design process for the Germanier headpiece',
         likeCount: 987,
         commentCount: 34,
@@ -80,7 +81,7 @@ const FEATURED_POSTS: InstagramPost[] = [
     {
         id: '6',
         permalink: 'https://www.instagram.com/germanier_official/',
-        mediaUrl: 'https://shipbyx.com/images/germanier/final-look.jpg',
+        mediaUrl: 'https://placehold.co/600x600/C13584/FFFFFF?text=Final+Look',
         caption: 'The complete look - Haute Couture craftsmanship meets 3D printed innovation #GermanierSS26',
         likeCount: 876,
         commentCount: 29,
@@ -108,49 +109,38 @@ export const InstagramSocialWall = ({
     const [isLoading, setIsLoading] = useState(true);
     const [hoveredPost, setHoveredPost] = useState<string | null>(null);
 
-    // Load posts from API or Fallback
+    // Data fetching with SWR
+    const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+    // Poll every 60 seconds (60000ms) to check for new posts
+    const { data: apiData, error } = useSWR('/api/instagram', fetcher, {
+        refreshInterval: 60000,
+        revalidateOnFocus: true
+    });
+
     useEffect(() => {
-        const loadPosts = async () => {
-            setIsLoading(true);
-            let apiPosts: InstagramPost[] = [];
-
-            try {
-                // Try to fetch from our Vercel API function
-                // In local dev without 'vercel dev', this might 404, which is expected
-                const response = await fetch('/api/instagram');
-
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.data && Array.isArray(data.data)) {
-                        apiPosts = data.data;
-                    }
-                }
-            } catch (error) {
-                console.log('Using mock/fallback data (API not available or configured)');
+        const processData = async () => {
+            // If we have API data and it's valid
+            if (apiData && apiData.data && Array.isArray(apiData.data)) {
+                setPosts(apiData.data.slice(0, maxPosts));
+                setIsLoading(false);
+                return;
             }
 
-            // Combine API posts with Featured posts if API returns few results
-            // Or just use Featured posts if API failed
-            let finalPosts;
-
-            if (apiPosts.length > 0) {
-                // Determine "Hot" posts based on engagement logic (mock logic since simple API doesn't give unlimited history)
-                finalPosts = apiPosts.sort((a, b) => (b.likeCount || 0) - (a.likeCount || 0));
-            } else {
-                // Simulate network delay for mock experience if we fell back instantly
-                await new Promise(resolve => setTimeout(resolve, 800));
-
-                // Fallback to purely mock data
-                finalPosts = [...FEATURED_POSTS]
+            // If API error or still loading initial state without data, wait a bit then show fallback
+            if (error || (apiData && !apiData.data)) {
+                // Fallback to mock data
+                // Determine "Hot" posts based on engagement logic
+                const finalPosts = [...FEATURED_POSTS]
                     .sort((a, b) => (b.likeCount + b.commentCount) - (a.likeCount + a.commentCount));
-            }
 
-            setPosts(finalPosts.slice(0, maxPosts));
-            setIsLoading(false);
+                setPosts(finalPosts.slice(0, maxPosts));
+                setIsLoading(false);
+            }
         };
 
-        loadPosts();
-    }, [maxPosts]);
+        processData();
+    }, [apiData, error, maxPosts]);
 
     const formatCount = useCallback((count: number): string => {
         if (count >= 1000) {
@@ -294,23 +284,29 @@ export const InstagramSocialWall = ({
                   transition-opacity duration-300
                   ${hoveredPost === post.id ? 'opacity-100' : 'opacity-0'}
                 `}>
-                                    {/* Engagement stats */}
-                                    <div className="flex items-center gap-6 text-white">
-                                        <span className="flex items-center gap-2">
-                                            <Heart size={18} fill="white" />
-                                            <span className="font-medium">{formatCount(post.likeCount)}</span>
-                                        </span>
-                                        <span className="flex items-center gap-2">
-                                            <MessageCircle size={18} />
-                                            <span className="font-medium">{formatCount(post.commentCount)}</span>
-                                        </span>
-                                    </div>
+                                    {/* Engagement stats - Only show if we have data (oEmbed doesn't provide these) */}
+                                    {(post.likeCount > 0 || post.commentCount > 0) && (
+                                        <div className="flex items-center gap-6 text-white">
+                                            <span className="flex items-center gap-2">
+                                                <Heart size={18} fill="white" />
+                                                <span className="font-medium">{formatCount(post.likeCount)}</span>
+                                            </span>
+                                            <span className="flex items-center gap-2">
+                                                <MessageCircle size={18} />
+                                                <span className="font-medium">{formatCount(post.commentCount)}</span>
+                                            </span>
+                                        </div>
+                                    )}
 
                                     {/* Username & time */}
                                     <div className="text-white/80 text-sm flex items-center gap-2">
                                         <span>@{post.username}</span>
-                                        <span className="opacity-50">•</span>
-                                        <span className="opacity-70">{formatTimeAgo(post.timestamp)}</span>
+                                        {post.timestamp && !post.timestamp.startsWith('202') && (
+                                            <>
+                                                <span className="opacity-50">•</span>
+                                                <span className="opacity-70">{formatTimeAgo(post.timestamp)}</span>
+                                            </>
+                                        )}
                                     </div>
 
                                     {/* View on Instagram */}

@@ -32,14 +32,5 @@
             ]
         }
     ],
-    "rewrites": [
-        {
-            "source": "/germanier-paris-2026",
-            "destination": "/germanier-paris-2026.html"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+    "rewrites": []
 }
