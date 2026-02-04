@@ -40,44 +40,8 @@ export default async function handler(req, res) {
     }
 
     try {
-        // --- STRATEGY 1: AUTOMATIC FEED (Basic Display API) ---
-        // Try to fetch latest posts from the connected account (e.g., @ivyjstudio)
-        let livePosts = [];
-        try {
-            const response = await fetch(
-                `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username,like_count,comments_count&access_token=${token}&limit=12`
-            );
-
-            if (response.ok) {
-                const data = await response.json();
-                if (data.data && Array.isArray(data.data) && data.data.length > 0) {
-                    livePosts = data.data.map(post => ({
-                        id: post.id,
-                        permalink: post.permalink,
-                        mediaUrl: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
-                        caption: post.caption || '',
-                        likeCount: post.like_count || 0,
-                        commentCount: post.comments_count || 0,
-                        username: post.username,
-                        timestamp: post.timestamp,
-                        mediaType: post.media_type,
-                        isHot: false
-                    }));
-                }
-            }
-        } catch (apiError) {
-            console.warn('Basic Display API failed, falling back to Curated List:', apiError);
-        }
-
-        // If we found live posts, return them!
-        if (livePosts.length > 0) {
-            res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=30'); // Short cache for live feed
-            return res.status(200).json({ data: livePosts });
-        }
-
-        // --- STRATEGY 2: FALLBACK TO CURATED LIST (oEmbed) ---
-        // If Strategy 1 failed (or account has 0 posts), use the manual list.
-        console.log('Using Curated List Fallback (oEmbed)');
+        // --- CURATED LIST ONLY (User Request) ---
+        // Fetch oEmbed data for the specific URLs provided
 
         const fetchPromises = CURATED_URLS.map(async (url) => {
             try {
