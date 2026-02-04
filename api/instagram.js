@@ -39,11 +39,48 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Fetch oEmbed data for each URL
-        // Endpoint: https://graph.facebook.com/v22.0/instagram_oembed?url={url}&access_token={token}&hidecaption=0&maxwidth=600
+        // --- STRATEGY 1: AUTOMATIC FEED (Basic Display API) ---
+        // Try to fetch latest posts from the connected account (e.g., @ivyjstudio)
+        let livePosts = [];
+        try {
+            const response = await fetch(
+                `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username,like_count,comments_count&access_token=${token}&limit=12`
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.data && Array.isArray(data.data) && data.data.length > 0) {
+                    livePosts = data.data.map(post => ({
+                        id: post.id,
+                        permalink: post.permalink,
+                        mediaUrl: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
+                        caption: post.caption || '',
+                        likeCount: post.like_count || 0,
+                        commentCount: post.comments_count || 0,
+                        username: post.username,
+                        timestamp: post.timestamp,
+                        mediaType: post.media_type,
+                        isHot: false
+                    }));
+                }
+            }
+        } catch (apiError) {
+            console.warn('Basic Display API failed, falling back to Curated List:', apiError);
+        }
+
+        // If we found live posts, return them!
+        if (livePosts.length > 0) {
+            res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=30'); // Short cache for live feed
+            return res.status(200).json({ data: livePosts });
+        }
+
+        // --- STRATEGY 2: FALLBACK TO CURATED LIST (oEmbed) ---
+        // If Strategy 1 failed (or account has 0 posts), use the manual list.
+        console.log('Using Curated List Fallback (oEmbed)');
 
         const fetchPromises = CURATED_URLS.map(async (url) => {
             try {
+                // Determine media type hint from URL if possible, default to IMAGE
                 const apiUrl = `https://graph.facebook.com/v22.0/instagram_oembed?url=${encodeURIComponent(url)}&access_token=${token}&hidecaption=1&maxwidth=600&omitscript=1`;
                 const response = await fetch(apiUrl);
 
@@ -54,20 +91,15 @@ export default async function handler(req, res) {
 
                 const data = await response.json();
 
-                // Transform to match our frontend interface
-                // oEmbed returns: { version, title, author_name, author_url, provider_url, width, height, html, thumbnail_url, thumbnail_width, thumbnail_height }
-                // Note: oEmbed does NOT always return a `thumbnail_url` for all post types (especially private or varied ones), but usually does for public.
-                // It does NOT return like_count or comment_count. We might have to live without those or fake them/hide them.
-
                 return {
                     id: url.split('/p/')[1]?.replace('/', '') || url,
                     permalink: url,
-                    mediaUrl: data.thumbnail_url || 'https://placehold.co/600x600?text=No+Image', // Fallback
+                    mediaUrl: data.thumbnail_url || 'https://placehold.co/600x600?text=No+Image',
                     caption: data.title || 'Germanier Paris 2026',
-                    likeCount: 0, // oEmbed doesn't provide this via basic endpoint
+                    likeCount: 0,
                     commentCount: 0,
                     username: data.author_name || 'Instagram User',
-                    timestamp: new Date().toISOString(), // No timestamp in oEmbed
+                    timestamp: new Date().toISOString(),
                     mediaType: 'IMAGE',
                     isHot: false
                 };
@@ -78,14 +110,15 @@ export default async function handler(req, res) {
         });
 
         const results = await Promise.all(fetchPromises);
-        const posts = results.filter(post => post !== null);
+        const curatedPosts = results.filter(post => post !== null);
 
-        // Cache for 1 hour
+        // Cache for 1 hour since curated list changes rarely
         res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=1800');
 
-        return res.status(200).json({ data: posts });
+        return res.status(200).json({ data: curatedPosts });
+
     } catch (error) {
-        console.error('Fetch Error:', error);
+        console.error('General API Error:', error);
         return res.status(500).json({ error: 'Failed to fetch Instagram data' });
     }
 }
