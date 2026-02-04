@@ -6,11 +6,12 @@
 // Better approach: Define the list here for the API to use.
 
 const CURATED_URLS = [
-    'https://www.instagram.com/p/DFa_kMItvO-/',
-    'https://www.instagram.com/p/DFbA_3RNvO-/',
-    'https://www.instagram.com/p/DFblqX6txO-/',
-    'https://www.instagram.com/p/DFbZ_3RtXO-/',
-    'https://www.instagram.com/p/DFc_kMItvO-/',
+    'https://www.instagram.com/p/DUIyoyPiKWD/',
+    'https://www.instagram.com/p/DUTOX8PCPhk/',
+    'https://www.instagram.com/p/DULc-UjCJOG/',
+    'https://www.instagram.com/p/DUImp1cDrV0/',
+    'https://www.instagram.com/reel/DUHDqWnioeS/',
+    'https://www.instagram.com/reel/DUGybVACniV/',
 ];
 
 export default async function handler(req, res) {
