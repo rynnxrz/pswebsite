@@ -91,8 +91,12 @@ export default async function handler(req, res) {
 
                 const data = await response.json();
 
+                // Extract ID from /p/, /reel/, or /tv/ URLs
+                const idMatch = url.match(/\/(?:p|reel|tv)\/([a-zA-Z0-9_-]+)/);
+                const id = idMatch ? idMatch[1] : url;
+
                 return {
-                    id: url.split('/p/')[1]?.replace('/', '') || url,
+                    id: id,
                     permalink: url,
                     mediaUrl: data.thumbnail_url || 'https://placehold.co/600x600?text=No+Image',
                     caption: data.title || 'Germanier Paris 2026',
@@ -100,7 +104,7 @@ export default async function handler(req, res) {
                     commentCount: 0,
                     username: data.author_name || 'Instagram User',
                     timestamp: new Date().toISOString(),
-                    mediaType: 'IMAGE',
+                    mediaType: data.type === 'video' ? 'VIDEO' : 'IMAGE',
                     isHot: false
                 };
             } catch (err) {
