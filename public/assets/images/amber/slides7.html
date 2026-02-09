@@ -1,0 +1,2015 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A.M.B.E.R. | Slide 7 Settings Prototype</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=Rajdhani:wght@500;600;700&display=swap");
+
+    :root {
+      --bg-top: #02070d;
+      --bg-mid: #08212d;
+      --bg-low: #6d9aab;
+      --ink: #eff7fb;
+      --muted: #b6d0da;
+      --line: rgba(172, 219, 234, 0.28);
+      --panel: rgba(4, 16, 25, 0.62);
+      --teal: #00d4aa;
+      --amber: #ffb454;
+      --red: #ff4d5a;
+      --gold: #ffd700;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      color: var(--ink);
+      font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg,
+          var(--bg-top) 0%,
+          #04111b 28%,
+          var(--bg-mid) 62%,
+          var(--bg-low) 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 72%, rgba(0, 165, 190, 0.16), transparent 48%),
+        radial-gradient(circle at 74% 84%, rgba(130, 198, 221, 0.22), transparent 38%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 35%);
+      pointer-events: none;
+    }
+
+    #deck {
+      position: relative;
+      height: 100%;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: clamp(12px, 2vh, 22px);
+      padding: clamp(22px, 4vw, 56px) clamp(18px, 4vw, 64px) clamp(72px, 10vh, 104px);
+      opacity: 0;
+      transform: translateX(5%);
+      pointer-events: none;
+      transition: opacity 320ms ease, transform 360ms ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .topline {
+      color: #b7d7e2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: clamp(11px, 1.5vw, 14px);
+    }
+
+    .content {
+      min-height: 0;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: rgba(4, 16, 25, 0.75);
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 7px 12px;
+      font-family: "IBM Plex Sans", sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      border-color: rgba(172, 219, 234, 0.56);
+    }
+
+    .slide.hmi-settings {
+      padding: clamp(12px, 2.1vw, 28px) clamp(14px, 2.6vw, 34px) 88px;
+      gap: 8px;
+    }
+
+    .slide.hmi-settings .content {
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .settings-shell {
+      border: 1px solid rgba(95, 139, 199, 0.46);
+      border-radius: 12px;
+      background: #1a2150;
+      box-shadow:
+        inset 0 0 0 1px rgba(187, 216, 255, 0.08),
+        0 24px 56px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      padding: 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 0;
+      font-family: "Rajdhani", "IBM Plex Sans", "Segoe UI", sans-serif;
+      width: min(1560px, 95vw);
+      height: min(72vh, 700px);
+    }
+
+    .settings-shell button,
+    .settings-shell input,
+    .settings-shell p,
+    .settings-shell small,
+    .settings-shell strong,
+    .settings-shell span,
+    .settings-shell h2,
+    .settings-shell h3 {
+      font-family: "Rajdhani", "IBM Plex Sans", "Segoe UI", sans-serif;
+    }
+
+    .bmw-system-bar {
+      position: relative;
+      min-height: 68px;
+      padding: 0 18px 0 22px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(180deg, #161d47 0%, #10163b 55%, #0b1230 100%);
+      border-bottom: 1px solid rgba(134, 175, 229, 0.24);
+      box-shadow:
+        inset 0 1px 0 rgba(175, 205, 255, 0.15),
+        inset 0 -1px 0 rgba(79, 117, 181, 0.38);
+      color: #d8e9ff;
+      letter-spacing: 0.015em;
+      font-weight: 600;
+      overflow: hidden;
+    }
+
+    .bmw-system-bar::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      width: 84px;
+      height: 4px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: rgba(248, 251, 255, 0.95);
+      pointer-events: none;
+    }
+
+    .bmw-system-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .bmw-system-title {
+      color: #edf4ff;
+      font-size: clamp(21px, 1.55vw, 29px);
+      line-height: 1;
+      letter-spacing: -0.012em;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(113, 172, 255, 0.14);
+      user-select: none;
+    }
+
+    .bmw-system-right {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      color: #e5efff;
+      font-size: clamp(15px, 1.03vw, 18px);
+      white-space: nowrap;
+    }
+
+    .bmw-system-temp-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .bmw-system-temp {
+      font-size: clamp(16px, 1.08vw, 19px);
+      letter-spacing: 0.01em;
+      color: #dbe8ff;
+      opacity: 0.96;
+    }
+
+    .bmw-system-icon {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      color: #deebff;
+      opacity: 0.92;
+      flex: 0 0 auto;
+    }
+
+    .bmw-system-icon-temp {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2;
+    }
+
+    .bmw-system-icon-audio {
+      width: 19px;
+      height: 19px;
+      stroke-width: 1.95;
+    }
+
+    .bmw-system-icon-bt {
+      width: 17px;
+      height: 17px;
+      stroke-width: 1.95;
+    }
+
+    .bmw-system-icon-system {
+      width: 19px;
+      height: 19px;
+      stroke-width: 1.85;
+    }
+
+    .bmw-system-icon-network {
+      width: 19px;
+      height: 19px;
+      stroke-width: 2;
+    }
+
+    .bmw-system-icon-profile {
+      width: 22px;
+      height: 22px;
+      stroke-width: 1.85;
+    }
+
+    .bmw-system-bar .clock {
+      font-size: clamp(19px, 1.25vw, 24px);
+      font-weight: 700;
+      color: #f4f8ff;
+      letter-spacing: 0.01em;
+      margin-left: 2px;
+    }
+
+    .bmw-surface {
+      min-height: 0;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 24.8% 75.2%;
+      background:
+        radial-gradient(circle at 72% 8%, rgba(79, 130, 198, 0.24), transparent 36%),
+        linear-gradient(180deg, #171f4b 0%, #111a42 100%);
+      overflow: hidden;
+    }
+
+    .bmw-rail {
+      border-right: 1px solid rgba(124, 164, 214, 0.22);
+      padding: 12px 10px 12px 14px;
+      background: linear-gradient(180deg, rgba(8, 14, 37, 0.92), rgba(11, 17, 40, 0.95));
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .nav-icon {
+      width: 17px;
+      height: 17px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.95;
+    }
+
+    .bmw-nav-list {
+      display: grid;
+      gap: 2px;
+    }
+
+    .bmw-nav-item {
+      border: 1px solid transparent;
+      border-radius: 9px;
+      background: transparent;
+      color: #d3e0f4;
+      text-align: left;
+      padding: 8px 9px;
+      min-height: 40px;
+      cursor: default;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 9px;
+      align-items: center;
+      line-height: 1;
+      font-size: clamp(16px, 1.18vw, 21px);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .bmw-nav-item.active {
+      border-color: rgba(94, 165, 243, 0.64);
+      background: linear-gradient(90deg, rgba(22, 107, 213, 0.4), rgba(22, 107, 213, 0.08));
+      color: #f0f8ff;
+      box-shadow:
+        inset 2px 0 0 rgba(98, 185, 255, 0.9),
+        inset 0 0 18px rgba(84, 165, 255, 0.22);
+    }
+
+    .bmw-nav-item.active .nav-icon {
+      color: #67c2ff;
+      filter: drop-shadow(0 0 5px rgba(103, 194, 255, 0.55));
+    }
+
+    .bmw-pane {
+      padding: 8px 12px 10px;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      gap: 0;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .settings-topline {
+      display: grid;
+      gap: 7px;
+    }
+
+    .bmw-main {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 0;
+      overflow: hidden;
+      padding-right: 2px;
+      padding-bottom: 2px;
+      scrollbar-gutter: stable;
+    }
+
+    .bmw-tab-row {
+      border-bottom: 1px solid rgba(121, 162, 213, 0.24);
+      display: flex;
+      gap: clamp(10px, 2vw, 30px);
+      padding: 0 8px 7px;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 12;
+      background: linear-gradient(180deg, rgba(20, 33, 75, 0.97), rgba(16, 28, 67, 0.94));
+      box-shadow: 0 6px 16px rgba(5, 11, 29, 0.45);
+    }
+
+    .bmw-tab {
+      border: 0;
+      background: transparent;
+      color: #d4e0f3;
+      font-size: clamp(16px, 1.22vw, 22px);
+      line-height: 1;
+      padding: 6px 8px 8px;
+      border-radius: 8px 8px 0 0;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+    }
+
+    .bmw-tab.active {
+      color: #65bcff;
+      box-shadow:
+        inset 0 -2px 0 #63c4ff,
+        0 10px 16px rgba(73, 146, 242, 0.35);
+      background: linear-gradient(180deg, rgba(55, 116, 199, 0.3), rgba(55, 116, 199, 0.02));
+    }
+
+    .settings-eyebrow {
+      margin: 0;
+      color: #a9c0e0;
+      letter-spacing: 0.06em;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .settings-title {
+      margin: 0;
+      color: #f2f7ff;
+      font-size: clamp(22px, 1.75vw, 31px);
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .board-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.14fr) minmax(0, 0.86fr);
+      gap: 8px;
+      align-items: stretch;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .left-column {
+      display: block;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 2px;
+      scrollbar-gutter: stable;
+    }
+
+    .left-column .board-panel {
+      width: 100%;
+      margin: 0;
+      position: relative;
+      z-index: 0;
+    }
+
+    .left-column .board-panel+.board-panel {
+      margin-top: 8px;
+    }
+
+    .right-column {
+      display: grid;
+      gap: 0;
+      align-content: stretch;
+      min-height: 0;
+      align-self: stretch;
+      height: 100%;
+    }
+
+    .board-panel {
+      border: 1px solid rgba(130, 176, 224, 0.26);
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(16, 42, 84, 0.62), rgba(10, 24, 51, 0.74));
+      padding: 9px 10px;
+      display: grid;
+      gap: 7px;
+      min-height: 0;
+      box-shadow: inset 0 0 0 1px rgba(190, 220, 255, 0.05);
+    }
+
+    .board-panel.panel-access,
+    .board-panel.panel-controls,
+    .board-panel.panel-overview {
+      align-content: start;
+    }
+
+    .board-panel.panel-overview {
+      grid-template-rows: auto auto auto minmax(0, 1fr);
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .panel-title {
+      margin: 0;
+      color: #eaf3ff;
+      font-size: clamp(15px, 1.08vw, 19px);
+      line-height: 1.06;
+      letter-spacing: 0.01em;
+      font-weight: 700;
+    }
+
+    .panel-hint {
+      margin: 0;
+      color: #a8bedb;
+      font-size: 11px;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      font-weight: 500;
+    }
+
+    .permission-list {
+      display: grid;
+      gap: 5px;
+    }
+
+    .permission-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto auto;
+      gap: 8px;
+      align-items: center;
+      border-radius: 8px;
+      border: 1px solid rgba(139, 181, 227, 0.22);
+      padding: 6px 7px;
+      background: rgba(8, 23, 47, 0.7);
+      min-height: 34px;
+    }
+
+    .item-icon {
+      width: 16px;
+      height: 16px;
+      color: #9dc0ea;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.95;
+    }
+
+    .permission-row.required {
+      border-color: rgba(102, 183, 255, 0.58);
+      background: rgba(31, 100, 182, 0.38);
+    }
+
+    .permission-copy strong {
+      display: block;
+      font-size: clamp(12px, 0.95vw, 15px);
+      color: #edf6ff;
+      margin-bottom: 1px;
+      line-height: 1.12;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+    }
+
+    .permission-copy small {
+      color: #a7bfde;
+      font-size: 10px;
+      line-height: 1.16;
+      letter-spacing: 0.01em;
+      font-weight: 500;
+    }
+
+    .row-arrow {
+      color: #afc5e1;
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .switch {
+      --switch-slant: 10px;
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      width: 108px;
+      min-height: 28px;
+      isolation: isolate;
+    }
+
+    .switch input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      margin: 0;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    .switch-option {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      font-size: 10px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #214767;
+      border: 1px solid rgba(168, 204, 232, 0.9);
+      background: linear-gradient(180deg, rgba(203, 219, 236, 0.94), rgba(182, 203, 226, 0.92));
+      clip-path: polygon(var(--switch-slant) 0, 100% 0, calc(100% - var(--switch-slant)) 100%, 0 100%);
+      position: relative;
+      z-index: 0;
+      transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .switch-option+.switch-option {
+      margin-left: calc(var(--switch-slant) * -1);
+    }
+
+    .switch-option:first-of-type {
+      clip-path: polygon(0 0, 100% 0, calc(100% - var(--switch-slant)) 100%, 0 100%);
+    }
+
+    .switch-option:last-of-type {
+      clip-path: polygon(var(--switch-slant) 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .switch input:not(:checked)~.switch-off,
+    .switch input:checked~.switch-on {
+      color: #ecf8ff;
+      border-color: rgba(188, 229, 255, 0.94);
+      background: linear-gradient(180deg, rgba(58, 122, 184, 0.96), rgba(43, 94, 145, 0.96));
+      box-shadow: 0 0 10px rgba(82, 176, 245, 0.35);
+      z-index: 2;
+    }
+
+    .switch input:disabled {
+      cursor: not-allowed;
+    }
+
+    .switch input:disabled~.switch-option {
+      opacity: 0.9;
+    }
+
+    .intensity {
+      display: grid;
+      gap: 7px;
+    }
+
+    .stage-block {
+      display: grid;
+      gap: 5px;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .stage-block+.stage-block {
+      margin-top: 3px;
+    }
+
+    .stage-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .stage-head strong {
+      font-size: clamp(12px, 0.95vw, 15px);
+      color: #e6f2ff;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .range-label {
+      color: #8fd7ff;
+      font-size: 11px;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+    }
+
+    .stage-group {
+      --step-slant: 18px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      min-height: 56px;
+      overflow: visible;
+      background: transparent;
+      isolation: isolate;
+    }
+
+    .stage-pill {
+      flex: 1 1 0;
+      border: 1px solid rgba(96, 144, 205, 0.48);
+      border-radius: 0;
+      background: linear-gradient(180deg, rgba(5, 31, 74, 0.96), rgba(4, 21, 52, 0.96));
+      color: #bdd2ee;
+      min-height: 56px;
+      font-size: 12px;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: calc(var(--step-slant) * -1);
+      clip-path: polygon(var(--step-slant) 0, 100% 0, calc(100% - var(--step-slant)) 100%, 0 100%);
+      position: relative;
+      z-index: 0;
+      isolation: isolate;
+      transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+    }
+
+    .stage-pill:first-child {
+      margin-left: 0;
+      clip-path: polygon(0 0, 100% 0, calc(100% - var(--step-slant)) 100%, 0 100%);
+    }
+
+    .stage-pill:last-child {
+      clip-path: polygon(var(--step-slant) 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .stage-pill+.stage-pill::before {
+      content: "";
+      position: absolute;
+      left: calc(var(--step-slant) - 1px);
+      top: 18%;
+      bottom: 18%;
+      width: 2px;
+      background: rgba(228, 238, 255, 0.56);
+      transform: skewX(-18deg);
+    }
+
+    .stage-pill.active {
+      border-color: rgba(124, 208, 255, 0.95);
+      background: linear-gradient(180deg, rgba(45, 149, 247, 0.86), rgba(31, 97, 194, 0.82));
+      color: #eff8ff;
+      z-index: 2;
+      box-shadow: 0 0 14px rgba(67, 172, 248, 0.36);
+    }
+
+    .stage-definition {
+      margin: 0;
+      color: #a9bfdc;
+      font-size: 10px;
+      line-height: 1.25;
+      letter-spacing: 0.01em;
+      font-weight: 500;
+    }
+
+    .mode-grid {
+      --step-slant: 18px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      min-height: 56px;
+      overflow: visible;
+      background: transparent;
+      isolation: isolate;
+    }
+
+    .mode-pill {
+      flex: 1 1 0;
+      border: 1px solid rgba(96, 144, 205, 0.48);
+      border-radius: 0;
+      background: linear-gradient(180deg, rgba(5, 31, 74, 0.96), rgba(4, 21, 52, 0.96));
+      color: #c7daef;
+      font-size: clamp(12px, 0.9vw, 14px);
+      min-height: 56px;
+      cursor: pointer;
+      transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+      margin-left: calc(var(--step-slant) * -1);
+      clip-path: polygon(var(--step-slant) 0, 100% 0, calc(100% - var(--step-slant)) 100%, 0 100%);
+      position: relative;
+      z-index: 0;
+      isolation: isolate;
+    }
+
+    .mode-pill:first-child {
+      margin-left: 0;
+      clip-path: polygon(0 0, 100% 0, calc(100% - var(--step-slant)) 100%, 0 100%);
+    }
+
+    .mode-pill:last-child {
+      clip-path: polygon(var(--step-slant) 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .mode-pill+.mode-pill::before {
+      content: "";
+      position: absolute;
+      left: calc(var(--step-slant) - 1px);
+      top: 18%;
+      bottom: 18%;
+      width: 2px;
+      background: rgba(228, 238, 255, 0.56);
+      transform: skewX(-18deg);
+    }
+
+    .mode-pill.active {
+      border-color: rgba(124, 208, 255, 0.95);
+      background: linear-gradient(180deg, rgba(45, 149, 247, 0.86), rgba(31, 97, 194, 0.82));
+      color: #eef8ff;
+      z-index: 2;
+      box-shadow: 0 0 14px rgba(67, 172, 248, 0.36);
+    }
+
+    .policy-note {
+      margin: 0;
+      color: #a8bedb;
+      font-size: 11px;
+      line-height: 1.2;
+      min-height: 28px;
+      letter-spacing: 0.01em;
+      font-weight: 500;
+    }
+
+    .mode-section {
+      display: grid;
+      gap: 6px;
+    }
+
+    .sub-panel-title {
+      margin: 0;
+      color: #d8e9ff;
+      font-size: 11px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    .controls-stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    .domain-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    .domain-card {
+      border: 1px solid rgba(133, 179, 227, 0.25);
+      border-radius: 8px;
+      background: rgba(8, 24, 52, 0.66);
+      padding: 6px 7px;
+      display: grid;
+      gap: 2px;
+    }
+
+    .domain-card small {
+      color: #9fb8d9;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    .domain-card strong {
+      color: #e8f2ff;
+      font-size: 11px;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+    }
+
+    .autonomy-meter {
+      border: 1px solid rgba(137, 179, 222, 0.24);
+      border-radius: 8px;
+      background: rgba(8, 23, 47, 0.64);
+      padding: 10px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .meter-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 0;
+    }
+
+    .style-heading {
+      display: grid;
+      gap: 4px;
+    }
+
+    .meter-head strong {
+      font-size: clamp(16px, 1.22vw, 20px);
+      color: #e3f2ff;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+    }
+
+    .meter-head small {
+      color: #a5bddc;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .meter-note {
+      margin: 0;
+      color: #acc2de;
+      font-size: 11px;
+      line-height: 1.28;
+      letter-spacing: 0.01em;
+      font-weight: 500;
+    }
+
+    .radar-panel {
+      border: 1px solid rgba(138, 182, 227, 0.24);
+      border-radius: 10px;
+      background: rgba(8, 23, 47, 0.66);
+      padding: 10px;
+      display: grid;
+      align-content: stretch;
+      gap: 0;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .radar-viewport {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .radar-chart {
+      width: min(100%, 292px);
+      aspect-ratio: 1 / 1;
+    }
+
+    .radar-grid polygon {
+      fill: rgba(74, 118, 177, 0.08);
+      stroke: rgba(151, 188, 231, 0.24);
+      stroke-width: 1;
+    }
+
+    .radar-grid line {
+      stroke: rgba(151, 188, 231, 0.3);
+      stroke-width: 1;
+    }
+
+    #radarAreaFill {
+      fill: rgba(84, 191, 255, 0.2);
+      stroke: rgba(112, 214, 255, 0.92);
+      stroke-width: 2;
+      transition: all 220ms ease;
+    }
+
+    .radar-node {
+      fill: #c9f0ff;
+      stroke: rgba(84, 191, 255, 0.75);
+      stroke-width: 1;
+    }
+
+    .radar-label {
+      position: absolute;
+      color: #9ab5d4;
+      font-size: 10px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 600;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .radar-label.top {
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .radar-label.top-right {
+      top: 72px;
+      right: 14px;
+    }
+
+    .radar-label.bottom-right {
+      bottom: 74px;
+      right: 10px;
+    }
+
+    .radar-label.bottom {
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .radar-label.bottom-left {
+      bottom: 74px;
+      left: 10px;
+    }
+
+    .radar-label.top-left {
+      top: 72px;
+      left: 14px;
+    }
+
+    .bmw-bottom-dock {
+      min-height: 70px;
+      padding: 0 16px;
+      border-top: 1px solid rgba(133, 176, 228, 0.28);
+      background: linear-gradient(180deg, #141d45 0%, #0b112b 55%, #070b1d 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(192, 221, 255, 0.12),
+        inset 0 -1px 0 rgba(30, 49, 89, 0.55);
+      display: grid;
+      grid-template-columns: minmax(280px, 348px) 1fr minmax(260px, 326px);
+      align-items: center;
+      gap: 16px;
+      color: #eff6ff;
+      font-size: clamp(14px, 1.03vw, 16px);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .bmw-climate {
+      display: grid;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      user-select: none;
+    }
+
+    .bmw-climate-left {
+      grid-template-columns: auto auto minmax(0, 1fr) auto;
+      justify-self: start;
+      width: min(100%, 340px);
+    }
+
+    .bmw-climate-right {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      justify-self: end;
+      width: min(100%, 300px);
+    }
+
+    .climate-zone-icon {
+      width: 24px;
+      height: 24px;
+      stroke: #e9f2ff;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.95;
+    }
+
+    .climate-step {
+      color: #ecf4ff;
+      font-size: clamp(24px, 1.95vw, 31px);
+      line-height: 1;
+      font-weight: 500;
+      text-align: center;
+      min-width: 16px;
+      opacity: 0.94;
+    }
+
+    .climate-readout {
+      display: grid;
+      gap: 5px;
+      min-width: 132px;
+    }
+
+    .climate-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      color: #f4f9ff;
+    }
+
+    .climate-temp {
+      margin: 0;
+      font-size: clamp(22px, 1.7vw, 30px);
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .climate-state-icon {
+      width: 19px;
+      height: 19px;
+      stroke: #edf4ff;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.95;
+      margin-bottom: 1px;
+    }
+
+    .climate-bar {
+      height: 4px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      width: 100%;
+    }
+
+    .climate-bar .cool {
+      border-radius: 999px 0 0 999px;
+      background: linear-gradient(90deg, #2a7dff, #3ba6ff);
+      box-shadow: 0 0 5px rgba(75, 157, 255, 0.5);
+    }
+
+    .climate-bar .warm {
+      border-radius: 0 999px 999px 0;
+      background: linear-gradient(90deg, #e14567, #ff4968);
+      box-shadow: 0 0 5px rgba(255, 86, 121, 0.45);
+    }
+
+    .dock-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(12px, 2vw, 28px);
+      color: #f0f6ff;
+    }
+
+    .dock-icon-btn {
+      border: 0;
+      background: transparent;
+      color: #f0f6ff;
+      width: 26px;
+      height: 26px;
+      padding: 0;
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      opacity: 0.96;
+    }
+
+    .dock-icon {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .dock-icon-solid {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .dock-icon-menu {
+      width: 24px;
+      height: 18px;
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .dock-icon-music {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width: 1080px) {
+      .bmw-system-bar {
+        min-height: 58px;
+        padding: 0 12px 0 14px;
+        gap: 8px;
+      }
+
+      .bmw-system-title {
+        font-size: 18px;
+      }
+
+      .bmw-system-right {
+        gap: 9px;
+      }
+
+      .bmw-system-temp {
+        font-size: 14px;
+      }
+
+      .bmw-system-icon {
+        width: 15px;
+        height: 15px;
+      }
+
+      .bmw-system-icon-temp {
+        width: 14px;
+        height: 14px;
+      }
+
+      .bmw-system-icon-audio,
+      .bmw-system-icon-system,
+      .bmw-system-icon-network {
+        width: 16px;
+        height: 16px;
+      }
+
+      .bmw-system-icon-bt {
+        width: 15px;
+        height: 15px;
+      }
+
+      .bmw-system-icon-network {
+        width: 16px;
+        height: 16px;
+      }
+
+      .bmw-system-icon-profile {
+        width: 19px;
+        height: 19px;
+      }
+
+      .bmw-system-bar .clock {
+        font-size: 18px;
+      }
+
+      .board-layout,
+      .domain-row,
+      .mode-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stage-group {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .right-column {
+        grid-template-columns: 1fr;
+        position: static;
+        top: auto;
+        height: auto;
+      }
+
+      .settings-shell {
+        width: 100%;
+        height: auto;
+      }
+
+      .bmw-surface {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        height: auto;
+      }
+
+      .bmw-rail {
+        display: none;
+      }
+
+      .bmw-main {
+        overflow: visible;
+      }
+
+      .left-column {
+        overflow: visible;
+        padding-right: 0;
+        display: block;
+      }
+
+      .slide.hmi-settings {
+        padding-bottom: 92px;
+      }
+
+      .bmw-tab-row {
+        flex-wrap: wrap;
+      }
+
+      .bmw-bottom-dock {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 8px 12px;
+      }
+
+      .bmw-climate-left,
+      .bmw-climate-right {
+        width: 100%;
+        justify-self: stretch;
+      }
+
+      .dock-icons {
+        justify-content: space-evenly;
+      }
+
+      .slide {
+        overflow-y: auto;
+        padding-bottom: 92px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .bmw-system-icon-system,
+      .bmw-system-icon-network {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main id="deck">
+    <section class="slide hmi-settings active">
+      <div class="topline">A.M.B.E.R. ADAS Concept | Settings Prototype</div>
+      <div class="content">
+        <div class="settings-shell" id="onboardSettingsBoard">
+          <div class="bmw-system-bar">
+            <div class="bmw-system-left">
+              <span class="bmw-system-title">My vehicle</span>
+            </div>
+            <div aria-hidden="true"></div>
+            <div class="bmw-system-right" aria-label="Vehicle status">
+              <span class="bmw-system-temp-group">
+                <svg class="bmw-system-icon bmw-system-icon-temp" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M10 6a2 2 0 1 1 4 0v7a4 4 0 1 1-4 0V6z"></path>
+                  <path d="M12 10v6"></path>
+                </svg>
+                <span class="bmw-system-temp">31 °c</span>
+              </span>
+
+              <svg class="bmw-system-icon bmw-system-icon-audio" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 14h4l6 4V6l-6 4H4z"></path>
+                <path d="M17 10a4 4 0 0 1 0 4"></path>
+                <path d="M19.5 8a7 7 0 0 1 0 8"></path>
+              </svg>
+
+              <svg class="bmw-system-icon bmw-system-icon-bt" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 3l7 5-7 4.5L17 17l-7 4V3z"></path>
+                <path d="M5.5 8l11 8"></path>
+                <path d="M5.5 16l11-8"></path>
+              </svg>
+
+              <svg class="bmw-system-icon bmw-system-icon-system" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="8"></circle>
+                <circle cx="12" cy="12" r="2.2"></circle>
+                <path d="M4.8 12h14.4"></path>
+                <path d="M12 4v5"></path>
+                <path d="M8.8 18l1.6-2.9"></path>
+                <path d="M15.2 18l-1.6-2.9"></path>
+              </svg>
+
+              <svg class="bmw-system-icon bmw-system-icon-network" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 19v1"></path>
+                <path d="M8 17v3"></path>
+                <path d="M12 14v6"></path>
+                <path d="M16 11v9"></path>
+                <path d="M20 8v12"></path>
+              </svg>
+
+              <svg class="bmw-system-icon bmw-system-icon-profile" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                <circle cx="12" cy="9" r="2.8"></circle>
+                <path d="M7.2 18.1c1.2-2.2 3-3.3 4.8-3.3s3.6 1.1 4.8 3.3"></path>
+              </svg>
+              <span class="clock">11:16</span>
+            </div>
+          </div>
+          <div class="bmw-surface">
+            <aside class="bmw-rail" aria-label="My vehicle categories">
+              <div class="bmw-nav-list">
+                <button class="bmw-nav-item" type="button">
+                  <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <path d="M12 6v6M6 12h12"></path>
+                  </svg>
+                  <span>Driving</span>
+                </button>
+                <button class="bmw-nav-item" type="button">
+                  <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="8" width="15" height="8" rx="2"></rect>
+                    <path d="M18 11h3M11 9l-2 4h3l-2 4"></path>
+                  </svg>
+                  <span>Charging</span>
+                </button>
+                <button class="bmw-nav-item" type="button">
+                  <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.2 2.2M16.2 16.2l2.2 2.2"></path>
+                  </svg>
+                  <span>Lighting</span>
+                </button>
+                <button class="bmw-nav-item" type="button">
+                  <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 15V9h5l4 4v6H9"></path>
+                    <path d="M14 19h5"></path>
+                  </svg>
+                  <span>Seats</span>
+                </button>
+                <button class="bmw-nav-item" type="button">
+                  <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 4h9v16H6z"></path>
+                    <path d="M12 12h1"></path>
+                  </svg>
+                  <span>Doors</span>
+                </button>
+                <button class="bmw-nav-item" type="button">
+                  <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="12" rx="2"></rect>
+                    <path d="M8 20h8"></path>
+                  </svg>
+                  <span>Displays</span>
+                </button>
+                <button class="bmw-nav-item" type="button">
+                  <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 16a7 7 0 0 1 14 0"></path>
+                    <path d="M12 12l3-3"></path>
+                  </svg>
+                  <span>Status</span>
+                </button>
+                <button class="bmw-nav-item" type="button">
+                  <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 14h4l5 4V6l-5 4H4z"></path>
+                    <path d="M17 9a4 4 0 0 1 0 6"></path>
+                  </svg>
+                  <span>Audio</span>
+                </button>
+                <button class="bmw-nav-item active" type="button">
+                  <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="4" y="5" width="16" height="14" rx="2"></rect>
+                    <circle cx="9" cy="10" r="1.5"></circle>
+                    <path d="M12 10h4M8 15h8"></path>
+                  </svg>
+                  <span>AI Onboard</span>
+                </button>
+              </div>
+            </aside>
+
+            <div class="bmw-pane">
+              <div class="bmw-main">
+                <div class="bmw-tab-row" aria-label="AI onboard tabs">
+                  <button class="bmw-tab" type="button">Agent Profile</button>
+                  <button class="bmw-tab active" type="button">Control Board</button>
+                  <button class="bmw-tab" type="button">Trust Preview</button>
+                </div>
+
+                <div class="settings-topline">
+                  <p class="settings-eyebrow">Control Board · Driver Profile · Voice + Touch</p>
+                  <h2 class="settings-title">Agent Access, Recommendation, and Confirmation</h2>
+                </div>
+
+                <div class="board-layout">
+                  <div class="left-column">
+                    <div class="board-panel panel-access">
+                      <h3 class="panel-title">Vehicle Data Access</h3>
+                      <p class="panel-hint">Safety telemetry is always on. Toggle optional signals below.</p>
+                      <div class="permission-list">
+                        <div class="permission-row required">
+                          <svg class="item-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"></path>
+                          </svg>
+                          <div class="permission-copy">
+                            <strong>Safety Data (Always On)</strong>
+                            <small>Speed, lane status, and vehicle health for baseline protection.</small>
+                          </div>
+                          <label class="switch">
+                            <input type="checkbox" checked disabled />
+                            <span class="switch-option switch-off">Off</span>
+                            <span class="switch-option switch-on">On</span>
+                          </label>
+                          <span class="row-arrow">›</span>
+                        </div>
+
+                        <div class="permission-row">
+                          <svg class="item-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 19l6-6 4 4 8-8"></path>
+                            <path d="M14 5h7v7"></path>
+                          </svg>
+                          <div class="permission-copy">
+                            <strong>Route and Traffic</strong>
+                            <small>Enables tunnel alerts, merge prompts, and parking predictions.</small>
+                          </div>
+                          <label class="switch">
+                            <input class="perm-toggle" data-perm="route" type="checkbox" checked />
+                            <span class="switch-option switch-off">Off</span>
+                            <span class="switch-option switch-on">On</span>
+                          </label>
+                          <span class="row-arrow">›</span>
+                        </div>
+
+                        <div class="permission-row">
+                          <svg class="item-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="3"></circle>
+                            <path d="M6 20a6 6 0 0 1 12 0"></path>
+                          </svg>
+                          <div class="permission-copy">
+                            <strong>Cabin State</strong>
+                            <small>Uses occupancy and fatigue cues to improve handover timing.</small>
+                          </div>
+                          <label class="switch">
+                            <input class="perm-toggle" data-perm="cabin" type="checkbox" checked />
+                            <span class="switch-option switch-off">Off</span>
+                            <span class="switch-option switch-on">On</span>
+                          </label>
+                          <span class="row-arrow">›</span>
+                        </div>
+
+                        <div class="permission-row">
+                          <svg class="item-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="8"></circle>
+                            <path d="M12 8v4l3 2"></path>
+                          </svg>
+                          <div class="permission-copy">
+                            <strong>Behavior History</strong>
+                            <small>Learns stable preferences and explains why a suggestion appears.</small>
+                          </div>
+                          <label class="switch">
+                            <input class="perm-toggle" data-perm="history" type="checkbox" checked />
+                            <span class="switch-option switch-off">Off</span>
+                            <span class="switch-option switch-on">On</span>
+                          </label>
+                          <span class="row-arrow">›</span>
+                        </div>
+
+                        <div class="permission-row">
+                          <svg class="item-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 15a4 4 0 1 1 1-7 5 5 0 0 1 9 2 3 3 0 1 1 1 5z"></path>
+                          </svg>
+                          <div class="permission-copy">
+                            <strong>Cloud Profile Sync</strong>
+                            <small>Syncs preferences between drives for continuity across trips.</small>
+                          </div>
+                          <label class="switch">
+                            <input class="perm-toggle" data-perm="cloud" type="checkbox" checked />
+                            <span class="switch-option switch-off">Off</span>
+                            <span class="switch-option switch-on">On</span>
+                          </label>
+                          <span class="row-arrow">›</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="board-panel panel-controls">
+                      <h3 class="panel-title">Style Controls</h3>
+                      <p class="panel-hint">Tune behavior for trip intent. Each profile has different strengths.</p>
+                      <div class="controls-stack">
+                        <div class="intensity">
+                          <div class="stage-block">
+                            <div class="stage-head">
+                              <strong>ADAS Recommendations</strong>
+                              <span class="range-label" id="adasStrengthLabel">Guided</span>
+                            </div>
+                            <div class="stage-group" data-stage-set="adas">
+                              <button class="stage-pill" data-level="0" type="button">Conservative</button>
+                              <button class="stage-pill active" data-level="1" type="button">Guided</button>
+                              <button class="stage-pill" data-level="2" type="button">Balanced</button>
+                              <button class="stage-pill" data-level="3" type="button">Proactive</button>
+                            </div>
+                            <p class="stage-definition" id="adasStageHint">Suggests at key moments, then asks before
+                              acting.</p>
+                          </div>
+
+                          <div class="stage-block">
+                            <div class="stage-head">
+                              <strong>Entertainment Suggestions</strong>
+                              <span class="range-label" id="mediaStrengthLabel">Curated</span>
+                            </div>
+                            <div class="stage-group" data-stage-set="media">
+                              <button class="stage-pill" data-level="0" type="button">Minimal</button>
+                              <button class="stage-pill" data-level="1" type="button">Contextual</button>
+                              <button class="stage-pill active" data-level="2" type="button">Curated</button>
+                              <button class="stage-pill" data-level="3" type="button">Proactive</button>
+                            </div>
+                            <p class="stage-definition" id="mediaStageHint">Curates media by route and drive context.</p>
+                          </div>
+                        </div>
+
+                        <div class="mode-section">
+                          <h4 class="sub-panel-title">Confirmation Style</h4>
+                          <div class="mode-grid">
+                            <button class="mode-pill active" data-mode="ask" type="button">Ask Every Time</button>
+                            <button class="mode-pill" data-mode="assist" type="button">Quick Confirm</button>
+                            <button class="mode-pill" data-mode="auto" type="button">Auto Low-Risk</button>
+                          </div>
+                          <p class="policy-note" id="modeDescription">Prompt for confirmation before each non-critical
+                            action.</p>
+                        </div>
+
+                        <div class="domain-row">
+                          <div class="domain-card">
+                            <small>ADAS Style</small>
+                            <strong id="adasPolicy">Guided prompts appear at key moments and wait for confirmation.</strong>
+                          </div>
+                          <div class="domain-card">
+                            <small>Cabin Style</small>
+                            <strong id="mediaPolicy">Curated suggestions adapt to context and remain easy to dismiss.</strong>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="right-column">
+                    <div class="board-panel panel-overview">
+                      <h3 class="panel-title">Style Summary</h3>
+                      <p class="panel-hint">Display only. This view shows a neutral balance profile as settings change.</p>
+
+                      <div class="autonomy-meter">
+                        <div class="meter-head">
+                          <div class="style-heading">
+                            <small>Driving style summary</small>
+                            <strong id="styleSummaryTitle">Balanced Co-Driving</strong>
+                          </div>
+                        </div>
+                        <p class="meter-note" id="autonomyNote">Predictable support with steady driver leadership.</p>
+                      </div>
+
+                      <div class="radar-panel" aria-label="Capability balance chart">
+                        <div class="radar-viewport">
+                          <svg class="radar-chart" viewBox="0 0 260 260" role="img"
+                            aria-label="AI capability balance radar chart">
+                            <g class="radar-grid">
+                              <polygon points="130,105 151.7,117.5 151.7,142.5 130,155 108.3,142.5 108.3,117.5"></polygon>
+                              <polygon points="130,85 169,107.5 169,152.5 130,175 91,152.5 91,107.5"></polygon>
+                              <polygon points="130,65 186.3,97.5 186.3,162.5 130,195 73.7,162.5 73.7,97.5"></polygon>
+                              <polygon points="130,45 203.6,87.5 203.6,172.5 130,215 56.4,172.5 56.4,87.5"></polygon>
+                              <line x1="130" y1="130" x2="130" y2="45"></line>
+                              <line x1="130" y1="130" x2="203.6" y2="87.5"></line>
+                              <line x1="130" y1="130" x2="203.6" y2="172.5"></line>
+                              <line x1="130" y1="130" x2="130" y2="215"></line>
+                              <line x1="130" y1="130" x2="56.4" y2="172.5"></line>
+                              <line x1="130" y1="130" x2="56.4" y2="87.5"></line>
+                            </g>
+                            <polygon id="radarAreaFill" points="130,73 183.7,99 177.8,157.6 130,179.3 88.4,154 82.4,101.9">
+                            </polygon>
+                            <g id="radarNodes"></g>
+                          </svg>
+
+                          <span class="radar-label top">Assistance Tempo</span>
+                          <span class="radar-label top-right">Safety Margin</span>
+                          <span class="radar-label bottom-right">Data Sharing</span>
+                          <span class="radar-label bottom">Driver Lead</span>
+                          <span class="radar-label bottom-left">Comfort Fit</span>
+                          <span class="radar-label top-left">System Clarity</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bmw-bottom-dock">
+            <div class="bmw-climate bmw-climate-left" aria-label="Left climate control">
+              <svg class="climate-zone-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3.5 7h5.5v10H3.5z"></path>
+                <path d="M9 12h8"></path>
+                <path d="M13.5 8.5 17 12l-3.5 3.5"></path>
+              </svg>
+              <span class="climate-step" aria-hidden="true">-</span>
+              <div class="climate-readout">
+                <div class="climate-row">
+                  <strong class="climate-temp">21.0°</strong>
+                  <svg class="climate-state-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 15V9a3 3 0 0 1 6 0v6"></path>
+                    <path d="M12 15h5a2 2 0 0 1 2 2v1H5v-1a2 2 0 0 1 2-2h5"></path>
+                  </svg>
+                </div>
+                <div class="climate-bar" aria-hidden="true">
+                  <span class="cool"></span>
+                  <span class="warm"></span>
+                </div>
+              </div>
+              <span class="climate-step" aria-hidden="true">+</span>
+            </div>
+
+            <div class="dock-icons" aria-label="Dock shortcuts">
+              <button class="dock-icon-btn" type="button" aria-label="Media">
+                <svg class="dock-icon-music" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M14.5 5v10.4"></path>
+                  <path d="M14.5 5 19.8 3.8v9.3"></path>
+                  <circle cx="10" cy="16.8" r="2.4"></circle>
+                  <circle cx="19.8" cy="14.8" r="2.2"></circle>
+                </svg>
+              </button>
+              <button class="dock-icon-btn" type="button" aria-label="Navigation">
+                <svg class="dock-icon dock-icon-solid" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3.5 20.5 20.8 12 3.5 3.5l3.2 7.1L12 12l-5.3 1.4z"></path>
+                </svg>
+              </button>
+              <button class="dock-icon-btn" type="button" aria-label="Phone">
+                <svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M6.5 4.5h3l2 4-1.9 1.9a14 14 0 0 0 4.9 4.9l1.9-1.9 4 2v3a2 2 0 0 1-2 2C10 20.3 3.7 14 3.7 6.5a2 2 0 0 1 2-2z">
+                  </path>
+                </svg>
+              </button>
+              <button class="dock-icon-btn" type="button" aria-label="Home">
+                <svg class="dock-icon-solid" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3 3.5 10.2V21h6.1v-6.3h4.8V21h6.1V10.2z"></path>
+                </svg>
+              </button>
+              <button class="dock-icon-btn" type="button" aria-label="Fan">
+                <svg class="dock-icon-solid" viewBox="0 0 24 24" aria-hidden="true">
+                  <ellipse cx="12" cy="6.9" rx="2.2" ry="3.5"></ellipse>
+                  <ellipse cx="17.1" cy="12" rx="3.5" ry="2.2"></ellipse>
+                  <ellipse cx="12" cy="17.1" rx="2.2" ry="3.5"></ellipse>
+                  <ellipse cx="6.9" cy="12" rx="3.5" ry="2.2"></ellipse>
+                  <circle cx="12" cy="12" r="1.6"></circle>
+                </svg>
+              </button>
+              <button class="dock-icon-btn" type="button" aria-label="Vehicle">
+                <svg class="dock-icon-solid" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7.5 6.6h9a2.6 2.6 0 0 1 2.4 1.6l1.4 3.5v5h-2.1v-1.4H5.8v1.4H3.7v-5l1.4-3.5a2.6 2.6 0 0 1 2.4-1.6z"></path>
+                  <circle cx="8.1" cy="12.5" r="0.9"></circle>
+                  <circle cx="15.9" cy="12.5" r="0.9"></circle>
+                </svg>
+              </button>
+              <button class="dock-icon-btn" type="button" aria-label="Menu">
+                <svg class="dock-icon-menu" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3.4 6.8h3.9l1.1 7.4H4.5z"></path>
+                  <path d="M10.2 6.8h3.9l1.1 7.4h-3.9z"></path>
+                  <path d="M17 6.8h3.9l1.1 7.4h-3.9z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="bmw-climate bmw-climate-right" aria-label="Right climate control">
+              <span class="climate-step" aria-hidden="true">-</span>
+              <div class="climate-readout">
+                <div class="climate-row">
+                  <strong class="climate-temp">21.0°</strong>
+                  <svg class="climate-state-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 18h6"></path>
+                    <path d="M10 18v-5l2.8-3 2 1.3-2 3.7V18"></path>
+                    <path d="M13 18h5"></path>
+                  </svg>
+                </div>
+                <div class="climate-bar" aria-hidden="true">
+                  <span class="cool"></span>
+                  <span class="warm"></span>
+                </div>
+              </div>
+              <span class="climate-step" aria-hidden="true">+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const modeButtons = Array.from(document.querySelectorAll(".mode-pill"));
+      const permissionInputs = Array.from(document.querySelectorAll(".perm-toggle"));
+      const adasStageButtons = Array.from(document.querySelectorAll('[data-stage-set="adas"] .stage-pill'));
+      const mediaStageButtons = Array.from(document.querySelectorAll('[data-stage-set="media"] .stage-pill'));
+      const adasLabel = document.getElementById("adasStrengthLabel");
+      const mediaLabel = document.getElementById("mediaStrengthLabel");
+      const adasStageHint = document.getElementById("adasStageHint");
+      const mediaStageHint = document.getElementById("mediaStageHint");
+      const modeDescription = document.getElementById("modeDescription");
+      const adasPolicy = document.getElementById("adasPolicy");
+      const mediaPolicy = document.getElementById("mediaPolicy");
+      const styleSummaryTitle = document.getElementById("styleSummaryTitle");
+      const autonomyNote = document.getElementById("autonomyNote");
+      const radarAreaFill = document.getElementById("radarAreaFill");
+      const radarNodes = document.getElementById("radarNodes");
+
+      const initialMode = modeButtons.find((button) => button.classList.contains("active"))?.dataset.mode || "ask";
+      const initialAdasLevel = Number(adasStageButtons.find((button) => button.classList.contains("active"))?.dataset.level || 1);
+      const initialMediaLevel = Number(mediaStageButtons.find((button) => button.classList.contains("active"))?.dataset.level || 2);
+      let activeMode = initialMode;
+
+      const stageState = {
+        adas: initialAdasLevel,
+        media: initialMediaLevel,
+      };
+
+      const defaultSettings = {
+        adasLevel: initialAdasLevel,
+        mediaLevel: initialMediaLevel,
+        mode: initialMode,
+        permissions: {},
+      };
+
+      permissionInputs.forEach((input) => {
+        defaultSettings.permissions[input.dataset.perm] = input.checked;
+      });
+
+      const modeNotes = {
+        ask: "Prompt for confirmation before each non-critical action.",
+        assist: "Show a recommendation, then apply after one quick confirmation.",
+        auto: "Apply low-risk actions automatically and always show what changed.",
+      };
+
+      const stageProfiles = {
+        adas: [
+          {
+            label: "Conservative",
+            score: 20,
+            hint: "Keeps assistance subtle and alert-focused.",
+            policy: "Alert-first, driver-led support.",
+          },
+          {
+            label: "Guided",
+            score: 45,
+            hint: "Adds timely prompts and waits for confirmation.",
+            policy: "Provides guided prompts at key moments.",
+          },
+          {
+            label: "Balanced",
+            score: 68,
+            hint: "Blends predictive prompts with clear driver oversight.",
+            policy: "Delivers predictive prompts in familiar contexts.",
+          },
+          {
+            label: "Proactive",
+            score: 86,
+            hint: "Prepares high-confidence actions ahead of events.",
+            policy: "Prepares and recommends high-confidence actions.",
+          },
+        ],
+        media: [
+          {
+            label: "Minimal",
+            score: 18,
+            hint: "Keeps media support quiet unless requested.",
+            policy: "Keeps media behavior mostly on demand.",
+          },
+          {
+            label: "Contextual",
+            score: 42,
+            hint: "Surfaces occasional suggestions from route context.",
+            policy: "Shows context-aware suggestions with confirmation.",
+          },
+          {
+            label: "Curated",
+            score: 70,
+            hint: "Curates media and ambience per trip context.",
+            policy: "Curates media and ambience for each drive context.",
+          },
+          {
+            label: "Proactive",
+            score: 90,
+            hint: "Adapts media and ambience proactively with low friction.",
+            policy: "Real-time media and ambience.",
+          },
+        ],
+      };
+
+      function setMode(mode) {
+        activeMode = mode;
+        modeButtons.forEach((button) => {
+          const isActive = button.dataset.mode === mode;
+          button.classList.toggle("active", isActive);
+          button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+        modeDescription.textContent = modeNotes[mode];
+      }
+
+      function setStage(type, level) {
+        const profiles = stageProfiles[type];
+        const buttons = type === "adas" ? adasStageButtons : mediaStageButtons;
+        const label = type === "adas" ? adasLabel : mediaLabel;
+        const hint = type === "adas" ? adasStageHint : mediaStageHint;
+
+        const safeLevel = Math.max(0, Math.min(profiles.length - 1, level));
+        stageState[type] = safeLevel;
+
+        buttons.forEach((button) => {
+          const isActive = Number(button.dataset.level) === safeLevel;
+          button.classList.toggle("active", isActive);
+          button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+
+        label.textContent = profiles[safeLevel].label;
+        if (hint) {
+          hint.textContent = profiles[safeLevel].hint;
+        }
+      }
+
+      function updatePolicyCopy() {
+        const adasStage = stageProfiles.adas[stageState.adas];
+        const mediaStage = stageProfiles.media[stageState.media];
+
+        const modePrefix = {
+          ask: "Ask every time:",
+          assist: "Quick confirm:",
+          auto: "Auto low-risk:",
+        }[activeMode];
+
+        const modeIntensity = {
+          ask: "Every non-critical action requires confirmation.",
+          assist: "Actions apply after one quick confirmation.",
+          auto: "Auto-applies low-risk actions.",
+        }[activeMode];
+
+        adasPolicy.textContent = `${modePrefix} ${adasStage.policy} ${modeIntensity}`;
+        mediaPolicy.textContent = `${modePrefix} ${mediaStage.policy} ${modeIntensity}`;
+      }
+
+      function clamp(value, min = 40, max = 95) {
+        return Math.max(min, Math.min(max, Math.round(value)));
+      }
+
+      function updateRadarMetrics(styleMomentum, enabledPermissions) {
+        const modeLevel = {
+          ask: 0,
+          assist: 1,
+          auto: 2,
+        }[activeMode];
+
+        const permissionRatio = enabledPermissions / Math.max(1, permissionInputs.length);
+        const adasLevel = stageState.adas;
+        const mediaLevel = stageState.media;
+        const isEnabled = (key) => permissionInputs.some((input) => input.dataset.perm === key && input.checked);
+
+        const metrics = {
+          automation: clamp(styleMomentum, 48, 96),
+          safety: clamp(92 - adasLevel * 2 - modeLevel * 2 + (1 - permissionRatio) * 4 + (isEnabled("route") ? 1 : 0), 82, 97),
+          privacy: clamp(46 + permissionRatio * 30 + (adasLevel + mediaLevel) * 5 + modeLevel * 4, 44, 93),
+          driverControl: clamp(90 - modeLevel * 14 - adasLevel * 6 - mediaLevel * 3 + (activeMode === "ask" ? 4 : 0), 52, 95),
+          personalization: clamp(42 + mediaLevel * 14 + (isEnabled("history") ? 9 : 0) + (isEnabled("cloud") ? 7 : 0) + (isEnabled("cabin") ? 4 : 0), 45, 93),
+          transparency: clamp(90 - modeLevel * 9 - (adasLevel + mediaLevel) * 2 + (activeMode === "ask" ? 5 : activeMode === "assist" ? 2 : 0), 62, 95),
+        };
+
+        const orderedKeys = [
+          "automation",
+          "safety",
+          "privacy",
+          "driverControl",
+          "personalization",
+          "transparency",
+        ];
+
+        const centerX = 130;
+        const centerY = 130;
+        const maxRadius = 85;
+
+        const points = orderedKeys.map((key, index) => {
+          const angle = (-90 + index * 60) * (Math.PI / 180);
+          const radius = (metrics[key] / 100) * maxRadius;
+          return {
+            x: centerX + Math.cos(angle) * radius,
+            y: centerY + Math.sin(angle) * radius,
+          };
+        });
+
+        const pointsString = points.map((point) => `${point.x.toFixed(1)},${point.y.toFixed(1)}`).join(" ");
+        if (radarAreaFill) {
+          radarAreaFill.setAttribute("points", pointsString);
+        }
+
+        if (radarNodes) {
+          radarNodes.innerHTML = points
+            .map((point) => `<circle class="radar-node" cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="2.8"></circle>`)
+            .join("");
+        }
+      }
+
+      function updateDrivingStyleSummary() {
+        const enabledPermissions = permissionInputs.filter((input) => input.checked).length;
+        const accessScore = 20 + enabledPermissions * 10;
+        const stageAverage = (stageProfiles.adas[stageState.adas].score + stageProfiles.media[stageState.media].score) / 2;
+        const modeBonus = {
+          ask: 0,
+          assist: 8,
+          auto: 14,
+        }[activeMode];
+        const styleMomentum = Math.max(
+          52,
+          Math.min(95, Math.round(accessScore * 0.35 + stageAverage * 0.45 + 26 + modeBonus * 0.7))
+        );
+
+        if (activeMode === "auto" && stageState.adas >= 2) {
+          styleSummaryTitle.textContent = "High-Tempo Co-Driving";
+          autonomyNote.textContent = "Strong forward assistance with clear, visible safeguards.";
+        } else if (activeMode === "ask" && stageState.adas <= 1) {
+          styleSummaryTitle.textContent = "Driver-Led Precision";
+          autonomyNote.textContent = "You stay in clear command while the system supports key moments.";
+        } else if (stageState.media >= 2 && stageState.adas <= 1) {
+          styleSummaryTitle.textContent = "Comfort-Cruise Balance";
+          autonomyNote.textContent = "Calm driving support with richer cabin personalization.";
+        } else {
+          styleSummaryTitle.textContent = "Balanced Co-Driving";
+          autonomyNote.textContent = "Predictable support with steady driver leadership.";
+        }
+
+        updateRadarMetrics(styleMomentum, enabledPermissions);
+      }
+
+      function refreshSettingsBoard() {
+        updatePolicyCopy();
+        updateDrivingStyleSummary();
+      }
+
+      if (adasStageButtons.length && mediaStageButtons.length && modeButtons.length) {
+        modeButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            setMode(button.dataset.mode);
+            refreshSettingsBoard();
+          });
+        });
+
+        adasStageButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            setStage("adas", Number(button.dataset.level));
+            refreshSettingsBoard();
+          });
+        });
+
+        mediaStageButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            setStage("media", Number(button.dataset.level));
+            refreshSettingsBoard();
+          });
+        });
+
+        permissionInputs.forEach((input) => {
+          input.addEventListener("change", refreshSettingsBoard);
+        });
+
+        setMode(defaultSettings.mode);
+        setStage("adas", defaultSettings.adasLevel);
+        setStage("media", defaultSettings.mediaLevel);
+        refreshSettingsBoard();
+      }
+    })();
+  </script>
+</body>
+
+</html>

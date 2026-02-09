@@ -1,0 +1,37 @@
+<svg width="1200" height="780" viewBox="0 0 1200 780" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="amberBg" x1="96" y1="48" x2="1120" y2="744" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1D2A"/>
+      <stop offset="1" stop-color="#101B22"/>
+    </linearGradient>
+    <linearGradient id="amberAccent" x1="184" y1="214" x2="948" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00D4AA"/>
+      <stop offset="1" stop-color="#3AB7FF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="780" rx="34" fill="url(#amberBg)"/>
+
+  <circle cx="1066" cy="128" r="216" fill="#00D4AA" fill-opacity="0.08"/>
+  <circle cx="118" cy="694" r="168" fill="#3AB7FF" fill-opacity="0.12"/>
+  <rect x="108" y="132" width="984" height="516" rx="24" fill="#0F2734" fill-opacity="0.7" stroke="#2D4A59"/>
+
+  <text x="172" y="252" fill="#7EE6D4" font-family="Avenir Next, Helvetica, Arial, sans-serif" font-size="26" letter-spacing="0.18em">
+    BMW NEUE KLASSE ADAS CONCEPT
+  </text>
+  <text x="172" y="346" fill="white" font-family="Avenir Next, Helvetica, Arial, sans-serif" font-size="100" font-weight="700">
+    A.M.B.E.R.
+  </text>
+  <text x="172" y="417" fill="#C9D4DB" font-family="Avenir Next, Helvetica, Arial, sans-serif" font-size="42" font-weight="500">
+    SAFE AGENCY FOR DRIVING
+  </text>
+
+  <rect x="172" y="486" width="328" height="66" rx="12" fill="url(#amberAccent)"/>
+  <text x="204" y="529" fill="#042934" font-family="Avenir Next, Helvetica, Arial, sans-serif" font-size="28" font-weight="700">
+    DESIGN CASE DECK
+  </text>
+
+  <text x="172" y="610" fill="#93A8B4" font-family="Avenir Next, Helvetica, Arial, sans-serif" font-size="24">
+    Decision-led trust narrative for hands-off, co-driving, and handover states
+  </text>
+</svg>

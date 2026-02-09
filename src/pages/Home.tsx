@@ -12,7 +12,19 @@ import { useThemeDetector } from '../hooks/useThemeDetector';
 
 import './Home.css';
 
-const projectsData = [
+interface HomeProject {
+  id: string;
+  image: string;
+  imageLight?: string;
+  imageDark?: string;
+  link?: string;
+}
+
+const projectsData: HomeProject[] = [
+  {
+    id: "amber-adas",
+    image: "/assets/images/amber/scenario-c2-rain-spot.png",
+  },
   {
     id: "germanier-show",
     image: "/germanier-card-dark.png", // Default/fallback
@@ -133,21 +145,21 @@ export const Home = () => {
 
                 // Determine which image to use based on theme
                 let projectImage = project.image;
-                if ((project as any).imageLight && (project as any).imageDark) {
+                if (project.imageLight && project.imageDark) {
                   projectImage = currentTheme === 'light'
-                    ? (project as any).imageLight
-                    : (project as any).imageDark;
+                    ? project.imageLight
+                    : project.imageDark;
                 }
 
                 return (
                   <Fragment key={project.id}>
                     <div
                       className="project-card-link"
-                      onClick={() => handleProjectClick(project.id, title, (project as any).link)}
+                      onClick={() => handleProjectClick(project.id, title, project.link)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                           e.preventDefault();
-                          handleProjectClick(project.id, title, (project as any).link);
+                          handleProjectClick(project.id, title, project.link);
                         }
                       }}
                       role="button"

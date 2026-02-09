@@ -607,6 +607,16 @@
         "projects": {
             "heading": "projects",
             "lastUpdated": "Last updated",
+            "amber-adas": {
+                "title": "A.M.B.E.R. ADAS Case Deck",
+                "description": "Designed a decision-first concept deck for BMW Neue Klasse ADAS, framing trust as a system architecture across hands-off, co-driving, and handover states.",
+                "date": "February 8th, 2026",
+                "tags": [
+                    "ADAS UX",
+                    "HMI Strategy",
+                    "Trust Design"
+                ]
+            },
             "oraweb": {
                 "title": "ORA Web",
                 "description": "From intern to SaaS co-founder, I led end-to-end UX design to unify 4 Google Sheets + Dynamics 365 data into a single dashboard for my former employer’s 40-person office team. Secured them as a client with this solution.",
@@ -658,6 +668,10 @@
         "title": "Keep Exploring",
         "cta": "View project",
         "projects": {
+            "amber-adas": {
+                "title": "A.M.B.E.R. ADAS Case Deck",
+                "description": "Decision-first trust design for BMW Neue Klasse ADAS concept states and transitions."
+            },
             "oraweb": {
                 "title": "ORA Web",
                 "description": "Integrated data management system for contracts, production, and cross-team decisions."

@@ -206,6 +206,25 @@ export const InstagramSocialWall = ({
                 >
                     Highlights from the Germanier × Ivy J Studio collaboration at Paris Haute Couture Week
                 </motion.p>
+
+                {showHashtags ? (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 }}
+                        className="mt-5 flex flex-wrap items-center justify-center gap-2"
+                    >
+                        {TRACKED_HASHTAGS.map((hashtag) => (
+                            <span
+                                key={hashtag}
+                                className="rounded-full border border-accent/20 bg-accent/10 px-3 py-1 font-mono text-[11px] tracking-wide opacity-80"
+                            >
+                                {hashtag}
+                            </span>
+                        ))}
+                    </motion.div>
+                ) : null}
             </div>
 
             {/* Posts Grid - Masonry-style */}

@@ -1,22 +1,44 @@
+import { Suspense, lazy } from 'react';
 import { useParams } from 'react-router-dom';
-import { ProjectP } from '../components/projects/ProjectP';
-import { ProjectOne } from '../components/projects/ProjectOne';
-import { ProjectDialogic } from '../components/projects/ProjectDialogic';
-import { ProjectIvy } from '../components/projects/ProjectIvy';
+
+const ProjectP = lazy(() => import('../components/projects/ProjectP').then((m) => ({ default: m.ProjectP })));
+const ProjectOne = lazy(() => import('../components/projects/ProjectOne').then((m) => ({ default: m.ProjectOne })));
+const ProjectDialogic = lazy(() => import('../components/projects/ProjectDialogic').then((m) => ({ default: m.ProjectDialogic })));
+const ProjectIvy = lazy(() => import('../components/projects/ProjectIvy').then((m) => ({ default: m.ProjectIvy })));
+const ProjectAmber = lazy(() => import('../components/projects/ProjectAmber').then((m) => ({ default: m.ProjectAmber })));
 
 export const ProjectDetail = () => {
   const { id } = useParams();
 
+  let projectComponent: JSX.Element | null;
+
   switch (id) {
+    case 'amber-adas':
+      projectComponent = <ProjectAmber />;
+      break;
     case 'oraweb':
-      return <ProjectP />;
+      projectComponent = <ProjectP />;
+      break;
     case 'one':
-      return <ProjectOne />;
+      projectComponent = <ProjectOne />;
+      break;
     case 'dialogic':
-      return <ProjectDialogic />;
+      projectComponent = <ProjectDialogic />;
+      break;
     case 'ivy-j-studio':
-      return <ProjectIvy />;
+      projectComponent = <ProjectIvy />;
+      break;
     default:
-      return <div>Project not found</div>;
+      projectComponent = null;
   }
+
+  if (!projectComponent) {
+    return <div>Project not found</div>;
+  }
+
+  return (
+    <Suspense fallback={null}>
+      {projectComponent}
+    </Suspense>
+  );
 };
