@@ -14,6 +14,12 @@ interface Quote {
 
 interface Props {
     filterTag?: string | null;
+    /**
+     * Optional exact role-name prefix filter (e.g. "Flora").
+     * Combined with filterTag via AND. Useful when a tag matches
+     * multiple people but you want to show a single voice.
+     */
+    filterRole?: string | null;
 }
 
 // Semantic Role Colors (Matching graph-theme.css logic)
@@ -34,7 +40,7 @@ const getTagColor = (tag: string) => {
     }
 };
 
-export const UserVoiceQuotes = ({ filterTag }: Props) => {
+export const UserVoiceQuotes = ({ filterTag, filterRole }: Props) => {
     const { t } = useTranslation();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const isPrintMode = usePrintMode();
@@ -43,9 +49,11 @@ export const UserVoiceQuotes = ({ filterTag }: Props) => {
 
     const quotes = isPrintMode
         ? allQuotes
-        : filterTag
-            ? allQuotes.filter(q => q.tags.includes(filterTag))
-            : allQuotes;
+        : allQuotes.filter(q => {
+            if (filterRole && !q.role.startsWith(filterRole)) return false;
+            if (filterTag && !q.tags.includes(filterTag)) return false;
+            return true;
+        });
 
     useEffect(() => {
         if (scrollContainerRef.current) {
@@ -54,7 +62,7 @@ export const UserVoiceQuotes = ({ filterTag }: Props) => {
                 behavior: 'smooth'
             });
         }
-    }, [filterTag]);
+    }, [filterTag, filterRole]);
 
     const getIcon = (tag: string, useColor: boolean = true) => {
         const color = useColor ? getTagColor(tag) : 'var(--text-secondary)';

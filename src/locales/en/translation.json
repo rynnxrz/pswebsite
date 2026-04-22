@@ -132,13 +132,23 @@
             "summary": "Summary",
             "problem": "Context & Problem",
             "decisions": "Decisions",
+            "frame": "Frame",
             "reflection": "Reflection"
         },
         "section": {
             "summary": "Summary",
             "problem": "Context & Problem",
             "decisions": "Decisions",
+            "frame": "Design System in Motion",
             "reflection": "Reflection"
+        },
+        "frame": {
+            "title": "Tokens, assembled",
+            "description": "The final interface wasn't designed in one pass — it came from layering tokens over the familiar Excel shapes the team already knew. Below, the bare structure appears first, then spacing, type, and color are applied, then the surface settles into place. A twelve-second loop of the same design system the product ships with.",
+            "caption": "Contracts SaaS — design system in motion",
+            "toolbar": {
+                "import": "Import New"
+            }
         },
         "intro": {
             "title": "Intro",
@@ -479,6 +489,59 @@
         "choices": {
             "title": "DEPRECATED",
             "subtitle": ""
+        },
+        "pitchv2": {
+            "s": {
+                "headline": "4 Google Sheets + 1 Dynamics 365"
+            },
+            "t": {
+                "headline": "Where exactly decisions stalled"
+            },
+            "a01": {
+                "headline": "The tooling was dragging the team down"
+            },
+            "a02": {
+                "headline": "From departments to the business object",
+                "schematic": {
+                    "beforeLabel": "Before · Department-centric",
+                    "afterLabel": "After · Object-centric",
+                    "beforeBoxes": [
+                        "Finance sheet",
+                        "Production sheet",
+                        "Front-desk sheet",
+                        "Dynamics 365"
+                    ],
+                    "afterTitle": "Order Object",
+                    "afterSubtitle": "Contract / ORDER",
+                    "statusFlow": [
+                        "Quote",
+                        "Scheduling",
+                        "Materials",
+                        "Packaging",
+                        "Finance"
+                    ]
+                }
+            },
+            "a03": {
+                "headline": "Assembling the UI piece by piece"
+            },
+            "r": {
+                "headline": "Every pain has a matching response",
+                "painResponse": [
+                    {
+                        "problem": "Hard to enter, easy to break formatting",
+                        "response": "Tabs per role + read-only master table"
+                    },
+                    {
+                        "problem": "Must cross-check sheets to read status",
+                        "response": "Manager-level dashboard filtered by stage"
+                    },
+                    {
+                        "problem": "Exceptions only expressible as cell coloring",
+                        "response": "Temp tasks attached to the order"
+                    }
+                ]
+            }
         }
     },
     "ivy": {

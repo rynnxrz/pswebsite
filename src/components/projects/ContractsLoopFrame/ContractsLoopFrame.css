@@ -1,0 +1,64 @@
+/* Contracts Loop Frame — static chrome around the Framer Motion composition.
+   The inner composition is light-only (no dark-mode variant in
+   design-extract.md). Outer canvas sits in a neutral band that reads cleanly
+   against both light and dark portfolio themes. */
+
+.clf-root {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.clf-bleed-outer {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 32px 32px;
+    background-color: #f2f5f6;
+    border: 1px solid var(--surface-divider, #e0e4e8);
+    border-radius: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.clf-scale-host {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.clf-inner {
+    position: relative;
+    margin: 0 auto;
+    color: #17222d;
+    text-align: left;
+}
+
+.clf-stage-root {
+    position: relative;
+    width: 100%;
+}
+
+.clf-caption {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    opacity: 0.5;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+@media (max-width: 720px) {
+    .clf-bleed-outer {
+        padding: 20px 16px 24px;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .clf-bleed-outer {
+        padding: 16px 12px 20px;
+    }
+}

@@ -10,6 +10,7 @@ import { UserStakeholdersGraph } from './UserStakeholdersGraph';
 import { DesignMoves } from './DesignMoves';
 import { UserVoiceQuotes } from './UserVoiceQuotes';
 import { WorkloadAnalysisGraph } from './WorkloadAnalysisGraph';
+import { ContractsLoopFrame } from './ContractsLoopFrame/ContractsLoopFrame';
 import { ProjectRecommendation } from '../common/ProjectRecommendation/ProjectRecommendation';
 import { usePitchDeckSlides } from '../../hooks/usePitchDeckSlides';
 
@@ -34,6 +35,7 @@ export const ProjectP = () => {
     { id: 'summary', title: t('project_p.nav.summary') },
     { id: 'problem', title: t('project_p.nav.problem') },
     { id: 'decisions', title: t('project_p.nav.decisions') },
+    { id: 'frame', title: t('project_p.nav.frame') },
     { id: 'reflection', title: t('project_p.nav.reflection') },
   ];
 
@@ -61,7 +63,7 @@ export const ProjectP = () => {
       { threshold: 0.2, rootMargin: '-10% 0px -50% 0px' }
     );
 
-    const observableIds = ['summary', 'problem', 'decisions', 'reflection'];
+    const observableIds = ['summary', 'problem', 'decisions', 'frame', 'reflection'];
     observableIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
@@ -177,7 +179,22 @@ export const ProjectP = () => {
 
         <hr className="section-divider" />
 
-        {/* 4. Reflection */}
+        {/* 4. Frame — design system in motion */}
+        <section id="frame" className="project-section">
+          <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.frame')}</div>
+          <h2>{t('project_p.frame.title')}</h2>
+          <p>{t('project_p.frame.description')}</p>
+
+          <div className="bleed">
+            <div className="bleedInner">
+              <ContractsLoopFrame />
+            </div>
+          </div>
+        </section>
+
+        <hr className="section-divider" />
+
+        {/* 5. Reflection */}
         <section id="reflection" className="project-section">
           <div className="typo-eyebrow" style={{ marginBottom: '0.5rem' }}>{t('project_p.section.reflection')}</div>
           <h2>{t('project_p.reflection.title')}</h2>

@@ -3,7 +3,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import X from 'lucide-react/dist/esm/icons/x';
 import ChevronLeft from 'lucide-react/dist/esm/icons/chevron-left';
 import ChevronRight from 'lucide-react/dist/esm/icons/chevron-right';
-import { PitchSlide } from '../../../hooks/usePitchDeckSlides';
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import {
+    PitchSlide,
+    PitchComponentKey,
+    SplitSlot,
+    StarLabel,
+} from '../../../hooks/usePitchDeckSlides';
+import { WorkloadAnalysisGraph } from '../../projects/WorkloadAnalysisGraph';
+import { UserStakeholdersGraph } from '../../projects/UserStakeholdersGraph';
+import { UserVoiceQuotes } from '../../projects/UserVoiceQuotes';
+import { OraModelShiftSchematic } from '../../projects/OraModelShiftSchematic';
+import { ContractsLoopFrame } from '../../projects/ContractsLoopFrame/ContractsLoopFrame';
 import './PitchDeckModal.css';
 
 interface PitchDeckModalProps {
@@ -27,6 +38,96 @@ const slideVariants = {
         opacity: 0,
     }),
 };
+
+// --------------------------------------------------------------------------
+// Named-component registry — lets a slide reference a component by key from
+// the translation/hook layer without the hook importing heavy components.
+// Each entry has a different prop shape; the map erases that on purpose so
+// renderNamedComponent can forward arbitrary props from the slide data.
+// --------------------------------------------------------------------------
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const componentMap: Record<PitchComponentKey, React.ComponentType<any>> = {
+    WorkloadAnalysisGraph,
+    UserStakeholdersGraph,
+    UserVoiceQuotes,
+    OraModelShiftSchematic,
+    ContractsLoopFrame,
+};
+
+function renderNamedComponent(
+    key: PitchComponentKey | undefined,
+    props?: Record<string, unknown>,
+): React.ReactNode {
+    if (!key) return null;
+    const Component = componentMap[key];
+    if (!Component) return null;
+    return <Component {...(props || {})} />;
+}
+
+function renderStarLabel(label: StarLabel | undefined): React.ReactNode {
+    if (!label) return null;
+    const parts = [
+        label.letter,
+        label.step,
+        label.name,
+    ].filter(Boolean);
+    return (
+        <div className="slide-star-label" aria-label={`STAR step ${label.letter}`}>
+            {parts.map((p, i) => (
+                <React.Fragment key={i}>
+                    {i > 0 && <span className="slide-star-label-dot">·</span>}
+                    <span className="slide-star-label-part">{p}</span>
+                </React.Fragment>
+            ))}
+        </div>
+    );
+}
+
+function renderMedia(src: string): React.ReactNode {
+    if (src.endsWith('.mp4')) {
+        return (
+            <video
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="slide-video"
+            />
+        );
+    }
+    return <img src={src} alt="" className="slide-image" />;
+}
+
+function renderSplitSlot(slot: SplitSlot | undefined): React.ReactNode {
+    if (!slot) return null;
+
+    if (slot.component) {
+        return renderNamedComponent(slot.component, slot.componentProps);
+    }
+
+    if (slot.media) {
+        return <div className="slide-split-media">{renderMedia(slot.media)}</div>;
+    }
+
+    if (slot.textList && slot.textList.length > 0) {
+        return (
+            <ul className="slide-pain-response">
+                {slot.textList.map((row, i) => (
+                    <li key={i} className="slide-pain-response-row">
+                        <span className="slide-pain-response-problem">{row.problem}</span>
+                        <span className="slide-pain-response-arrow" aria-hidden="true">
+                            <ArrowRight size={16} />
+                        </span>
+                        <span className="slide-pain-response-response">{row.response}</span>
+                    </li>
+                ))}
+            </ul>
+        );
+    }
+
+    return null;
+}
 
 export const PitchDeckModal: React.FC<PitchDeckModalProps> = ({
     isOpen,
@@ -228,6 +329,7 @@ function renderSlide(slide: PitchSlide): React.ReactNode {
         case 'statement':
             return (
                 <div className="slide-statement-content">
+                    {renderStarLabel(content.starLabel)}
                     <h2 className="slide-statement">{content.headline}</h2>
                 </div>
             );
@@ -235,7 +337,15 @@ function renderSlide(slide: PitchSlide): React.ReactNode {
         case 'visual':
             return (
                 <div className="slide-visual-content">
-                    <h2 className="slide-visual-headline">{content.headline}</h2>
+                    {renderStarLabel(content.starLabel)}
+                    {content.headline && (
+                        <h2 className="slide-visual-headline">{content.headline}</h2>
+                    )}
+                    {content.component && (
+                        <div className="slide-visual-component">
+                            {renderNamedComponent(content.component, content.componentProps)}
+                        </div>
+                    )}
                     {content.stat && (
                         <div className="slide-stat">
                             <span className="slide-stat-value">{content.stat.value}</span>
@@ -250,23 +360,13 @@ function renderSlide(slide: PitchSlide): React.ReactNode {
             return (
                 <div className="slide-decision-content">
                     <div className="slide-decision-text">
+                        {renderStarLabel(content.starLabel)}
                         <h2 className="slide-decision-headline">{content.headline}</h2>
                         {content.body && <p className="slide-decision-body">{content.body}</p>}
                     </div>
                     {content.media && (
                         <div className="slide-decision-media">
-                            {content.media.endsWith('.mp4') ? (
-                                <video
-                                    src={content.media}
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    className="slide-video"
-                                />
-                            ) : (
-                                <img src={content.media} alt="" className="slide-image" />
-                            )}
+                            {renderMedia(content.media)}
                         </div>
                     )}
                 </div>
@@ -275,8 +375,29 @@ function renderSlide(slide: PitchSlide): React.ReactNode {
         case 'reflection':
             return (
                 <div className="slide-reflection-content">
+                    {renderStarLabel(content.starLabel)}
                     <h2 className="slide-reflection-headline">{content.headline}</h2>
                     {content.body && <p className="slide-reflection-body">{content.body}</p>}
+                </div>
+            );
+
+        case 'split':
+            return (
+                <div className="slide-split-content">
+                    <div className="slide-split-header">
+                        {renderStarLabel(content.starLabel)}
+                        {content.headline && (
+                            <h2 className="slide-split-headline">{content.headline}</h2>
+                        )}
+                    </div>
+                    <div className="slide-split-body">
+                        <div className="slide-split-slot slide-split-slot--left">
+                            {renderSplitSlot(content.left)}
+                        </div>
+                        <div className="slide-split-slot slide-split-slot--right">
+                            {renderSplitSlot(content.right)}
+                        </div>
+                    </div>
                 </div>
             );
 

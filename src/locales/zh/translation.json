@@ -132,7 +132,23 @@
             "summary": "摘要",
             "problem": "背景与问题",
             "decisions": "决策",
+            "frame": "画面",
             "reflection": "反思"
+        },
+        "section": {
+            "summary": "Summary",
+            "problem": "Context & Problem",
+            "decisions": "Decisions",
+            "delivery": "Delivery & Scope",
+            "reflection": "Reflection"
+        },
+        "frame": {
+            "title": "从 token 一层层拼起来",
+            "description": "最终界面不是一次画完的，是在客户熟悉的 Excel 视觉语言上一层层叠 token 叠出来的。下面这段十二秒循环，先出裸结构，再上间距、字号、色板，最后一块块拼成完整的表面——用的是产品线上同一套设计系统。",
+            "caption": "合同 SaaS — 运动中的设计系统",
+            "toolbar": {
+                "import": "导入新合同"
+            }
         },
         "intro": {
             "title": "Intro",
@@ -172,13 +188,6 @@
             "planDesc": "Connect orders to capacity.",
             "input": "Input: Heavy data entry & initial validation.",
             "inputDesc": "Heavy data entry & initial validation."
-        },
-        "section": {
-            "summary": "Summary",
-            "problem": "Context & Problem",
-            "decisions": "Decisions",
-            "delivery": "Delivery & Scope",
-            "reflection": "Reflection"
         },
         "summary": {
             "title": "从实习生到 SaaS 联合创始人，我主导了端到端的用户体验设计，将 4 个 Google Sheets 表格和 Dynamics 365 数据整合为统一的仪表盘，解决了前雇主 40 人团队的工作流痛点，并成功将他们转化为客户。",
@@ -462,6 +471,59 @@
                 "Show that I’m not only designing UI, but also prioritizing features systematically."
             ],
             "content3": "Including this reflection is my way of demonstrating a growth mindset: I’m willing to learn, borrow tools from product/strategy (like Kano), and use them to make more grounded design choices."
+        },
+        "pitchv2": {
+            "s": {
+                "headline": "4 张 Google Sheets + 1 套 Dynamics 365"
+            },
+            "t": {
+                "headline": "决策卡点到底在哪"
+            },
+            "a01": {
+                "headline": "工具在拖团队后腿"
+            },
+            "a02": {
+                "headline": "从部门到业务对象",
+                "schematic": {
+                    "beforeLabel": "Before · 以部门为本",
+                    "afterLabel": "After · 以业务对象为本",
+                    "beforeBoxes": [
+                        "财务表",
+                        "生产表",
+                        "前台表",
+                        "Dynamics 365"
+                    ],
+                    "afterTitle": "订单对象",
+                    "afterSubtitle": "合同 / ORDER",
+                    "statusFlow": [
+                        "报价",
+                        "排产",
+                        "物料",
+                        "包装",
+                        "财务"
+                    ]
+                }
+            },
+            "a03": {
+                "headline": "一块一块拼出界面"
+            },
+            "r": {
+                "headline": "每条痛点都有对应回应",
+                "painResponse": [
+                    {
+                        "problem": "录入难、格式易坏",
+                        "response": "按部门分 tab + 主表只读"
+                    },
+                    {
+                        "problem": "跨表才能判断合同状态",
+                        "response": "厂长全局 dashboard，按环节筛选"
+                    },
+                    {
+                        "problem": "异常信息只能靠涂色",
+                        "response": "临时任务挂在订单上"
+                    }
+                ]
+            }
         }
     },
     "ivy": {
