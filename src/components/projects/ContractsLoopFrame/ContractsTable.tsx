@@ -13,6 +13,7 @@ import {
     REDUCED_TRANSITION,
     statusDotVariants,
     STATUS_DOT_COLOR,
+    TOKEN,
     type ContractRow,
     type Phase,
 } from './tokens';
@@ -75,12 +76,12 @@ export const ContractsTable = ({ phase }: ContractsTableProps) => {
                             transition={transition}
                             style={{
                                 padding: resolvedPadding,
-                                textAlign: idx === 5 ? 'right' : 'left',
+                                textAlign: 'left',
                                 whiteSpace: 'nowrap',
                                 lineHeight: phase === 'naked' ? 1.4 : '16.8px',
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: idx === 5 ? 'flex-end' : 'flex-start',
+                                justifyContent: 'flex-start',
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
                             }}
@@ -126,6 +127,10 @@ function BodyRow({
     const firstPad = `${padBlock} ${padInline} ${padBlock} ${firstColPaddingLeft}`;
     const innerPad = `${padBlock} ${padInline}`;
     const lastPad = `${padBlock} ${lastColPaddingRight} ${padBlock} ${padInline}`;
+
+    const specSpaceIdx = row.spec.indexOf(' ');
+    const specNum = specSpaceIdx === -1 ? row.spec : row.spec.slice(0, specSpaceIdx);
+    const specUnit = specSpaceIdx === -1 ? '' : row.spec.slice(specSpaceIdx + 1);
 
     return (
         <motion.div
@@ -181,12 +186,25 @@ function BodyRow({
 
             <motion.div
                 role="cell"
-                variants={mutedCellVariants}
+                variants={cellVariants}
                 layout
                 transition={transition}
-                style={cellBase(innerPad, phase)}
+                style={{ ...cellBase(innerPad, phase), fontVariantNumeric: 'tabular-nums' }}
             >
-                {row.spec}
+                {specNum}
+                {specUnit && (
+                    <>
+                        {' '}
+                        <span
+                            style={{
+                                color: phase === 'styled' ? TOKEN.mutedColor : 'inherit',
+                                fontSize: phase === 'styled' ? 12 : 'inherit',
+                            }}
+                        >
+                            {specUnit}
+                        </span>
+                    </>
+                )}
             </motion.div>
 
             <motion.div
@@ -196,7 +214,6 @@ function BodyRow({
                 transition={transition}
                 style={{
                     ...cellBase(innerPad, phase),
-                    justifyContent: 'flex-end',
                     fontVariantNumeric: 'tabular-nums',
                 }}
             >

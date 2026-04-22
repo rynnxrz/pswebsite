@@ -22,6 +22,14 @@ interface HomeProject {
 
 const projectsData: HomeProject[] = [
   {
+    id: "oraweb",
+    image: "/assets/images/ora-web/orawebn.webp",
+  },
+  {
+    id: "ivy-j-studio",
+    image: "/assets/images/ivy-j/project-card.webp",
+  },
+  {
     id: "amber-adas",
     image: "/assets/images/amber/scenario-c2-rain-spot.png",
   },
@@ -31,14 +39,6 @@ const projectsData: HomeProject[] = [
     imageLight: "/germanier-card-light.png",
     imageDark: "/germanier-card-dark.png",
     link: "/germanier-paris-2026"
-  },
-  {
-    id: "ivy-j-studio",
-    image: "/assets/images/ivy-j/project-card.webp",
-  },
-  {
-    id: "oraweb",
-    image: "/assets/images/ora-web/orawebn.webp",
   },
   // {
   //   id: "one",

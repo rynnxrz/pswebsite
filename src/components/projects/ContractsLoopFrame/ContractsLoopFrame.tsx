@@ -57,6 +57,7 @@ function useFitScale(
 ) {
     const [scale, setScale] = useState(1);
     const [innerHeight, setInnerHeight] = useState(INNER_HEIGHT_FALLBACK);
+    const lockedHeight = useRef<number | null>(null);
 
     useLayoutEffect(() => {
         const outer = outerRef.current;
@@ -65,9 +66,21 @@ function useFitScale(
 
         const compute = () => {
             const width = outer.clientWidth;
-            const next = Math.min(1, width / INNER_WIDTH);
-            setScale(next);
-            setInnerHeight(inner.offsetHeight || INNER_HEIGHT_FALLBACK);
+            setScale(Math.min(1, width / INNER_WIDTH));
+
+            // Ratchet up on every measurement. `hidden` and `styled` share
+            // the TOKEN box-model (same layout dimensions), so first render
+            // in `hidden` already gives us the correct height — no wait for
+            // styled, no wrong fallback flash. `naked` is shorter and can't
+            // shrink the locked value.
+            const h = inner.offsetHeight;
+            if (h) {
+                lockedHeight.current = Math.max(
+                    lockedHeight.current ?? 0,
+                    h,
+                );
+                setInnerHeight(lockedHeight.current);
+            }
         };
 
         compute();
@@ -278,7 +291,10 @@ export const ContractsLoopFrame = () => {
                                         overflow: 'hidden',
                                         borderRadius:
                                             boxModel.containerBorderRadius,
-                                        backgroundColor: boxModel.containerBg,
+                                        backgroundColor:
+                                            phase === 'hidden'
+                                                ? 'transparent'
+                                                : boxModel.containerBg,
                                     }}
                                 >
                                     <motion.div

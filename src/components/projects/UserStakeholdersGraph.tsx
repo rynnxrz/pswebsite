@@ -114,7 +114,6 @@ export const UserStakeholdersGraph = ({ onFilterChange }: Props) => {
                                 role="region"
                                 aria-labelledby={buttonId}
                                 aria-hidden={!isOpen}
-                                hidden={!isOpen}
                             >
                                 <div className="content-inner">
                                     <div className="group-role-title">{group.role_title}</div>

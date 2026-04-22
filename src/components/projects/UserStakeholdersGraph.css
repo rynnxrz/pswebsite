@@ -1,10 +1,13 @@
 /* src/components/projects/UserStakeholdersGraph.css */
 
 .stakeholders-container {
-    margin: 1rem 0 1rem 0;
+    margin: 1rem auto;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    text-align: left;
+    width: 100%;
+    max-width: 760px;
 }
 
 .stakeholders-header h3 {
@@ -149,13 +152,27 @@
 }
 
 .accordion-content {
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-content > .content-inner {
     overflow: hidden;
-    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 0;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.25s ease 0.05s,
+                transform 0.25s ease 0.05s;
 }
 
 .accordion-item.open .accordion-content {
-    max-height: 500px;
+    grid-template-rows: 1fr;
+}
+
+.accordion-item.open .accordion-content > .content-inner {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .content-inner {
@@ -163,6 +180,7 @@
     /* Indented to align with text */
     /* border-top: 1px solid rgba(255, 255, 255, 0.05); */
     padding-top: 0;
+    text-align: left;
 }
 
 .group-role-title {
@@ -218,8 +236,14 @@
     }
 
     .accordion-content {
-        max-height: none !important;
+        grid-template-rows: 1fr !important;
+        transition: none !important;
+    }
+
+    .accordion-content > .content-inner {
         overflow: visible !important;
+        opacity: 1 !important;
+        transform: none !important;
         transition: none !important;
     }
 
